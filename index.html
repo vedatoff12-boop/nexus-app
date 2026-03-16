@@ -546,9 +546,8 @@
 
     function profitSym(){return currentGeo?geo().sym:'$';}
     function profitFmt(v){return profitSym()+v.toLocaleString();}
-    function updProfit(){const ds=new Date().toDateString();if(S.get('pday')!==ds){S.set('pday',ds);S.set('pval','0');}todayProfit=parseInt(S.get('pval')||'0');document.getElementById('profitAmount').textContent='+'+profitFmt(todayProfit);}
-    function addProfit(v){if(!currentGeo)v=rndInt(5,50);else{const r=geo().profitRange;v=rndInt(r[0],r[1]);}todayProfit+=v;S.set('pval',todayProfit.toString());const el=document.getElementById('profitAmount');el.textContent='+'+profitFmt(todayProfit);el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
-      const fl=document.createElement('span');fl.className='hero-float';fl.textContent='+'+profitFmt(v);el.appendChild(fl);setTimeout(()=>fl.remove(),1200);}
+    function updProfit(){const ds=new Date().toDateString();if(S.get('pday')!==ds){S.set('pday',ds);S.set('pval','0');}todayProfit=parseInt(S.get('pval')||'0');}
+    function addProfit(v){if(!currentGeo)v=rndInt(5,50);else{const r=geo().profitRange;v=rndInt(r[0],r[1]);}todayProfit+=v;S.set('pval',todayProfit.toString());}
     updProfit();
 
     // STREAK
