@@ -419,20 +419,7 @@
         </div>
       </div>
 
-      <!-- HERO -->
-      <div class="hero">
-        <div class="hero-label">Today's Profit <span class="help-icon" onclick="showHelp('profit')">?</span></div>
-        <div class="hero-amount" id="profitAmount">+$0</div>
-        <div class="hero-sub" id="heroSub">Keep playing to grow your balance</div>
-      </div>
-
-      <!-- META BAR -->
-      <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span><span class="help-icon" onclick="showHelp('streak')">?</span></div>
-        <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
-      </div>
-
-      <div class="vip-card" id="vipCard" onclick="showHelp('vip')">
+      <div class="vip-card" id="vipCard" onclick="showHelp('vip')" style="margin-top:8px;">
         <div class="vip-top">
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
@@ -449,6 +436,11 @@
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
         <div class="vip-progress-text"><span id="vipProgressLeft">₹0 / ₹1,000</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
         <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+      </div>
+
+      <div class="meta-bar">
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
       <div id="app"></div>
@@ -508,7 +500,7 @@
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="Guest",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     // GEO SELECTOR
     function buildGeoSelector(){
@@ -725,6 +717,7 @@
       try{const uid=tg?.initDataUnsafe?.user?.id;if(!uid){el.removeChild(ld);showLock(el);return;}
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
+      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}else{el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
@@ -814,7 +807,7 @@
     inp.value='';inp.style.height='auto';removeChatImage();renderChat();
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
     try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_accuracy:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
-    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Sorry, try again.';const typingDelay=Math.min(Math.max(botText.length*25,1500),5000)+Math.random()*1500;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){await new Promise(r=>setTimeout(r,1500));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
+    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Sorry, try again.';if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}const typingDelay=Math.min(Math.max(botText.length*25,1500),5000)+Math.random()*1500;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){await new Promise(r=>setTimeout(r,1500));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
