@@ -361,18 +361,18 @@
     </div>
   </div>
 
-  <div class="app-wrap">
-    <!-- CHAT TAB -->
-    <div id="tabChat" class="tab-content active">
-      <div class="chat-header">
-        <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
-        <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
-      </div>
-      <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div></div>
-      <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-      <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+  <!-- CHAT TAB — outside app-wrap, fixed fullscreen -->
+  <div id="tabChat" class="tab-content active">
+    <div class="chat-header">
+      <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
+      <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
     </div>
+    <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div></div>
+    <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
+    <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+  </div>
 
+  <div class="app-wrap">
     <!-- SIGNALS TAB -->
     <div id="tabSignals" class="tab-content">
       <div class="top-bar">
@@ -473,6 +473,9 @@
     }
     function showGeoSelector(){
       buildGeoSelector();
+      // Remove chat-active so app-wrap (with geoScreen) is visible
+      document.body.classList.remove('chat-active');
+      document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
       document.getElementById('geoScreen').classList.add('open');
     }
 
