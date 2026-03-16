@@ -294,6 +294,12 @@
     .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
     .chat-send:active{transform:scale(0.9);}
     .chat-send:disabled{opacity:0.3;}
+    .chat-attach{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);color:var(--muted);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-family:inherit;}
+    .chat-attach:active{transform:scale(0.9);background:rgba(255,255,255,0.1);}
+    .chat-img-preview{position:relative;max-width:180px;margin:4px 0;border-radius:12px;overflow:hidden;}
+    .chat-img-preview img{width:100%;display:block;border-radius:12px;}
+    .chat-img-remove{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .msg img{max-width:100%;border-radius:10px;margin-top:4px;}
     .chat-welcome{text-align:center;padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
     .chat-welcome-icon{font-size:44px;}
     .chat-welcome-title{font-size:18px;font-weight:900;color:#fff;}
@@ -363,7 +369,8 @@
         <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
       </div>
       <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div></div>
-      <div class="chat-input-row"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+      <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
+      <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
     </div>
 
     <!-- SIGNALS TAB -->
@@ -652,12 +659,32 @@
     }
 
     // CHAT
-    let chatH=[],chatLD=false,chatSnd=false;
+    let chatH=[],chatLD=false,chatSnd=false,chatImgB64=null;
+    function handleChatImage(input){
+      const file=input.files[0];if(!file)return;
+      const reader=new FileReader();
+      reader.onload=function(e){
+        chatImgB64=e.target.result; // data:image/...;base64,...
+        const prev=document.getElementById('chatImgPreview');
+        prev.style.display='block';
+        prev.innerHTML=`<div class="chat-img-preview"><img src="${chatImgB64}"><button class="chat-img-remove" onclick="removeChatImage()">✕</button></div>`;
+      };
+      reader.readAsDataURL(file);
+      input.value='';
+    }
+    function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:currentGeo})});const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
-    async function sendChatMessage(){const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt||chatSnd)return;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;chatH.push({r:'user',t:txt,tm:hhmm(new Date())});inp.value='';inp.style.height='auto';renderChat();const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
-    try{const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,message:txt,geo:currentGeo,lang:lang,source:'miniapp'})});const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
+    async function sendChatMessage(){const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64||chatSnd)return;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
+    const msgContent=chatImgB64?`${txt||'📸'}${chatImgB64?'<img>':''}`:txt;
+    const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
+    chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
+    const imgData=chatImgB64;
+    inp.value='';inp.style.height='auto';removeChatImage();renderChat();
+    const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
+    try{const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp'};if(imgData)body.image=imgData;
+    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px';});
     document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
