@@ -526,11 +526,11 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronze',icon:'🥉',dep:600,sigs:3,desc:'3 signals/day, basic games'},
-      {name:'Silver',icon:'🥈',dep:1000,sigs:5,desc:'5 signals/day + priority signals'},
-      {name:'Gold',icon:'🥇',dep:15000,sigs:10,desc:'10 signals/day + exclusive strategies'},
-      {name:'Diamond',icon:'💎',dep:20000,sigs:0,desc:'Unlimited signals + early access to new games'},
-      {name:'Platinum',icon:'👑',dep:25000,sigs:0,desc:'Everything + personal alerts from Zach + VIP chat'}
+      {name:'Bronze',icon:'🥉',dep:600,sigs:3,acc:85,desc:'3 signals/day, 85% accuracy'},
+      {name:'Silver',icon:'🥈',dep:1000,sigs:5,acc:89,desc:'5 signals/day, 89% accuracy'},
+      {name:'Gold',icon:'🥇',dep:15000,sigs:10,acc:93,desc:'10 signals/day, 93% accuracy'},
+      {name:'Diamond',icon:'💎',dep:20000,sigs:0,acc:96,desc:'Unlimited, 96% accuracy'},
+      {name:'Platinum',icon:'👑',dep:25000,sigs:0,acc:98,desc:'98% + personal Zach alerts'}
     ];
     function getVipTier(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return VIP_TIERS[i];}return VIP_TIERS[0];}
     function updVIP(){const tier=getVipTier();document.getElementById('vipIcon').textContent=tier.icon;document.getElementById('vipText').textContent=tier.name;}
@@ -764,7 +764,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
-      vip:{title:'🏅 VIP Tier',text:'Your VIP tier is based on total deposit:\n\n🥉 Bronze — ₹600 → 3 signals/day\n🥈 Silver — ₹1,000 → 5 signals/day + priority\n🥇 Gold — ₹15,000 → 10 signals/day + exclusive strategies\n💎 Diamond — ₹20,000 → Unlimited + early access\n👑 Platinum — ₹25,000 → Everything + personal Zach alerts\n\nDeposit more to level up instantly!'},
+      vip:{title:'🏅 VIP Tier',text:'Your tier = your edge.\n\n🥉 Bronze (₹600) — 3 signals/day, 85% accuracy\n🥈 Silver (₹1,000) — 5/day, 89% accuracy\n🥇 Gold (₹15,000) — 10/day, 93% accuracy\n💎 Diamond (₹20,000) — Unlimited, 96% accuracy\n👑 Platinum (₹25,000) — 98% + Zach personally tells you which game to play\n\nDeposit more → instant upgrade!'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
