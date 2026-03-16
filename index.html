@@ -505,6 +505,14 @@
 
     // PROFIT
     let todayProfit=0;
+
+    function getFbParam(name){
+      try {
+        const m=document.cookie.match(new RegExp('(?:^|; )'+name.replace(/[.$?*|{}()\[\]\/+^]/g,'\\$&')+'=([^;]*)'));
+        return m?decodeURIComponent(m[1]):'';
+      } catch(e){ return ''; }
+    }
+
     function profitSym(){return currentGeo?geo().sym:'$';}
     function profitFmt(v){return profitSym()+v.toLocaleString();}
     function updProfit(){const ds=new Date().toDateString();if(S.get('pday')!==ds){S.set('pday',ds);S.set('pval','0');}todayProfit=parseInt(S.get('pval')||'0');document.getElementById('profitAmount').textContent='+'+profitFmt(todayProfit);}
@@ -700,7 +708,7 @@
     const imgData=chatImgB64;
     inp.value='';inp.style.height='auto';removeChatImage();renderChat();
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
-    try{const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp'};if(imgData)body.image=imgData;
+    try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid};if(imgData)body.image=imgData;
     const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||d.message||d.output||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
