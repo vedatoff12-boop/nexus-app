@@ -234,7 +234,7 @@
 
     /* MARQUEE */
     .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
-    .marquee-inner{display:inline-block;animation:mqScroll 300s linear infinite;font-size:11px;font-weight:600;color:var(--muted);will-change:transform;}
+    .marquee-inner{display:inline-block;animation:mqScroll 120s linear infinite;font-size:11px;font-weight:600;color:var(--muted);will-change:transform;}
     .marquee-inner span{color:var(--gold);font-weight:800;}
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -692,7 +692,7 @@
     inp.value='';inp.style.height='auto';removeChatImage();renderChat();
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
     try{const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp'};if(imgData)body.image=imgData;
-    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
+    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||d.message||d.output||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
