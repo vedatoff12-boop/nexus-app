@@ -234,7 +234,7 @@
 
     /* MARQUEE */
     .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
-    .marquee-inner{display:inline-block;animation:mqScroll 300s linear infinite;font-size:11px;font-weight:600;color:var(--muted);}
+    .marquee-inner{display:inline-block;animation:mqScroll 300s linear infinite;font-size:11px;font-weight:600;color:var(--muted);will-change:transform;}
     .marquee-inner span{color:var(--gold);font-weight:800;}
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -277,11 +277,11 @@
     .tab-content.active{display:block;}
 
     /* CHAT — stable fullscreen mobile layout */
-    #tabChat{height:100%;background:var(--bg);display:none;flex-direction:column;overflow:hidden;}
-    #tabChat.active{display:flex !important;}
+    #tabChat{height:100%;background:var(--bg);display:none;grid-template-rows:auto minmax(0,1fr) auto auto;overflow:hidden;position:relative;}
+    #tabChat.active{display:grid !important;}
     .chat-header{padding:calc(8px + var(--safeT)) 16px 4px;flex-shrink:0;background:var(--bg);}
-    .chat-box{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:0 16px 0;}
-    .chat-msgs{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch;min-height:0;}
+    .chat-box{min-height:0;height:100%;overflow:hidden;display:flex;flex-direction:column;padding:0 16px 0;}
+    .chat-msgs{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch;min-height:0;max-height:100%;overscroll-behavior:contain;}
     .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;word-wrap:break-word;animation:msgIn .3s ease;}
     @keyframes msgIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
     .msg.bot{align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid var(--stroke);color:var(--text);border-bottom-left-radius:4px;}
@@ -537,15 +537,20 @@
     function buildMarquee(){
       const c=document.getElementById("marqueeText");
       const source=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:geo().names).map(x=>String(x).trim()).filter(Boolean))];
-      const pick=source.slice(0,18);
+      const nowBucket=Math.floor(Date.now()/15000);
+      const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
+      const pick=rotated.slice(0,16);
+      const verbs=['won','cashed out','hit','withdrew'];
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
         const amt=currentGeo?rndInt(geo().profitRange[0],geo().profitRange[1]*2):rndInt(50,500);
-        h+=`${name} won <span>${sym}${amt.toLocaleString()}</span>`;
-        if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        const verb=verbs[(nowBucket+i)%verbs.length];
+        h+=`${name} ${verb} <span>${sym}${amt.toLocaleString()}</span>`;
+        if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       });
-      c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
+      c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
+      c.style.animationDelay=`-${Date.now()%300000}ms`;
     }
 
     // LANGS
@@ -690,6 +695,8 @@
     const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
+    document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
+    document.getElementById('chatInput').addEventListener('blur',function(){setTimeout(scrollChatBottom,60);});
     document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
 
     // TOP PLAYERS — weekly seed, multinational, $10k descending
