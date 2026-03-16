@@ -525,7 +525,15 @@
     const curStreak=updStreak();
 
     // VIP
-    function updVIP(){const ts=parseInt(S.get('tsig')||'0');let t='Bronze',i='🥉';if(ts>50||curStreak>14){t='Diamond';i='💎';}else if(ts>25||curStreak>7){t='Gold';i='🥇';}else if(ts>10||curStreak>3){t='Silver';i='🥈';}document.getElementById('vipIcon').textContent=i;document.getElementById('vipText').textContent=t;}
+    const VIP_TIERS=[
+      {name:'Bronze',icon:'🥉',dep:600,sigs:3,desc:'3 signals/day, basic games'},
+      {name:'Silver',icon:'🥈',dep:1000,sigs:5,desc:'5 signals/day + priority signals'},
+      {name:'Gold',icon:'🥇',dep:15000,sigs:10,desc:'10 signals/day + exclusive strategies'},
+      {name:'Diamond',icon:'💎',dep:20000,sigs:0,desc:'Unlimited signals + early access to new games'},
+      {name:'Platinum',icon:'👑',dep:25000,sigs:0,desc:'Everything + personal alerts from Zach + VIP chat'}
+    ];
+    function getVipTier(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return VIP_TIERS[i];}return VIP_TIERS[0];}
+    function updVIP(){const tier=getVipTier();document.getElementById('vipIcon').textContent=tier.icon;document.getElementById('vipText').textContent=tier.name;}
     updVIP();
 
     // DAILY BONUS
@@ -702,8 +710,8 @@
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask about AI signals, UPI deposit, or your 1xBet ID.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:currentGeo})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
-    let _lastSendTs=0;
-    async function sendChatMessage(){const now=Date.now();if(now-_lastSendTs<1500)return;_lastSendTs=now;const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64||chatSnd)return;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
+    let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
+    async function sendChatMessage(){if(_sendLock)return;const now=Date.now();const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64)return;if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;_sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
     const msgContent=chatImgB64?`${txt||'📸'}${chatImgB64?'<img>':''}`:txt;
     const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
     chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
@@ -712,7 +720,7 @@
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
     try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid};if(imgData)body.image=imgData;
     const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Sorry, try again.';const typingDelay=Math.min(Math.max(botText.length*25,1500),5000)+Math.random()*1500;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){await new Promise(r=>setTimeout(r,1500));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
-    renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
+    renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
     document.getElementById('chatInput').addEventListener('blur',function(){setTimeout(scrollChatBottom,60);});
@@ -756,7 +764,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
-      vip:{title:'🏅 VIP Tier',text:'Bronze → Silver (10+ signals or 3+ day streak) → Gold (25+ signals or 7+ day streak) → Diamond (50+ signals or 14+ day streak). Higher tier = access to more accurate AI predictions.'},
+      vip:{title:'🏅 VIP Tier',text:'Your VIP tier is based on total deposit:\n\n🥉 Bronze — ₹600 → 3 signals/day\n🥈 Silver — ₹1,000 → 5 signals/day + priority\n🥇 Gold — ₹15,000 → 10 signals/day + exclusive strategies\n💎 Diamond — ₹20,000 → Unlimited + early access\n👑 Platinum — ₹25,000 → Everything + personal Zach alerts\n\nDeposit more to level up instantly!'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
