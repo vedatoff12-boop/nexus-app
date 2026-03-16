@@ -289,7 +289,7 @@
     .msg.typing{align-self:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--stroke);color:var(--muted);font-style:italic;}
     .msg-time{font-size:9px;color:var(--muted2);margin-top:3px;}
     .chat-input-row{display:flex;gap:8px;padding:8px 16px 8px;border-top:1px solid var(--stroke);align-items:flex-end;flex-shrink:0;background:var(--bg);}
-    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:14px;outline:none;font-family:inherit;resize:none;min-height:42px;max-height:76px;overflow-y:auto;}
+    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:14px;outline:none;font-family:inherit;resize:none;height:42px;min-height:42px;max-height:42px;overflow-y:auto;}
     .chat-input::placeholder{color:var(--muted2);}
     .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,0.1);}
     .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
@@ -446,6 +446,7 @@
         webhook:"https://n8nnexusai.uk/webhook/check-access-it",
         names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
     };
+    const REAL_NAME_POOL=["Audrey", "Khatri", "Rosdyana", "Mila", "Areziqizham", "HidayahSG", "Its", "jellyzheli", "Allaric", "Irfxnzzstoree", "Mr", "Jebat7", "EricSyamir", "Raja", "Ultranewge", "N1", "ake8833", "SNarainthirenrao", "Leehellens77", "scarletphantom96", "Zbsjkaoo", "Gzanfar", "BennVibe777", "FahmiNoor", "Adren10", "ChilleXtoX", "Nitêšh", "zhuohongwong", "zulaika", "Aaron", "zonan12", "adamabdullah94", "MomoeeAmpire", "Spd980", "soha5566", "Mohamed Basith", "Afz2071", "Narupetai", "faamyOsman", "ozan1290", "chaaaa2004", "IMRAN", "Rosnah", "ravi567889", "vinfel8", "Pongal2028", "Ajaya000", "ashhhh_1807", "Viduranga", "Dyana2711", "Kee Hui", "Rausyan", "viralvayyarey", "leongggg999", "Pinokiolah", "Water_Bottlee", "Shionys", "Krish", "Ruhen", "Casz", "BlackShoper", "Nikhil", "Jei_8780", "someonen10", "ayempireee", "Nadzirah33", "infinityGod1", "Weal", "zhaahir", "ciknabila69", "Michael", "MR_Black", "money4life10", "nickyap93", "Ceo Dugem", "Dashhaline", "Dex_9", "Abdul Aziz", "nia", "Ben", "Adiel210", "OriginalNorth", "MNZahwan", "Razak741009", "Mr Rabbit", "Hardcorethemonk", "weiweil0815", "Esmeralda4t3gwrvf", "Antorxz", "assacino", "Lee910908", "shahsiuu", "Xhanda1997", "omiyou", "Awie", "hammad82a", "jiehan223", "No", "Shawn", "MT", "Ryan", "Panjang", "JY", "sahana_riya17", "annewqq", "HilmiFuturesBot", "Poweryourr", "Ugen1012", "aidanwafiy", "SONZIT_SAREKR_ADOR", "motokriss", "dknerak", "Flintzjr", "Sukbir", "Shown", "Ayonhasan123", "Md", "UmloLT9015", "me", "Aieqa"];
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -535,20 +536,16 @@
     // MARQUEE
     function buildMarquee(){
       const c=document.getElementById("marqueeText");
-      const suffixes=["_777","_win","_pro","_1x","_bet","_ace","","","","",""];
-      const gNames=currentGeo?geo().names:["Alex","Max","John","Mike","Sam","Leo","Nick","Eva","Mia","Jack"];
-      const allNames=[...gNames];
-      // Mix in some international names
-      const intl=["Lucky88","BTC_fan","Winner","ProBet","CashKing","GoldRush","JackpotX","StarBet","TopPlay","AceHigh"];
-      intl.forEach(n=>allNames.push(n));
+      const source=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:geo().names).map(x=>String(x).trim()).filter(Boolean))];
+      const pick=source.slice(0,18);
       let h="";
-      for(let i=0;i<20;i++){
-        const name=allNames[Math.floor(Math.random()*allNames.length)]+suffixes[Math.floor(Math.random()*suffixes.length)];
+      pick.forEach((name,i)=>{
         const sym=profitSym();
         const amt=currentGeo?rndInt(geo().profitRange[0],geo().profitRange[1]*2):rndInt(50,500);
-        h+=`${name} won <span>${sym}${amt.toLocaleString()}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
-      }
-      c.innerHTML=h+h;
+        h+=`${name} won <span>${sym}${amt.toLocaleString()}</span>`;
+        if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+      });
+      c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
     }
 
     // LANGS
@@ -692,7 +689,7 @@
     try{const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp'};if(imgData)body.image=imgData;
     const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
-    document.getElementById('chatInput').addEventListener('input',function(){this.style.height='auto';const next=Math.min(this.scrollHeight,76);this.style.height=Math.max(42,next)+'px';scrollChatBottom();});
+    document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
 
     // TOP PLAYERS — weekly seed, multinational, $10k descending
@@ -700,22 +697,19 @@
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
     function genTop(){
       const ws=getWeekSeed();
-      const allNames=["Rahul_777","Hafiz_pro","Carlos99","Marco_bet","James_win","Arjun_1x","Syafiq","Priya_ace","Pablo_top","Luca","Alessandro","Ryan_vip","Vikram","Alejandro","Tyler_pro","Danish","Amit_777","Sergio","Francesco","Kyle_bet","Deepak_win","Álvaro","Matteo","Josh_1x","Pooja","Laura","Chiara","Emma_ace","Sneha","Sara","Aisyah","María","Valentina","Sophie","Neha","Ana","Fatin","Elena","Giulia","Hannah","Rohan_pro","Javier_bet","Lorenzo","Matt_777","Kiran","Diego_win","Davide","Alex_1x","Vivek","Daniel","Faiz_ace","Miguel","Giuseppe","Chris_top","Meera","Carmen","Alessia","Lauren","Kavita","Paula","Aiman","Adrián","Simone","David_pro","Farhan","Ananya_bet","Elisa","Megan","Sanjay","Alba","Martina","Chloe_win","Ravi","Nadia","Sofia_777","Jessica","Aqil","Marta","Anna","Emily","Haziq_pro","Arun_bet","Francesca","Ashley","Nurul","Liyana","Atikah_1x","Hana","Mira_ace","Siti","Ain","Michael_top","Tyler","Josh","Matt_win","Kyle","Ben","Tom","Rex","Ace","Ivy_777","Sky_pro"];
+      const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
+      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
+      const ordered=baseNames.slice(0,100);
       const p=[];
-      // Generate realistic descending amounts: #1 ~$9500-10200, #100 ~$80-200
-      // Use exponential decay with randomness for natural feel
       let prevAmt=10500;
       for(let i=0;i<100;i++){
-        const r1=sRnd(ws+i*7),r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11);
-        const nm=allNames[Math.floor(r1*allNames.length)];
+        const r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11);
+        const nm=ordered[i];
         const gm=gn[Math.floor(r2*gn.length)];
-        // Exponential curve: top spots close together, bottom spread out
-        const pct=i/99; // 0 to 1
-        const base=10200*Math.pow(0.952,i); // exponential decay ~$10200 to ~$80
-        const jitter=(r3-0.5)*base*0.15; // ±7.5% randomness
+        const base=10200*Math.pow(0.952,i);
+        const jitter=(r3-0.5)*base*0.15;
         let am=Math.round(base+jitter);
-        // Ensure strictly descending
         am=Math.min(am,prevAmt-Math.floor(r3*30+10));
         am=Math.max(am,50);
         prevAmt=am;
