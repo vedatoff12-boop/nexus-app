@@ -339,6 +339,18 @@
     .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
   </style>
+
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1167558612227832');
+    fbq('track', 'PageView');
+    window.trackIndiaEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
+  </script>
+
 </head>
 <body>
   <div id="geoScreen">
@@ -370,7 +382,7 @@
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">India VIP Access</div><div class="chat-welcome-text">Ask about AI signals, your 1xBet ID, UPI deposit, or how to unlock full access.</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
         <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
@@ -381,7 +393,6 @@
       <div class="top-bar">
         <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right">
-          <button class="geo-switch" id="geoSwitchBtn" onclick="showGeoSelector()"><span id="geoSwitchFlag">🌍</span> <span id="geoSwitchName">Change</span></button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
           <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
@@ -450,9 +461,9 @@
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo=urlParams.get('geo')||S.get('user_geo')||null;
+    let currentGeo='in'; S.set('user_geo','in');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
-    const CHECKER_URL=currentGeo?geo().webhook:'https://n8nnexusai.uk/webhook/check-access-my';
+    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-in';
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
@@ -478,10 +489,7 @@
       document.getElementById('geoScreen').classList.remove('open');
       initApp();
     }
-    function showGeoSelector(){
-      buildGeoSelector();
-      document.getElementById('geoScreen').classList.add('open');
-    }
+    function showGeoSelector(){ return; }
 
     // ONLINE — smooth ±1-5
     let onlineVal=Math.floor(240+Math.random()*60);
@@ -554,8 +562,8 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"},{id:"es",l:"ES"},{id:"it",l:"IT"},{id:"ru",l:"RU"},{id:"pt",l:"PT"},{id:"id",l:"ID"}];
-    let lang=S.get("aslang")||"en";
+    const LANGS=[{id:"en",l:"EN"}];
+    let lang='en'; S.set('aslang','en');
     function T(){return STR[lang]||STR.en;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
@@ -630,6 +638,7 @@
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
+      try{window.trackIndiaEvent&&window.trackIndiaEvent('RegistrationIntent',{geo:'IN'});}catch(e){}
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
     }
 
@@ -682,7 +691,7 @@
     }
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask about AI signals, UPI deposit, or your 1xBet ID.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:currentGeo})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
     async function sendChatMessage(){const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64||chatSnd)return;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
     const msgContent=chatImgB64?`${txt||'📸'}${chatImgB64?'<img>':''}`:txt;
@@ -764,7 +773,8 @@
 
     // APP INIT after geo is known
     function initApp(){
-      lang=S.get('aslang')||geo().lang;S.set('aslang',lang);
+      try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'IN',lang:'en'});}catch(e){}
+      lang='en';S.set('aslang','en');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on chat tab
       switchTab('chat');
@@ -779,12 +789,8 @@
         splash.style.opacity="0";
         setTimeout(()=>{
           splash.style.display="none";
-          if(!currentGeo){
-            showGeoSelector();
-          } else {
-            initApp();
-            setTimeout(()=>startTutorial(),500);
-          }
+          initApp();
+          setTimeout(()=>startTutorial(),500);
         },1000);
       },2500);
     };
