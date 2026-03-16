@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+  <title>NexusAI Signals</title>
+  <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#080c18;--bg2:#0d1324;--bg3:#111827;
+      --stroke:rgba(255,255,255,0.06);--stroke2:rgba(255,255,255,0.1);
+      --text:#eef2ff;--muted:#7c85a3;--muted2:#4b5270;
+      --gold:#facc15;--gold2:#eab308;--gold-glow:rgba(250,204,21,0.35);
+      --green:#22c55e;--green-glow:rgba(34,197,94,0.3);
+      --red:#ef4444;--blue:#3b82f6;
+      --r1:24px;--r2:16px;--pill:999px;
+      --safeT:env(safe-area-inset-top,0px);--safeB:env(safe-area-inset-bottom,0px);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html,body{height:100%;overflow-x:hidden;}
+    body{
+      font-family:'Outfit',system-ui,-apple-system,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      -webkit-tap-highlight-color:transparent;
+    }
+    body.rtl{direction:rtl;}
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar{width:3px;}
+    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:10px;}
+
+    /* MAIN WRAPPER */
+    .app-wrap{
+      max-width:480px;margin:0 auto;min-height:100vh;
+      padding:calc(12px + var(--safeT)) 16px calc(120px + var(--safeB));
+      position:relative;
+    }
+
+    /* TOP BAR */
+    .top-bar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:8px 0 12px;
+    }
+    .top-left{display:flex;align-items:center;gap:8px;}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:livePulse 2s infinite;}
+    @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--green);}50%{opacity:.5;box-shadow:0 0 3px var(--green);}}
+    .live-text{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;}
+    .online-count{font-size:11px;color:var(--muted);font-weight:600;}
+    .top-right{display:flex;align-items:center;gap:8px;}
+    .tg-id{font-size:11px;font-weight:700;color:var(--blue);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:var(--pill);}
+
+    /* LANG DROPDOWN */
+    .lang-drop{position:relative;}
+    .lang-btn{background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:10px;padding:4px 10px;color:var(--gold);font-weight:800;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;}
+    .lang-btn::after{content:'▾';font-size:10px;color:var(--muted);}
+    .lang-menu{position:absolute;top:110%;right:0;background:var(--bg3);border:1px solid var(--stroke2);border-radius:12px;padding:4px;z-index:500;display:none;min-width:80px;box-shadow:0 12px 40px rgba(0,0,0,0.6);}
+    .lang-menu.open{display:block;}
+    .lang-opt{display:block;width:100%;padding:6px 12px;background:none;border:none;color:var(--muted);font-weight:700;font-size:12px;text-align:left;cursor:pointer;border-radius:8px;font-family:inherit;}
+    .lang-opt:hover,.lang-opt.active{background:rgba(250,204,21,0.1);color:var(--gold);}
+
+    /* HERO PROFIT */
+    .hero{
+      text-align:center;padding:20px 0 16px;
+      background:radial-gradient(ellipse at 50% 80%,rgba(34,197,94,0.08) 0%,transparent 60%);
+    }
+    .hero-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:2px;}
+    .hero-amount{
+      font-size:42px;font-weight:900;color:var(--green);
+      text-shadow:0 0 30px var(--green-glow),0 0 60px rgba(34,197,94,0.15);
+      transition:all 0.3s;position:relative;display:inline-block;
+    }
+    .hero-amount.bump{animation:profitBump 0.4s ease;}
+    @keyframes profitBump{0%{transform:scale(1)}30%{transform:scale(1.12)}100%{transform:scale(1)}}
+    .hero-sub{font-size:12px;color:var(--muted2);margin-top:2px;}
+    .hero-float{
+      position:absolute;top:-10px;right:-40px;
+      font-size:14px;font-weight:800;color:var(--green);
+      opacity:0;animation:floatUp 1s ease forwards;pointer-events:none;
+    }
+    @keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-30px)}}
+
+    /* STREAK / VIP SLIM BAR */
+    .meta-bar{
+      display:flex;align-items:center;justify-content:center;gap:14px;
+      padding:6px 0 14px;
+    }
+    .meta-pill{
+      display:flex;align-items:center;gap:5px;
+      padding:4px 10px;border-radius:var(--pill);
+      background:rgba(255,255,255,0.04);border:1px solid var(--stroke);
+      font-size:11px;font-weight:700;
+    }
+    .meta-pill .icon{font-size:13px;}
+    .meta-pill .val{color:#fff;font-weight:800;}
+
+    /* GAMES GRID */
+    .games-title{font-size:15px;font-weight:800;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;}
+    .games-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+    .game-card{
+      border-radius:var(--r2);padding:16px 14px;cursor:pointer;
+      position:relative;overflow:hidden;min-height:110px;
+      display:flex;flex-direction:column;justify-content:space-between;
+      border:1px solid var(--stroke);
+      backdrop-filter:blur(12px);
+      transition:transform 0.15s,box-shadow 0.2s;
+    }
+    .game-card:active{transform:scale(0.97);}
+    .game-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.4);}
+    /* Per-game gradients */
+    .game-card[data-game="aviator"]{background:linear-gradient(145deg,rgba(239,68,68,0.12),rgba(15,23,42,0.8));border-color:rgba(239,68,68,0.15);}
+    .game-card[data-game="jetx"]{background:linear-gradient(145deg,rgba(245,158,11,0.12),rgba(15,23,42,0.8));border-color:rgba(245,158,11,0.15);}
+    .game-card[data-game="mines"]{background:linear-gradient(145deg,rgba(59,130,246,0.12),rgba(15,23,42,0.8));border-color:rgba(59,130,246,0.15);}
+    .game-card[data-game="penalty"]{background:linear-gradient(145deg,rgba(34,197,94,0.12),rgba(15,23,42,0.8));border-color:rgba(34,197,94,0.15);}
+    .game-card[data-game="balloon"]{background:linear-gradient(145deg,rgba(168,85,247,0.12),rgba(15,23,42,0.8));border-color:rgba(168,85,247,0.15);}
+    .game-card[data-game="chicken"]{background:linear-gradient(145deg,rgba(251,146,60,0.12),rgba(15,23,42,0.8));border-color:rgba(251,146,60,0.15);}
+
+    .game-top{display:flex;align-items:center;gap:10px;}
+    .game-icon{font-size:28px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);flex-shrink:0;}
+    .game-name{font-size:15px;font-weight:800;color:#fff;line-height:1.1;}
+    .game-desc{font-size:10px;color:var(--muted2);font-weight:600;margin-top:2px;}
+    .game-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+    .game-wr{
+      display:flex;align-items:center;gap:4px;
+      padding:3px 8px;border-radius:8px;
+      background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.2);
+    }
+    .game-wr-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
+    .game-wr-text{font-size:12px;font-weight:800;color:var(--green);}
+    .game-play{font-size:11px;color:var(--muted2);font-weight:700;display:flex;align-items:center;gap:3px;}
+    .game-play::after{content:'▶';font-size:8px;}
+
+    /* LOCKED */
+    .locked-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,12,24,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(6px);text-align:center;padding:10px;border-radius:var(--r2);}
+    .lock-icon{font-size:28px;margin-bottom:6px;}
+    .lock-text{color:var(--red);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
+    .lock-msg{color:var(--muted);font-size:10px;margin-top:4px;line-height:1.3;}
+
+    /* GAME DETAIL PANEL */
+    .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(13,19,36,0.8);padding:16px;backdrop-filter:blur(8px);}
+    .backrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .back{border:1px solid var(--stroke);background:rgba(255,255,255,0.04);color:var(--muted);padding:8px 14px;border-radius:var(--pill);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
+    .p-title{font-size:22px;font-weight:900;color:#fff;}
+    .p-sub{margin-top:4px;color:var(--muted);font-size:13px;}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+    .btn{flex:1;min-width:140px;padding:14px;border-radius:14px;border:none;background:rgba(255,255,255,0.06);color:#fff;font-weight:800;cursor:pointer;font-size:14px;font-family:inherit;transition:transform .1s;}
+    .btn:active{transform:scale(0.97);}
+    .btn.primary{color:#0a0f1e;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 6px 20px var(--gold-glow);}
+    .btn[disabled]{opacity:0.4;cursor:not-allowed;background:#1e293b;color:var(--muted);box-shadow:none;}
+    .stepbox{margin-top:14px;border-radius:16px;border:1px solid var(--stroke);background:rgba(255,255,255,0.02);padding:20px;text-align:center;}
+    .stepnum{font-size:52px;font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);}
+    .steplabel{color:var(--muted2);font-weight:800;letter-spacing:1.5px;font-size:11px;text-transform:uppercase;margin-top:4px;}
+    .stepnote{margin-top:10px;color:var(--muted);font-size:12px;}
+
+    /* SIGNAL HISTORY */
+    .sig-history{margin-top:14px;border-radius:14px;border:1px solid var(--stroke);background:rgba(0,0,0,0.15);padding:10px 12px;}
+    .sig-history-title{font-size:10px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+    .sig-history-row{display:flex;gap:4px;flex-wrap:wrap;}
+    .sig-dot{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;border:1px solid var(--stroke);}
+    .sig-dot.win{background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.25);color:var(--green);}
+    .sig-dot.lose{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.15);color:var(--red);}
+
+    /* CIRCULAR COUNTDOWN */
+    .cd-wrap{margin:12px auto;width:64px;height:64px;position:relative;}
+    .cd-wrap svg{transform:rotate(-90deg);}
+    .cd-wrap circle{fill:none;stroke-width:4;}
+    .cd-wrap .bg{stroke:rgba(255,255,255,0.04);}
+    .cd-wrap .prog{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1s linear;}
+    .cd-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:17px;font-weight:900;color:var(--gold);}
+
+    /* MINES & PENALTY */
+    .mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:280px;margin:16px auto;}
+    .mines-cell{aspect-ratio:1;background:rgba(255,255,255,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--stroke);}
+    .mines-cell.active{background:var(--gold);box-shadow:0 0 12px var(--gold-glow);border-color:#fff;animation:popIn .3s ease;}
+    .penalty-wrapper{width:100%;max-width:300px;height:180px;margin:16px auto;border:3px solid rgba(255,255,255,0.2);border-bottom:none;background:rgba(0,0,0,0.15);display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);border-radius:8px 8px 0 0;}
+    .penalty-cell{border:1px dashed rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;}
+    .penalty-ball{font-size:22px;animation:popIn .3s cubic-bezier(.175,.885,.32,1.275);}
+    @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+    .tabs{margin-top:14px;}
+
+    /* DAILY BONUS FLOATING */
+    .daily-float{
+      position:fixed;bottom:130px;right:16px;z-index:250;
+      width:52px;height:52px;border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),#f97316);
+      box-shadow:0 4px 20px rgba(245,158,11,0.4);
+      display:flex;align-items:center;justify-content:center;
+      font-size:24px;cursor:pointer;
+      animation:dailyBounce 3s ease-in-out infinite;
+      border:2px solid rgba(255,255,255,0.2);
+    }
+    .daily-float.claimed{background:var(--bg3);box-shadow:none;animation:none;opacity:0.4;border-color:var(--stroke);}
+    .daily-float-badge{
+      position:absolute;top:-2px;right:-2px;
+      width:16px;height:16px;border-radius:50%;
+      background:var(--red);font-size:9px;font-weight:900;color:#fff;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .daily-float.claimed .daily-float-badge{display:none;}
+    @keyframes dailyBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+    /* DAILY POPUP */
+    .daily-popup{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);z-index:600;display:none;
+      align-items:center;justify-content:center;
+      backdrop-filter:blur(4px);
+    }
+    .daily-popup.open{display:flex;}
+    .daily-card{
+      background:var(--bg3);border:1px solid var(--stroke2);border-radius:20px;
+      padding:28px 24px;text-align:center;max-width:300px;width:90%;
+      box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    }
+    .daily-card-icon{font-size:48px;margin-bottom:8px;}
+    .daily-card-title{font-size:20px;font-weight:900;color:#fff;}
+    .daily-card-sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4;}
+    .daily-card-btn{
+      margin-top:16px;width:100%;padding:14px;border:none;border-radius:14px;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#0a0f1e;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;
+      box-shadow:0 6px 20px var(--gold-glow);
+    }
+    .daily-card-timer{margin-top:12px;font-size:13px;color:var(--muted);font-weight:600;}
+
+    /* CONFETTI */
+    .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
+    .confetti-p{position:absolute;top:-10px;animation:cFall 3s ease-in forwards;}
+    @keyframes cFall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+    /* MARQUEE */
+    .marquee-wrap{position:fixed;bottom:56px;left:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
+    .marquee-inner{display:inline-block;animation:mqScroll 300s linear infinite;font-size:11px;font-weight:600;color:var(--muted);}
+    .marquee-inner span{color:var(--gold);font-weight:800;}
+    @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* SPLASH */
+    #splash{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 1s ease;}
+    .splash-text{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:#fff;opacity:0;animation:fadeUp 2.5s ease forwards;}
+    @keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}40%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+
+    /* TUTORIAL */
+    #tutOverlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:5000;pointer-events:none;opacity:0;transition:opacity .5s;display:none;}
+    .focus-box{position:absolute;border-radius:16px;box-shadow:0 0 0 4000px rgba(0,0,0,0.88);transition:all .6s cubic-bezier(.25,1,.5,1);border:2px solid rgba(255,255,255,0.4);pointer-events:none;}
+    .tut-card{position:absolute;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);padding:16px;border-radius:16px;color:#fff;font-size:14px;line-height:1.4;max-width:280px;text-align:center;opacity:0;transition:opacity .4s .2s;z-index:5002;}
+    .skip-btn{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:99px;color:#fff;font-weight:700;font-size:12px;cursor:pointer;z-index:5003;pointer-events:auto;font-family:inherit;}
+
+    /* GEO SELECTOR */
+    #geoScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:8000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+    #geoScreen.open{display:flex;}
+    .geo-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:6px;}
+    .geo-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
+    .geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:320px;}
+    .geo-btn{display:flex;align-items:center;gap:10px;padding:16px;border-radius:16px;background:rgba(255,255,255,0.04);border:1px solid var(--stroke2);cursor:pointer;transition:all .2s;font-family:inherit;}
+    .geo-btn:active{transform:scale(0.96);}
+    .geo-btn:hover{border-color:var(--gold);background:rgba(250,204,21,0.06);}
+    .geo-flag{font-size:28px;}
+    .geo-name{font-size:14px;font-weight:700;color:#fff;}
+
+    /* REGISTER BUTTON in lock overlay */
+    .reg-btn{margin-top:8px;padding:8px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;}
+    .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
+
+    /* TAB BAR */
+    .tab-bar{position:fixed;bottom:0;left:0;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);}
+    .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 0;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;}
+    .tab-item.active{color:var(--gold);}
+    .tab-item .tab-icon{font-size:20px;line-height:1;}
+    .tab-item .tab-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tab-content{display:none;}
+    .tab-content.active{display:block;}
+
+    /* CHAT */
+    .chat-box{display:flex;flex-direction:column;height:calc(100vh - 180px);max-height:650px;}
+    .chat-msgs{flex:1;overflow-y:auto;padding:12px 4px;display:flex;flex-direction:column;gap:8px;}
+    .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;word-wrap:break-word;animation:msgIn .3s ease;}
+    @keyframes msgIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+    .msg.bot{align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid var(--stroke);color:var(--text);border-bottom-left-radius:4px;}
+    .msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:600;border-bottom-right-radius:4px;}
+    .msg.typing{align-self:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--stroke);color:var(--muted);font-style:italic;}
+    .msg-time{font-size:9px;color:var(--muted2);margin-top:3px;}
+    .chat-input-row{display:flex;gap:8px;padding:10px 0 0;border-top:1px solid var(--stroke);align-items:flex-end;}
+    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:14px;outline:none;font-family:inherit;resize:none;min-height:42px;max-height:100px;}
+    .chat-input::placeholder{color:var(--muted2);}
+    .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,0.1);}
+    .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
+    .chat-send:active{transform:scale(0.9);}
+    .chat-send:disabled{opacity:0.3;}
+    .chat-welcome{text-align:center;padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .chat-welcome-icon{font-size:44px;}
+    .chat-welcome-title{font-size:18px;font-weight:900;color:#fff;}
+    .chat-welcome-text{font-size:13px;color:var(--muted);line-height:1.5;max-width:260px;}
+
+    /* HELP TOOLTIP */
+    .help-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--muted);font-size:9px;font-weight:800;cursor:pointer;margin-left:4px;flex-shrink:0;vertical-align:middle;line-height:1;}
+    .help-tooltip{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg3);border:1px solid var(--stroke2);border-radius:16px;padding:16px 20px;color:var(--text);font-size:13px;line-height:1.5;max-width:280px;z-index:7000;box-shadow:0 20px 60px rgba(0,0,0,0.7);animation:ttIn .2s ease;}
+    .help-tooltip-title{font-weight:800;font-size:14px;margin-bottom:6px;color:var(--gold);}
+    .help-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:6999;}
+    @keyframes ttIn{0%{opacity:0;transform:translate(-50%,-50%) scale(0.9)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+    /* GEO SWITCH BTN */
+    .geo-switch{background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:10px;padding:4px 10px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;color:var(--muted);font-weight:700;font-size:11px;}
+    .geo-switch:active{transform:scale(0.95);}
+
+    /* TOP PLAYERS */
+    .top-header{text-align:center;padding:10px 0 16px;}
+    .top-header-title{font-size:22px;font-weight:900;color:#fff;}
+    .top-header-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+    .top-header-date{display:inline-block;margin-top:8px;padding:4px 14px;border-radius:99px;background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.15);color:var(--gold);font-size:11px;font-weight:700;}
+    .top-podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:16px 0 20px;}
+    .podium-item{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;}
+    .podium-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--stroke);}
+    .podium-item:nth-child(2) .podium-avatar{width:58px;height:58px;font-size:22px;border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow);background:rgba(250,204,21,0.1);}
+    .podium-item:nth-child(1) .podium-avatar{background:rgba(192,192,192,0.08);border-color:#aaa;}
+    .podium-item:nth-child(3) .podium-avatar{background:rgba(205,127,50,0.08);border-color:#cd7f32;}
+    .podium-name{font-size:11px;font-weight:700;color:#fff;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .podium-amount{font-size:13px;font-weight:900;color:var(--gold);}
+    .top-list{border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(0,0,0,0.15);overflow:hidden;max-height:400px;overflow-y:auto;}
+    .top-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--stroke);}
+    .top-row:last-child{border-bottom:none;}
+    .top-rank{width:26px;font-size:12px;font-weight:800;color:var(--muted2);text-align:center;flex-shrink:0;}
+    .top-row:nth-child(-n+3) .top-rank{color:var(--gold);}
+    .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
+    .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
+  </style>
+</head>
+<body>
+  <div id="geoScreen">
+    <div class="geo-title">🌍 Select Your Country</div>
+    <div class="geo-sub">Choose to get started</div>
+    <div class="geo-grid" id="geoGrid"></div>
+  </div>
+  <div id="splash"><div class="splash-text" id="splashName">Hello</div></div>
+  <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">SKIP</button></div>
+  <div class="confetti-box" id="confettiBox"></div>
+
+  <!-- DAILY BONUS FLOAT -->
+  <div class="daily-float" id="dailyFloat" onclick="openDailyPopup()">🎁<div class="daily-float-badge">!</div></div>
+  <div class="daily-popup" id="dailyPopup">
+    <div class="daily-card">
+      <div class="daily-card-icon">🎁</div>
+      <div class="daily-card-title" id="dpTitle">Free VIP Signal <span class="help-icon" onclick="event.stopPropagation();showHelp('bonus')">?</span></div>
+      <div class="daily-card-sub" id="dpSub">Claim your daily bonus and get a free VIP-level signal prediction!</div>
+      <button class="daily-card-btn" id="dpBtn" onclick="claimDailyBonus()">CLAIM BONUS</button>
+      <div class="daily-card-timer" id="dpTimer"></div>
+    </div>
+  </div>
+
+  <div class="app-wrap">
+    <!-- CHAT TAB -->
+    <div id="tabChat" class="tab-content active">
+      <div class="top-bar"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
+      <div style="text-align:center;margin-bottom:8px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:24px;font-weight:900;color:#fff;">CHAT</div></div>
+      <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div><div class="chat-input-row"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div></div>
+    </div>
+
+    <!-- SIGNALS TAB -->
+    <div id="tabSignals" class="tab-content">
+      <div class="top-bar">
+        <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
+        <div class="top-right">
+          <button class="geo-switch" id="geoSwitchBtn" onclick="showGeoSelector()"><span id="geoSwitchFlag">🌍</span> <span id="geoSwitchName">Change</span></button>
+          <div class="tg-id" id="userHeaderId">TG: ...</div>
+          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-label">Today's Profit <span class="help-icon" onclick="showHelp('profit')">?</span></div>
+        <div class="hero-amount" id="profitAmount">+$0</div>
+        <div class="hero-sub" id="heroSub">Keep playing to grow your balance</div>
+      </div>
+
+      <!-- META BAR -->
+      <div class="meta-bar">
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span><span class="help-icon" onclick="showHelp('streak')">?</span></div>
+        <div class="meta-pill"><span class="icon" id="vipIcon">🥉</span><span class="val" id="vipText">Bronze</span><span class="help-icon" onclick="showHelp('vip')">?</span></div>
+        <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
+      </div>
+
+      <div id="app"></div>
+    </div>
+
+    <!-- TOP PLAYERS TAB -->
+    <div id="tabTop" class="tab-content">
+      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-podium" id="topPodium"></div>
+      <div class="top-list" id="topList"></div>
+    </div>
+  </div>
+
+  <div class="marquee-wrap" id="marqueeBar"><div class="marquee-inner" id="marqueeText"></div></div>
+
+  <div class="tab-bar">
+    <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
+    <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
+    <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
+  </div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    const GEO_CONFIG = {
+      my: { name:"Malaysia", flag:"🇲🇾", lang:"en", currency:"MYR", sym:"RM", profitRange:[20,200],
+        link:"https://fastwin667.com/HQPf6K", promo:"777MY777",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-my",
+        names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
+      in: { name:"India", flag:"🇮🇳", lang:"en", currency:"INR", sym:"₹", profitRange:[200,5000],
+        link:"https://fastwin667.com/dpNzcY", promo:"777IN777",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-in",
+        names:["Rahul","Amit","Priya","Raj","Arjun","Vikram","Deepak","Sunil","Ananya","Pooja","Kiran","Rohan","Sneha","Arun","Neha","Vivek","Meera","Sanjay","Kavita","Ravi"] },
+      ca: { name:"Canada", flag:"🇨🇦", lang:"en", currency:"CAD", sym:"C$", profitRange:[5,50],
+        link:"https://fastwin667.com/PDCDGj", promo:"777CA777",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-ca",
+        names:["James","Michael","David","Ryan","Tyler","Chris","Matt","Josh","Alex","Kyle","Emma","Sarah","Jessica","Emily","Ashley","Megan","Lauren","Hannah","Chloe","Sophie"] },
+      es: { name:"España", flag:"🇪🇸", lang:"es", currency:"EUR", sym:"€", profitRange:[5,50],
+        link:"https://sp1nwin.com/WLwJLLgK", promo:"",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-es",
+        names:["Carlos","Javier","Pablo","Alejandro","Diego","Sergio","Álvaro","Adrián","Daniel","Miguel","Lucía","María","Marta","Laura","Ana","Carmen","Sara","Paula","Elena","Alba"] },
+      it: { name:"Italia", flag:"🇮🇹", lang:"it", currency:"EUR", sym:"€", profitRange:[5,50],
+        link:"", promo:"",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-it",
+        names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
+    };
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history';
+    const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+    const urlParams=new URLSearchParams(window.location.search);
+    let currentGeo=urlParams.get('geo')||S.get('user_geo')||null;
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
+    const CHECKER_URL=currentGeo?geo().webhook:'https://n8nnexusai.uk/webhook/check-access-my';
+    const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
+    const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
+    const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
+    let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
+    let userName="Guest",tgUserId=null;
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}
+
+    // GEO SELECTOR
+    function buildGeoSelector(){
+      const grid=document.getElementById('geoGrid');grid.innerHTML='';
+      Object.entries(GEO_CONFIG).forEach(([code,cfg])=>{
+        const btn=document.createElement('div');btn.className='geo-btn';
+        btn.innerHTML=`<span class="geo-flag">${cfg.flag}</span><span class="geo-name">${cfg.name}</span>`;
+        btn.onclick=()=>selectGeo(code);
+        grid.appendChild(btn);
+      });
+    }
+    function selectGeo(code){
+      currentGeo=code;S.set('user_geo',code);
+      savedIdKey=`saved_player_id_${code}`;
+      lang=geo().lang;S.set('aslang',lang);
+      document.getElementById('geoScreen').classList.remove('open');
+      initApp();
+    }
+    function showGeoSelector(){
+      buildGeoSelector();
+      document.getElementById('geoScreen').classList.add('open');
+    }
+
+    // ONLINE — smooth ±1-5
+    let onlineVal=Math.floor(240+Math.random()*60);
+    function updOnline(){
+      const delta=Math.floor(Math.random()*5)+1;
+      onlineVal+=Math.random()>0.5?delta:-delta;
+      if(onlineVal<180)onlineVal+=Math.floor(Math.random()*10)+5;
+      if(onlineVal>420)onlineVal-=Math.floor(Math.random()*10)+5;
+      document.getElementById('onlineCount').textContent='• '+onlineVal;
+      document.getElementById('onlineCount2').textContent=onlineVal;
+    }
+    updOnline();setInterval(updOnline,4000);
+
+    // PROFIT
+    let todayProfit=0;
+    function profitSym(){return currentGeo?geo().sym:'$';}
+    function profitFmt(v){return profitSym()+v.toLocaleString();}
+    function updProfit(){const ds=new Date().toDateString();if(S.get('pday')!==ds){S.set('pday',ds);S.set('pval','0');}todayProfit=parseInt(S.get('pval')||'0');document.getElementById('profitAmount').textContent='+'+profitFmt(todayProfit);}
+    function addProfit(v){if(!currentGeo)v=rndInt(5,50);else{const r=geo().profitRange;v=rndInt(r[0],r[1]);}todayProfit+=v;S.set('pval',todayProfit.toString());const el=document.getElementById('profitAmount');el.textContent='+'+profitFmt(todayProfit);el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');
+      const fl=document.createElement('span');fl.className='hero-float';fl.textContent='+'+profitFmt(v);el.appendChild(fl);setTimeout(()=>fl.remove(),1200);}
+    updProfit();
+
+    // STREAK
+    function updStreak(){const d=new Date().toDateString(),ld=S.get('sday');let s=parseInt(S.get('scnt')||'0');if(ld!==d){const y=new Date(Date.now()-864e5).toDateString();if(ld===y)s++;else s=1;S.set('sday',d);S.set('scnt',s);}document.getElementById('streakNum').textContent=s;return s;}
+    const curStreak=updStreak();
+
+    // VIP
+    function updVIP(){const ts=parseInt(S.get('tsig')||'0');let t='Bronze',i='🥉';if(ts>50||curStreak>14){t='Diamond';i='💎';}else if(ts>25||curStreak>7){t='Gold';i='🥇';}else if(ts>10||curStreak>3){t='Silver';i='🥈';}document.getElementById('vipIcon').textContent=i;document.getElementById('vipText').textContent=t;}
+    updVIP();
+
+    // DAILY BONUS
+    function updDaily(){const f=document.getElementById('dailyFloat'),lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){f.classList.add('claimed');}else{f.classList.remove('claimed');}}
+    function openDailyPopup(){const p=document.getElementById('dailyPopup');p.classList.add('open');const lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){const left=864e5-(now-parseInt(lc)),h=Math.floor(left/36e5),m=Math.floor((left%36e5)/6e4);document.getElementById('dpBtn').style.display='none';document.getElementById('dpTimer').textContent=`Next bonus in ${h}h ${m}m`;document.getElementById('dpSub').textContent='You already claimed today!';}else{document.getElementById('dpBtn').style.display='';document.getElementById('dpTimer').textContent='';document.getElementById('dpSub').textContent='Claim your daily bonus and get a free VIP signal!';}}
+    function claimDailyBonus(){S.set('dclaim',Date.now().toString());addProfit(rndInt(15,45));try{navigator.vibrate&&navigator.vibrate(100);}catch(e){}fireConfetti();document.getElementById('dailyPopup').classList.remove('open');updDaily();}
+    document.getElementById('dailyPopup').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+    updDaily();
+
+    // SOUND
+    let actx=null;
+    function playSfx(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.type='sine';o.frequency.setValueAtTime(800,actx.currentTime);o.frequency.setValueAtTime(1200,actx.currentTime+0.1);g.gain.setValueAtTime(0.2,actx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,actx.currentTime+0.3);o.start();o.stop(actx.currentTime+0.3);}catch(e){}}
+
+    // CONFETTI
+    function fireConfetti(){const box=document.getElementById('confettiBox'),cols=['#facc15','#22c55e','#3b82f6','#ef4444','#a855f7','#ec4899'];for(let i=0;i<35;i++){const p=document.createElement('div');p.className='confetti-p';p.style.left=Math.random()*100+'%';p.style.background=cols[Math.floor(Math.random()*cols.length)];p.style.animationDelay=Math.random()*.5+'s';p.style.animationDuration=(2+Math.random()*2)+'s';p.style.borderRadius=Math.random()>.5?'50%':'2px';p.style.width=(5+Math.random()*7)+'px';p.style.height=(5+Math.random()*7)+'px';box.appendChild(p);setTimeout(()=>p.remove(),4000);}}
+
+    // TAB
+    let curTab='signals';
+    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
+    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
+    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
+
+    // MARQUEE
+    function buildMarquee(){
+      const c=document.getElementById("marqueeText");
+      const suffixes=["_777","_win","_pro","_1x","_bet","_ace","","","","",""];
+      const gNames=currentGeo?geo().names:["Alex","Max","John","Mike","Sam","Leo","Nick","Eva","Mia","Jack"];
+      const allNames=[...gNames];
+      // Mix in some international names
+      const intl=["Lucky88","BTC_fan","Winner","ProBet","CashKing","GoldRush","JackpotX","StarBet","TopPlay","AceHigh"];
+      intl.forEach(n=>allNames.push(n));
+      let h="";
+      for(let i=0;i<20;i++){
+        const name=allNames[Math.floor(Math.random()*allNames.length)]+suffixes[Math.floor(Math.random()*suffixes.length)];
+        const sym=profitSym();
+        const amt=currentGeo?rndInt(geo().profitRange[0],geo().profitRange[1]*2):rndInt(50,500);
+        h+=`${name} won <span>${sym}${amt.toLocaleString()}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
+      }
+      c.innerHTML=h+h;
+    }
+
+    // LANGS
+    const LANGS=[{id:"en",l:"EN"},{id:"es",l:"ES"},{id:"it",l:"IT"},{id:"ru",l:"RU"},{id:"pt",l:"PT"},{id:"id",l:"ID"}];
+    let lang=S.get("aslang")||"en";
+    function T(){return STR[lang]||STR.en;}
+    function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
+    function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
+    function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
+    document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
+
+    const STR={
+      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Register & Send ID to Bot.",skip:"SKIP",wait:"Wait",tut:{s1:"Your 1xBet ID synced with signals.",s2:"Select a game for AI signals.",s4:"Predicted coefficient.",s5:"Click GET SIGNAL."},
+        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
+        ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Max 10x.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Aim for target.",b:"GET SIGNAL",l:"TARGET",u:(t)=>`Updates at <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Safe spots marked.",b:"GET SIGNAL",l:"SAFE SPOTS",u:(t)=>`Updates at <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Cash out before pop.",b:"GET SIGNAL",l:"CASH OUT",u:(t)=>`Updates at <strong>${t}</strong>`}},
+      ru:{cg:"Выберите игру:",back:"Меню",lt:"ДОСТУП ЗАКРЫТ",lm:"⛔️ Отправьте ID боту.",skip:"ПРОПУСТИТЬ",wait:"Ждите",tut:{s1:"ID синхронизирован.",s2:"Выберите игру.",s4:"Прогноз.",s5:"Нажмите кнопку."},
+        g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
+        ch:{t:"Chicken Road",s:"Выберите сложность.",nx:"ДАЛЕЕ",w:(s)=>`Ждите ${s}с`,tb:{easy:"Лёгкий",medium:"Средний",hard:"Сложный",hardcore:"Хардкор"}},
+        av:{t:"Aviator",s:"Каждую минуту.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Макс 10x.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Бей в зону.",b:"ПОЛУЧИТЬ",l:"ЗОНА",u:(t)=>`Обновится в <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Безопасные клетки.",b:"ПОЛУЧИТЬ",l:"ЯЧЕЙКИ",u:(t)=>`Обновится в <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}},
+      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Enviar ID al bot.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Evita minas"},balloon:{n:"Balloon",d:"Infla y gana"}},ch:{t:"Chicken Road",s:"Dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Medio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta.",b:"OBTENER",l:"ZONA",u:(t)=>`Actualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTENER",l:"CELDAS",u:(t)=>`Actualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira.",b:"OBTENER",l:"RETIRAR",u:(t)=>`Actualiza <strong>${t}</strong>`}},
+      pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
+      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
+      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Livelli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
+      mn:{cg:"Сонгох:",back:"Цэс",lt:"ХААГДЛАА",lm:"⛔️ ID илгээнэ.",skip:"АЛГАСАХ",wait:"Хүлээнэ",tut:{s1:"ID синхрон.",s2:"Тоглоом сонгох.",s4:"Таамаглал.",s5:"Дарна уу."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Эрсдэл"},penalty:{n:"Penalty",d:"Гоол"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Хүлээнэ ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
+    };
+
+    // UTILS
+    function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+    function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+    function getCd(k){return Math.max(0,Math.ceil((parseInt(S.get(`cd_${k}`)||'0')-Date.now())/1000));}
+    function setCd(k){S.set(`cd_${k}`,Date.now()+30000);}
+    function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
+    function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
+    function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+
+    // SIGNALS
+    let timer=null;
+    function renderHome(){
+      if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
+      const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
+      const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
+      ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
+        const g=T().g[k],wr=WIN_RATES[k]||88;
+        const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
+        c.onclick=()=>handleGameClick(k,c);
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-wr"><span class="game-wr-dot"></span><span class="game-wr-text">${wr}%</span></div><div class="game-play">Play</div></div>`;
+        grid.appendChild(c);
+      });
+      app.appendChild(h);app.appendChild(grid);
+    }
+    function applyStatic(){renderHome();buildLangMenu();}
+
+    async function handleGameClick(k,el){
+      const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
+      try{const uid=tg?.initDataUnsafe?.user?.id;if(!uid){el.removeChild(ld);showLock(el);return;}
+      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});const d=await r.json();
+      if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
+      if(d.allowed){el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}else{el.removeChild(ld);showLock(el);}}
+      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
+    }
+    function showLock(el){
+      if(el.querySelector('.lock-text'))return;
+      const g=geo();
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
+      const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
+      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
+    }
+    function openRegLink(){
+      const url=geo().link;if(!url)return;
+      if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
+    }
+
+    function renderGame(k){
+      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
+      const gk={aviator:'av',jetx:'jx',mines:'mi',penalty:'pe',balloon:'ba'}[k]||'av';
+      const td=T()[gk]||T().av;
+      let ch=`<div class="stepnum" id="cD">...</div><div class="steplabel">${td.l}</div>`;
+      if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++)g+='<div class="mines-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
+      else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++)g+='<div class="penalty-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
+      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="game-wr-dot"></span><span style="font-size:12px;font-weight:800;color:var(--green)">${WIN_RATES[k]}%</span><span class="help-icon" onclick="showHelp('winrate')">?</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
+      const btn=document.getElementById('sBtn'),box=document.getElementById('gBox'),cdW=document.getElementById('cdW'),cdP=document.getElementById('cdP'),cdN=document.getElementById('cdN');
+      const circ=175.93;
+      function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
+      function showSig(){
+        const v=genVal(k);try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
+        const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
+        if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
+        else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
+        else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
+        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
+      }
+      uBtn();timer=setInterval(uBtn,1000);btn.onclick=()=>{setCd(k);showSig();uBtn();};
+    }
+
+    const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
+    function renderChicken(){
+      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
+      const p=document.createElement('div');p.className='panel';
+      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
+      app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
+      const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
+      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
+      nxB.onclick=()=>{nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');},500);};dT();
+    }
+
+    // CHAT
+    let chatH=[],chatLD=false,chatSnd=false;
+    function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');e.appendChild(d);});scrollChatBottom();}
+    async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:currentGeo})});const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
+    async function sendChatMessage(){const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt||chatSnd)return;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;chatH.push({r:'user',t:txt,tm:hhmm(new Date())});inp.value='';inp.style.height='auto';renderChat();const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
+    try{const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,message:txt,geo:currentGeo,lang:lang,source:'miniapp'})});const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
+    renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
+    document.getElementById('chatInput').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px';});
+    document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
+
+    // TOP PLAYERS — weekly seed, multinational, $10k descending
+    function sRnd(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
+    function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
+    function genTop(){
+      const ws=getWeekSeed();
+      const allNames=["Rahul_777","Hafiz_pro","Carlos99","Marco_bet","James_win","Arjun_1x","Syafiq","Priya_ace","Pablo_top","Luca","Alessandro","Ryan_vip","Vikram","Alejandro","Tyler_pro","Danish","Amit_777","Sergio","Francesco","Kyle_bet","Deepak_win","Álvaro","Matteo","Josh_1x","Pooja","Laura","Chiara","Emma_ace","Sneha","Sara","Aisyah","María","Valentina","Sophie","Neha","Ana","Fatin","Elena","Giulia","Hannah","Rohan_pro","Javier_bet","Lorenzo","Matt_777","Kiran","Diego_win","Davide","Alex_1x","Vivek","Daniel","Faiz_ace","Miguel","Giuseppe","Chris_top","Meera","Carmen","Alessia","Lauren","Kavita","Paula","Aiman","Adrián","Simone","David_pro","Farhan","Ananya_bet","Elisa","Megan","Sanjay","Alba","Martina","Chloe_win","Ravi","Nadia","Sofia_777","Jessica","Aqil","Marta","Anna","Emily","Haziq_pro","Arun_bet","Francesca","Ashley","Nurul","Liyana","Atikah_1x","Hana","Mira_ace","Siti","Ain","Michael_top","Tyler","Josh","Matt_win","Kyle","Ben","Tom","Rex","Ace","Ivy_777","Sky_pro"];
+      const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
+      const p=[];
+      // Generate realistic descending amounts: #1 ~$9500-10200, #100 ~$80-200
+      // Use exponential decay with randomness for natural feel
+      let prevAmt=10500;
+      for(let i=0;i<100;i++){
+        const r1=sRnd(ws+i*7),r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11);
+        const nm=allNames[Math.floor(r1*allNames.length)];
+        const gm=gn[Math.floor(r2*gn.length)];
+        // Exponential curve: top spots close together, bottom spread out
+        const pct=i/99; // 0 to 1
+        const base=10200*Math.pow(0.952,i); // exponential decay ~$10200 to ~$80
+        const jitter=(r3-0.5)*base*0.15; // ±7.5% randomness
+        let am=Math.round(base+jitter);
+        // Ensure strictly descending
+        am=Math.min(am,prevAmt-Math.floor(r3*30+10));
+        am=Math.max(am,50);
+        prevAmt=am;
+        p.push({rk:i+1,nm,gm,am});
+      }
+      return p;
+    }
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+
+    // TUTORIAL
+    const splash=document.getElementById("splash"),sName=document.getElementById("splashName"),overlay=document.getElementById("tutOverlay"),focusBox=document.getElementById("focusBox"),tutText=document.getElementById("tutText");let isSkipped=false;
+    function setFocus(el,text){if(!el)return;const r=el.getBoundingClientRect();focusBox.style.width=(r.width+12)+"px";focusBox.style.height=(r.height+12)+"px";focusBox.style.top=(r.top-6)+"px";focusBox.style.left=(r.left-6)+"px";tutText.style.opacity="0";setTimeout(()=>{if(isSkipped)return;tutText.textContent=text;let tp=r.bottom+20;if(tp>window.innerHeight-100)tp=r.top-100;tutText.style.top=tp+"px";tutText.style.left="50%";tutText.style.transform="translateX(-50%)";tutText.style.opacity="1";},300);}
+    async function startTutorial(force=false){if(S.get("st7")&&!force)return;isSkipped=false;switchTab('signals');renderHome();overlay.style.display="block";setTimeout(()=>overlay.style.opacity="1",10);if(isSkipped)return;setFocus(document.getElementById("userHeaderId"),T().tut.s1);await wait(5000);if(isSkipped)return;setFocus(document.getElementById("gamesGrid"),T().tut.s2);await wait(5000);if(isSkipped)return;tutText.style.opacity="0";renderGame('aviator');document.getElementById("cD").textContent="2.45x";await wait(2000);if(isSkipped)return;const c=document.getElementById("cD");if(c)setFocus(c.parentElement,T().tut.s4);await wait(5000);if(isSkipped)return;setFocus(document.getElementById("sBtn"),T().tut.s5);await wait(5000);endTutorial();}
+    function skipTutorial(){isSkipped=true;endTutorial();}
+    function endTutorial(){overlay.style.opacity="0";setTimeout(()=>{overlay.style.display="none";S.set("st7","1");renderHome();},500);}
+    function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+
+    // HELP TOOLTIPS
+    const HELP_DATA={
+      streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
+      vip:{title:'🏅 VIP Tier',text:'Bronze → Silver (10+ signals or 3+ day streak) → Gold (25+ signals or 7+ day streak) → Diamond (50+ signals or 14+ day streak). Higher tier = access to more accurate AI predictions.'},
+      profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
+      bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
+      winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
+    };
+    function showHelp(key){
+      const d=HELP_DATA[key];if(!d)return;
+      const ov=document.createElement('div');ov.className='help-overlay';
+      const tt=document.createElement('div');tt.className='help-tooltip';
+      tt.innerHTML=`<div class="help-tooltip-title">${d.title}</div><div>${d.text}</div>`;
+      document.body.appendChild(ov);document.body.appendChild(tt);
+      function close(){ov.remove();tt.remove();}
+      ov.onclick=close;tt.onclick=close;
+    }
+
+    // GEO SWITCH — update button with current flag
+    function updGeoSwitch(){
+      const btn=document.getElementById('geoSwitchBtn');if(!btn)return;
+      if(currentGeo){
+        const g=geo();
+        document.getElementById('geoSwitchFlag').textContent=g.flag;
+        document.getElementById('geoSwitchName').textContent=g.name;
+      }
+    }
+
+    // APP INIT after geo is known
+    function initApp(){
+      lang=S.get('aslang')||geo().lang;S.set('aslang',lang);
+      applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
+      // Start on chat tab
+      switchTab('chat');
+      // Load chat history
+      loadChatHistory();
+    }
+
+    // INIT
+    window.onload=function(){
+      sName.textContent=`Hello, ${userName}`;
+      setTimeout(()=>{
+        splash.style.opacity="0";
+        setTimeout(()=>{
+          splash.style.display="none";
+          if(!currentGeo){
+            showGeoSelector();
+          } else {
+            initApp();
+            setTimeout(()=>startTutorial(),500);
+          }
+        },1000);
+      },2500);
+    };
+  </script>
+</body>
+</html>
