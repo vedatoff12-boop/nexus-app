@@ -33,9 +33,11 @@
 
     /* MAIN WRAPPER */
     .app-wrap{
-      max-width:480px;margin:0 auto;min-height:100vh;
+      max-width:480px;margin:0 auto;height:100%;overflow-y:auto;
       padding:calc(12px + var(--safeT)) 16px calc(120px + var(--safeB));
       position:relative;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
     }
 
     /* TOP BAR */
@@ -182,7 +184,7 @@
 
     /* DAILY BONUS FLOATING */
     .daily-float{
-      position:fixed;bottom:130px;right:16px;z-index:250;
+      position:absolute;bottom:74px;right:16px;z-index:250;
       width:52px;height:52px;border-radius:50%;
       background:linear-gradient(135deg,var(--gold),#f97316);
       box-shadow:0 4px 20px rgba(245,158,11,0.4);
@@ -231,7 +233,7 @@
     @keyframes cFall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
     /* MARQUEE */
-    .marquee-wrap{position:fixed;bottom:56px;left:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
+    .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
     .marquee-inner{display:inline-block;animation:mqScroll 300s linear infinite;font-size:11px;font-weight:600;color:var(--muted);}
     .marquee-inner span{color:var(--gold);font-weight:800;}
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -263,24 +265,22 @@
     .reg-btn{margin-top:8px;padding:8px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;}
     .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
 
-    /* TAB BAR */
-    .tab-bar{position:fixed;bottom:0;left:0;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);}
+    /* APP SHELL + TAB BAR */
+    .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100dvh;}
+    .app-body{flex:1;min-height:0;position:relative;overflow:hidden;}
+    .tab-bar{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);flex-shrink:0;}
     .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 0;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;}
     .tab-item.active{color:var(--gold);}
     .tab-item .tab-icon{font-size:20px;line-height:1;}
     .tab-item .tab-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
-    .tab-content{display:none;}
+    .tab-content{display:none;height:100%;}
     .tab-content.active{display:block;}
 
-    /* CHAT — fixed layout like Telegram */
-    body.chat-active{overflow:hidden;height:100vh;height:100dvh;}
-    body.chat-active .app-wrap{display:none !important;}
-    body.chat-active .marquee-wrap{display:none !important;}
-    body.chat-active .tab-bar{display:none !important;}
-    #tabChat{position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:var(--bg);display:none;flex-direction:column;overflow:hidden;}
+    /* CHAT — stable fullscreen mobile layout */
+    #tabChat{height:100%;background:var(--bg);display:none;flex-direction:column;overflow:hidden;}
     #tabChat.active{display:flex !important;}
-    .chat-header{padding:calc(8px + var(--safeT)) 16px 4px;flex-shrink:0;}
-    .chat-box{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:0 16px;}
+    .chat-header{padding:calc(8px + var(--safeT)) 16px 4px;flex-shrink:0;background:var(--bg);}
+    .chat-box{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:0 16px 0;}
     .chat-msgs{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch;min-height:0;}
     .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;word-wrap:break-word;animation:msgIn .3s ease;}
     @keyframes msgIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
@@ -289,7 +289,7 @@
     .msg.typing{align-self:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--stroke);color:var(--muted);font-style:italic;}
     .msg-time{font-size:9px;color:var(--muted2);margin-top:3px;}
     .chat-input-row{display:flex;gap:8px;padding:8px 16px 8px;border-top:1px solid var(--stroke);align-items:flex-end;flex-shrink:0;background:var(--bg);}
-    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:14px;outline:none;font-family:inherit;resize:none;min-height:42px;max-height:100px;}
+    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:14px;outline:none;font-family:inherit;resize:none;min-height:42px;max-height:76px;overflow-y:auto;}
     .chat-input::placeholder{color:var(--muted2);}
     .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,0.1);}
     .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
@@ -330,7 +330,7 @@
     .podium-item:nth-child(3) .podium-avatar{background:rgba(205,127,50,0.08);border-color:#cd7f32;}
     .podium-name{font-size:11px;font-weight:700;color:#fff;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .podium-amount{font-size:13px;font-weight:900;color:var(--gold);}
-    .top-list{border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(0,0,0,0.15);overflow:hidden;max-height:400px;overflow-y:auto;}
+    .top-list{border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(0,0,0,0.15);overflow:hidden;max-height:none;overflow-y:auto;padding-bottom:12px;}
     .top-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--stroke);}
     .top-row:last-child{border-bottom:none;}
     .top-rank{width:26px;font-size:12px;font-weight:800;color:var(--muted2);text-align:center;flex-shrink:0;}
@@ -363,22 +363,19 @@
   </div>
 
   <!-- CHAT TAB — outside app-wrap, fixed fullscreen -->
-  <div id="tabChat" class="tab-content active">
-    <div class="chat-header">
-      <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
-      <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
-    </div>
-    <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div></div>
-    <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-    <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
-    <div class="tab-bar" style="position:relative;flex-shrink:0;">
-      <button class="tab-item active" onclick="switchTab('chat')"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('top')"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
-    </div>
-  </div>
+  <div class="app-shell">
+    <div class="app-body">
+      <div id="tabChat" class="tab-content">
+        <div class="chat-header">
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
+        </div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals, deposits, or how to get started.</div></div></div></div>
+        <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+      </div>
 
-  <div class="app-wrap">
+      <div class="app-wrap">
     <!-- SIGNALS TAB -->
     <div id="tabSignals" class="tab-content">
       <div class="top-bar">
@@ -415,12 +412,14 @@
     </div>
   </div>
 
-  <div class="marquee-wrap" id="marqueeBar"><div class="marquee-inner" id="marqueeText"></div></div>
+      <div class="marquee-wrap" id="marqueeBar"><div class="marquee-inner" id="marqueeText"></div></div>
+    </div>
 
-  <div class="tab-bar">
-    <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-    <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-    <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
+    <div class="tab-bar">
+      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
+      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
+      <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
+    </div>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -474,14 +473,12 @@
       currentGeo=code;S.set('user_geo',code);
       savedIdKey=`saved_player_id_${code}`;
       lang=geo().lang;S.set('aslang',lang);
+      const nextUrl=new URL(window.location.href);nextUrl.searchParams.set('geo',code);history.replaceState({},'',nextUrl);
       document.getElementById('geoScreen').classList.remove('open');
       initApp();
     }
     function showGeoSelector(){
       buildGeoSelector();
-      // Remove chat-active so app-wrap (with geoScreen) is visible
-      document.body.classList.remove('chat-active');
-      document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
       document.getElementById('geoScreen').classList.add('open');
     }
 
@@ -531,9 +528,9 @@
     // TAB
     let curTab='signals';
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
-    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';document.body.classList.add('chat-active');loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';document.body.classList.remove('chat-active');}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';document.body.classList.remove('chat-active');renderTopPlayers();}}
+    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
+    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -684,7 +681,7 @@
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Welcome!</div><div class="chat-welcome-text">Ask me anything about AI signals.</div></div>';return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
-    async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:currentGeo})});const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
+    async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:currentGeo})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
     async function sendChatMessage(){const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64||chatSnd)return;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
     const msgContent=chatImgB64?`${txt||'📸'}${chatImgB64?'<img>':''}`:txt;
     const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
@@ -693,9 +690,9 @@
     inp.value='';inp.style.height='auto';removeChatImage();renderChat();
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
     try{const body={user_id:tgUserId,message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp'};if(imgData)body.image=imgData;
-    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
+    const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('chat_http_'+r.status);const d=await r.json();document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:d.reply||'Sorry, try again.',tm:hhmm(new Date())});}catch(e){document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Connection error.',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;document.getElementById('chatSendBtn').disabled=false;}
-    document.getElementById('chatInput').addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px';});
+    document.getElementById('chatInput').addEventListener('input',function(){this.style.height='auto';const next=Math.min(this.scrollHeight,76);this.style.height=Math.max(42,next)+'px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
 
     // TOP PLAYERS — weekly seed, multinational, $10k descending
