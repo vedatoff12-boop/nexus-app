@@ -476,6 +476,7 @@
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-es',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-es';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('reset')==='1'){try{localStorage.clear();}catch(e){}const u=new URL(window.location.href);u.searchParams.delete('reset');history.replaceState({},'',u);}
     let currentGeo='es'; S.set('user_geo','es');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.es;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-es';
@@ -808,22 +809,29 @@
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
-      let prevAmt=10500;
+      let prevAmt=12000;
       for(let i=0;i<100;i++){
-        const r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11);
+        const r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11),r4=sRnd(ws+i*31+3);
         const nm=ordered[i];
         const gm=gn[Math.floor(r2*gn.length)];
-        const base=10200*Math.pow(0.952,i);
-        const jitter=(r3-0.5)*base*0.15;
-        let am=Math.round(base+jitter);
-        am=Math.min(am,prevAmt-Math.floor(r3*30+10));
-        am=Math.max(am,50);
+        // Exponential curve: ~€11500 top → ~€200 bottom
+        const ratio=i/99;
+        const base=11500*Math.pow(1-ratio*0.97,1.8)+200;
+        // ±15% jitter seeded per player
+        const jitter=1+(r3-0.5)*0.30;
+        let am=Math.round(base*jitter);
+        // Ensure strictly decreasing with small random gaps
+        am=Math.min(am,prevAmt-Math.floor(r4*40+5));
+        am=Math.max(am,180+Math.floor(r4*60));
+        // Clamp bottom range to ~€180-€280
+        if(i>=90)am=Math.max(am,180+Math.floor(r3*100));
+        if(i===99)am=Math.min(am,280);
         prevAmt=am;
         p.push({rk:i+1,nm,gm,am});
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Semana del ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('es-ES',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Semana del ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">€${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+€${x.am.toLocaleString()}</div></div>`).join('');}
 
     // TUTORIAL
     const splash=document.getElementById("splash"),sName=document.getElementById("splashName"),overlay=document.getElementById("tutOverlay"),focusBox=document.getElementById("focusBox"),tutText=document.getElementById("tutText");let isSkipped=false;
