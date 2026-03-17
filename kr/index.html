@@ -418,6 +418,8 @@
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
+    let lang="ko";
+
     const GEO_CONFIG = {
       kr: { name:"한국", flag:"🇰🇷", lang:"ko", currency:"KRW", sym:"₩", profitRange:[5000,100000],
         link:"https://sp1nwin.com/vcgTRr", promo:"777KR777",
@@ -566,7 +568,7 @@
 
     // LANGS
     const LANGS=[{id:"ko",l:"KO"},{id:"en",l:"EN"}];
-    let lang='ko'; S.set('aslang','ko');
+    lang='ko'; S.set('aslang','ko');
     function T(){return STR[lang]||STR.en;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();updVIP();}
