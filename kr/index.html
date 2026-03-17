@@ -335,6 +335,8 @@
 
 </head>
 <body>
+  <div id="__krErr" style="display:none;position:fixed;inset:0;z-index:99999;background:#000;color:#f00;font:14px monospace;padding:20px;word-break:break-all;overflow:auto"></div>
+  <script>window.onerror=function(m,s,l,c,e){var d=document.getElementById('__krErr');if(d){d.style.display='block';d.innerHTML+='<b>'+m+'</b><br>'+s+':'+l+':'+c+'<br><br>';}};window.addEventListener('unhandledrejection',function(e){var d=document.getElementById('__krErr');if(d){d.style.display='block';d.innerHTML+='<b>Promise: '+e.reason+'</b><br><br>';}});</script>
   <div id="splash"><div class="splash-text" id="splashName"></div></div>
   <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">건너뛰기</button></div>
   <div class="confetti-box" id="confettiBox"></div>
