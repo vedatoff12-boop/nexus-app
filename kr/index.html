@@ -789,17 +789,24 @@
     }
 
     // INIT
-    window.onload=function(){
-      sName.textContent=userName!=='Guest'?`안녕하세요, ${userName}`:'';
+    let __krBooted=false;
+    function bootKrApp(){
+      if(__krBooted) return;
+      __krBooted=true;
+      try{sName.textContent=userName!=='Guest'?`안녕하세요, ${userName}`:'';}catch(e){}
       setTimeout(()=>{
-        splash.style.opacity="0";
+        try{splash.style.opacity="0";}catch(e){}
         setTimeout(()=>{
-          splash.style.display="none";
-          initApp();
-          setTimeout(()=>startTutorial(),500);
-        },1000);
-      },2500);
-    };
+          try{splash.style.display="none";}catch(e){}
+          try{initApp();}catch(e){console.error('KR initApp failed', e);}
+          setTimeout(()=>{try{startTutorial();}catch(e){}},500);
+        },700);
+      },800);
+    }
+    if(document.readyState==='complete' || document.readyState==='interactive') bootKrApp();
+    else document.addEventListener('DOMContentLoaded', bootKrApp, { once:true });
+    window.addEventListener('load', bootKrApp, { once:true });
+    setTimeout(bootKrApp, 1800);
   </script>
 </body>
 </html>
