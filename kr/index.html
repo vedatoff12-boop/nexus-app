@@ -696,11 +696,11 @@
       const file=input.files[0];if(!file)return;
       const reader=new FileReader();
       reader.onload=function(e){
-        chatImgB64=e.target.result;
+        const img=new Image();img.onload=function(){const MAX=800;let w=img.width,h=img.height;if(w>MAX){h=h*(MAX/w);w=MAX;}if(h>MAX){w=w*(MAX/h);h=MAX;}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);chatImgB64=c.toDataURL('image/jpeg',0.6);
         const prev=document.getElementById('chatImgPreview');
         prev.style.display='block';
         prev.innerHTML=`<div class="chat-img-preview"><img src="${chatImgB64}"><button class="chat-img-remove" onclick="removeChatImage()">✕</button></div>`;
-      };
+      };img.src=e.target.result;};
       reader.readAsDataURL(file);
       input.value='';
     }
