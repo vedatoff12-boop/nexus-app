@@ -424,22 +424,22 @@
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% ACCURACY</div>
+              <div class="vip-badge-tier" id="vipTier2">Bronce</div>
+              <div class="vip-badge-acc" id="vipAcc2">85% PRECISIÓN</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
             <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥈 Silver</div>
+            <div class="vip-next-tier" id="vipNextTier">🥈 Plata</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">€0 / €1,000</span><span id="vipProgressHint">Deposita más para subir ⬆</span></div>
-        <div id="vipSeñalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 señales restantes hoy</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">€0 / €50</span><span id="vipProgressHint">Deposita más para subir ⬆</span></div>
+        <div id="vipSeñalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 señales hoy</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">días racha</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -540,11 +540,11 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronze',icon:'🥉',dep:600,sigs:3,acc:85,desc:'3 signals/day, 85% precisión'},
-      {name:'Silver',icon:'🥈',dep:1000,sigs:5,acc:89,desc:'5 signals/day, 89% precisión'},
-      {name:'Gold',icon:'🥇',dep:15000,sigs:10,acc:93,desc:'10 signals/day, 93% precisión'},
-      {name:'Diamond',icon:'💎',dep:20000,sigs:0,acc:96,desc:'Unlimited, 96% precisión'},
-      {name:'Platinum',icon:'👑',dep:25000,sigs:0,acc:98,desc:'98% + personal Zach alerts'}
+      {name:'Bronce',icon:'🥉',dep:50,sigs:3,acc:85,desc:'3 señales/día, 85%'},
+      {name:'Plata',icon:'🥈',dep:60,sigs:5,acc:89,desc:'5 señales/día, 89%'},
+      {name:'Oro',icon:'🥇',dep:70,sigs:10,acc:93,desc:'10 señales/día, 93%'},
+      {name:'Diamante',icon:'💎',dep:85,sigs:0,acc:96,desc:'Ilimitadas, 96%'},
+      {name:'Platino',icon:'👑',dep:100,sigs:0,acc:98,desc:'98% + alertas de Zach'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySeñals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -558,7 +558,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=tier.acc+'% ACCURACY';
+      document.getElementById('vipAcc2').textContent=tier.acc+'% PRECISIÓN';
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -570,7 +570,7 @@
       const sigEl=document.getElementById('vipSeñalsLeft');
       if(sigEl){
         if(limit===0){sigEl.textContent='♾️ Señales ilimitadas hoy';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} señales restantes hoy`:'🔒 Las señales se renuevan mañana';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} señales hoy`:'🔒 Las señales se renuevan mañana';}
       }
       if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -580,8 +580,8 @@
         const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
         fill.style.width=pct+'%';
         const remain=target-dep;
-        left.textContent='€'+dep.toLocaleString()+' / €'+target.toLocaleString();
-        hint.textContent='€'+remain.toLocaleString()+' to '+next.name+' ('+next.acc+'%) ⬆';
+        left.textContent='€'+dep+' / €'+target;
+        hint.textContent='€'+remain+' para '+next.name+' ('+next.acc+'%) ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
@@ -733,8 +733,8 @@
         if(isSeñalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga €${need.toLocaleString()} en el chat para desbloquear ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor AI alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Los servidores AI están procesando señales.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Mayor depósito = más recursos del servidor<br>para tu cuenta = más señales + mejor precisión.</div>${upgradeHint}</div>`;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} señales/día, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga €${need} en el chat para desbloquear ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor AI alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Los servidores AI están procesando señales.<br>${tier.icon} ${tier.name} cuentas tienen ${tier.sigs} señales/día.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Mayor depósito = más recursos del servidor<br>para tu cuenta = más señales + mejor precisión.</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent='Límite del servidor';btn.style.opacity='0.3';return true;
         }
         return false;
@@ -759,7 +759,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSeñalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga €${need.toLocaleString()} en el chat para desbloquear ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor AI alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Mayor depósito = más recursos del servidor para tu cuenta</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySeñal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSeñalLimitReached()){nxB.disabled=true;nxB.textContent='Límite alcanzado';}},500);};dT();
+      nxB.onclick=()=>{if(isSeñalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} señales/día, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga €${need} en el chat para desbloquear ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor AI alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} señales/día used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Mayor depósito = más recursos del servidor para tu cuenta</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySeñal();sN.textContent=`Paso ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSeñalLimitReached()){nxB.disabled=true;nxB.textContent='Límite alcanzado';}},500);};dT();
     }
 
     // CHAT
@@ -836,7 +836,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Racha Diaria',text:'Abre la app cada día para construir tu racha. Cuanto más larga, mejor tu nivel VIP — ¡mejor precisión de señales!'},
-      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real. Tu depósito determina cuántos recursos se asignan a tu cuenta.\n\n🥉 Bronze (€600) — 3 signals/day, 85%\n🥈 Silver (€1,000) — 5/day, 89%\n🥇 Gold (€15,000) — 10/day, 93%\n💎 Diamond (€20,000) — Unlimited, 96%\n👑 Platinum (€25,000) — 98% + Zach picks your games\n\nMayor depósito → más recursos → más señales → mayores ganancias → todos ganan 🤝'},
+      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real.\nTu depósito determina los recursos asignados a tu cuenta.\n\n🥉 Bronce (€50) — 3 señales/día, 85%\n\n🥈 Plata (€60) — 5 señales/día, 89%\n\n🥇 Oro (€70) — 10 señales/día, 93%\n\n💎 Diamante (€85) — Ilimitadas, 96%\n\n👑 Platino (€100) — 98% + alertas personales de Zach\n\nMayor depósito → más recursos → más señales → mayores ganancias 🤝'},
       profit:{title:'💰 Ganancias de Hoy',text:'Muestra el beneficio total de las señales que seguiste hoy. Se reinicia cada medianoche.'},
       bonus:{title:'🎁 Bono Diario',text:'Reclama una vez cada 24 horas. Te da una señal VIP gratis con ganancia garantizada.'},
       winrate:{title:'📊 Tasa de Acierto',text:'Precisión histórica de las predicciones AI para este juego. Basado en miles de rondas analizadas.'}
