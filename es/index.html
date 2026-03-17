@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-  <title>NexusAI Señals</title>
+  <title>NexusAI Señales</title>
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -367,7 +367,7 @@
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1351386483678073');
+    fbq('init', '1574735693849456');
     fbq('track', 'PageView');
     window.trackEspañaEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
   </script>
@@ -375,12 +375,12 @@
 </head>
 <body>
   <div id="geoScreen">
-    <div class="geo-title">🌍 Select Your Country</div>
-    <div class="geo-sub">Choose to get started</div>
+    <div class="geo-title">🌍 Elige tu país</div>
+    <div class="geo-sub">Elige para empezar</div>
     <div class="geo-grid" id="geoGrid"></div>
   </div>
   <div id="splash"><div class="splash-text" id="splashName"></div></div>
-  <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">SKIP</button></div>
+  <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">OMITIR</button></div>
   <div class="confetti-box" id="confettiBox"></div>
 
   <!-- DAILY BONUS FLOAT -->
@@ -388,9 +388,9 @@
   <div class="daily-popup" id="dailyPopup">
     <div class="daily-card">
       <div class="daily-card-icon">🎁</div>
-      <div class="daily-card-title" id="dpTitle">Free VIP Señal <span class="help-icon" onclick="event.stopPropagation();showHelp('bonus')">?</span></div>
-      <div class="daily-card-sub" id="dpSub">Claim your daily bonus and get a free VIP-level signal prediction!</div>
-      <button class="daily-card-btn" id="dpBtn" onclick="claimDailyBonus()">CLAIM BONUS</button>
+      <div class="daily-card-title" id="dpTitle">Señal VIP Gratis <span class="help-icon" onclick="event.stopPropagation();showHelp('bonus')">?</span></div>
+      <div class="daily-card-sub" id="dpSub">¡Reclama tu bono diario y obtén una señal VIP gratis!</div>
+      <button class="daily-card-btn" id="dpBtn" onclick="claimDailyBonus()">RECLAMAR BONO</button>
       <div class="daily-card-timer" id="dpTimer"></div>
     </div>
   </div>
@@ -403,9 +403,9 @@
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Señals?</div><div class="chat-welcome-text">Escribe un mensaje abajo y te explico cómo entrar 👇</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">¿Quieres desbloquear señales AI?</div><div class="chat-welcome-text">Escríbeme abajo y te cuento cómo entrar 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
@@ -434,8 +434,8 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">€0 / €1,000</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
-        <div id="vipSeñalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">€0 / €1,000</span><span id="vipProgressHint">Deposita más para subir ⬆</span></div>
+        <div id="vipSeñalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 señales restantes hoy</div>
       </div>
 
       <div class="meta-bar">
@@ -448,7 +448,7 @@
 
     <!-- TOP PLAYERS TAB -->
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Mejores Jugadores</div><div class="top-header-sub">Clasificación semanal — los mejores ganadores</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -459,7 +459,7 @@
 
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')" id="btnSeñals"><span class="tab-icon">🎯</span><span class="tab-label">Señals</span></button>
+      <button class="tab-item" onclick="switchTab('signals')" id="btnSeñals"><span class="tab-icon">🎯</span><span class="tab-label">Señales</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -467,33 +467,17 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      my: { name:"Malaysia", flag:"🇲🇾", lang:"en", currency:"MYR", sym:"RM", profitRange:[20,200],
-        link:"https://fastwin667.com/HQPf6K", promo:"777MY777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-my",
-        names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
-      in: { name:"España", flag:"🇮🇳", lang:"en", currency:"EUR", sym:"€", profitRange:[200,5000],
-        link:"https://fastwin667.com/dpNzcY", promo:"777IN777",
+      es: { name:"España", flag:"🇪🇸", lang:"es", currency:"EUR", sym:"€", profitRange:[10,200],
+        link:"https://sp1nwin.com/QctWr83m", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-es",
-        names:["Rahul","Amit","Priya","Raj","Arjun","Vikram","Deepak","Sunil","Ananya","Pooja","Kiran","Rohan","Sneha","Arun","Neha","Vivek","Meera","Sanjay","Kavita","Ravi"] },
-      ca: { name:"Canada", flag:"🇨🇦", lang:"en", currency:"CAD", sym:"C$", profitRange:[5,50],
-        link:"https://fastwin667.com/PDCDGj", promo:"777CA777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-ca",
-        names:["James","Michael","David","Ryan","Tyler","Chris","Matt","Josh","Alex","Kyle","Emma","Sarah","Jessica","Emily","Ashley","Megan","Lauren","Hannah","Chloe","Sophie"] },
-      es: { name:"España", flag:"🇪🇸", lang:"es", currency:"EUR", sym:"€", profitRange:[5,50],
-        link:"https://sp1nwin.com/WLwJLLgK", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-es",
-        names:["Carlos","Javier","Pablo","Alejandro","Diego","Sergio","Álvaro","Adrián","Daniel","Miguel","Lucía","María","Marta","Laura","Ana","Carmen","Sara","Paula","Elena","Alba"] },
-      it: { name:"Italia", flag:"🇮🇹", lang:"it", currency:"EUR", sym:"€", profitRange:[5,50],
-        link:"", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-it",
-        names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
+        names:["Carlos","Javier","Pablo","Alejandro","Diego","Sergio","Álvaro","Adrián","Daniel","Miguel","Lucía","María","Marta","Laura","Ana","Carmen","Sara","Paula","Elena","Alba","Raúl","Andrés","Jorge","Manuel","Fernando","Marcos","Roberto","Ángel","David","Hugo","Sofía","Isabel","Claudia","Rocío","Natalia","Beatriz","Irene","Cristina","Patricia","Rosa"] }
     };
     const REAL_NAME_POOL=["Audrey", "Khatri", "Rosdyana", "Mila", "Areziqizham", "HidayahSG", "Its", "jellyzheli", "Allaric", "Irfxnzzstoree", "Mr", "Jebat7", "EricSyamir", "Raja", "Ultranewge", "N1", "ake8833", "SNarainthirenrao", "Leehellens77", "scarletphantom96", "Zbsjkaoo", "Gzanfar", "BennVibe777", "FahmiNoor", "Adren10", "ChilleXtoX", "Nitêšh", "zhuohongwong", "zulaika", "Aaron", "zonan12", "adamabdullah94", "MomoeeAmpire", "Spd980", "soha5566", "Mohamed Basith", "Afz2071", "Narupetai", "faamyOsman", "ozan1290", "chaaaa2004", "IMRAN", "Rosnah", "ravi567889", "vinfel8", "Pongal2028", "Ajaya000", "ashhhh_1807", "Viduranga", "Dyana2711", "Kee Hui", "Rausyan", "viralvayyarey", "leongggg999", "Pinokiolah", "Water_Bottlee", "Shionys", "Krish", "Ruhen", "Casz", "BlackShoper", "Nikhil", "Jei_8780", "someonen10", "ayempireee", "Nadzirah33", "infinityGod1", "Weal", "zhaahir", "ciknabila69", "Michael", "MR_Black", "money4life10", "nickyap93", "Ceo Dugem", "Dashhaline", "Dex_9", "Abdul Aziz", "nia", "Ben", "Adiel210", "OriginalNorth", "MNZahwan", "Razak741009", "Mr Rabbit", "Hardcorethemonk", "weiweil0815", "Esmeralda4t3gwrvf", "Antorxz", "assacino", "Lee910908", "shahsiuu", "Xhanda1997", "omiyou", "Awie", "hammad82a", "jiehan223", "No", "Shawn", "MT", "Ryan", "Panjang", "JY", "sahana_riya17", "annewqq", "HilmiFuturesBot", "Poweryourr", "Ugen1012", "aidanwafiy", "SONZIT_SAREKR_ADOR", "motokriss", "dknerak", "Flintzjr", "Sukbir", "Shown", "Ayonhasan123", "Md", "UmloLT9015", "me", "Aieqa"];
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-es-es',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-es-es';
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-es',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-es';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo='in'; S.set('user_geo','in');
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
+    let currentGeo='es'; S.set('user_geo','es');
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.es;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-es';
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
@@ -556,10 +540,10 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronze',icon:'🥉',dep:600,sigs:3,acc:85,desc:'3 signals/day, 85% accuracy'},
-      {name:'Silver',icon:'🥈',dep:1000,sigs:5,acc:89,desc:'5 signals/day, 89% accuracy'},
-      {name:'Gold',icon:'🥇',dep:15000,sigs:10,acc:93,desc:'10 signals/day, 93% accuracy'},
-      {name:'Diamond',icon:'💎',dep:20000,sigs:0,acc:96,desc:'Unlimited, 96% accuracy'},
+      {name:'Bronze',icon:'🥉',dep:600,sigs:3,acc:85,desc:'3 signals/day, 85% precisión'},
+      {name:'Silver',icon:'🥈',dep:1000,sigs:5,acc:89,desc:'5 signals/day, 89% precisión'},
+      {name:'Gold',icon:'🥇',dep:15000,sigs:10,acc:93,desc:'10 signals/day, 93% precisión'},
+      {name:'Diamond',icon:'💎',dep:20000,sigs:0,acc:96,desc:'Unlimited, 96% precisión'},
       {name:'Platinum',icon:'👑',dep:25000,sigs:0,acc:98,desc:'98% + personal Zach alerts'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
@@ -585,8 +569,8 @@
       const used=getDailySeñals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSeñalsLeft');
       if(sigEl){
-        if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Señals refresh tomorrow';}
+        if(limit===0){sigEl.textContent='♾️ Señales ilimitadas hoy';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} señales restantes hoy`:'🔒 Las señales se renuevan mañana';}
       }
       if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -601,8 +585,8 @@
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='MAX TIER';
-        hint.textContent='You are Zach\'s VIP 👑';
+        left.textContent='NIVEL MÁXIMO';
+        hint.textContent='Eres VIP de Zach 👑';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -612,7 +596,7 @@
 
     // DAILY BONUS
     function updDaily(){const f=document.getElementById('dailyFloat'),lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){f.classList.add('claimed');}else{f.classList.remove('claimed');}}
-    function openDailyPopup(){const p=document.getElementById('dailyPopup');p.classList.add('open');const lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){const left=864e5-(now-parseInt(lc)),h=Math.floor(left/36e5),m=Math.floor((left%36e5)/6e4);document.getElementById('dpBtn').style.display='none';document.getElementById('dpTimer').textContent=`Next bonus in ${h}h ${m}m`;document.getElementById('dpSub').textContent='You already claimed today!';}else{document.getElementById('dpBtn').style.display='';document.getElementById('dpTimer').textContent='';document.getElementById('dpSub').textContent='Claim your daily bonus and get a free VIP signal!';}}
+    function openDailyPopup(){const p=document.getElementById('dailyPopup');p.classList.add('open');const lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){const left=864e5-(now-parseInt(lc)),h=Math.floor(left/36e5),m=Math.floor((left%36e5)/6e4);document.getElementById('dpBtn').style.display='none';document.getElementById('dpTimer').textContent=`Próximo bono en ${h}h ${m}m`;document.getElementById('dpSub').textContent='¡Ya lo reclamaste hoy!';}else{document.getElementById('dpBtn').style.display='';document.getElementById('dpTimer').textContent='';document.getElementById('dpSub').textContent='¡Reclama tu bono diario y obtén una señal VIP gratis!';}}
     function claimDailyBonus(){S.set('dclaim',Date.now().toString());addProfit(rndInt(15,45));try{navigator.vibrate&&navigator.vibrate(100);}catch(e){}fireConfetti();document.getElementById('dailyPopup').classList.remove('open');updDaily();}
     document.getElementById('dailyPopup').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
     updDaily();
@@ -638,7 +622,7 @@
       const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
       const pick=rotated.slice(0,16);
-      const verbs=['won','cashed out','hit','withdrew'];
+      const verbs=['ganó','cobró','ganó','retiró'];
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
@@ -652,8 +636,8 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
-    let lang='en'; S.set('aslang','en');
+    const LANGS=[{id:"es",l:"ES"}];
+    let lang='es'; S.set('aslang','es');
     function T(){return STR[lang]||STR.en;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
@@ -661,7 +645,7 @@
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Register & Send ID to Bot.",skip:"SKIP",wait:"Wait",tut:{s1:"Your AlfCasino ID synced with signals.",s2:"Select a game for AI signals.",s4:"Predicted coefficient.",s5:"Click OBTENER SEÑAL."},
+      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Register & Send ID to Bot.",skip:"OMITIR",wait:"Wait",tut:{s1:"Your AlfCasino ID synced with signals.",s2:"Select a game for AI signals.",s4:"Predicted coefficient.",s5:"Click OBTENER SEÑAL."},
         g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
         ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
         av:{t:"Aviator",s:"Refreshes every minute.",b:"OBTENER SEÑAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
@@ -692,7 +676,7 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Señals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Señales Recientes</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
@@ -704,7 +688,7 @@
         const g=T().g[k],wr=WIN_RATES[k]||88;
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
         c.onclick=()=>handleGameClick(k,c);
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Play</div></div>`;
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Jugar</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
@@ -724,13 +708,13 @@
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Regístrate →</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
-      try{window.trackEspañaEvent&&window.trackEspañaEvent('RegistrationIntent',{geo:'IN'});}catch(e){}
+      try{window.trackEspañaEvent&&window.trackEspañaEvent('RegistrationIntent',{geo:'ES'});}catch(e){}
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
     }
 
@@ -749,8 +733,8 @@
         if(isSeñalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up €${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better accuracy.</div>${upgradeHint}</div>`;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga €${need.toLocaleString()} en el chat para desbloquear ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor AI alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Los servidores AI están procesando señales.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Mayor depósito = más recursos del servidor<br>para tu cuenta = más señales + mejor precisión.</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent='Límite del servidor';btn.style.opacity='0.3';return true;
         }
         return false;
@@ -775,7 +759,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSeñalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up €${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySeñal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSeñalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(isSeñalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga €${need.toLocaleString()} en el chat para desbloquear ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor AI alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Mayor depósito = más recursos del servidor para tu cuenta</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySeñal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSeñalLimitReached()){nxB.disabled=true;nxB.textContent='Límite alcanzado';}},500);};dT();
     }
 
     // CHAT
@@ -795,8 +779,8 @@
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">€${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Señals?</div><div class="chat-welcome-text">Escribe un mensaje abajo y te explico cómo entrar 👇</div></div>';return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">€${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% precisión</span>${hint}</div>`;}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">¿Quieres desbloquear señales AI?</div><div class="chat-welcome-text">Escríbeme abajo y te cuento cómo entrar 👇</div></div>';return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:userName||"User",geo:currentGeo})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
     async function sendChatMessage(){if(_sendLock)return;const now=Date.now();const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64)return;if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;_sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
@@ -805,9 +789,9 @@
     chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
     const imgData=chatImgB64;
     inp.value='';inp.style.height='auto';removeChatImage();renderChat();
-    const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
-    try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,first_name:userName||"User",message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_accuracy:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
-    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Hmm something glitched bro, send that again 🙏';if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Network hiccup bro, send that again 🔄',tm:hhmm(new Date())});}
+    const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Escribiendo...';el.appendChild(tp);scrollChatBottom();
+    try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,first_name:userName||"User",message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_precisión:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
+    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Algo falló, envíalo de nuevo 🙏';if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Error de red, envíalo de nuevo 🔄',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
@@ -839,7 +823,7 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Semana del ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // TUTORIAL
     const splash=document.getElementById("splash"),sName=document.getElementById("splashName"),overlay=document.getElementById("tutOverlay"),focusBox=document.getElementById("focusBox"),tutText=document.getElementById("tutText");let isSkipped=false;
@@ -851,11 +835,11 @@
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
-      vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (€600) — 3 signals/day, 85%\n🥈 Silver (€1,000) — 5/day, 89%\n🥇 Gold (€15,000) — 10/day, 93%\n💎 Diamond (€20,000) — Unlimited, 96%\n👑 Platinum (€25,000) — 98% + Zach picks your games\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
-      profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
-      bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
-      winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
+      streak:{title:'🔥 Racha Diaria',text:'Abre la app cada día para construir tu racha. Cuanto más larga, mejor tu nivel VIP — ¡mejor precisión de señales!'},
+      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real. Tu depósito determina cuántos recursos se asignan a tu cuenta.\n\n🥉 Bronze (€600) — 3 signals/day, 85%\n🥈 Silver (€1,000) — 5/day, 89%\n🥇 Gold (€15,000) — 10/day, 93%\n💎 Diamond (€20,000) — Unlimited, 96%\n👑 Platinum (€25,000) — 98% + Zach picks your games\n\nMayor depósito → más recursos → más señales → mayores ganancias → todos ganan 🤝'},
+      profit:{title:'💰 Ganancias de Hoy',text:'Muestra el beneficio total de las señales que seguiste hoy. Se reinicia cada medianoche.'},
+      bonus:{title:'🎁 Bono Diario',text:'Reclama una vez cada 24 horas. Te da una señal VIP gratis con ganancia garantizada.'},
+      winrate:{title:'📊 Tasa de Acierto',text:'Precisión histórica de las predicciones AI para este juego. Basado en miles de rondas analizadas.'}
     };
     function showHelp(key){
       const d=HELP_DATA[key];if(!d)return;
@@ -879,8 +863,8 @@
 
     // APP INIT after geo is known
     function initApp(){
-      try{window.trackEspañaEvent&&window.trackEspañaEvent('MiniAppOpen',{geo:'IN',lang:'es'});}catch(e){}
-      lang='en';S.set('aslang','en');
+      try{window.trackEspañaEvent&&window.trackEspañaEvent('MiniAppOpen',{geo:'ES',lang:'es'});}catch(e){}
+      lang='es';S.set('aslang','es');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on chat tab
       switchTab('chat');
