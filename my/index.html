@@ -597,8 +597,8 @@
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
     if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
     else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';}
-    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();loadLiveRoomFeed();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
+    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();loadLiveRoomFeed();startLiveRoomPolling();}
+    else{stopLiveRoomPolling();document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -746,7 +746,7 @@
       '승률 오늘 괜찮네','esto sí pegó bien','bhai this one was nice','terbaik hari ini honestly',
       'i waited too long 😭','still learning but better now','diamond room people move fast','quiet room then boom 💸'
     ];
-    let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false;
+    let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false,liveRoomPollTimer=null;
     function liveRoomUnlocked(){return getVipTierIdx()>=2;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
     function roomTimeFromNow(minsAgo){const d=new Date(Date.now()-minsAgo*60000);return hhmm(d);}
@@ -777,6 +777,12 @@
       });
       feed.scrollTop=feed.scrollHeight;
     }
+
+    function startLiveRoomPolling(){
+      stopLiveRoomPolling();
+      liveRoomPollTimer=setInterval(()=>{if(curTab==='liveRoom')loadLiveRoomFeed();},15000);
+    }
+    function stopLiveRoomPolling(){ if(liveRoomPollTimer){ clearInterval(liveRoomPollTimer); liveRoomPollTimer=null; } }
     async function loadLiveRoomFeed(){
       if(liveRoomLoading||!tgUserId) return; liveRoomLoading=true;
       try{
