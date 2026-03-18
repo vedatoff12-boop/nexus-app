@@ -602,7 +602,7 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">${lang==='en'?'최근 시그널':'Recent Signals'}</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">${lang==='en'?'Recent Signals':'최근 시그널'}</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
@@ -765,7 +765,7 @@
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 일day streak',text:lang==='en'?'매일 앱을 열어 연속 기록을 쌓으세요. 길수록 VIP 레벨이 올라갑니다!':'Open the app daily to build your streak. Longer streak = better VIP level!'},
+      streak:{title:'🔥 Daily streak',text:lang==='en'?'Open the app daily to build your streak. Longer streak = better VIP level!':'매일 앱을 열어 연속 기록을 쌓으세요. 길수록 VIP 레벨이 올라갑니다!'},
       vip:{title:'🏅 VIP tiers',text:'AI server access has a real cost.\nYour deposit level decides your account resources.\n\n🥉 Bronze (RM 40) — 3 signals/day, 85%\n\n🥈 Silver (RM 70) — 5 signals/day, 89%\n\n🥇 Gold (RM 100) — 10 signals/day, 93%\n\n💎 Diamond (RM 130) — Unlimited, 96%\n\n👑 Platinum (RM 200) — 98% + Zach 개인 알림\n\n더 높은 입금 → 더 많은 리소스 → 더 많은 시그널 → 더 큰 수익 🤝'},
       profit:{title:'💰 오늘의 수익',text:lang==='en'?'오늘 따라한 시그널의 총 수익입니다. 매일 자정에 초기화됩니다.':'Total profit from signals followed today. Resets at midnight.'},
       bonus:{title:'🎁 Daily bonus',text:'Claim once every 24 hours for a free VIP signal.'},
