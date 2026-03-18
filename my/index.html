@@ -320,6 +320,33 @@
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
+
+    /* ── Live Room ── */
+    .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
+    .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
+    .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
+    .live-room-feed{flex:1;overflow-y:auto;padding:10px 12px 6px;display:flex;flex-direction:column;gap:2px;min-height:0;}
+    .live-room-feed::-webkit-scrollbar{width:3px;}
+    .live-room-feed::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px;}
+    .room-msg{padding:5px 0;line-height:1.45;}
+    .room-msg.user{background:rgba(250,204,21,0.04);border-radius:8px;padding:5px 8px;}
+    .room-inline{display:inline;}
+    .room-name{font-weight:800;font-size:12.5px;margin-right:2px;}
+    .room-name.c1{color:#64b5f6;} .room-name.c2{color:#ce93d8;} .room-name.c3{color:#81c784;} .room-name.c4{color:#ffb74d;} .room-name.c5{color:#ef9a9a;} .room-name.c6{color:#80cbc4;}
+    .room-badge{font-size:11px;margin-right:3px;vertical-align:middle;}
+    .room-text{display:inline;font-size:12.5px;color:rgba(255,255,255,0.82);word-break:break-word;}
+    .room-time{display:inline;font-size:10px;color:rgba(255,255,255,0.22);margin-left:6px;white-space:nowrap;}
+    .room-reply{font-size:10.5px;color:rgba(255,255,255,0.35);margin:0 0 1px 2px;font-style:italic;}
+    .room-day-sep{display:none;}
+    .room-composer{border-top:1.5px solid rgba(250,204,21,0.25);background:rgba(0,0,0,0.25);border-radius:0 0 16px 16px;padding:0;}
+    .room-lock{padding:14px 16px;text-align:center;}
+    .room-lock-input{width:100%;padding:12px 16px;border-radius:0 0 14px 14px;border:none;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.25);font-size:13px;font-family:inherit;outline:none;cursor:not-allowed;}
+    .room-lock-hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px;}
+    .room-input-row{display:flex;align-items:center;gap:8px;padding:10px 12px;}
+    .room-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);border-radius:12px;padding:10px 14px;color:#fff;font-size:13px;resize:none;height:40px;font-family:inherit;outline:none;}
+    .room-input:focus{border-color:rgba(250,204,21,0.3);}
+    .room-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .room-send:disabled{opacity:0.3;}
   </style>
 
   <script>
@@ -401,26 +428,18 @@
 
     <div id="tabLiveRoom" class="tab-content">
       <div class="live-room">
+        <div class="live-room-label">Live Room</div>
         <div class="live-room-shell">
-        <div class="live-room-header">
-          <div class="top-bar" style="padding:0 0 6px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="tg-id" id="roomStatus">Global Room</div></div></div>
-          <div class="live-room-title">🌐 Live Room</div>
-          <div class="live-room-sub">International VIP chat — mixed users, mixed languages, real-time energy.</div>
-          <div class="live-room-meta">
-            <div class="live-room-stat">🟢 <span id="roomActiveCount">2.4k active today</span></div>
-            <div class="live-room-pill" id="roomTierGate">Unlock chat at Gold</div>
-          </div>
-        </div>
-        <div class="live-room-feed" id="liveRoomFeed"></div>
-        </div>
-        <div class="room-composer">
-          <div class="room-lock" id="liveRoomLock">
-            <div class="room-lock-title">🔒 Write access unlocks at Gold</div>
-            <div class="room-lock-sub">You can watch the room now. Reach Tier 3 to join the conversation and get replies from other members.</div>
-          </div>
-          <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-            <textarea class="room-input" id="liveRoomInput" placeholder="Drop a message into the room..." maxlength="280"></textarea>
-            <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
+          <div class="live-room-feed" id="liveRoomFeed"></div>
+          <div class="room-composer">
+            <div class="room-lock" id="liveRoomLock">
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold tier to unlock chat">
+              <div class="room-lock-hint">Watch the room now · Gold members can join the conversation</div>
+            </div>
+            <div class="room-input-row" id="liveRoomComposer" style="display:none;">
+              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
+              <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
+            </div>
           </div>
         </div>
       </div>
@@ -736,17 +755,26 @@
 
     // CHAT
     const LIVE_ROOM_NPCS=[
-      {name:'Minjae⚡',badge:'Gold'},{name:'DY',badge:''},{name:'Sofía',badge:'Silver'},{name:'Jihoon 🎯',badge:'Diamond'},
-      {name:'Aarav',badge:''},{name:'Carlos M',badge:'Gold'},{name:'Nisa',badge:''},{name:'박준호',badge:'Silver'},
-      {name:'Lina ✨',badge:''},{name:'Sean Park',badge:'Platinum'},{name:'A.',badge:''},{name:'Harith',badge:'Gold'},
-      {name:'민수',badge:''},{name:'Mateo',badge:''},{name:'R',badge:''},{name:'Ryan 이',badge:'Silver'}
+      {name:'Harith 🇲🇾',badge:'Gold'},{name:'민재⚡',badge:'Diamond'},{name:'Carlos M.',badge:'Gold'},{name:'Aarav',badge:''},
+      {name:'Lucía',badge:'Platinum'},{name:'Sean P.',badge:'Gold'},{name:'준호',badge:'Silver'},{name:'Nisa',badge:''},
+      {name:'Mateo 🔥',badge:'Gold'},{name:'Azmi',badge:''},{name:'이수현',badge:'Gold'},{name:'Priya',badge:'Silver'},
+      {name:'Farhan',badge:''},{name:'박지훈',badge:'Diamond'},{name:'Elena',badge:'Gold'},{name:'Raj K.',badge:''},
+      {name:'Amir',badge:''},{name:'김도윤',badge:'Silver'},{name:'Diego',badge:'Gold'},{name:'Hafiz',badge:''},
+      {name:'Siti',badge:''},{name:'Alex R.',badge:'Platinum'},{name:'Wing',badge:'Gold'},{name:'Darren',badge:''},
+      {name:'최민수',badge:'Gold'},{name:'Miguel',badge:''},{name:'Arjun',badge:'Silver'},{name:'R.',badge:''}
     ];
     const LIVE_ROOM_SEED=[
-      'bro that late one still hit 😂','small win but i take it','gold tier feels cleaner ngl','mine was late but still profit',
-      'who caught the second entry?','not huge but enough for today','@Minjae⚡ how you saw that move?','first one missed, next one saved me',
+      'bro that late one still hit 😂','small win but i take it','gold tier feels different ngl','mine was late but still profit',
+      'who caught the second entry?','not huge but enough for today','@민재⚡ how you saw that move?','first one missed, next one saved me',
       'zach cooked today 🔥','i just covered my depo','not my best day but room still solid','that rebound was clean',
-      '승률 오늘 괜찮네','esto sí pegó bien','bhai this one was nice','terbaik hari ini honestly',
-      'i waited too long 😭','still learning but better now','diamond room people move fast','quiet room then boom 💸'
+      '승률 오늘 괜찮네 ㅋㅋ','esto sí pegó bien 🔥','bhai this one was nice','terbaik hari ini honestly',
+      'i waited too long 😭','still learning but getting better','diamond room people move fast','quiet room then boom 💸',
+      '오늘 balloon 4.6x 잡았다','Mines limpió hoy 💰','aviator 2.1x baru je lepas','chicken road again bro lol',
+      'JetX 3.2x 방금 터짐 ㅋㅋ','penalty was clean today','ese crash de 5.8x fue loco','balloon naik gila tadi',
+      '누가 2.4x 탔어?','that 6x crash was insane','mines tadi 3 row straight','ayer no pero hoy sí 🙌',
+      'crash timing improving fr','@Carlos M. kau punya entry tadi solid','오늘 하루 수익 괜찮다','la racha sigue 💪',
+      'just hit gold tier lets go 🥇','baru masuk room ni best','어제보다 오늘이 낫다','primer día y ya profit',
+      'room was quiet then 3 wins back to back','siapa dapat signal tadi?','신호 오늘 정확했어','hoy el room estuvo tranquilo pero ganamos'
     ];
     let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false,liveRoomPollTimer=null;
     function liveRoomUnlocked(){return getVipTierIdx()>=2;}
@@ -763,23 +791,21 @@
       }
       liveRoomFeed=msgs.slice(-18);
     }
-    function roomBadgeClass(b){const x=(b||'').toLowerCase();if(x.includes('silver'))return 'silver';if(x.includes('gold'))return 'gold';if(x.includes('diamond'))return 'diamond';if(x.includes('platinum'))return 'platinum';return '';}
-    function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%4;return ['c1','c2','c3','c4'][s];}
+    function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';if(x.includes('silver'))return '🥈';return '';}
+    function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
     function roomReplyTarget(text){const m=String(text||'').match(/^@([^\s,:!?]+)/);return m?m[1]:'';}
     function renderLiveRoom(){
       seedLiveRoomLocal();
       const feed=document.getElementById('liveRoomFeed'); if(!feed) return;
-      const lock=document.getElementById('liveRoomLock'); const comp=document.getElementById('liveRoomComposer'); const gate=document.getElementById('roomTierGate');
+      const lock=document.getElementById('liveRoomLock'); const comp=document.getElementById('liveRoomComposer');
       const unlocked=liveRoomUnlocked();
-      lock.style.display=unlocked?'none':'block'; comp.style.display=unlocked?'flex':'none'; gate.textContent=unlocked?'Room unlocked':'Unlock chat at Gold';
-      const activeBase=2300+Math.floor((Date.now()/60000)%170);
-      document.getElementById('roomActiveCount').textContent=(activeBase/1000).toFixed(1)+'k active today';
+      lock.style.display=unlocked?'none':'block'; comp.style.display=unlocked?'flex':'none';
       feed.innerHTML='';
-      const sep=document.createElement('div'); sep.className='room-day-sep'; sep.textContent='Live room'; feed.appendChild(sep);
       liveRoomFeed.forEach(m=>{
         const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
         const rt=roomReplyTarget(m.text); const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
-        el.innerHTML=`<div class="room-topline"><span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${m.badge?`<span class="room-badge ${roomBadgeClass(m.badge)}">${m.badge}</span>`:''}</div>${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<div class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</div><div class="room-time">${roomRelTime(m.createdAt)}</div>`;
+        const bi=roomBadgeIcon(m.badge);
+        el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>`;
         feed.appendChild(el);
       });
       feed.scrollTop=feed.scrollHeight;
