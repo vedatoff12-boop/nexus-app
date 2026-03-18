@@ -625,10 +625,7 @@
     }
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
-      const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register →</button>`:'';
-      const promoTxt=g.promo?`<div class="promo-text" onclick="event.stopPropagation();navigator.clipboard.writeText('${g.promo}');this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='🎁 Promo: ${g.promo} (tap to copy)'},1200)">🎁 Promo: ${g.promo} (tap to copy)</div>`:'';
-      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
+      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">ACCESS LOCKED</div><div class="lock-msg">Get access — write in chat 💬</div></div>`;
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
