@@ -51,7 +51,7 @@
     .live-text{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;}
     .online-count{font-size:11px;color:var(--muted);font-weight:600;}
     .top-right{display:flex;align-items:center;gap:8px;}
-    .tg-id{font-size:11px;font-weight:700;color:var(--blue);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:var(--pill);}
+    .tg-id{font-size:11px;font-weight:700;color:var(--blue);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:var(--pill);}.self-reset-btn{display:none;align-items:center;justify-content:center;height:28px;padding:0 10px;border-radius:999px;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.12);color:#ff8a8a;font-size:11px;font-weight:800;cursor:pointer;gap:6px}.self-reset-btn:disabled{opacity:.6;cursor:default}
 
     /* LANG DROPDOWN */
     .lang-drop{position:relative;}
@@ -400,7 +400,7 @@
     <div class="app-body">
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: ...</div></div>
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
         </div>
         <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
@@ -413,7 +413,7 @@
     <div id="tabSignals" class="tab-content">
       <div class="top-bar">
         <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
-        <div class="top-right">
+        <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
           <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
@@ -501,6 +501,31 @@
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="Guest",tgUserId=null;
     if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+
+    const SELF_RESET_USER_ID='930309275';
+    const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
+    function canUseSelfReset(){return String(tgUserId||S.get('tg_user_id')||'')===SELF_RESET_USER_ID;}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
+    async function runSelfReset(){
+      if(!canUseSelfReset()) return;
+      const ok=window.confirm('Full reset for this funnel? This will wipe chat, stage, VIP progress, deposit progress and local app state for your account only.');
+      if(!ok) return;
+      syncSelfResetButtons(true);
+      try{
+        const uid=String(tgUserId||S.get('tg_user_id')||'');
+        const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
+        const data=await res.json().catch(()=>({ok:false}));
+        if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
+        try{localStorage.clear();}catch(e){}
+        alert('Reset done. Funnel is back to fresh state.');
+        window.location.href=window.location.pathname;
+      }catch(e){
+        alert('Reset failed: '+(e&&e.message?e.message:'unknown'));
+        syncSelfResetButtons(false);
+      }
+    }
+
+    syncSelfResetButtons();
 
     // GEO SELECTOR
     function buildGeoSelector(){
