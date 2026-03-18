@@ -765,31 +765,33 @@
 
     // CHAT
     const LIVE_ROOM_NPCS=[
-      /* EN — 40 */
-      {name:'harith.my',badge:'Gold',lang:'en'},{name:'sean.p',badge:'Gold',lang:'en'},{name:'priya✨',badge:'Diamond',lang:'en'},{name:'farhan.k',badge:'Gold',lang:'en'},
-      {name:'raj.k',badge:'Gold',lang:'en'},{name:'hafiz',badge:'Gold',lang:'en'},{name:'alex.r',badge:'Platinum',lang:'en'},{name:'wing_88',badge:'Gold',lang:'en'},
-      {name:'darren',badge:'Gold',lang:'en'},{name:'arjun',badge:'Gold',lang:'en'},{name:'siti.n',badge:'Diamond',lang:'en'},{name:'aarav',badge:'Gold',lang:'en'},
-      {name:'nisa🇲🇾',badge:'Gold',lang:'en'},{name:'azmi_99',badge:'Gold',lang:'en'},{name:'vikram',badge:'Gold',lang:'en'},{name:'tom_',badge:'Gold',lang:'en'},
-      {name:'aiman',badge:'Gold',lang:'en'},{name:'jake🔥',badge:'Diamond',lang:'en'},{name:'rizal',badge:'Gold',lang:'en'},{name:'danial.z',badge:'Gold',lang:'en'},
-      {name:'syafiq',badge:'Gold',lang:'en'},{name:'kevin_t',badge:'Gold',lang:'en'},{name:'nash',badge:'Gold',lang:'en'},{name:'marcus',badge:'Platinum',lang:'en'},
-      {name:'izzat',badge:'Gold',lang:'en'},{name:'ben',badge:'Gold',lang:'en'},{name:'firdaus_',badge:'Gold',lang:'en'},{name:'anwar',badge:'Gold',lang:'en'},
-      {name:'amit.s',badge:'Diamond',lang:'en'},{name:'zul',badge:'Gold',lang:'en'},{name:'rohan',badge:'Gold',lang:'en'},{name:'dani',badge:'Gold',lang:'en'},
-      {name:'hamza',badge:'Gold',lang:'en'},{name:'adib',badge:'Gold',lang:'en'},{name:'irfan.k',badge:'Gold',lang:'en'},{name:'jay_',badge:'Gold',lang:'en'},
-      {name:'fahmi',badge:'Gold',lang:'en'},{name:'luke',badge:'Gold',lang:'en'},{name:'imran✨',badge:'Diamond',lang:'en'},{name:'nabil',badge:'Gold',lang:'en'},
-      /* KR — 25 */
-      {name:'⚡jihoon',badge:'Diamond',lang:'kr'},{name:'민재',badge:'Diamond',lang:'kr'},{name:'준호⚡',badge:'Gold',lang:'kr'},{name:'수현',badge:'Gold',lang:'kr'},
-      {name:'지훈',badge:'Diamond',lang:'kr'},{name:'도윤',badge:'Gold',lang:'kr'},{name:'최민수',badge:'Gold',lang:'kr'},{name:'김현우',badge:'Gold',lang:'kr'},
-      {name:'성진',badge:'Gold',lang:'kr'},{name:'재원',badge:'Gold',lang:'kr'},{name:'유진_',badge:'Diamond',lang:'kr'},{name:'태현',badge:'Gold',lang:'kr'},
-      {name:'동혁',badge:'Gold',lang:'kr'},{name:'서준',badge:'Platinum',lang:'kr'},{name:'현서',badge:'Gold',lang:'kr'},{name:'우진',badge:'Gold',lang:'kr'},
-      {name:'시우',badge:'Gold',lang:'kr'},{name:'은호',badge:'Gold',lang:'kr'},{name:'정우⚡',badge:'Diamond',lang:'kr'},{name:'승민',badge:'Gold',lang:'kr'},
-      {name:'건우',badge:'Gold',lang:'kr'},{name:'예준',badge:'Gold',lang:'kr'},{name:'하준',badge:'Gold',lang:'kr'},{name:'민호_',badge:'Gold',lang:'kr'},
-      {name:'준서',badge:'Gold',lang:'kr'},
-      /* ES — 20 */
-      {name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Platinum',lang:'es'},{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},
-      {name:'diego🎯',badge:'Gold',lang:'es'},{name:'miguel_',badge:'Gold',lang:'es'},{name:'sofía',badge:'Diamond',lang:'es'},{name:'pablo.r',badge:'Gold',lang:'es'},
-      {name:'andrés',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'camila✨',badge:'Diamond',lang:'es'},
-      {name:'sergio',badge:'Gold',lang:'es'},{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'laura_m',badge:'Gold',lang:'es'},
-      {name:'martín',badge:'Gold',lang:'es'},{name:'isabella',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Platinum',lang:'es'},{name:'fernanda',badge:'Gold',lang:'es'}
+      /* MY top100 — 35 */
+      {name:'Bossku',badge:'Gold',lang:'en'},{name:'Ah Boy',badge:'Gold',lang:'en'},{name:'Siti 🌸',badge:'Gold',lang:'en'},{name:'Haziq_99',badge:'Diamond',lang:'en'},
+      {name:'Mantap 🔥',badge:'Gold',lang:'en'},{name:'Amoi ✨',badge:'Gold',lang:'en'},{name:'Aiman',badge:'Gold',lang:'en'},{name:'Kopi Peng ☕️',badge:'Gold',lang:'en'},
+      {name:'Fatin',badge:'Gold',lang:'en'},{name:'Izzat',badge:'Gold',lang:'en'},{name:'Santai 🌴',badge:'Gold',lang:'en'},{name:'Nurul',badge:'Diamond',lang:'en'},
+      {name:'Danial',badge:'Gold',lang:'en'},{name:'Hafiz',badge:'Gold',lang:'en'},{name:'Aisyah',badge:'Gold',lang:'en'},{name:'Nadia',badge:'Gold',lang:'en'},
+      {name:'Sean',badge:'Platinum',lang:'en'},{name:'Wong',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Boba 🧋',badge:'Gold',lang:'en'},
+      {name:'Kucing 🐱',badge:'Gold',lang:'en'},{name:'Lepak',badge:'Gold',lang:'en'},{name:'Syah',badge:'Gold',lang:'en'},{name:'Jason',badge:'Gold',lang:'en'},
+      {name:'Kevin',badge:'Gold',lang:'en'},{name:'Alex',badge:'Diamond',lang:'en'},{name:'David',badge:'Gold',lang:'en'},{name:'Ryan',badge:'Gold',lang:'en'},
+      {name:'Amin 🙏',badge:'Gold',lang:'en'},{name:'Steven',badge:'Gold',lang:'en'},{name:'Ah Meng',badge:'Gold',lang:'en'},{name:'Abang',badge:'Gold',lang:'en'},
+      {name:'Cikgu',badge:'Gold',lang:'en'},{name:'Michael',badge:'Platinum',lang:'en'},{name:'Hensem Boy',badge:'Gold',lang:'en'},
+      /* KR top100 — 30 */
+      {name:'민준',badge:'Gold',lang:'kr'},{name:'가즈아 🚀',badge:'Diamond',lang:'kr'},{name:'지훈_99',badge:'Gold',lang:'kr'},{name:'김태형',badge:'Gold',lang:'kr'},
+      {name:'유나✨',badge:'Gold',lang:'kr'},{name:'서준',badge:'Platinum',lang:'kr'},{name:'현우',badge:'Gold',lang:'kr'},{name:'잭팟',badge:'Diamond',lang:'kr'},
+      {name:'민지',badge:'Gold',lang:'kr'},{name:'하늘',badge:'Gold',lang:'kr'},{name:'연우',badge:'Gold',lang:'kr'},{name:'하린',badge:'Gold',lang:'kr'},
+      {name:'비트보이',badge:'Gold',lang:'kr'},{name:'빅쇼트',badge:'Gold',lang:'kr'},{name:'윤서',badge:'Gold',lang:'kr'},{name:'럭키가이',badge:'Diamond',lang:'kr'},
+      {name:'유진',badge:'Gold',lang:'kr'},{name:'태양',badge:'Gold',lang:'kr'},{name:'풀매수',badge:'Gold',lang:'kr'},{name:'승리',badge:'Gold',lang:'kr'},
+      {name:'은우',badge:'Gold',lang:'kr'},{name:'곰돌이 🐻',badge:'Gold',lang:'kr'},{name:'🚀투더문',badge:'Gold',lang:'kr'},{name:'우진',badge:'Gold',lang:'kr'},
+      {name:'짱구',badge:'Gold',lang:'kr'},{name:'하준',badge:'Gold',lang:'kr'},{name:'소희',badge:'Gold',lang:'kr'},{name:'동글이',badge:'Gold',lang:'kr'},
+      {name:'킹갓',badge:'Diamond',lang:'kr'},{name:'밤하늘 🌌',badge:'Gold',lang:'kr'},
+      /* ES/IN top100 — 25 */
+      {name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'BennVibe777',badge:'Diamond',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},
+      {name:'Krish',badge:'Gold',lang:'en'},{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Gold',lang:'en'},{name:'Ceo Dugem',badge:'Platinum',lang:'en'},
+      {name:'Dex_9',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'Esmeralda',badge:'Gold',lang:'es'},
+      {name:'Antorxz',badge:'Gold',lang:'es'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Diamond',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},
+      {name:'Viduranga',badge:'Gold',lang:'en'},{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'Shionys',badge:'Gold',lang:'en'},
+      {name:'infinityGod1',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},
+      {name:'Panjang',badge:'Gold',lang:'en'}
     ];
     const SEED_EN=[
       '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
