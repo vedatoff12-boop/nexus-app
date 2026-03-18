@@ -325,11 +325,11 @@
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
     .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
-    .live-room-feed{flex:1;overflow-y:auto;padding:10px 12px 6px;display:flex;flex-direction:column;gap:2px;min-height:0;}
+    .live-room-feed{flex:1;overflow-y:auto;padding:8px 10px 4px;display:flex;flex-direction:column;gap:0;min-height:0;}
     .live-room-feed::-webkit-scrollbar{width:3px;}
     .live-room-feed::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px;}
-    .room-msg{padding:5px 0;line-height:1.45;}
-    .room-msg.user{background:rgba(250,204,21,0.04);border-radius:8px;padding:5px 8px;}
+    .room-msg{padding:2px 0;line-height:1.4;}
+    .room-msg.user{background:rgba(250,204,21,0.04);border-radius:6px;padding:2px 6px;}
     .room-inline{display:inline;}
     .room-name{font-weight:800;font-size:12.5px;margin-right:2px;}
     .room-name.c1{color:#64b5f6;} .room-name.c2{color:#ce93d8;} .room-name.c3{color:#81c784;} .room-name.c4{color:#ffb74d;} .room-name.c5{color:#ef9a9a;} .room-name.c6{color:#80cbc4;}
@@ -755,26 +755,32 @@
 
     // CHAT
     const LIVE_ROOM_NPCS=[
-      {name:'Harith 🇲🇾',badge:'Gold'},{name:'민재⚡',badge:'Diamond'},{name:'Carlos M.',badge:'Gold'},{name:'Aarav',badge:''},
-      {name:'Lucía',badge:'Platinum'},{name:'Sean P.',badge:'Gold'},{name:'준호',badge:'Silver'},{name:'Nisa',badge:''},
-      {name:'Mateo 🔥',badge:'Gold'},{name:'Azmi',badge:''},{name:'이수현',badge:'Gold'},{name:'Priya',badge:'Silver'},
-      {name:'Farhan',badge:''},{name:'박지훈',badge:'Diamond'},{name:'Elena',badge:'Gold'},{name:'Raj K.',badge:''},
-      {name:'Amir',badge:''},{name:'김도윤',badge:'Silver'},{name:'Diego',badge:'Gold'},{name:'Hafiz',badge:''},
-      {name:'Siti',badge:''},{name:'Alex R.',badge:'Platinum'},{name:'Wing',badge:'Gold'},{name:'Darren',badge:''},
-      {name:'최민수',badge:'Gold'},{name:'Miguel',badge:''},{name:'Arjun',badge:'Silver'},{name:'R.',badge:''}
+      {name:'harith.my',badge:'Gold'},{name:'⚡jihoon',badge:'Diamond'},{name:'carlos_m',badge:'Gold'},{name:'lucía🔥',badge:'Platinum'},
+      {name:'민재',badge:'Diamond'},{name:'sean.p',badge:'Gold'},{name:'준호⚡',badge:'Gold'},{name:'mateo',badge:'Gold'},
+      {name:'azmi_99',badge:'Gold'},{name:'수현',badge:'Gold'},{name:'priya✨',badge:'Diamond'},{name:'farhan.k',badge:'Gold'},
+      {name:'지훈',badge:'Diamond'},{name:'elena_',badge:'Gold'},{name:'raj.k',badge:'Gold'},{name:'도윤',badge:'Gold'},
+      {name:'diego🎯',badge:'Gold'},{name:'hafiz',badge:'Gold'},{name:'alex.r',badge:'Platinum'},{name:'wing_88',badge:'Gold'},
+      {name:'darren',badge:'Gold'},{name:'최민수',badge:'Gold'},{name:'miguel_',badge:'Gold'},{name:'arjun',badge:'Gold'},
+      {name:'siti.n',badge:'Diamond'},{name:'김현우',badge:'Gold'},{name:'aarav',badge:'Gold'},{name:'nisa🇲🇾',badge:'Gold'}
     ];
     const LIVE_ROOM_SEED=[
-      'bro that late one still hit 😂','small win but i take it','gold tier feels different ngl','mine was late but still profit',
-      'who caught the second entry?','not huge but enough for today','@민재⚡ how you saw that move?','first one missed, next one saved me',
-      'zach cooked today 🔥','i just covered my depo','not my best day but room still solid','that rebound was clean',
-      '승률 오늘 괜찮네 ㅋㅋ','esto sí pegó bien 🔥','bhai this one was nice','terbaik hari ini honestly',
-      'i waited too long 😭','still learning but getting better','diamond room people move fast','quiet room then boom 💸',
-      '오늘 balloon 4.6x 잡았다','Mines limpió hoy 💰','aviator 2.1x baru je lepas','chicken road again bro lol',
-      'JetX 3.2x 방금 터짐 ㅋㅋ','penalty was clean today','ese crash de 5.8x fue loco','balloon naik gila tadi',
-      '누가 2.4x 탔어?','that 6x crash was insane','mines tadi 3 row straight','ayer no pero hoy sí 🙌',
-      'crash timing improving fr','@Carlos M. kau punya entry tadi solid','오늘 하루 수익 괜찮다','la racha sigue 💪',
-      'just hit gold tier lets go 🥇','baru masuk room ni best','어제보다 오늘이 낫다','primer día y ya profit',
-      'room was quiet then 3 wins back to back','siapa dapat signal tadi?','신호 오늘 정확했어','hoy el room estuvo tranquilo pero ganamos'
+      '💰💰','gg','ㅋㅋㅋ','nice','lol same','clean','🔥','wtf','gg bro','niceee',
+      'yooo','ez','대박','lets go','bruh','😭😭','W','lfg','no way','facts',
+      'bro 💀','insane','terbaik','genial','ㅋㅋ 진짜','나도','same here','real','big W',
+      'zach cooked 🔥','who caught that??','@⚡jihoon bro how','gg room','that was fast',
+      'balloon 4.6x 잡음','mines 3 row straight 💰','aviator 2.1x baru lepas','chicken road again lol',
+      'JetX 3.2x 터짐 ㅋㅋ','ese crash de 5.8x fue loco','penalty was clean','balloon naik gila',
+      '누가 2.4x 탔어?','that 6x was insane','ayer no pero hoy sí 🙌','crash timing improving fr',
+      '@carlos_m entry tadi solid','오늘 수익 괜찮다','la racha sigue 💪','just hit gold 🥇',
+      'baru masuk room best gila','어제보다 낫다','primer día y ya profit','3 wins back to back',
+      'siapa dapat signal?','신호 정확했어','hoy ganamos','mines limpió 💰',
+      'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
+      '승률 괜찮네','esto pegó bien','bhai nice one','terbaik hari ini',
+      'room was dead then boom 💸','diamond room moves fast','quiet then 3 straight W','late entry but still profit',
+      'balloon터짐 ㄹㅇ','@priya✨ u saw that right','@민재 how bro','lol i was sleeping and missed it 😭',
+      'woke up to profit','ese fue gratis','free money fr','RM covered today',
+      '₩80k 달성 ㅋㅋ','otro día otro profit','kena 5x tadi gila','@lucía🔥 nice call',
+      'told yall','called it','봤지?','dije que iba a pegar','kan dah cakap'
     ];
     let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false,liveRoomPollTimer=null;
     function liveRoomUnlocked(){return getVipTierIdx()>=2;}
@@ -783,13 +789,13 @@
     function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
     function seedLiveRoomLocal(){
       if(liveRoomFeed.length) return;
-      const msgs=[];let mins=320;
-      for(let i=0;i<18;i++){
-        mins-=Math.max(3,Math.floor(Math.random()*26));
+      const msgs=[];let mins=90;
+      for(let i=0;i<48;i++){
+        mins-=Math.max(0.3,Math.random()*3.5);
         const npc=randomOf(LIVE_ROOM_NPCS);
-        msgs.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),createdAt:roomTimeFromNow(Math.max(1,mins)),role:'npc'});
+        msgs.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),createdAt:roomTimeFromNow(Math.max(0.2,mins)),role:'npc'});
       }
-      liveRoomFeed=msgs.slice(-18);
+      liveRoomFeed=msgs;
     }
     function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';if(x.includes('silver'))return '🥈';return '';}
     function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
