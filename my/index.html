@@ -820,7 +820,7 @@
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
     function roomTimeFromNow(minsAgo){const d=new Date(Date.now()-minsAgo*60000);return d.toISOString();}
     function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
-    function sRng(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
+    function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
     function pickText(npc,seed){
       const lang=npc.lang||'en';
       const r=sRng(seed);
@@ -828,31 +828,31 @@
       if(lang==='es'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_ES[Math.floor(sRng(seed+50)*SEED_ES.length)];}
       return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
     }
-    /* absolute minute slots — each minute of the day has a deterministic message */
-    let lastSeedMinute=0;
+    /* slot every 18 seconds — fully deterministic, same on every device */
+    const SLOT_SEC=18;
+    function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
+    function msgForSlot(slot){
+      const npcIdx=Math.floor(sRng(slot*7+1)*LIVE_ROOM_NPCS.length);
+      const npc=LIVE_ROOM_NPCS[npcIdx];
+      const ts=new Date(slot*SLOT_SEC*1000).toISOString();
+      return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
+    }
+    let lastSlot=0;
     function seedLiveRoomLocal(){
-      const nowMin=Math.floor(Date.now()/60000);
-      if(liveRoomFeed.length && lastSeedMinute===nowMin) return;
+      const now=slotNow();
+      if(liveRoomFeed.length && lastSlot===now) return;
       if(!liveRoomFeed.length){
-        const msgs=[];
-        for(let i=0;i<48;i++){
-          const slotMin=nowMin-47+i;
-          const npcIdx=Math.floor(sRng(slotMin*7+1)*LIVE_ROOM_NPCS.length);
-          const npc=LIVE_ROOM_NPCS[npcIdx];
-          const ts=new Date(slotMin*60000).toISOString();
-          msgs.push({author:npc.name,badge:npc.badge,text:pickText(npc,slotMin*7+2),createdAt:ts,role:'npc',reactions:[]});
+        const count=80;
+        for(let i=0;i<count;i++){
+          liveRoomFeed.push(msgForSlot(now-count+1+i));
         }
-        liveRoomFeed=msgs;
-        lastSeedMinute=nowMin;
-      } else if(nowMin>lastSeedMinute){
-        for(let m=lastSeedMinute+1;m<=nowMin;m++){
-          const npcIdx=Math.floor(sRng(m*7+1)*LIVE_ROOM_NPCS.length);
-          const npc=LIVE_ROOM_NPCS[npcIdx];
-          const ts=new Date(m*60000).toISOString();
-          liveRoomFeed.push({author:npc.name,badge:npc.badge,text:pickText(npc,m*7+2),createdAt:ts,role:'npc',reactions:[]});
+        lastSlot=now;
+      } else if(now>lastSlot){
+        for(let s=lastSlot+1;s<=now;s++){
+          liveRoomFeed.push(msgForSlot(s));
         }
-        if(liveRoomFeed.length>120)liveRoomFeed.splice(0,liveRoomFeed.length-120);
-        lastSeedMinute=nowMin;
+        if(liveRoomFeed.length>150)liveRoomFeed.splice(0,liveRoomFeed.length-150);
+        lastSlot=now;
       }
     }
     function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';if(x.includes('silver'))return '🥈';return '';}
@@ -884,31 +884,25 @@
         }
       },3000+Math.random()*4000);
     }
-    /* typing + drip */
-    let roomTypingTimer=null,roomDripTimer=null,roomDripStarted=false;
-    function showTypingBriefly(name){
-      const el=document.getElementById('roomTyping');if(!el||curTab!=='liveRoom')return;
-      el.innerHTML=`${name} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;
-      if(roomTypingTimer)clearTimeout(roomTypingTimer);
-      roomTypingTimer=setTimeout(()=>{el.innerHTML='';},3500);
-    }
-    function startRoomDrip(){
-      if(roomDripStarted)return;roomDripStarted=true;
+    /* slot-based live ticker — checks every 3s for new deterministic msgs */
+    let roomTickerStarted=false,roomTickerTimer=null;
+    function startRoomTicker(){
+      if(roomTickerStarted)return;roomTickerStarted=true;
       startReactDrip();
-      setTimeout(dripOne,2000+Math.random()*1500);
-      roomDripTimer=setInterval(dripOne,6000+Math.random()*3000);
-    }
-    function dripOne(){
-      const npc=randomOf(LIVE_ROOM_NPCS);
-      showTypingBriefly(npc.name);
-      const lang=npc.lang||'en';
-      const pool=lang==='kr'?(Math.random()<0.3?SEED_EN:SEED_KR):lang==='es'?(Math.random()<0.3?SEED_EN:SEED_ES):SEED_EN;
-      const txt=pool[Math.floor(Math.random()*pool.length)];
-      setTimeout(()=>{
-        liveRoomFeed.push({author:npc.name,badge:npc.badge,text:txt,createdAt:new Date().toISOString(),role:'npc',reactions:[]});
-        if(liveRoomFeed.length>120)liveRoomFeed.splice(0,liveRoomFeed.length-120);
-        if(curTab==='liveRoom'){const el=document.getElementById('roomTyping');if(el)el.innerHTML='';renderLiveRoom(true);}
-      },1500+Math.random()*2000);
+      roomTickerTimer=setInterval(()=>{
+        const now=slotNow();
+        if(now>lastSlot){
+          /* show typing briefly before new msg appears */
+          const nextMsg=msgForSlot(now);
+          const tyEl=document.getElementById('roomTyping');
+          if(tyEl&&curTab==='liveRoom'){
+            tyEl.innerHTML=`${nextMsg.author} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;
+            setTimeout(()=>{tyEl.innerHTML='';},2000);
+          }
+          seedLiveRoomLocal();
+          if(curTab==='liveRoom')renderLiveRoom(true);
+        }
+      },3000);
     }
     function stopRoomDrip(){}
     let roomRenderedCount=0;
@@ -934,20 +928,9 @@
         roomRenderedCount=liveRoomFeed.length;
       }
       feed.scrollTop=feed.scrollHeight;
-      startRoomDrip();
-      startMinuteCheck();
+      startRoomTicker();
     }
-    let minuteCheckTimer=null;
-    function startMinuteCheck(){
-      if(minuteCheckTimer)return;
-      minuteCheckTimer=setInterval(()=>{
-        const nowMin=Math.floor(Date.now()/60000);
-        if(nowMin>lastSeedMinute){
-          seedLiveRoomLocal();
-          if(curTab==='liveRoom')renderLiveRoom(true);
-        }
-      },30000);
-    }
+
 
     function startLiveRoomPolling(){
       stopLiveRoomPolling();
