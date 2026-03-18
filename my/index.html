@@ -399,6 +399,31 @@
       <div id="app"></div>
     </div>
 
+    <div id="tabLiveRoom" class="tab-content">
+      <div class="live-room">
+        <div class="live-room-header">
+          <div class="top-bar" style="padding:0 0 6px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="tg-id" id="roomStatus">Global Room</div></div></div>
+          <div class="live-room-title">🌐 Live Room</div>
+          <div class="live-room-sub">International VIP chat — mixed users, mixed wins, real-time energy.</div>
+          <div class="live-room-meta">
+            <div class="live-room-stat">🟢 <span id="roomActiveCount">2.4k active today</span></div>
+            <div class="live-room-pill" id="roomTierGate">Unlock chat at Gold</div>
+          </div>
+        </div>
+        <div class="live-room-feed" id="liveRoomFeed"></div>
+        <div class="room-composer">
+          <div class="room-lock" id="liveRoomLock">
+            <div class="room-lock-title">🔒 Write access unlocks at Gold</div>
+            <div class="room-lock-sub">You can watch the room now. Reach Tier 3 to join the conversation and get replies from other members.</div>
+          </div>
+          <div class="room-input-row" id="liveRoomComposer" style="display:none;">
+            <textarea class="room-input" id="liveRoomInput" placeholder="Drop a message into the room..." maxlength="280"></textarea>
+            <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="tabTop" class="tab-content">
       <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly ranking — top earners</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
@@ -412,6 +437,7 @@
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
       <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -428,6 +454,7 @@
     };
     const REAL_NAME_POOL=["Bossku", "Amir", "Ah Boy", "J", "Walaowei 🤯", ".", "Siti 🌸", "Jason", "hahaha", "Makan time 🍜", "888", "Syah", "Haziq_99", "🇲🇾", "Mantap 🔥", "_", "Amoi ✨", "Wei", "Aiman", "M.", "Ngantuk 😴", "Lapar gila", "Kopi Peng ☕️", "Ah Meng", "Ali", "Z.", "😎", "999", "Abang", "Fatin", "Hehe", "Kevin", "L.", "Alamak! 🤦‍♂️", "🍀", "Izzat", "Boleh je", "T.", "Cikgu", "👑", "Jack", "777", "C.", "Santai 🌴", "wkwkwk", "David", "✨", "Ryan", "H", "Lepak", "🚗 Vroom", "Bro", "S.", "OT again 💻", "123", "Nurul", "X", "🌙", "John", "D.", "Kucing 🐱", "G.", "1", "Ravi", "A.", "Hensem Boy", "🔥", "Alex", "Y.", "Danial", "K.", "Steven", "!", "N.", "Wong", "R.", "0.0", "B.", "Amin 🙏", "V.", "P.", "Ah Leng", "W.", "Hafiz", "E.", "Jom", "O.", "Michael", "🇲🇾✨", "T_T", "Meow", "Cuti ✈️", "0", "Aisyah", "M.K.", "Boba 🧋", "Kopi o", "0_o", "Nadia", "Sean"];
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-my',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-my';
+    const LIVE_ROOM_FEED_WEBHOOK='https://n8nnexusai.uk/webhook/live-room-feed',LIVE_ROOM_SEND_WEBHOOK='https://n8nnexusai.uk/webhook/live-room-send';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     if(urlParams.get('reset')==='1'){try{localStorage.clear();}catch(e){}const u=new URL(window.location.href);u.searchParams.delete('reset');history.replaceState({},'',u);}
@@ -570,6 +597,7 @@
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
     if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
     else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';}
+    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();loadLiveRoomFeed();}
     else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
@@ -705,6 +733,73 @@
     }
 
     // CHAT
+    const LIVE_ROOM_NPCS=[
+      {name:'Minjae⚡',badge:'Gold'},{name:'DY',badge:''},{name:'Sofía',badge:'Silver'},{name:'Jihoon 🎯',badge:'Diamond'},
+      {name:'Aarav',badge:''},{name:'Carlos M',badge:'Gold'},{name:'Nisa',badge:''},{name:'박준호',badge:'Silver'},
+      {name:'Lina ✨',badge:''},{name:'Sean Park',badge:'Platinum'},{name:'A.',badge:''},{name:'Harith',badge:'Gold'},
+      {name:'민수',badge:''},{name:'Mateo',badge:''},{name:'R',badge:''},{name:'Ryan 이',badge:'Silver'}
+    ];
+    const LIVE_ROOM_SEED=[
+      'bro that late one still hit 😂','small win but i take it','gold tier feels cleaner ngl','mine was late but still profit',
+      'who caught the second entry?','not huge but enough for today','@Minjae⚡ how you saw that move?','first one missed, next one saved me',
+      'zach cooked today 🔥','i just covered my depo','not my best day but room still solid','that rebound was clean',
+      '승률 오늘 괜찮네','esto sí pegó bien','bhai this one was nice','terbaik hari ini honestly',
+      'i waited too long 😭','still learning but better now','diamond room people move fast','quiet room then boom 💸'
+    ];
+    let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false;
+    function liveRoomUnlocked(){return getVipTierIdx()>=2;}
+    function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
+    function roomTimeFromNow(minsAgo){const d=new Date(Date.now()-minsAgo*60000);return hhmm(d);}
+    function seedLiveRoomLocal(){
+      if(liveRoomFeed.length) return;
+      const msgs=[];let mins=320;
+      for(let i=0;i<18;i++){
+        mins-=Math.max(3,Math.floor(Math.random()*26));
+        const npc=randomOf(LIVE_ROOM_NPCS);
+        msgs.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),time:roomTimeFromNow(Math.max(1,mins)),role:'npc'});
+      }
+      liveRoomFeed=msgs.slice(-18);
+    }
+    function renderLiveRoom(){
+      seedLiveRoomLocal();
+      const feed=document.getElementById('liveRoomFeed'); if(!feed) return;
+      const lock=document.getElementById('liveRoomLock'); const comp=document.getElementById('liveRoomComposer'); const gate=document.getElementById('roomTierGate');
+      const unlocked=liveRoomUnlocked();
+      lock.style.display=unlocked?'none':'block'; comp.style.display=unlocked?'flex':'none'; gate.textContent=unlocked?'Room unlocked':'Unlock chat at Gold';
+      const activeBase=2300+Math.floor((Date.now()/60000)%170);
+      document.getElementById('roomActiveCount').textContent=(activeBase/1000).toFixed(1)+'k active today';
+      feed.innerHTML='';
+      const sep=document.createElement('div'); sep.className='room-day-sep'; sep.textContent='Live room'; feed.appendChild(sep);
+      liveRoomFeed.forEach(m=>{
+        const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
+        el.innerHTML=`<div class="room-topline"><span class="room-name">${m.author}</span>${m.badge?`<span class="room-badge">${m.badge}</span>`:''}</div><div class="room-text">${linkify((m.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</div><div class="room-time">${m.time||''}</div>`;
+        feed.appendChild(el);
+      });
+      feed.scrollTop=feed.scrollHeight;
+    }
+    async function loadLiveRoomFeed(){
+      if(liveRoomLoading||!tgUserId) return; liveRoomLoading=true;
+      try{
+        const r=await fetch(LIVE_ROOM_FEED_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:'my',tier:getVipTier().name,total_deposit:parseInt(S.get('totalDep')||'0')})});
+        if(r.ok){const d=await r.json(); if(d&&Array.isArray(d.messages)&&d.messages.length){liveRoomFeed=d.messages.map(m=>({author:m.author_name||m.author||'User',badge:m.author_badge||'',text:m.message||m.text||'',time:m.time||hhmm(new Date(m.created_at||Date.now())),role:m.author_type==='user'?'user':'npc'})); liveRoomLoaded=true; renderLiveRoom();}}
+      }catch(e){}
+      finally{liveRoomLoading=false;}
+    }
+    async function sendLiveRoomMessage(){
+      if(liveRoomSending||!liveRoomUnlocked()) return;
+      const inp=document.getElementById('liveRoomInput'); const txt=(inp.value||'').trim(); if(!txt) return;
+      liveRoomSending=true; document.getElementById('liveRoomSend').disabled=true;
+      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,time:hhmm(new Date()),role:'user'}); inp.value=''; renderLiveRoom();
+      try{
+        const r=await fetch(LIVE_ROOM_SEND_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:'my',message:txt,first_name:userName||'User',tier:getVipTier().name,total_deposit:parseInt(S.get('totalDep')||'0')})});
+        if(r.ok){const d=await r.json(); if(d&&Array.isArray(d.messages)&&d.messages.length){d.messages.forEach(m=>liveRoomFeed.push({author:m.author_name||m.author||'User',badge:m.author_badge||'',text:m.message||m.text||'',time:m.time||hhmm(new Date(m.created_at||Date.now())),role:m.author_type==='user'?'user':'npc'}));}}
+      }catch(e){
+        setTimeout(()=>{liveRoomFeed.push({author:randomOf(LIVE_ROOM_NPCS).name,badge:randomOf(LIVE_ROOM_NPCS).badge,text:randomOf(['nice one 😂','same here bro','room was on fire today','that was clean','not bad at all']),time:hhmm(new Date()),role:'npc'}); renderLiveRoom();},800);
+      }
+      renderLiveRoom(); liveRoomSending=false; document.getElementById('liveRoomSend').disabled=false;
+    }
+    document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();sendLiveRoomMessage();}});
+
     let chatH=[],chatLD=false,chatSnd=false,chatImgB64=null;
     function handleChatImage(input){
       const file=input.files[0];if(!file)return;
