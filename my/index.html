@@ -423,17 +423,17 @@
     const GEO_CONFIG = {
       kr: { name:"한국", flag:"🇰🇷", lang:"ko", currency:"KRW", sym:"₩", profitRange:[5000,100000],
         link:"https://sp1nwin.com/vcgTRr", promo:"777KR777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-kr",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-my",
         names:["민준","Jihoon 🎯","서준","DY","Kevin K.","시우","Minjae⚡","J.H.","Chris 🇰🇷","지호","현우","Sean Park","SJ","Alex 민","Danny 🔥","현준","Yuna","서윤","MJ","하윤","Jennie 💜","채원","수아","EJ","Brian K","수빈","태민","SH.K","Jake 🏆","Jay","Ryan 이","Sam 🎰","JK 🔑","Eric 💰","Tony 박","Leo 🦁","Paul 김","Dave K.","Ray","HD"] }
     };
     const REAL_NAME_POOL=['ㅇㅇ','민준','J','가즈아 🚀','서아','.','ㅋㅋㅋ','Alex','으나','777','지훈_99','🌙','Ryan','-_-','김태형','떡상기원 🙏','SJ','유나✨','퇴근하고싶다','D.H.','쮸','JS','돈복사기 💸','🌸지민🌸','1234','David K.','현우','ㅇㅎ','잭팟','✨','뜌비','하늘','Kim','😎','가보자고','룰루','T.K.','서준','멍멍이 🐶','0.0','비트보이','민지','Jason','🍀','H.','수아','ㅇㅅㅇ','굿보이','🚀🚀','연우','하린','제이','!','🔥','빅쇼트','S.W.','동글이','1','Jayden','소희','쭈니','kjk','💰','나야나','윤서','럭키가이','..','Jisu','뽀로로','태양','민기','👑','풀매수','C.H.','유진','ㅋㅋㅋㅎㅎ','Paul','밤하늘 🌌','888','킹갓','지원','🐰','G.W.','승리','은우','곰돌이 🐻','L','🚀투더문','서현','뇸뇸','잭','_','영호','하준','짱구','E.J.','VIP','우진','🇰🇷','ㅇㅇ'];
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-kr',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-kr';
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-my',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-my';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     if(urlParams.get('reset')==='1'){try{localStorage.clear();}catch(e){}const u=new URL(window.location.href);u.searchParams.delete('reset');history.replaceState({},'',u);}
     let currentGeo='kr'; S.set('user_geo','kr');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.kr;}
-    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-kr';
+    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-my';
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
