@@ -404,7 +404,7 @@
         <div class="live-room-header">
           <div class="top-bar" style="padding:0 0 6px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><div class="tg-id" id="roomStatus">Global Room</div></div></div>
           <div class="live-room-title">🌐 Live Room</div>
-          <div class="live-room-sub">International VIP chat — mixed users, mixed wins, real-time energy.</div>
+          <div class="live-room-sub">International VIP chat — mixed users, mixed languages, real-time energy.</div>
           <div class="live-room-meta">
             <div class="live-room-stat">🟢 <span id="roomActiveCount">2.4k active today</span></div>
             <div class="live-room-pill" id="roomTierGate">Unlock chat at Gold</div>
@@ -760,6 +760,7 @@
       }
       liveRoomFeed=msgs.slice(-18);
     }
+    function roomBadgeClass(b){const x=(b||'').toLowerCase();if(x.includes('silver'))return 'silver';if(x.includes('gold'))return 'gold';if(x.includes('diamond'))return 'diamond';if(x.includes('platinum'))return 'platinum';return '';}
     function renderLiveRoom(){
       seedLiveRoomLocal();
       const feed=document.getElementById('liveRoomFeed'); if(!feed) return;
@@ -772,7 +773,7 @@
       const sep=document.createElement('div'); sep.className='room-day-sep'; sep.textContent='Live room'; feed.appendChild(sep);
       liveRoomFeed.forEach(m=>{
         const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
-        el.innerHTML=`<div class="room-topline"><span class="room-name">${m.author}</span>${m.badge?`<span class="room-badge">${m.badge}</span>`:''}</div><div class="room-text">${linkify((m.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</div><div class="room-time">${m.time||''}</div>`;
+        el.innerHTML=`<div class="room-topline"><span class="room-name">${m.author}</span>${m.badge?`<span class="room-badge ${roomBadgeClass(m.badge)}">${m.badge}</span>`:''}</div><div class="room-text">${linkify((m.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</div><div class="room-time">${m.time||''}</div>`;
         feed.appendChild(el);
       });
       feed.scrollTop=feed.scrollHeight;
