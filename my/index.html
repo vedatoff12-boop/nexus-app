@@ -829,12 +829,28 @@
       return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
     }
     /* slot every 18 seconds — fully deterministic, same on every device */
-    const SLOT_SEC=18;
+    const SLOT_SEC=8;
     function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
+    const REPLY_EN=['nice','facts','same bro','real','gg','lol','fr fr','W','big W','no way 😂','true','yep','100%','agreed','this ^^'];
+    const REPLY_KR=['ㅋㅋㅋ','ㄹㅇ','나도','진짜','대박','ㅇㅇ','맞아','ㅋㅋ 인정','그거 맞음','ㅇㅈ'];
+    const REPLY_ES=['jaja','tal cual','real','eso','sí bro','facts','exacto','jajaja','100%','lo mismo'];
+    function pickReply(npc,seed){
+      const lang=npc.lang||'en';
+      const pool=lang==='kr'?REPLY_KR:lang==='es'?REPLY_ES:REPLY_EN;
+      return pool[Math.floor(sRng(seed)*pool.length)];
+    }
     function msgForSlot(slot){
       const npcIdx=Math.floor(sRng(slot*7+1)*LIVE_ROOM_NPCS.length);
       const npc=LIVE_ROOM_NPCS[npcIdx];
       const ts=new Date(slot*SLOT_SEC*1000).toISOString();
+      /* every ~4th msg is a reply to previous slot's author */
+      const isReply=sRng(slot*13+5)<0.28;
+      if(isReply){
+        const prevNpcIdx=Math.floor(sRng((slot-1)*7+1)*LIVE_ROOM_NPCS.length);
+        const prevNpc=LIVE_ROOM_NPCS[prevNpcIdx];
+        const replyText=pickReply(npc,slot*7+9);
+        return {author:npc.name,badge:npc.badge,text:'@'+prevNpc.name+' '+replyText,createdAt:ts,role:'npc',reactions:[]};
+      }
       return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
     }
     let lastSlot=0;
