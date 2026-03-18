@@ -626,10 +626,10 @@
     // TAB
     let curTab='signals';
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
-    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';}
+    if(t==='chat'){stopRoomDrip();document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
+    else if(t==='signals'){stopRoomDrip();document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';}
     else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();loadLiveRoomFeed();startLiveRoomPolling();}
-    else{stopLiveRoomPolling();document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
+    else{stopLiveRoomPolling();stopRoomDrip();document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -810,24 +810,37 @@
     function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';if(x.includes('silver'))return '🥈';return '';}
     function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
     function roomReplyTarget(text){const m=String(text||'').match(/^@([^\s,:!?]+)/);return m?m[1]:'';}
-    const ROOM_REACT_POOL=[['🔥',3],['🔥',7],['💰',5],['💰',2],['😂',4],['😂',2],['🎯',3],['👀',2],['💎',1],['🙌',4],['😭',3],['🤑',2]];
-    function makeReactions(){
-      const n=1+Math.floor(Math.random()*3);const picks=[];const used=new Set();
-      for(let i=0;i<n;i++){const r=ROOM_REACT_POOL[Math.floor(Math.random()*ROOM_REACT_POOL.length)];if(used.has(r[0]))continue;used.add(r[0]);picks.push(`<span class="room-reaction">${r[0]}<span class="rcount">${r[1]}</span></span>`);}
-      return `<span class="room-reactions">${picks.join('')}</span>`;
+    const ROOM_REACT_EMOJIS=['🔥','💰','😂','🎯','👀','🙌','😭','🤑','💎'];
+    function seededRand(seed){let x=Math.sin(seed)*10000;return x-Math.floor(x);}
+    const _reactCache={};
+    function getReactions(idx){
+      if(_reactCache[idx]!==undefined)return _reactCache[idx];
+      const r=seededRand(idx*7+13);
+      if(r>0.2){_reactCache[idx]='';return '';}
+      const n=r<0.07?3:r<0.13?2:1;const picks=[];const used=new Set();
+      for(let i=0;i<n;i++){const ei=Math.floor(seededRand(idx*11+i*31+7)*ROOM_REACT_EMOJIS.length);const em=ROOM_REACT_EMOJIS[ei];if(used.has(em))continue;used.add(em);const cnt=1+Math.floor(seededRand(idx*3+i*17)*8);picks.push(`<span class="room-reaction">${em}<span class="rcount">${cnt}</span></span>`);}
+      const html=picks.length?`<span class="room-reactions">${picks.join('')}</span>`:'';
+      _reactCache[idx]=html;return html;
     }
-    let roomTypingTimer=null;
-    function startRoomTyping(){
-      if(roomTypingTimer)clearInterval(roomTypingTimer);
-      function tick(){
-        const el=document.getElementById('roomTyping');if(!el)return;
-        const n1=randomOf(LIVE_ROOM_NPCS).name,n2=randomOf(LIVE_ROOM_NPCS).name;
-        const names=n1===n2?n1:`${n1}, ${n2}`;
-        el.innerHTML=`${names} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;
-      }
-      tick();roomTypingTimer=setInterval(tick,4000);
+    let roomTypingTimer=null,roomDripTimer=null;
+    function showTypingThenMessage(){
+      const el=document.getElementById('roomTyping');if(!el)return;
+      const npc=randomOf(LIVE_ROOM_NPCS);
+      el.innerHTML=`${npc.name} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;
+      if(roomTypingTimer)clearTimeout(roomTypingTimer);
+      roomTypingTimer=setTimeout(()=>{
+        el.innerHTML='';
+        liveRoomFeed.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),createdAt:new Date().toISOString(),role:'npc'});
+        if(liveRoomFeed.length>60)liveRoomFeed.shift();
+        renderLiveRoom(true);
+      },1500+Math.random()*2500);
     }
-    function renderLiveRoom(){
+    function startRoomDrip(){
+      if(roomDripTimer)clearInterval(roomDripTimer);
+      roomDripTimer=setInterval(()=>{if(curTab==='liveRoom')showTypingThenMessage();},8000+Math.random()*7000);
+    }
+    function stopRoomDrip(){if(roomDripTimer){clearInterval(roomDripTimer);roomDripTimer=null;}if(roomTypingTimer){clearTimeout(roomTypingTimer);roomTypingTimer=null;}}
+    function renderLiveRoom(skipDripStart){
       seedLiveRoomLocal();
       const feed=document.getElementById('liveRoomFeed'); if(!feed) return;
       const lock=document.getElementById('liveRoomLock'); const comp=document.getElementById('liveRoomComposer');
@@ -838,12 +851,12 @@
         const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
         const rt=roomReplyTarget(m.text); const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
         const bi=roomBadgeIcon(m.badge);
-        const hasReact=(i%3===1||i%5===0)&&m.role!=='user';
-        el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${hasReact?makeReactions():''}`;
+        const reactHtml=m.role!=='user'?getReactions(i):'';
+        el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${reactHtml}`;
         feed.appendChild(el);
       });
       feed.scrollTop=feed.scrollHeight;
-      startRoomTyping();
+      if(!skipDripStart)startRoomDrip();
     }
 
     function startLiveRoomPolling(){
