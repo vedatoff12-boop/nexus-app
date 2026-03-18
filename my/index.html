@@ -377,13 +377,13 @@
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">브론즈</div>
+              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
               <div class="vip-badge-acc" id="vipAcc2">85% 정확도</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
             <div class="vip-next-label">다음 등급</div>
-            <div class="vip-next-tier" id="vipNextTier">🥈 실버</div>
+            <div class="vip-next-tier" id="vipNextTier">🥈 Silver</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
@@ -487,13 +487,13 @@
     function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
     function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignals()>=tier.sigs;}
     function getVipTier(){return VIP_TIERS[getVipTierIdx()];}
-    function tierName(tier){return lang==='ko'?tier.name:(tier.nameEn||tier.name);}
+    function tierName(tier){return lang==='en'?tier.name:(tier.nameEn||tier.name);}
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
       const idx=getVipTierIdx();const tier=VIP_TIERS[idx];
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tierName(tier);
-      document.getElementById('vipAcc2').textContent=tier.acc+'% '+(lang==='ko'?'정확도':'ACCURACY');
+      document.getElementById('vipAcc2').textContent=tier.acc+'% '+(lang==='en'?'ACCURACY':'ACCURACY');
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
       const left=document.getElementById('vipProgressLeft');
@@ -502,8 +502,8 @@
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
         const used=getDailySignals();const limit=tier.sigs;
-        if(limit===0){sigEl.textContent=lang==='ko'?'♾️ 오늘 무제한 시그널':'♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} `+(lang==='ko'?'오늘 시그널':'signals today'):(lang==='ko'?'🔒 내일 시그널이 갱신됩니다':'🔒 Signals renew tomorrow');}
+        if(limit===0){sigEl.textContent=lang==='en'?'♾️ 오늘 무제한 시그널':'♾️ Unlimited signals today';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} `+(lang==='en'?'오늘 시그널':'signals today'):(lang==='en'?'🔒 내일 시그널이 갱신됩니다':'🔒 Signals renew tomorrow');}
       }
       if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -514,12 +514,12 @@
         fill.style.width=pct+'%';
         const remain=target-dep;
         left.textContent='RM '+dep.toLocaleString()+' / RM '+target.toLocaleString();
-        hint.textContent='RM '+remain.toLocaleString()+(lang==='ko'?' → '+tierName(next)+' ('+next.acc+'%) ⬆':' to '+tierName(next)+' ('+next.acc+'%) ⬆');
+        hint.textContent='RM '+remain.toLocaleString()+(lang==='en'?' → '+tierName(next)+' ('+next.acc+'%) ⬆':' to '+tierName(next)+' ('+next.acc+'%) ⬆');
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent=lang==='ko'?'최고 등급':'MAX LEVEL';
-        hint.textContent=lang==='ko'?'Zach의 VIP입니다 👑':'You are Zach\'s VIP 👑';
+        left.textContent=lang==='en'?'최고 등급':'MAX LEVEL';
+        hint.textContent=lang==='en'?'Zach의 VIP입니다 👑':'You are Zach\'s VIP 👑';
       }
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
@@ -528,7 +528,7 @@
 
     // DAILY BONUS
     function updDaily(){const f=document.getElementById('dailyFloat'),lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){f.classList.add('claimed');}else{f.classList.remove('claimed');}}
-    function openDailyPopup(){const p=document.getElementById('dailyPopup');p.classList.add('open');const lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){const left=864e5-(now-parseInt(lc)),h=Math.floor(left/36e5),m=Math.floor((left%36e5)/6e4);document.getElementById('dpBtn').style.display='none';document.getElementById('dpTimer').textContent=lang==='ko'?`다음 보너스 ${h}시간 ${m}분 후`:`Next bonus in ${h}h ${m}m`;document.getElementById('dpSub').textContent=lang==='ko'?'오늘 이미 받았습니다!':'Already claimed today!';}else{document.getElementById('dpBtn').style.display='';document.getElementById('dpTimer').textContent='';document.getElementById('dpSub').textContent=lang==='ko'?'일일 보너스를 받고 무료 VIP 시그널을 획득하세요!':'Claim your daily bonus for a free VIP signal!';}}
+    function openDailyPopup(){const p=document.getElementById('dailyPopup');p.classList.add('open');const lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){const left=864e5-(now-parseInt(lc)),h=Math.floor(left/36e5),m=Math.floor((left%36e5)/6e4);document.getElementById('dpBtn').style.display='none';document.getElementById('dpTimer').textContent=lang==='en'?`다음 보너스 ${h}시간 ${m}분 후`:`Next bonus in ${h}h ${m}m`;document.getElementById('dpSub').textContent=lang==='en'?'오늘 이미 받았습니다!':'Already claimed today!';}else{document.getElementById('dpBtn').style.display='';document.getElementById('dpTimer').textContent='';document.getElementById('dpSub').textContent=lang==='en'?'일일 보너스를 받고 무료 VIP 시그널을 획득하세요!':'Claim your daily bonus for a free VIP signal!';}}
     function claimDailyBonus(){S.set('dclaim',Date.now().toString());addProfit(rndInt(5000,25000));try{navigator.vibrate&&navigator.vibrate(100);}catch(e){}fireConfetti();document.getElementById('dailyPopup').classList.remove('open');updDaily();}
     document.getElementById('dailyPopup').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
     updDaily();
@@ -554,7 +554,7 @@
       const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
       const pick=rotated.slice(0,16);
-      const verbs=lang==='ko'?['수익','출금','수익','획득']:['won','cashed','won','withdrew'];
+      const verbs=lang==='en'?['수익','출금','수익','획득']:['won','cashed','won','withdrew'];
       let h="";
       pick.forEach((name,i)=>{
         const amt=rndInt(5000,200000);
@@ -602,7 +602,7 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">${lang==='ko'?'최근 시그널':'Recent Signals'}</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">${lang==='en'?'최근 시그널':'Recent Signals'}</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
@@ -614,7 +614,7 @@
         const g=T().g[k];
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
         c.onclick=()=>handleGameClick(k,c);
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${lang==='ko'?'플레이':'Play'}</div></div>`;
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${lang==='en'?'플레이':'Play'}</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
@@ -634,8 +634,8 @@
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">${lang==='ko'?'가입하기 →':'Register →'}</button>`:'';
-      const promoTxt=g.promo?`<div class="promo-text" onclick="event.stopPropagation();navigator.clipboard.writeText('${g.promo}');this.textContent='✅ 복사됨!';setTimeout(()=>{this.textContent='🎁 프로모: ${g.promo} (탭하여 복사)'},1200)">🎁 ${lang==='ko'?'프로모':'Promo'}: ${g.promo} (${lang==='ko'?'탭하여 복사':'tap to copy'})</div>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">${lang==='en'?'가입하기 →':'Register →'}</button>`:'';
+      const promoTxt=g.promo?`<div class="promo-text" onclick="event.stopPropagation();navigator.clipboard.writeText('${g.promo}');this.textContent='✅ 복사됨!';setTimeout(()=>{this.textContent='🎁 프로모: ${g.promo} (탭하여 복사)'},1200)">🎁 ${lang==='en'?'프로모':'Promo'}: ${g.promo} (${lang==='en'?'탭하여 복사':'tap to copy'})</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
     function openRegLink(){
@@ -651,7 +651,7 @@
       let ch=`<div class="stepnum" id="cD">...</div><div class="steplabel">${td.l}</div>`;
       if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++)g+='<div class="mines-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
       else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++)g+='<div class="penalty-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
-      const limitTxt=lang==='ko'?'서버 한도':'Server limit';
+      const limitTxt=lang==='en'?'서버 한도':'Server limit';
       app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipTier().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipTier().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
       const btn=document.getElementById('sBtn'),box=document.getElementById('gBox'),cdW=document.getElementById('cdW'),cdP=document.getElementById('cdP'),cdN=document.getElementById('cdN');
       const circ=175.93;
@@ -660,8 +660,8 @@
         if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${tierName(next)} — ${next.sigs||'∞'} ${lang==='ko'?'시그널/일':'signals/day'}, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${lang==='ko'?'채팅에서 RM '+need.toLocaleString()+' 충전하여 잠금 해제 ⬆':'Top up RM '+need.toLocaleString()+' in chat to unlock ⬆'}</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lang==='ko'?'AI 서버 한도 도달':'AI Server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">${lang==='ko'?'AI 서버가 시그널을 처리 중입니다.':'AI servers are processing signals.'}<br>${tier.icon} ${tierName(tier)} ${lang==='ko'?'계정은 '+tier.sigs+' 시그널/일입니다.':'accounts have '+tier.sigs+' signals/day.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">${lang==='ko'?'더 높은 입금 = 더 많은 서버 리소스':'Higher deposit = more server resources'}<br>${lang==='ko'?'= 더 많은 시그널 + 높은 정확도':'= more signals + better accuracy'}</div>${upgradeHint}</div>`;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${tierName(next)} — ${next.sigs||'∞'} ${lang==='en'?'시그널/일':'signals/day'}, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${lang==='en'?'채팅에서 RM '+need.toLocaleString()+' 충전하여 잠금 해제 ⬆':'Top up RM '+need.toLocaleString()+' in chat to unlock ⬆'}</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lang==='en'?'AI 서버 한도 도달':'AI Server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">${lang==='en'?'AI 서버가 시그널을 처리 중입니다.':'AI servers are processing signals.'}<br>${tier.icon} ${tierName(tier)} ${lang==='en'?'계정은 '+tier.sigs+' 시그널/일입니다.':'accounts have '+tier.sigs+' signals/day.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">${lang==='en'?'더 높은 입금 = 더 많은 서버 리소스':'Higher deposit = more server resources'}<br>${lang==='en'?'= 더 많은 시그널 + 높은 정확도':'= more signals + better accuracy'}</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent=limitTxt;btn.style.opacity='0.3';return true;
         }
         return false;
@@ -682,12 +682,12 @@
     function renderChicken(){
       if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const p=document.createElement('div');p.className='panel';
-      const limitTxt=lang==='ko'?'한도 도달':'Limit reached';
+      const limitTxt=lang==='en'?'한도 도달':'Limit reached';
       p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${tierName(next)} — ${next.sigs||'∞'} ${lang==='ko'?'시그널/일':'signals/day'}, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${lang==='ko'?'채팅에서 RM '+need.toLocaleString()+' 충전 ⬆':'Top up RM '+need.toLocaleString()+' in chat ⬆'}</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lang==='ko'?'AI 서버 한도 도달':'AI Server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tierName(tier)} — ${tier.sigs} ${lang==='ko'?'시그널/일':'signals/day'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${lang==='ko'?'더 높은 입금 = 더 많은 서버 리소스':'Higher deposit = more server resources'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=limitTxt;return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`${lang==='ko'?'단계':'Step'} ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(2000,10000));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent=limitTxt;}},500);};dT();
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${tierName(next)} — ${next.sigs||'∞'} ${lang==='en'?'시그널/일':'signals/day'}, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${lang==='en'?'채팅에서 RM '+need.toLocaleString()+' 충전 ⬆':'Top up RM '+need.toLocaleString()+' in chat ⬆'}</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lang==='en'?'AI 서버 한도 도달':'AI Server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tierName(tier)} — ${tier.sigs} ${lang==='en'?'시그널/일':'signals/day'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${lang==='en'?'더 높은 입금 = 더 많은 서버 리소스':'Higher deposit = more server resources'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=limitTxt;return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`${lang==='en'?'단계':'Step'} ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(2000,10000));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent=limitTxt;}},500);};dT();
     }
 
     // CHAT
@@ -707,8 +707,8 @@
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'복사됨!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">RM ${remain.toLocaleString()} → ${next.icon} ${tierName(next)} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tierName(tier)}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% ${lang==='ko'?'정확도':'accuracy'}</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">${lang==='ko'?'AI 시그널을 잠금 해제하시겠습니까?':'Want to unlock AI Signals?'}</div><div class="chat-welcome-text">${lang==='ko'?'아래에 메시지를 보내주세요 👇':'Type a message below 👇'}</div></div>`;return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">RM ${remain.toLocaleString()} → ${next.icon} ${tierName(next)} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tierName(tier)}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% ${lang==='en'?'정확도':'accuracy'}</span>${hint}</div>`;}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">${lang==='en'?'AI 시그널을 잠금 해제하시겠습니까?':'Want to unlock AI Signals?'}</div><div class="chat-welcome-text">${lang==='en'?'아래에 메시지를 보내주세요 👇':'Type a message below 👇'}</div></div>`;return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:userName||"User",geo:'kr'})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
     async function sendChatMessage(){if(_sendLock)return;const now=Date.now();const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64)return;if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;_sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
@@ -716,9 +716,9 @@
     chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
     const imgData=chatImgB64;
     inp.value='';inp.style.height='auto';removeChatImage();renderChat();
-    const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent=lang==='ko'?'입력 중...':'Typing...';el.appendChild(tp);scrollChatBottom();
+    const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent=lang==='en'?'입력 중...':'Typing...';el.appendChild(tp);scrollChatBottom();
     try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,first_name:userName||"User",message:txt||'[photo]',geo:'kr',lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_accuracy:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
-    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||(lang==='ko'?'오류가 발생했습니다. 다시 보내주세요 🙏':'Something went wrong, try again 🙏');if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:lang==='ko'?'네트워크 오류, 다시 보내주세요 🔄':'Network error, try again 🔄',tm:hhmm(new Date())});}
+    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||(lang==='en'?'오류가 발생했습니다. 다시 보내주세요 🙏':'Something went wrong, try again 🙏');if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:lang==='en'?'네트워크 오류, 다시 보내주세요 🔄':'Network error, try again 🔄',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
@@ -765,11 +765,11 @@
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 일일 연속',text:lang==='ko'?'매일 앱을 열어 연속 기록을 쌓으세요. 길수록 VIP 레벨이 올라갑니다!':'Open the app daily to build your streak. Longer streak = better VIP level!'},
-      vip:{title:'🏅 VIP 등급',text:'AI 서버는 실제 비용이 듭니다.\n입금액이 계정 리소스를 결정합니다.\n\n🥉 브론즈 (RM 80,000) — 3 시그널/일, 85%\n\n🥈 실버 (RM 90,000) — 5 시그널/일, 89%\n\n🥇 골드 (RM 105,000) — 10 시그널/일, 93%\n\n💎 다이아몬드 (RM 120,000) — 무제한, 96%\n\n👑 플래티넘 (RM 135,000) — 98% + Zach 개인 알림\n\n더 높은 입금 → 더 많은 리소스 → 더 많은 시그널 → 더 큰 수익 🤝'},
-      profit:{title:'💰 오늘의 수익',text:lang==='ko'?'오늘 따라한 시그널의 총 수익입니다. 매일 자정에 초기화됩니다.':'Total profit from signals followed today. Resets at midnight.'},
-      bonus:{title:'🎁 일일 보너스',text:lang==='ko'?'24시간마다 한 번 받을 수 있습니다. 무료 VIP 시그널을 제공합니다.':'Claim once every 24 hours for a free VIP signal.'},
-      winrate:{title:'📊 승률',text:lang==='ko'?'이 게임의 AI 예측 역사적 정확도입니다.':'Historical accuracy of AI predictions for this game.'}
+      streak:{title:'🔥 일일 연속',text:lang==='en'?'매일 앱을 열어 연속 기록을 쌓으세요. 길수록 VIP 레벨이 올라갑니다!':'Open the app daily to build your streak. Longer streak = better VIP level!'},
+      vip:{title:'🏅 VIP 등급',text:'AI 서버는 실제 비용이 듭니다.\n입금액이 계정 리소스를 결정합니다.\n\n🥉 Bronze (RM 80,000) — 3 시그널/일, 85%\n\n🥈 Silver (RM 90,000) — 5 시그널/일, 89%\n\n🥇 Gold (RM 105,000) — 10 시그널/일, 93%\n\n💎 Diamond (RM 120,000) — 무제한, 96%\n\n👑 Platinum (RM 135,000) — 98% + Zach 개인 알림\n\n더 높은 입금 → 더 많은 리소스 → 더 많은 시그널 → 더 큰 수익 🤝'},
+      profit:{title:'💰 오늘의 수익',text:lang==='en'?'오늘 따라한 시그널의 총 수익입니다. 매일 자정에 초기화됩니다.':'Total profit from signals followed today. Resets at midnight.'},
+      bonus:{title:'🎁 일일 보너스',text:lang==='en'?'24시간마다 한 번 받을 수 있습니다. 무료 VIP 시그널을 제공합니다.':'Claim once every 24 hours for a free VIP signal.'},
+      winrate:{title:'📊 승률',text:lang==='en'?'이 게임의 AI 예측 역사적 정확도입니다.':'Historical accuracy of AI predictions for this game.'}
     };
     function showHelp(key){
       const d=HELP_DATA[key];if(!d)return;
