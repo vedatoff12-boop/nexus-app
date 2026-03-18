@@ -846,23 +846,31 @@
       },1500+Math.random()*2000);
     }
     function stopRoomDrip(){}
-    function renderLiveRoom(skipDripStart){
+    let roomRenderedCount=0;
+    function buildMsgEl(m,i){
+      const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
+      const rt=roomReplyTarget(m.text); const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
+      const bi=roomBadgeIcon(m.badge);
+      const reactHtml=m.role!=='user'?getReactions(i):'';
+      el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${reactHtml}`;
+      return el;
+    }
+    function renderLiveRoom(appendOnly){
       seedLiveRoomLocal();
       const feed=document.getElementById('liveRoomFeed'); if(!feed) return;
       const lock=document.getElementById('liveRoomLock'); const comp=document.getElementById('liveRoomComposer');
       const unlocked=liveRoomUnlocked();
       lock.style.display=unlocked?'none':'block'; comp.style.display=unlocked?'flex':'none';
-      feed.innerHTML='';
-      liveRoomFeed.forEach((m,i)=>{
-        const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
-        const rt=roomReplyTarget(m.text); const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
-        const bi=roomBadgeIcon(m.badge);
-        const reactHtml=m.role!=='user'?getReactions(i):'';
-        el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${reactHtml}`;
-        feed.appendChild(el);
-      });
+      if(!appendOnly||roomRenderedCount===0){
+        feed.innerHTML='';roomRenderedCount=0;
+        for(let i=0;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i],i));}
+        roomRenderedCount=liveRoomFeed.length;
+      } else {
+        for(let i=roomRenderedCount;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i],i));}
+        roomRenderedCount=liveRoomFeed.length;
+      }
       feed.scrollTop=feed.scrollHeight;
-      if(!skipDripStart)startRoomDrip();
+      startRoomDrip();
     }
 
     function startLiveRoomPolling(){
