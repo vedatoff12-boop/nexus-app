@@ -749,14 +749,15 @@
     let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false,liveRoomPollTimer=null;
     function liveRoomUnlocked(){return getVipTierIdx()>=2;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
-    function roomTimeFromNow(minsAgo){const d=new Date(Date.now()-minsAgo*60000);return hhmm(d);}
+    function roomTimeFromNow(minsAgo){const d=new Date(Date.now()-minsAgo*60000);return d.toISOString();}
+    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
     function seedLiveRoomLocal(){
       if(liveRoomFeed.length) return;
       const msgs=[];let mins=320;
       for(let i=0;i<18;i++){
         mins-=Math.max(3,Math.floor(Math.random()*26));
         const npc=randomOf(LIVE_ROOM_NPCS);
-        msgs.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),time:roomTimeFromNow(Math.max(1,mins)),role:'npc'});
+        msgs.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),createdAt:roomTimeFromNow(Math.max(1,mins)),role:'npc'});
       }
       liveRoomFeed=msgs.slice(-18);
     }
@@ -773,7 +774,7 @@
       const sep=document.createElement('div'); sep.className='room-day-sep'; sep.textContent='Live room'; feed.appendChild(sep);
       liveRoomFeed.forEach(m=>{
         const el=document.createElement('div'); el.className='room-msg'+(m.role==='user'?' user':'');
-        el.innerHTML=`<div class="room-topline"><span class="room-name">${m.author}</span>${m.badge?`<span class="room-badge ${roomBadgeClass(m.badge)}">${m.badge}</span>`:''}</div><div class="room-text">${linkify((m.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</div><div class="room-time">${m.time||''}</div>`;
+        el.innerHTML=`<div class="room-topline"><span class="room-name">${m.author}</span>${m.badge?`<span class="room-badge ${roomBadgeClass(m.badge)}">${m.badge}</span>`:''}</div><div class="room-text">${linkify((m.text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</div><div class="room-time">${roomRelTime(m.createdAt)}</div>`;
         feed.appendChild(el);
       });
       feed.scrollTop=feed.scrollHeight;
@@ -788,7 +789,7 @@
       if(liveRoomLoading||!tgUserId) return; liveRoomLoading=true;
       try{
         const r=await fetch(LIVE_ROOM_FEED_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:'my',tier:getVipTier().name,total_deposit:parseInt(S.get('totalDep')||'0')})});
-        if(r.ok){const d=await r.json(); if(d&&Array.isArray(d.messages)&&d.messages.length){liveRoomFeed=d.messages.map(m=>({author:m.author_name||m.author||'User',badge:m.author_badge||'',text:m.message||m.text||'',time:m.time||hhmm(new Date(m.created_at||Date.now())),role:m.author_type==='user'?'user':'npc'})); liveRoomLoaded=true; renderLiveRoom();}}
+        if(r.ok){const d=await r.json(); if(d&&Array.isArray(d.messages)&&d.messages.length){liveRoomFeed=d.messages.map(m=>({author:m.author_name||m.author||'User',badge:m.author_badge||'',text:m.message||m.text||'',createdAt:m.created_at||Date.now(),role:m.author_type==='user'?'user':'npc'})); liveRoomLoaded=true; renderLiveRoom();}}
       }catch(e){}
       finally{liveRoomLoading=false;}
     }
@@ -796,12 +797,12 @@
       if(liveRoomSending||!liveRoomUnlocked()) return;
       const inp=document.getElementById('liveRoomInput'); const txt=(inp.value||'').trim(); if(!txt) return;
       liveRoomSending=true; document.getElementById('liveRoomSend').disabled=true;
-      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,time:hhmm(new Date()),role:'user'}); inp.value=''; renderLiveRoom();
+      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,createdAt:new Date().toISOString(),role:'user'}); inp.value=''; renderLiveRoom();
       try{
         const r=await fetch(LIVE_ROOM_SEND_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,geo:'my',message:txt,first_name:userName||'User',tier:getVipTier().name,total_deposit:parseInt(S.get('totalDep')||'0')})});
-        if(r.ok){const d=await r.json(); if(d&&Array.isArray(d.messages)&&d.messages.length){d.messages.forEach(m=>liveRoomFeed.push({author:m.author_name||m.author||'User',badge:m.author_badge||'',text:m.message||m.text||'',time:m.time||hhmm(new Date(m.created_at||Date.now())),role:m.author_type==='user'?'user':'npc'}));}}
+        if(r.ok){const d=await r.json(); if(d&&Array.isArray(d.messages)&&d.messages.length){d.messages.forEach(m=>liveRoomFeed.push({author:m.author_name||m.author||'User',badge:m.author_badge||'',text:m.message||m.text||'',createdAt:m.created_at||Date.now(),role:m.author_type==='user'?'user':'npc'}));}}
       }catch(e){
-        setTimeout(()=>{liveRoomFeed.push({author:randomOf(LIVE_ROOM_NPCS).name,badge:randomOf(LIVE_ROOM_NPCS).badge,text:randomOf(['nice one 😂','same here bro','room was on fire today','that was clean','not bad at all']),time:hhmm(new Date()),role:'npc'}); renderLiveRoom();},800);
+        setTimeout(()=>{const npc=randomOf(LIVE_ROOM_NPCS);liveRoomFeed.push({author:npc.name,badge:npc.badge,text:randomOf(['nice one 😂','same here bro','room was on fire today','that was clean','not bad at all']),createdAt:new Date().toISOString(),role:'npc'}); renderLiveRoom();},800);
       }
       renderLiveRoom(); liveRoomSending=false; document.getElementById('liveRoomSend').disabled=false;
     }
