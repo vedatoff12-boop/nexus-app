@@ -765,55 +765,75 @@
 
     // CHAT
     const LIVE_ROOM_NPCS=[
-      {name:'harith.my',badge:'Gold'},{name:'⚡jihoon',badge:'Diamond'},{name:'carlos_m',badge:'Gold'},{name:'lucía🔥',badge:'Platinum'},
-      {name:'민재',badge:'Diamond'},{name:'sean.p',badge:'Gold'},{name:'준호⚡',badge:'Gold'},{name:'mateo',badge:'Gold'},
-      {name:'azmi_99',badge:'Gold'},{name:'수현',badge:'Gold'},{name:'priya✨',badge:'Diamond'},{name:'farhan.k',badge:'Gold'},
-      {name:'지훈',badge:'Diamond'},{name:'elena_',badge:'Gold'},{name:'raj.k',badge:'Gold'},{name:'도윤',badge:'Gold'},
-      {name:'diego🎯',badge:'Gold'},{name:'hafiz',badge:'Gold'},{name:'alex.r',badge:'Platinum'},{name:'wing_88',badge:'Gold'},
-      {name:'darren',badge:'Gold'},{name:'최민수',badge:'Gold'},{name:'miguel_',badge:'Gold'},{name:'arjun',badge:'Gold'},
-      {name:'siti.n',badge:'Diamond'},{name:'김현우',badge:'Gold'},{name:'aarav',badge:'Gold'},{name:'nisa🇲🇾',badge:'Gold'}
+      {name:'harith.my',badge:'Gold',lang:'en'},{name:'⚡jihoon',badge:'Diamond',lang:'kr'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Platinum',lang:'es'},
+      {name:'민재',badge:'Diamond',lang:'kr'},{name:'sean.p',badge:'Gold',lang:'en'},{name:'준호⚡',badge:'Gold',lang:'kr'},{name:'mateo',badge:'Gold',lang:'es'},
+      {name:'azmi_99',badge:'Gold',lang:'en'},{name:'수현',badge:'Gold',lang:'kr'},{name:'priya✨',badge:'Diamond',lang:'en'},{name:'farhan.k',badge:'Gold',lang:'en'},
+      {name:'지훈',badge:'Diamond',lang:'kr'},{name:'elena_',badge:'Gold',lang:'es'},{name:'raj.k',badge:'Gold',lang:'en'},{name:'도윤',badge:'Gold',lang:'kr'},
+      {name:'diego🎯',badge:'Gold',lang:'es'},{name:'hafiz',badge:'Gold',lang:'en'},{name:'alex.r',badge:'Platinum',lang:'en'},{name:'wing_88',badge:'Gold',lang:'en'},
+      {name:'darren',badge:'Gold',lang:'en'},{name:'최민수',badge:'Gold',lang:'kr'},{name:'miguel_',badge:'Gold',lang:'es'},{name:'arjun',badge:'Gold',lang:'en'},
+      {name:'siti.n',badge:'Diamond',lang:'en'},{name:'김현우',badge:'Gold',lang:'kr'},{name:'aarav',badge:'Gold',lang:'en'},{name:'nisa🇲🇾',badge:'Gold',lang:'en'}
     ];
-    const LIVE_ROOM_SEED=[
-      '💰💰','gg','ㅋㅋㅋ','nice','lol same','clean','🔥','wtf','gg bro','niceee',
-      'yooo','ez','대박','lets go','bruh','😭😭','W','lfg','no way','facts',
-      'bro 💀','insane','terbaik','genial','ㅋㅋ 진짜','나도','same here','real','big W',
-      'zach cooked 🔥','who caught that??','@⚡jihoon bro how','gg room','that was fast',
-      'balloon 4.6x 잡음','mines 3 row straight 💰','aviator 2.1x baru lepas','chicken road again lol',
-      'JetX 3.2x 터짐 ㅋㅋ','ese crash de 5.8x fue loco','penalty was clean','balloon naik gila',
-      '누가 2.4x 탔어?','that 6x was insane','ayer no pero hoy sí 🙌','crash timing improving fr',
-      '@carlos_m entry tadi solid','오늘 수익 괜찮다','la racha sigue 💪','just hit gold 🥇',
-      'baru masuk room best gila','어제보다 낫다','primer día y ya profit','3 wins back to back',
-      'siapa dapat signal?','신호 정확했어','hoy ganamos','mines limpió 💰',
+    const SEED_EN=[
+      '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
+      'bro 💀','insane','terbaik','same here','real','big W','zach cooked 🔥','who caught that??','gg room','that was fast',
+      'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
+      'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
       'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
-      '승률 괜찮네','esto pegó bien','bhai nice one','terbaik hari ini',
       'room was dead then boom 💸','diamond room moves fast','quiet then 3 straight W','late entry but still profit',
-      'balloon터짐 ㄹㅇ','@priya✨ u saw that right','@민재 how bro','lol i was sleeping and missed it 😭',
-      'woke up to profit','ese fue gratis','free money fr','RM covered today',
-      '₩80k 달성 ㅋㅋ','otro día otro profit','kena 5x tadi gila','@lucía🔥 nice call',
-      'told yall','called it','봤지?','dije que iba a pegar','kan dah cakap'
+      'lol i was sleeping and missed it 😭','woke up to profit','free money fr','RM covered today',
+      'told yall','called it','not bad at all','baru masuk room best gila','kena 5x tadi gila','siapa dapat signal?'
+    ];
+    const SEED_KR=[
+      'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
+      '오늘 수익 괜찮다','어제보다 낫다','신호 정확했어','승률 괜찮네','balloon터짐 ㄹㅇ','봤지?',
+      '₩80k 달성 ㅋㅋ','오늘 하루 좋았다','mines 3연속 💰','진짜 미쳤다','이건 real','방금 gold 달성 🥇',
+      'crash 타이밍 좋았어','penalty 깔끔','chicken road ㅋㅋ','aviator 방금 터짐','nice','gg'
+    ];
+    const SEED_ES=[
+      'genial','otro día otro profit','la racha sigue 💪','primer día y ya profit','hoy ganamos',
+      'ese crash de 5.8x fue loco','esto pegó bien','ayer no pero hoy sí 🙌','mines limpió hoy 💰',
+      'dije que iba a pegar','ese fue gratis','balloon subió loco','penalty limpio','not bad','nice',
+      'JetX 3.2x acaba de pegar','crash timing mejorando','recién llegué y ya profit','gg','🔥','💰💰'
     ];
     let liveRoomFeed=[],liveRoomLoaded=false,liveRoomLoading=false,liveRoomSending=false,liveRoomPollTimer=null;
     function liveRoomUnlocked(){return getVipTierIdx()>=2;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
     function roomTimeFromNow(minsAgo){const d=new Date(Date.now()-minsAgo*60000);return d.toISOString();}
     function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
-    /* deterministic seeded random based on hour epoch — same results for same hour */
     function sRng(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
+    function pickText(npc,seed){
+      const lang=npc.lang||'en';
+      const r=sRng(seed);
+      if(lang==='kr'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_KR[Math.floor(sRng(seed+50)*SEED_KR.length)];}
+      if(lang==='es'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_ES[Math.floor(sRng(seed+50)*SEED_ES.length)];}
+      return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
+    }
+    /* absolute minute slots — each minute of the day has a deterministic message */
+    let lastSeedMinute=0;
     function seedLiveRoomLocal(){
-      if(liveRoomFeed.length) return;
-      const hourEpoch=Math.floor(Date.now()/3600000);
-      const msgs=[];
-      for(let i=0;i<48;i++){
-        const r1=sRng(hourEpoch*1000+i*7+1);
-        const r2=sRng(hourEpoch*1000+i*7+2);
-        const r3=sRng(hourEpoch*1000+i*7+3);
-        const npcIdx=Math.floor(r1*LIVE_ROOM_NPCS.length);
-        const txtIdx=Math.floor(r2*LIVE_ROOM_SEED.length);
-        const npc=LIVE_ROOM_NPCS[npcIdx];
-        const minsAgo=55-i*1.1+r3*0.5;
-        msgs.push({author:npc.name,badge:npc.badge,text:LIVE_ROOM_SEED[txtIdx],createdAt:roomTimeFromNow(Math.max(0.2,minsAgo)),role:'npc',reactions:[]});
+      const nowMin=Math.floor(Date.now()/60000);
+      if(liveRoomFeed.length && lastSeedMinute===nowMin) return;
+      if(!liveRoomFeed.length){
+        const msgs=[];
+        for(let i=0;i<48;i++){
+          const slotMin=nowMin-47+i;
+          const npcIdx=Math.floor(sRng(slotMin*7+1)*LIVE_ROOM_NPCS.length);
+          const npc=LIVE_ROOM_NPCS[npcIdx];
+          const ts=new Date(slotMin*60000).toISOString();
+          msgs.push({author:npc.name,badge:npc.badge,text:pickText(npc,slotMin*7+2),createdAt:ts,role:'npc',reactions:[]});
+        }
+        liveRoomFeed=msgs;
+        lastSeedMinute=nowMin;
+      } else if(nowMin>lastSeedMinute){
+        for(let m=lastSeedMinute+1;m<=nowMin;m++){
+          const npcIdx=Math.floor(sRng(m*7+1)*LIVE_ROOM_NPCS.length);
+          const npc=LIVE_ROOM_NPCS[npcIdx];
+          const ts=new Date(m*60000).toISOString();
+          liveRoomFeed.push({author:npc.name,badge:npc.badge,text:pickText(npc,m*7+2),createdAt:ts,role:'npc',reactions:[]});
+        }
+        if(liveRoomFeed.length>120)liveRoomFeed.splice(0,liveRoomFeed.length-120);
+        lastSeedMinute=nowMin;
       }
-      liveRoomFeed=msgs;
     }
     function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';if(x.includes('silver'))return '🥈';return '';}
     function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
@@ -861,8 +881,11 @@
     function dripOne(){
       const npc=randomOf(LIVE_ROOM_NPCS);
       showTypingBriefly(npc.name);
+      const lang=npc.lang||'en';
+      const pool=lang==='kr'?(Math.random()<0.3?SEED_EN:SEED_KR):lang==='es'?(Math.random()<0.3?SEED_EN:SEED_ES):SEED_EN;
+      const txt=pool[Math.floor(Math.random()*pool.length)];
       setTimeout(()=>{
-        liveRoomFeed.push({author:npc.name,badge:npc.badge,text:randomOf(LIVE_ROOM_SEED),createdAt:new Date().toISOString(),role:'npc',reactions:[]});
+        liveRoomFeed.push({author:npc.name,badge:npc.badge,text:txt,createdAt:new Date().toISOString(),role:'npc',reactions:[]});
         if(liveRoomFeed.length>120)liveRoomFeed.splice(0,liveRoomFeed.length-120);
         if(curTab==='liveRoom'){const el=document.getElementById('roomTyping');if(el)el.innerHTML='';renderLiveRoom(true);}
       },1500+Math.random()*2000);
@@ -892,6 +915,18 @@
       }
       feed.scrollTop=feed.scrollHeight;
       startRoomDrip();
+      startMinuteCheck();
+    }
+    let minuteCheckTimer=null;
+    function startMinuteCheck(){
+      if(minuteCheckTimer)return;
+      minuteCheckTimer=setInterval(()=>{
+        const nowMin=Math.floor(Date.now()/60000);
+        if(nowMin>lastSeedMinute){
+          seedLiveRoomLocal();
+          if(curTab==='liveRoom')renderLiveRoom(true);
+        }
+      },30000);
     }
 
     function startLiveRoomPolling(){
