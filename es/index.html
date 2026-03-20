@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Señales</title>
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#080c18;--bg2:#0d1324;--bg3:#111827;
@@ -260,9 +260,20 @@
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* SPLASH */
-    #splash{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 1s ease;}
-    .splash-text{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:#fff;opacity:0;animation:fadeUp 2.5s ease forwards;}
-    @keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}40%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+    #splash{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 40%,rgba(139,92,246,0.06) 0%,#000 70%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transition:opacity 1s ease;overflow:hidden;}
+    .splash-brand{font-family:'Space Grotesk','Outfit',sans-serif;font-weight:700;font-size:clamp(36px,10vw,52px);letter-spacing:0.08em;color:#fff;opacity:0;animation:brandIn 1.8s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;}
+    .splash-brand .ai{background:linear-gradient(135deg,#a78bfa,#7c3aed,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(139,92,246,0.4));}
+    @keyframes brandIn{0%{opacity:0;letter-spacing:0.3em;filter:blur(10px)}100%{opacity:1;letter-spacing:0.08em;filter:blur(0)}}
+    .splash-line{width:0;height:1px;margin:16px 0 14px;background:linear-gradient(90deg,transparent,rgba(139,92,246,0.35),transparent);animation:lineGrow 0.7s ease 1.6s forwards;}
+    @keyframes lineGrow{0%{width:0}100%{width:min(140px,36vw)}}
+    .splash-welcome{font-family:'Space Grotesk','Outfit',sans-serif;font-weight:400;font-size:clamp(13px,3.5vw,16px);letter-spacing:0.06em;color:rgba(255,255,255,0);animation:welcomeIn 0.8s ease 2s forwards;}
+    @keyframes welcomeIn{0%{color:rgba(255,255,255,0)}100%{color:rgba(255,255,255,0.55)}}
+    .splash-dots{display:flex;gap:5px;margin-top:28px;opacity:0;animation:dotsShow 0.5s ease 2.4s forwards;}
+    .splash-dots span{width:3px;height:3px;border-radius:50%;background:rgba(139,92,246,0.5);animation:dotBlink 1.4s ease infinite;}
+    .splash-dots span:nth-child(2){animation-delay:0.2s}
+    .splash-dots span:nth-child(3){animation-delay:0.4s}
+    @keyframes dotsShow{0%{opacity:0}100%{opacity:1}}
+    @keyframes dotBlink{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
 
     /* TUTORIAL */
     #tutOverlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:5000;pointer-events:none;opacity:0;transition:opacity .5s;display:none;}
@@ -414,7 +425,7 @@
     <div class="geo-sub">Elige para empezar</div>
     <div class="geo-grid" id="geoGrid"></div>
   </div>
-  <div id="splash"><div class="splash-text" id="splashName"></div></div>
+  <div id="splash"><div class="splash-brand">NEXUS<span class="ai">AI</span></div><div class="splash-line"></div><div class="splash-welcome" id="splashName"></div><div class="splash-dots"><span></span><span></span><span></span></div></div>
   <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">OMITIR</button></div>
   <div class="confetti-box" id="confettiBox"></div>
 
@@ -1072,7 +1083,7 @@ const LIVE_ROOM_NPCS=[
 
     // INIT
     window.onload=function(){
-      sName.textContent=`Hello, ${userName}`;
+      sName.textContent=`Welcome, ${userName}`;
       setTimeout(()=>{
         splash.style.opacity="0";
         setTimeout(()=>{
@@ -1080,7 +1091,7 @@ const LIVE_ROOM_NPCS=[
           initApp();
           setTimeout(()=>startTutorial(),500);
         },1000);
-      },2500);
+      },3200);
     };
   </script>
 </body>
