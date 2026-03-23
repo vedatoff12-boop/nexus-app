@@ -710,7 +710,7 @@
     let curTab='signals';
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
     if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';renderHome();}
+    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';checkMinesFree().then(()=>renderHome());}
     else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();}
     else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
 
@@ -786,8 +786,8 @@
       ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
         const g=T().g[k],wr=WIN_RATES[k]||88;
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
-        c.onclick=()=>handleGameClick(k,c);
-        const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':'';
+        if(k==='mines'&&minesFreeAvailable){c.onclick=()=>renderGame('mines');}else{c.onclick=()=>handleGameClick(k,c);}
+        const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':''; if(k==='mines'&&minesFreeAvailable){c.style.boxShadow='0 0 0 1px rgba(34,197,94,.45), 0 0 24px rgba(34,197,94,.18)';}
         c.style.position='relative';
         c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${k==='mines'&&minesFreeAvailable?'🎁 Free Signal':'Play'}</div></div>`;
         grid.appendChild(c);
@@ -800,7 +800,7 @@
       const d=await r.json();
       if(d.mines_free){minesFreeAvailable=true;S.set('mines_free','1');}
       else if(d.free_signal_claimed){minesFreeAvailable=false;S.set('mines_free','0');}
-      if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}}catch(e){}
+      if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(curTab==='signals')renderHome();}catch(e){}
     }
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
@@ -1033,7 +1033,7 @@ async function claimFreeSignal(){
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
     try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,first_name:userName||"User",message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_accuracy:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
     const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Hmm something glitched bro, send that again 🙏';if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}
-      if(d.free_signal_unlocked){minesFreeAvailable=true;S.set('mines_free','1');renderHome();}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Network hiccup bro, send that again 🔄',tm:hhmm(new Date())});}
+      if(d.free_signal_unlocked){minesFreeAvailable=true;S.set('mines_free','1');if(curTab==='signals')renderHome();}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Network hiccup bro, send that again 🔄',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
