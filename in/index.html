@@ -805,6 +805,7 @@
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
+      if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
@@ -815,9 +816,10 @@
       else if(k==='mines'&&d.mines_free){
         minesFreeAvailable=true;S.set('mines_free','1');if(el.contains(ld))el.removeChild(ld);renderGame(k);
       }else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
-      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
+      catch(e){if(el.contains(ld))el.removeChild(ld);if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}showLock(el);}
     }
     function showLock(el){
+      if(el.dataset.game==='mines' && minesFreeAvailable) return;
       if(el.querySelector('.lock-text'))return;
       const g=geo();
       const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
