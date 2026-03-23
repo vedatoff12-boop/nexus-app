@@ -859,7 +859,7 @@
         addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
-          if(minesFreeAvailable){minesFreeAvailable=false;S.set('mines_free','0');S.set('free_signal_used','1');if(timer)clearInterval(timer);btn.disabled=true;btn.textContent='Used';btn.onclick=()=>{box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free signal already used</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">Chat with Zach to unlock full access.</div></div>`;btn.disabled=true;btn.textContent='Used';};claimFreeSignal();setTimeout(()=>{renderHome();switchTab('chat');},3200);}}
+          if(minesFreeAvailable){minesFreeAvailable=false;S.set('mines_free','0');S.set('free_signal_used','1');if(timer)clearInterval(timer);btn.disabled=true;btn.textContent='Used';btn.onclick=()=>{box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free signal already used</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">Chat with Zach to unlock full access.</div></div>`;btn.disabled=true;btn.textContent='Used';};claimFreeSignal();setTimeout(()=>{renderHome();switchTab('chat');},60200);}}
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
@@ -892,7 +892,7 @@ async function claimFreeSignal(){
           <button onclick="this.parentElement.remove()" style="background:transparent;color:var(--muted);font-size:12px;font-weight:600;padding:8px 24px;border:none;cursor:pointer;margin-top:8px;font-family:inherit">Maybe later</button>
         `;
         document.body.appendChild(ov);
-      },3000);
+      },60000);
     }
 
     const LIVE_ROOM_NPCS=[
