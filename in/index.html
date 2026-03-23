@@ -1116,15 +1116,9 @@ async function claimFreeSignal(){
 
     // INIT
     window.onload=function(){
-      sName.textContent=`Hello, ${userName}`;
-      setTimeout(()=>{
-        splash.style.opacity="0";
-        setTimeout(()=>{
-          splash.style.display="none";
-          initApp();
-          setTimeout(()=>startTutorial(),500);
-        },1000);
-      },2500);
+      splash.style.display="none";
+      initApp();
+      setTimeout(()=>startTutorial(),500);
     };
   </script>
 </body>
