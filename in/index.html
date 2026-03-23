@@ -550,6 +550,8 @@
     let currentGeo='in'; S.set('user_geo','in');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-in';
+    const CLAIM_FREE_URL='https://n8nnexusai.uk/webhook/claim-free-signal-in';
+    let minesFreeAvailable=false;
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
@@ -785,12 +787,20 @@
         const g=T().g[k],wr=WIN_RATES[k]||88;
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
         c.onclick=()=>handleGameClick(k,c);
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Play</div></div>`;
+        const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':'';
+        c.style.position='relative';
+        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${k==='mines'&&minesFreeAvailable?'🎁 Free Signal':'Play'}</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
     }
-    function applyStatic(){renderHome();buildLangMenu();}
+    async function checkMinesFree(){
+      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
+      try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
+      const d=await r.json();if(d.mines_free)minesFreeAvailable=true;
+      if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}}catch(e){}
+    }
+    function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
@@ -799,7 +809,10 @@
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
+      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      else if(k==='mines'&&d.mines_free){
+        minesFreeAvailable=true;if(el.contains(ld))el.removeChild(ld);renderGame(k);
+      }else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
     function showLock(el){
@@ -841,7 +854,8 @@
         const v=genVal(k);try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
         addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
-        else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
+        else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
+          if(minesFreeAvailable){minesFreeAvailable=false;claimFreeSignal();}}
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
@@ -859,7 +873,25 @@
       nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ₹${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
     }
 
-const LIVE_ROOM_NPCS=[
+async function claimFreeSignal(){
+      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
+      try{await fetch(CLAIM_FREE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:String(uid)})});}catch(e){}
+      // Show overlay after short delay so they see the signal first
+      setTimeout(()=>{
+        const ov=document.createElement('div');
+        ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,12,24,0.95);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;backdrop-filter:blur(8px)';
+        ov.innerHTML=`
+          <div style="font-size:48px;margin-bottom:16px">🎁</div>
+          <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px">Free Signal Used!</div>
+          <div style="font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin-bottom:24px">That was your free Mines signal.<br>Want unlimited signals for all 6 games?<br><strong style="color:var(--gold)">Activate VIP in chat 💬</strong></div>
+          <button onclick="this.parentElement.remove();switchTab('chat')" style="background:var(--gold);color:#000;font-weight:800;font-size:14px;padding:12px 32px;border:none;border-radius:999px;cursor:pointer;font-family:inherit">Chat with Zach →</button>
+          <button onclick="this.parentElement.remove()" style="background:transparent;color:var(--muted);font-size:12px;font-weight:600;padding:8px 24px;border:none;cursor:pointer;margin-top:8px;font-family:inherit">Maybe later</button>
+        `;
+        document.body.appendChild(ov);
+      },3000);
+    }
+
+    const LIVE_ROOM_NPCS=[
 {name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Diamond',lang:'en'},
 {name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Platinum',lang:'en'},
 {name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Diamond',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
