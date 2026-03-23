@@ -812,7 +812,7 @@
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      if(d.allowed){S.set('free_signal_used','0');minesFreeAvailable=false;if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
       else if(k==='mines'&&d.mines_free){
         minesFreeAvailable=true;S.set('mines_free','1');if(el.contains(ld))el.removeChild(ld);renderGame(k);
       }else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
