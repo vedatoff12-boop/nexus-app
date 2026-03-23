@@ -260,7 +260,7 @@
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* SPLASH */
-    #splash{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 1s ease;}
+    #splash{display:none !important;}
     .splash-text{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:#fff;opacity:0;animation:fadeUp 2.5s ease forwards;}
     @keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}40%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
 
@@ -414,7 +414,7 @@
     <div class="geo-sub">Choose to get started</div>
     <div class="geo-grid" id="geoGrid"></div>
   </div>
-  <div id="splash"><div class="splash-text" id="splashName"></div></div>
+  <div id="splash" style="display:none !important;"><div class="splash-text" id="splashName"></div></div>
   <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">SKIP</button></div>
   <div class="confetti-box" id="confettiBox"></div>
 
