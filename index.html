@@ -550,8 +550,8 @@
     let currentGeo='in'; S.set('user_geo','in');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-in';
-    const CLAIM_FREE_URL='https://n8nnexusai.uk/webhook/claim-free-signal-in';
-    let minesFreeAvailable=(S.get('mines_free')==='1');
+    
+    let minesFreeAvailable=false;
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
@@ -789,7 +789,7 @@
         if(k==='mines'&&minesFreeAvailable){c.onclick=()=>renderGame('mines');}else{c.onclick=()=>handleGameClick(k,c);}
         const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':''; if(k==='mines'&&minesFreeAvailable){c.style.boxShadow='0 0 0 1px rgba(34,197,94,.45), 0 0 24px rgba(34,197,94,.18)';}
         c.style.position='relative';
-        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${k==='mines'&&minesFreeAvailable?'🎁 Free Signal':'Play'}</div></div>`;
+        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${'Play'}</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
@@ -798,8 +798,8 @@
       const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
-      if(d.mines_free){minesFreeAvailable=true;S.set('mines_free','1');S.set('free_signal_used','0');}
-      else if(d.free_signal_claimed){minesFreeAvailable=false;S.set('mines_free','0');}
+      
+      
       if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(curTab==='signals')renderHome();}catch(e){}
     }
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
@@ -812,9 +812,8 @@
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){S.set('free_signal_used','0');minesFreeAvailable=false;if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
-      else if(k==='mines'&&d.mines_free){
-        minesFreeAvailable=true;S.set('mines_free','1');if(el.contains(ld))el.removeChild(ld);renderGame(k);
+      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      
       }else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}showLock(el);}
     }
@@ -859,11 +858,11 @@
         addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
-          if(minesFreeAvailable){minesFreeAvailable=false;S.set('mines_free','0');S.set('free_signal_used','1');if(timer)clearInterval(timer);const cdW2=document.getElementById('cdW');if(cdW2)cdW2.style.display='none';const btnRow=document.querySelector('.btnrow');if(btnRow){btnRow.innerHTML=`<button class="btn primary" disabled style="opacity:.55">Free signal used</button>`;}claimFreeSignal();}}
+          }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
-      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(k==='mines'&&S.get('free_signal_used')==='1'){box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free signal already used</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">Chat with Zach to unlock full access.</div></div>`;btn.disabled=true;btn.textContent='Used';return;}if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
+      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
 
     const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
@@ -877,105 +876,7 @@
       nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ₹${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
     }
 
-async function claimFreeSignal(){
-      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
-      try{await fetch(CLAIM_FREE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:String(uid)})});}catch(e){}
-      // Show overlay after short delay so they see the signal first
-      setTimeout(()=>{
-        const ov=document.createElement('div');
-        ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,12,24,0.95);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;backdrop-filter:blur(8px)';
-        ov.innerHTML=`
-          <div style="font-size:48px;margin-bottom:16px">🎁</div>
-          <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px">Free Signal Used!</div>
-          <div style="font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin-bottom:24px">That was your free Mines signal.<br>Want unlimited signals for all 6 games?<br><strong style="color:var(--gold)">Activate VIP in chat 💬</strong></div>
-          <button onclick="this.parentElement.remove();switchTab('chat')" style="background:var(--gold);color:#000;font-weight:800;font-size:14px;padding:12px 32px;border:none;border-radius:999px;cursor:pointer;font-family:inherit">Chat with Zach →</button>
-          <button onclick="this.parentElement.remove()" style="background:transparent;color:var(--muted);font-size:12px;font-weight:600;padding:8px 24px;border:none;cursor:pointer;margin-top:8px;font-family:inherit">Maybe later</button>
-        `;
-        document.body.appendChild(ov);
-      },60000);
-    }
-
-    const LIVE_ROOM_NPCS=[
-{name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Diamond',lang:'en'},
-{name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Platinum',lang:'en'},
-{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Diamond',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
-{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},
-{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'infinityGod1',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},
-{name:'Ceo Dugem',badge:'Platinum',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'Panjang',badge:'Gold',lang:'en'},
-{name:'Shionys',badge:'Gold',lang:'en'},{name:'Aaron',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Michael',badge:'Gold',lang:'en'},
-{name:'Ryan',badge:'Gold',lang:'en'},{name:'Shawn',badge:'Gold',lang:'en'},
-{name:'민준',badge:'Gold',lang:'kr'},{name:'가즈아 🚀',badge:'Diamond',lang:'kr'},{name:'지훈_99',badge:'Gold',lang:'kr'},{name:'김태형',badge:'Gold',lang:'kr'},
-{name:'유나✨',badge:'Gold',lang:'kr'},{name:'서준',badge:'Platinum',lang:'kr'},{name:'현우',badge:'Gold',lang:'kr'},{name:'잭팟',badge:'Diamond',lang:'kr'},
-{name:'민지',badge:'Gold',lang:'kr'},{name:'하늘',badge:'Gold',lang:'kr'},{name:'연우',badge:'Gold',lang:'kr'},{name:'비트보이',badge:'Gold',lang:'kr'},
-{name:'빅쇼트',badge:'Gold',lang:'kr'},{name:'윤서',badge:'Gold',lang:'kr'},{name:'럭키가이',badge:'Diamond',lang:'kr'},{name:'풀매수',badge:'Gold',lang:'kr'},
-{name:'승리',badge:'Gold',lang:'kr'},{name:'은우',badge:'Gold',lang:'kr'},{name:'곰돌이 🐻',badge:'Gold',lang:'kr'},{name:'킹갓',badge:'Diamond',lang:'kr'},
-{name:'하준',badge:'Gold',lang:'kr'},{name:'소희',badge:'Gold',lang:'kr'},{name:'밤하늘 🌌',badge:'Gold',lang:'kr'},{name:'동글이',badge:'Gold',lang:'kr'},{name:'준서',badge:'Gold',lang:'kr'},
-{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Platinum',lang:'es'},
-{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Diamond',lang:'es'},
-{name:'pablo.r',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},
-{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Platinum',lang:'es'}
-];
-    const SEED_EN=[
-      '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
-      'bro 💀','insane','terbaik','same here','real','big W','zach cooked 🔥','who caught that??','gg room','that was fast',
-      'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
-      'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
-      'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
-      'room was dead then boom 💸','diamond room moves fast','quiet then 3 straight W','late entry but still profit',
-      'lol i was sleeping and missed it 😭','woke up to profit','free money fr','told yall','called it','not bad at all'
-    ];
-    const SEED_KR=[
-      'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
-      '오늘 수익 괜찮다','어제보다 낫다','신호 정확했어','승률 괜찮네','balloon터짐 ㄹㅇ','봤지?',
-      '₩80k 달성 ㅋㅋ','오늘 하루 좋았다','mines 3연속 💰','진짜 미쳤다','이건 real','방금 gold 달성 🥇',
-      'crash 타이밍 좋았어','penalty 깔끔','chicken road ㅋㅋ','aviator 방금 터짐','nice','gg'
-    ];
-    const SEED_ES=[
-      'genial','otro día otro profit','la racha sigue 💪','primer día y ya profit','hoy ganamos',
-      'ese crash de 5.8x fue loco','esto pegó bien','ayer no pero hoy sí 🙌','mines limpió hoy 💰',
-      'dije que iba a pegar','ese fue gratis','balloon subió loco','penalty limpio','not bad','nice',
-      'JetX 3.2x acaba de pegar','crash timing mejorando','recién llegué y ya profit','gg','🔥','💰💰'
-    ];
-    let liveRoomFeed=[];
-    function liveRoomUnlocked(){return getVipTierIdx()>=2;}
-    function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
-    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
-    function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
-    function pickText(npc,seed){
-      const lang=npc.lang||'en';const r=sRng(seed);
-      if(lang==='kr'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_KR[Math.floor(sRng(seed+50)*SEED_KR.length)];}
-      if(lang==='es'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_ES[Math.floor(sRng(seed+50)*SEED_ES.length)];}
-      return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
-    }
-    const SLOT_SEC=8;
-    function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
-    const REPLY_EN=['nice','facts','same bro','real','gg','lol','fr fr','W','big W','no way 😂','true','yep','100%','agreed','this ^^'];
-    const REPLY_KR=['ㅋㅋㅋ','ㄹㅇ','나도','진짜','대박','ㅇㅇ','맞아','ㅋㅋ 인정','그거 맞음','ㅇㅈ'];
-    const REPLY_ES=['jaja','tal cual','real','eso','sí bro','facts','exacto','jajaja','100%','lo mismo'];
-    function pickReply(npc,seed){const lang=npc.lang||'en';const pool=lang==='kr'?REPLY_KR:lang==='es'?REPLY_ES:REPLY_EN;return pool[Math.floor(sRng(seed)*pool.length)];}
-    function msgForSlot(slot){
-      const npcIdx=Math.floor(sRng(slot*7+1)*LIVE_ROOM_NPCS.length);const npc=LIVE_ROOM_NPCS[npcIdx];
-      const ts=new Date(slot*SLOT_SEC*1000).toISOString();
-      const isReply=sRng(slot*13+5)<0.28;
-      if(isReply){const prevNpcIdx=Math.floor(sRng((slot-1)*7+1)*LIVE_ROOM_NPCS.length);const prevNpc=LIVE_ROOM_NPCS[prevNpcIdx];return {author:npc.name,badge:npc.badge,text:'@'+prevNpc.name+' '+pickReply(npc,slot*7+9),createdAt:ts,role:'npc',reactions:[]};}
-      return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
-    }
-    let lastSlot=0;
-    function seedLiveRoomLocal(){
-      const now=slotNow();
-      if(liveRoomFeed.length&&lastSlot===now)return;
-      if(!liveRoomFeed.length){for(let i=0;i<80;i++){liveRoomFeed.push(msgForSlot(now-80+1+i));}lastSlot=now;}
-      else if(now>lastSlot){for(let s=lastSlot+1;s<=now;s++){liveRoomFeed.push(msgForSlot(s));}if(liveRoomFeed.length>150)liveRoomFeed.splice(0,liveRoomFeed.length-150);lastSlot=now;}
-    }
-    function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';return '';}
-    function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
-    function roomReplyTarget(text){const m=String(text||'').match(/^@([^\s,:!?]+)/);return m?m[1]:'';}
-    const ROOM_REACT_EMOJIS=['🔥','💰','😂','🎯','👀','🙌','😭','🤑','💎'];
-    function renderReactions(msg){if(!msg.reactions||!msg.reactions.length)return '';return '<span class="room-reactions">'+msg.reactions.map(r=>`<span class="room-reaction">${r.e}<span class="rcount">${r.c}</span></span>`).join('')+'</span>';}
-    let reactDripTimer=null;
-    function startReactDrip(){
-      if(reactDripTimer)return;
-      reactDripTimer=setInterval(()=>{if(!liveRoomFeed.length)return;const idx=Math.floor(Math.random()*liveRoomFeed.length);const m=liveRoomFeed[idx];if(m.role==='user')return;if(!m.reactions)m.reactions=[];const em=ROOM_REACT_EMOJIS[Math.floor(Math.random()*ROOM_REACT_EMOJIS.length)];const existing=m.reactions.find(r=>r.e===em);if(existing){existing.c++;}else{if(m.reactions.length>=3)return;m.reactions.push({e:em,c:1});}if(curTab==='liveRoom'){const feed=document.getElementById('liveRoomFeed');if(!feed)return;const el=feed.children[idx];if(!el)return;const old=el.querySelector('.room-reactions');if(old)old.remove();const html=renderReactions(m);if(html){const tmp=document.createElement('span');tmp.innerHTML=html;el.appendChild(tmp.firstChild);}}},3500);
+},3500);
     }
     let roomTickerStarted=false,roomTickerTimer=null,roomTypingTimer=null;
     function startRoomTicker(){
@@ -1033,7 +934,7 @@ async function claimFreeSignal(){
     const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
     try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,first_name:userName||"User",message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_accuracy:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
     const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Hmm something glitched bro, send that again 🙏';if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}
-      if(d.free_signal_unlocked){minesFreeAvailable=true;S.set('mines_free','1');S.set('free_signal_used','0');if(curTab==='signals')renderHome();}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Network hiccup bro, send that again 🔄',tm:hhmm(new Date())});}
+      const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Network hiccup bro, send that again 🔄',tm:hhmm(new Date())});}
     renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
     document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
     document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
