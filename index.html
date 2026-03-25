@@ -875,6 +875,48 @@
       nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ₹${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
     }
 
+    let liveRoomFeed=[];
+    function liveRoomUnlocked(){return getVipTierIdx()>=2;}
+    function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
+    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
+    function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
+    function pickText(npc,seed){
+      const lang=npc.lang||'en';const r=sRng(seed);
+      if(lang==='kr'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_KR[Math.floor(sRng(seed+50)*SEED_KR.length)];}
+      if(lang==='es'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_ES[Math.floor(sRng(seed+50)*SEED_ES.length)];}
+      return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
+    }
+    const SLOT_SEC=8;
+    function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
+    const REPLY_EN=['nice','facts','same bro','real','gg','lol','fr fr','W','big W','no way 😂','true','yep','100%','agreed','this ^^'];
+    const REPLY_KR=['ㅋㅋㅋ','ㄹㅇ','나도','진짜','대박','ㅇㅇ','맞아','ㅋㅋ 인정','그거 맞음','ㅇㅈ'];
+    const REPLY_ES=['jaja','tal cual','real','eso','sí bro','facts','exacto','jajaja','100%','lo mismo'];
+    function pickReply(npc,seed){const lang=npc.lang||'en';const pool=lang==='kr'?REPLY_KR:lang==='es'?REPLY_ES:REPLY_EN;return pool[Math.floor(sRng(seed)*pool.length)];}
+    function msgForSlot(slot){
+      const npcIdx=Math.floor(sRng(slot*7+1)*LIVE_ROOM_NPCS.length);const npc=LIVE_ROOM_NPCS[npcIdx];
+      const ts=new Date(slot*SLOT_SEC*1000).toISOString();
+      const isReply=sRng(slot*13+5)<0.28;
+      if(isReply){const prevNpcIdx=Math.floor(sRng((slot-1)*7+1)*LIVE_ROOM_NPCS.length);const prevNpc=LIVE_ROOM_NPCS[prevNpcIdx];return {author:npc.name,badge:npc.badge,text:'@'+prevNpc.name+' '+pickReply(npc,slot*7+9),createdAt:ts,role:'npc',reactions:[]};}
+      return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
+    }
+    let lastSlot=0;
+    function seedLiveRoomLocal(){
+      const now=slotNow();
+      if(liveRoomFeed.length&&lastSlot===now)return;
+      if(!liveRoomFeed.length){for(let i=0;i<80;i++){liveRoomFeed.push(msgForSlot(now-80+1+i));}lastSlot=now;}
+      else if(now>lastSlot){for(let s=lastSlot+1;s<=now;s++){liveRoomFeed.push(msgForSlot(s));}if(liveRoomFeed.length>150)liveRoomFeed.splice(0,liveRoomFeed.length-150);lastSlot=now;}
+    }
+    function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('platinum'))return '👑';if(x.includes('diamond'))return '💎';if(x.includes('gold'))return '🥇';return '';}
+    function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
+    function roomReplyTarget(text){const m=String(text||'').match(/^@([^\s,:!?]+)/);return m?m[1]:'';}
+    const ROOM_REACT_EMOJIS=['🔥','💰','😂','🎯','👀','🙌','😭','🤑','💎'];
+    function renderReactions(msg){if(!msg.reactions||!msg.reactions.length)return '';return '<span class="room-reactions">'+msg.reactions.map(r=>`<span class="room-reaction">${r.e}<span class="rcount">${r.c}</span></span>`).join('')+'</span>';}
+    let reactDripTimer=null;
+    function startReactDrip(){
+      if(reactDripTimer)return;
+      reactDripTimer=setInterval(()=>{if(!liveRoomFeed.length)return;const idx=Math.floor(Math.random()*liveRoomFeed.length);const m=liveRoomFeed[idx];if(m.role==='user')return;if(!m.reactions)m.reactions=[];const em=ROOM_REACT_EMOJIS[Math.floor(Math.random()*ROOM_REACT_EMOJIS.length)];const existing=m.reactions.find(r=>r.e===em);if(existing){existing.c++;}else{if(m.reactions.length>=3)return;m.reactions.push({e:em,c:1});}if(curTab==='liveRoom'){const feed=document.getElementById('liveRoomFeed');if(!feed)return;const el=feed.children[idx];if(!el)return;const old=el.querySelector('.room-reactions');if(old)old.remove();const html=renderReactions(m);if(html){const tmp=document.createElement('span');tmp.innerHTML=html;el.appendChild(tmp.firstChild);}}},3500);
+    }
+
     let roomTickerStarted=false,roomTickerTimer=null,roomTypingTimer=null;
     function startRoomTicker(){
       if(roomTickerStarted)return;roomTickerStarted=true;startReactDrip();
