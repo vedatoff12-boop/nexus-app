@@ -875,6 +875,47 @@
       nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ₹${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
     }
 
+    const LIVE_ROOM_NPCS=[
+{name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Diamond',lang:'en'},
+{name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Platinum',lang:'en'},
+{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Diamond',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
+{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},
+{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'infinityGod1',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},
+{name:'Ceo Dugem',badge:'Platinum',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'Panjang',badge:'Gold',lang:'en'},
+{name:'Shionys',badge:'Gold',lang:'en'},{name:'Aaron',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Michael',badge:'Gold',lang:'en'},
+{name:'Ryan',badge:'Gold',lang:'en'},{name:'Shawn',badge:'Gold',lang:'en'},
+{name:'민준',badge:'Gold',lang:'kr'},{name:'가즈아 🚀',badge:'Diamond',lang:'kr'},{name:'지훈_99',badge:'Gold',lang:'kr'},{name:'김태형',badge:'Gold',lang:'kr'},
+{name:'유나✨',badge:'Gold',lang:'kr'},{name:'서준',badge:'Platinum',lang:'kr'},{name:'현우',badge:'Gold',lang:'kr'},{name:'잭팟',badge:'Diamond',lang:'kr'},
+{name:'민지',badge:'Gold',lang:'kr'},{name:'하늘',badge:'Gold',lang:'kr'},{name:'연우',badge:'Gold',lang:'kr'},{name:'비트보이',badge:'Gold',lang:'kr'},
+{name:'빅쇼트',badge:'Gold',lang:'kr'},{name:'윤서',badge:'Gold',lang:'kr'},{name:'럭키가이',badge:'Diamond',lang:'kr'},{name:'풀매수',badge:'Gold',lang:'kr'},
+{name:'승리',badge:'Gold',lang:'kr'},{name:'은우',badge:'Gold',lang:'kr'},{name:'곰돌이 🐻',badge:'Gold',lang:'kr'},{name:'킹갓',badge:'Diamond',lang:'kr'},
+{name:'하준',badge:'Gold',lang:'kr'},{name:'소희',badge:'Gold',lang:'kr'},{name:'밤하늘 🌌',badge:'Gold',lang:'kr'},{name:'동글이',badge:'Gold',lang:'kr'},{name:'준서',badge:'Gold',lang:'kr'},
+{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Platinum',lang:'es'},
+{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Diamond',lang:'es'},
+{name:'pablo.r',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},
+{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Platinum',lang:'es'}
+];
+    const SEED_EN=[
+      '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
+      'bro 💀','insane','terbaik','same here','real','big W','zach cooked 🔥','who caught that??','gg room','that was fast',
+      'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
+      'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
+      'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
+      'room was dead then boom 💸','diamond room moves fast','quiet then 3 straight W','late entry but still profit',
+      'lol i was sleeping and missed it 😭','woke up to profit','free money fr','told yall','called it','not bad at all'
+    ];
+    const SEED_KR=[
+      'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
+      '오늘 수익 괜찮다','어제보다 낫다','신호 정확했어','승률 괜찮네','balloon터짐 ㄹㅇ','봤지?',
+      '₩80k 달성 ㅋㅋ','오늘 하루 좋았다','mines 3연속 💰','진짜 미쳤다','이건 real','방금 gold 달성 🥇',
+      'crash 타이밍 좋았어','penalty 깔끔','chicken road ㅋㅋ','aviator 방금 터짐','nice','gg'
+    ];
+    const SEED_ES=[
+      'genial','otro día otro profit','la racha sigue 💪','primer día y ya profit','hoy ganamos',
+      'ese crash de 5.8x fue loco','esto pegó bien','ayer no pero hoy sí 🙌','mines limpió hoy 💰',
+      'dije que iba a pegar','ese fue gratis','balloon subió loco','penalty limpio','not bad','nice',
+      'JetX 3.2x acaba de pegar','crash timing mejorando','recién llegué y ya profit','gg','🔥','💰💰'
+    ];
     let liveRoomFeed=[];
     function liveRoomUnlocked(){return getVipTierIdx()>=2;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
