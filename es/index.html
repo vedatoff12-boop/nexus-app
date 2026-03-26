@@ -260,7 +260,7 @@
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* SPLASH */
-    #splash{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 50% 40%,rgba(139,92,246,0.06) 0%,#000 70%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transition:opacity 1s ease;overflow:hidden;}
+    #splash{display:none !important;pointer-events:none !important;opacity:0 !important;visibility:hidden !important;}
     .splash-brand{font-family:'Space Grotesk','Outfit',sans-serif;font-weight:700;font-size:clamp(36px,10vw,52px);letter-spacing:0.08em;color:#fff;opacity:0;animation:brandIn 1.8s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;}
     .splash-brand .ai{background:linear-gradient(135deg,#a78bfa,#7c3aed,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(139,92,246,0.4));}
     @keyframes brandIn{0%{opacity:0;letter-spacing:0.3em;filter:blur(10px)}100%{opacity:1;letter-spacing:0.08em;filter:blur(0)}}
@@ -633,9 +633,9 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:89,desc:'5 señales/día, 89%'},
-      {name:'Silver',icon:'🥈',dep:80,sigs:15,acc:92,desc:'15 señales/día, 92%'},
-      {name:'Gold',icon:'🥇',dep:150,sigs:0,acc:95,desc:'Ilimitadas, 95%'}
+      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:89,desc:'5 signals/day, 89% accuracy'},
+      {name:'Silver',icon:'🥈',dep:80,sigs:15,acc:92,desc:'15 signals/day, 92% accuracy'},
+      {name:'Gold',icon:'🥇',dep:150,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySeñals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -855,25 +855,25 @@
     }
 
 const LIVE_ROOM_NPCS=[
-{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Platinum',lang:'es'},
-{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Diamond',lang:'es'},
+{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Gold',lang:'es'},
+{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Gold',lang:'es'},
 {name:'pablo.r',badge:'Gold',lang:'es'},{name:'andrés',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},
-{name:'camila✨',badge:'Diamond',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},
-{name:'laura_m',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'isabella',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Platinum',lang:'es'},
+{name:'camila✨',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},
+{name:'laura_m',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'isabella',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Gold',lang:'es'},
 {name:'fernanda',badge:'Gold',lang:'es'},{name:'ozan1290',badge:'Gold',lang:'es'},{name:'miguel_',badge:'Gold',lang:'es'},{name:'adrián',badge:'Gold',lang:'es'},
-{name:'paula',badge:'Gold',lang:'es'},{name:'álvaro',badge:'Diamond',lang:'es'},{name:'marta',badge:'Gold',lang:'es'},{name:'hugo',badge:'Gold',lang:'es'},
+{name:'paula',badge:'Gold',lang:'es'},{name:'álvaro',badge:'Gold',lang:'es'},{name:'marta',badge:'Gold',lang:'es'},{name:'hugo',badge:'Gold',lang:'es'},
 {name:'claudia',badge:'Gold',lang:'es'},{name:'david.r',badge:'Gold',lang:'es'},
-{name:'민준',badge:'Gold',lang:'kr'},{name:'가즈아 🚀',badge:'Diamond',lang:'kr'},{name:'지훈_99',badge:'Gold',lang:'kr'},{name:'김태형',badge:'Gold',lang:'kr'},
-{name:'유나✨',badge:'Gold',lang:'kr'},{name:'서준',badge:'Platinum',lang:'kr'},{name:'현우',badge:'Gold',lang:'kr'},{name:'잭팟',badge:'Diamond',lang:'kr'},
+{name:'민준',badge:'Gold',lang:'kr'},{name:'가즈아 🚀',badge:'Gold',lang:'kr'},{name:'지훈_99',badge:'Gold',lang:'kr'},{name:'김태형',badge:'Gold',lang:'kr'},
+{name:'유나✨',badge:'Gold',lang:'kr'},{name:'서준',badge:'Gold',lang:'kr'},{name:'현우',badge:'Gold',lang:'kr'},{name:'잭팟',badge:'Gold',lang:'kr'},
 {name:'민지',badge:'Gold',lang:'kr'},{name:'하늘',badge:'Gold',lang:'kr'},{name:'연우',badge:'Gold',lang:'kr'},{name:'비트보이',badge:'Gold',lang:'kr'},
-{name:'빅쇼트',badge:'Gold',lang:'kr'},{name:'윤서',badge:'Gold',lang:'kr'},{name:'럭키가이',badge:'Diamond',lang:'kr'},{name:'풀매수',badge:'Gold',lang:'kr'},
-{name:'승리',badge:'Gold',lang:'kr'},{name:'은우',badge:'Gold',lang:'kr'},{name:'곰돌이 🐻',badge:'Gold',lang:'kr'},{name:'킹갓',badge:'Diamond',lang:'kr'},
+{name:'빅쇼트',badge:'Gold',lang:'kr'},{name:'윤서',badge:'Gold',lang:'kr'},{name:'럭키가이',badge:'Gold',lang:'kr'},{name:'풀매수',badge:'Gold',lang:'kr'},
+{name:'승리',badge:'Gold',lang:'kr'},{name:'은우',badge:'Gold',lang:'kr'},{name:'곰돌이 🐻',badge:'Gold',lang:'kr'},{name:'킹갓',badge:'Gold',lang:'kr'},
 {name:'하준',badge:'Gold',lang:'kr'},{name:'소희',badge:'Gold',lang:'kr'},{name:'밤하늘 🌌',badge:'Gold',lang:'kr'},{name:'동글이',badge:'Gold',lang:'kr'},{name:'준서',badge:'Gold',lang:'kr'},
-{name:'Bossku',badge:'Gold',lang:'en'},{name:'Haziq_99',badge:'Diamond',lang:'en'},{name:'Audrey',badge:'Gold',lang:'en'},{name:'BennVibe777',badge:'Gold',lang:'en'},
-{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Platinum',lang:'en'},{name:'IMRAN',badge:'Diamond',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},
+{name:'Bossku',badge:'Gold',lang:'en'},{name:'Haziq_99',badge:'Gold',lang:'en'},{name:'Audrey',badge:'Gold',lang:'en'},{name:'BennVibe777',badge:'Gold',lang:'en'},
+{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Gold',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},
 {name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},
-{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'Ceo Dugem',badge:'Platinum',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},{name:'Sean',badge:'Gold',lang:'en'},
-{name:'Michael',badge:'Gold',lang:'en'},{name:'Ryan',badge:'Gold',lang:'en'},{name:'Alex',badge:'Diamond',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'}
+{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'Ceo Dugem',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},{name:'Sean',badge:'Gold',lang:'en'},
+{name:'Michael',badge:'Gold',lang:'en'},{name:'Ryan',badge:'Gold',lang:'en'},{name:'Alex',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'}
 ];
     const SEED_EN=[
       '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
@@ -1044,7 +1044,7 @@ const LIVE_ROOM_NPCS=[
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Racha Diaria',text:'Abre la app cada día para construir tu racha. Cuanto más larga, mejor tu nivel VIP — ¡mejor precisión de señales!'},
-      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real.\nTu depósito determina los recursos asignados a tu cuenta.\n\n🥉 Bronze (€50) — 3 señales/día, 85%\n\n🥈 Silver (€80) — 5 señales/día, 89%\n\n🥇 Gold (€150) — 10 señales/día, 93%\n\n💎 Gold (€85) — Ilimitadas, 96%\n\n👑 Gold (€100) — 98% + alertas personales de Zach\n\nMayor depósito → más recursos → más señales → mayores ganancias 🤝'},
+      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real.\nTu depósito determina los recursos asignados a tu cuenta.\n\n🥉 Bronze (€50) — 3 señales/día, 85%\n\n🥈 Silver (€80) — 5 signals/day, 89% accuracy\n\n🥇 Gold (€150) — 10 señales/día, 93%\n\n💎 Gold (€85) — Ilimitadas, 96%\n\n👑 Gold (€100) — 98% + alertas personales de Zach\n\nMayor depósito → más recursos → más señales → mayores ganancias 🤝'},
       profit:{title:'💰 Ganancias de Hoy',text:'Muestra el beneficio total de las señales que seguiste hoy. Se reinicia cada medianoche.'},
       bonus:{title:'🎁 Bono Diario',text:'Reclama una vez cada 24 horas. Te da una señal VIP gratis con ganancia garantizada.'},
       winrate:{title:'📊 Tasa de Acierto',text:'Precisión histórica de las predicciones AI para este juego. Basado en miles de rondas analizadas.'}
