@@ -471,13 +471,13 @@
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronce</div>
+              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
               <div class="vip-badge-acc" id="vipAcc2">89% PRECISIÓN</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
             <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥈 Plata</div>
+            <div class="vip-next-tier" id="vipNextTier">🥈 Silver</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
@@ -502,8 +502,8 @@
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Alcanza Oro para desbloquear el chat">
-              <div class="room-lock-hint">Mira la sala ahora · Los miembros Oro pueden unirse</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Alcanza Gold para desbloquear el chat">
+              <div class="room-lock-hint">Mira la sala ahora · Los miembros Gold pueden unirse</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
               <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
@@ -633,9 +633,9 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronce',icon:'🥉',dep:50,sigs:5,acc:89,desc:'5 señales/día, 89%'},
-      {name:'Plata',icon:'🥈',dep:80,sigs:15,acc:92,desc:'15 señales/día, 92%'},
-      {name:'Oro',icon:'🥇',dep:150,sigs:0,acc:95,desc:'Ilimitadas, 95%'}
+      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:89,desc:'5 señales/día, 89%'},
+      {name:'Silver',icon:'🥈',dep:80,sigs:15,acc:92,desc:'15 señales/día, 92%'},
+      {name:'Gold',icon:'🥇',dep:150,sigs:0,acc:95,desc:'Ilimitadas, 95%'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySeñals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -1044,7 +1044,7 @@ const LIVE_ROOM_NPCS=[
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Racha Diaria',text:'Abre la app cada día para construir tu racha. Cuanto más larga, mejor tu nivel VIP — ¡mejor precisión de señales!'},
-      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real.\nTu depósito determina los recursos asignados a tu cuenta.\n\n🥉 Bronce (€50) — 3 señales/día, 85%\n\n🥈 Plata (€60) — 5 señales/día, 89%\n\n🥇 Oro (€70) — 10 señales/día, 93%\n\n💎 Diamante (€85) — Ilimitadas, 96%\n\n👑 Platino (€100) — 98% + alertas personales de Zach\n\nMayor depósito → más recursos → más señales → mayores ganancias 🤝'},
+      vip:{title:'🏅 Nivel VIP',text:'Los servidores AI cuestan dinero real.\nTu depósito determina los recursos asignados a tu cuenta.\n\n🥉 Bronze (€50) — 3 señales/día, 85%\n\n🥈 Silver (€80) — 5 señales/día, 89%\n\n🥇 Gold (€150) — 10 señales/día, 93%\n\n💎 Gold (€85) — Ilimitadas, 96%\n\n👑 Gold (€100) — 98% + alertas personales de Zach\n\nMayor depósito → más recursos → más señales → mayores ganancias 🤝'},
       profit:{title:'💰 Ganancias de Hoy',text:'Muestra el beneficio total de las señales que seguiste hoy. Se reinicia cada medianoche.'},
       bonus:{title:'🎁 Bono Diario',text:'Reclama una vez cada 24 horas. Te da una señal VIP gratis con ganancia garantizada.'},
       winrate:{title:'📊 Tasa de Acierto',text:'Precisión histórica de las predicciones AI para este juego. Basado en miles de rondas analizadas.'}
