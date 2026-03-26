@@ -787,7 +787,7 @@
         if(k==='mines'&&minesFreeAvailable){c.onclick=()=>renderGame('mines');}else{c.onclick=()=>handleGameClick(k,c);}
         const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':''; if(k==='mines'&&minesFreeAvailable){c.style.boxShadow='0 0 0 1px rgba(34,197,94,.45), 0 0 24px rgba(34,197,94,.18)';}
         c.style.position='relative';
-        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${'Play'}</div></div>`;
+        const playLabel=(k==='mines'&&minesFreeAvailable)?'🎁 Free Signal':'Play';c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${playLabel}</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
@@ -796,10 +796,13 @@
       const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
-      
-      
+      if(d.mines_free&&!d.free_signal_claimed){minesFreeAvailable=true;S.set('mines_free','1');S.set('free_signal_used','0');}
+      else{minesFreeAvailable=false;S.set('mines_free','0');}
+      if(d.free_signal_claimed){S.set('free_signal_used','1');}
       if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(curTab==='signals')renderHome();}catch(e){}
     }
+    const CLAIM_FREE_URL='https://n8nnexusai.uk/webhook/claim-free-signal-in';
+    async function claimFreeSignal(){const uid=tgUserId||S.get('tg_user_id');if(!uid)return;try{await fetch(CLAIM_FREE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:String(uid)})});}catch(e){}}
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
@@ -859,7 +862,22 @@
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
-      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
+      if(k==='mines'&&minesFreeAvailable){
+        btn.textContent='🎁 Free Signal';btn.disabled=false;cdW.style.display='none';
+        let freeUsed=false;
+        btn.onclick=()=>{
+          if(freeUsed){
+            box.innerHTML='<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free Signal Used!</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">You\'ve used your free Mines signal.<br>Want unlimited signals for all 6 games?<br><strong style="color:var(--gold)">Tell Zach in chat you want more signals 💬</strong></div><button onclick="switchTab(\'chat\')" style="margin-top:14px;background:var(--gold);color:#000;font-weight:800;font-size:13px;padding:10px 24px;border:none;border-radius:999px;cursor:pointer;font-family:inherit">Chat with Zach →</button><br><button onclick="renderHome()" style="background:transparent;color:var(--muted);font-size:11px;font-weight:600;padding:8px 24px;border:none;cursor:pointer;margin-top:6px;font-family:inherit">Close</button></div>';
+            btn.disabled=true;btn.textContent='Used';
+            setTimeout(()=>{if(curTab==='signals')renderHome();},30000);
+            return;
+          }
+          showSig();freeUsed=true;
+          S.set('free_signal_used','1');minesFreeAvailable=false;S.set('mines_free','0');
+          claimFreeSignal();
+          btn.textContent='GET SIGNAL';
+        };
+      } else {if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};}
     }
 
     const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
