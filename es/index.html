@@ -1081,17 +1081,7 @@ const LIVE_ROOM_NPCS=[
     }
 
     // INIT
-    window.onload=function(){
-      sName.textContent=`Welcome, ${userName}`;
-      setTimeout(()=>{
-        splash.style.opacity="0";
-        setTimeout(()=>{
-          splash.style.display="none";
-          initApp();
-          setTimeout(()=>startTutorial(),500);
-        },1000);
-      },3200);
-    };
+    window.onload=function(){ initApp(); };
   </script>
 </body>
 </html>
