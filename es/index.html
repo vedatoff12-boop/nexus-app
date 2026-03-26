@@ -472,7 +472,7 @@
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
               <div class="vip-badge-tier" id="vipTier2">Bronce</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% PRECISIÓN</div>
+              <div class="vip-badge-acc" id="vipAcc2">89% PRECISIÓN</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
@@ -502,8 +502,8 @@
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Alcanza Gold para desbloquear el chat">
-              <div class="room-lock-hint">Mira la sala ahora · Los miembros Gold pueden unirse</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Alcanza Oro para desbloquear el chat">
+              <div class="room-lock-hint">Mira la sala ahora · Los miembros Oro pueden unirse</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
               <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
@@ -633,11 +633,9 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronce',icon:'🥉',dep:50,sigs:3,acc:85,desc:'3 señales/día, 85%'},
-      {name:'Plata',icon:'🥈',dep:60,sigs:5,acc:89,desc:'5 señales/día, 89%'},
-      {name:'Oro',icon:'🥇',dep:70,sigs:10,acc:93,desc:'10 señales/día, 93%'},
-      {name:'Diamante',icon:'💎',dep:85,sigs:0,acc:96,desc:'Ilimitadas, 96%'},
-      {name:'Platino',icon:'👑',dep:100,sigs:0,acc:98,desc:'98% + alertas de Zach'}
+      {name:'Bronce',icon:'🥉',dep:50,sigs:5,acc:89,desc:'5 señales/día, 89%'},
+      {name:'Plata',icon:'🥈',dep:80,sigs:15,acc:92,desc:'15 señales/día, 92%'},
+      {name:'Oro',icon:'🥇',dep:150,sigs:0,acc:95,desc:'Ilimitadas, 95%'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySeñals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
