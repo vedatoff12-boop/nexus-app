@@ -359,7 +359,7 @@
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
-    /* ── Live Room ── */
+    /* ── Ruang Live ── */
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
     .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
@@ -438,7 +438,7 @@
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Mau buka akses AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
         <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
@@ -450,7 +450,7 @@
         <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
-          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
+          
         </div>
       </div>
 
@@ -484,7 +484,7 @@
     <!-- TOP PLAYERS TAB -->
     <div id="tabLiveRoom" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Live Room</div>
+        <div class="live-room-label">Ruang Live</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
@@ -502,7 +502,7 @@
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Top Pemain</div><div class="top-header-sub">Papan peringkat mingguan — pemenang terbaik minggu ini</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -514,7 +514,7 @@
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
       <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Ruang Live</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Peringkat 100</span></button>
     </div>
   </div>
@@ -701,7 +701,7 @@
     if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
     else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';renderHome();}
     else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPemains();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -724,13 +724,13 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
+    const LANGS=[{id:"id",l:"ID"}];
     let lang='id'; S.set('aslang','id');
     function T(){return STR[lang]||STR.en;}
-    function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
+    function toggleLangMenu(){}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
-    function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
-    document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
+    function buildLangMenu(){}
+    document.addEventListener('click',e=>{});
 
     const STR={
       en:{cg:"Pilih game:",back:"Menu",lt:"AKSES TERKUNCI",lm:"⛔️ Daftar & kirim ID ke bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID 1xBet kamu tersambung ke sinyal.",s2:"Pilih game untuk AI signals.",s4:"Koefisien prediksi.",s5:"Tekan GET SIGNAL."},
@@ -764,7 +764,7 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Sinyal Terbaru</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
@@ -778,7 +778,7 @@
         c.onclick=()=>handleGameClick(k,c);
         const freeBadge='';
         c.style.position='relative';
-        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${k==='mines'&&minesFreeAvailable?'🎁 Free Signal':'Play'}</div></div>`;
+        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${k==='mines'&&minesFreeAvailable?'🎁 Free Signal':'Main'}</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
@@ -811,7 +811,7 @@
       if(el.dataset.game==='mines' && minesFreeAvailable) return;
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Daftar Sekarang →</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
@@ -837,7 +837,7 @@
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
           if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} sinyal/hari, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up Rp${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Batas server AI tercapai</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} sinyal/hari.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better akurasi.</div>${upgradeHint}</div>`;
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Batas server AI tercapai</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Server AI sedang padat memproses sinyal.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} sinyal/hari.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Deposit lebih tinggi = lebih banyak resource server<br>untuk akun kamu = lebih banyak sinyal + akurasi lebih tinggi.</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent='Batas server';btn.style.opacity='0.3';return true;
         }
         return false;
@@ -1010,7 +1010,7 @@ async function claimFreeSignal(){
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">Rp${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% akurasi</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div>';return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Mau buka akses AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div>';return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:userName||"User",geo:currentGeo})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
     async function sendChatMessage(){if(_sendLock)return;const now=Date.now();const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64)return;if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;_sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
@@ -1035,7 +1035,7 @@ async function claimFreeSignal(){
     function genTop(){
       const ws=getWeekSeed();
       const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
+      while(baseNames.length<100){baseNames.push(`Pemain${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
@@ -1054,7 +1054,7 @@ async function claimFreeSignal(){
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPemains(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Minggu ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // TUTORIAL
     const splash=document.getElementById("splash"),sName=document.getElementById("splashName"),overlay=document.getElementById("tutOverlay"),focusBox=document.getElementById("focusBox"),tutText=document.getElementById("tutText");let isSkipped=false;
