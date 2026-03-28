@@ -801,7 +801,6 @@
       if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(curTab==='signals')renderHome();}catch(e){}
     }
     
-    ,body:JSON.stringify({user_id:String(uid)})});}catch(e){}}
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
