@@ -784,7 +784,7 @@
         const g=T().g[k],wr=WIN_RATES[k]||88;
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
         c.onclick=()=>handleGameClick(k,c);
-        const freeBadge=''; if(k==='mines'&&minesFreeAvailable){c.style.boxShadow='0 0 0 1px rgba(34,197,94,.45), 0 0 24px rgba(34,197,94,.18)';}
+        const freeBadge='';
         c.style.position='relative';
         const playLabel='Play';c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${playLabel}</div></div>`;
         grid.appendChild(c);
@@ -814,7 +814,7 @@
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
       else{if(el.contains(ld))el.removeChild(ld);showLock(el);}
-      }catch(e){if(el.contains(ld))el.removeChild(ld);// free signal removedshowLock(el);}
+      }catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
     function showLock(el){
       if(el.dataset.game==='mines' && minesFreeAvailable) return;
