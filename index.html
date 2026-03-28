@@ -424,7 +424,7 @@
     <div class="daily-card">
       <div class="daily-card-icon">🎁</div>
       <div class="daily-card-title" id="dpTitle">Daily VIP Signal <span class="help-icon" onclick="event.stopPropagation();showHelp('bonus')">?</span></div>
-      <div class="daily-card-sub" id="dpSub">Claim your daily bonus and get a free VIP-level signal prediction!</div>
+      <div class="daily-card-sub" id="dpSub">Claim your daily bonus signal prediction!</div>
       <button class="daily-card-btn" id="dpBtn" onclick="claimDailyBonus()">CLAIM BONUS</button>
       <div class="daily-card-timer" id="dpTimer"></div>
     </div>
@@ -783,8 +783,8 @@
       ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
         const g=T().g[k],wr=WIN_RATES[k]||88;
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
-        if(k==='mines'&&minesFreeAvailable){c.onclick=()=>renderGame('mines');}else{c.onclick=()=>handleGameClick(k,c);}
-        const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':''; if(k==='mines'&&minesFreeAvailable){c.style.boxShadow='0 0 0 1px rgba(34,197,94,.45), 0 0 24px rgba(34,197,94,.18)';}
+        c.onclick=()=>handleGameClick(k,c);
+        const freeBadge=''; if(k==='mines'&&minesFreeAvailable){c.style.boxShadow='0 0 0 1px rgba(34,197,94,.45), 0 0 24px rgba(34,197,94,.18)';}
         c.style.position='relative';
         const playLabel='Play';c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${playLabel}</div></div>`;
         grid.appendChild(c);
@@ -797,7 +797,7 @@
       const d=await r.json();
       // free signal removed
       
-      if(d.free_signal_claimed){S.set('free_signal_used','1');}
+      // free signal removed
       if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(curTab==='signals')renderHome();}catch(e){}
     }
     
@@ -805,7 +805,7 @@
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
-      if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}
+      // free signal removed
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
@@ -814,7 +814,7 @@
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
       else{if(el.contains(ld))el.removeChild(ld);showLock(el);}
-      }catch(e){if(el.contains(ld))el.removeChild(ld);if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}showLock(el);}
+      }catch(e){if(el.contains(ld))el.removeChild(ld);// free signal removedshowLock(el);}
     }
     function showLock(el){
       if(el.dataset.game==='mines' && minesFreeAvailable) return;
@@ -862,7 +862,7 @@
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
       if(k==='mines'&&minesFreeAvailable){
-        btn.textContent='🎁 Free Signal';btn.disabled=false;cdW.style.display='none';
+        // free signal button removed
         let freeUsed=false;
         btn.onclick=()=>{
           if(freeUsed){
@@ -872,8 +872,8 @@
             return;
           }
           showSig();freeUsed=true;
-          S.set('free_signal_used','1');minesFreeAvailable=false;S.set('mines_free','0');
-          claimFreeSignal();
+          // free signal removed
+          // free signal removed
           btn.textContent='GET SIGNAL';
         };
       } else {if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};}
@@ -1076,7 +1076,7 @@
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
       vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (₹600) — 5 signals/day, 90%\n🥇 Gold (₹2,000) — Unlimited signals, 95%\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
-      bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
+      bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a bonus signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
     };
     function showHelp(key){
