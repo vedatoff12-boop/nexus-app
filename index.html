@@ -638,9 +638,8 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronze',icon:'🥉',dep:600,sigs:5,acc:89,desc:'5 signals/day, 89% accuracy'},
-      {name:'Silver',icon:'🥈',dep:2000,sigs:15,acc:92,desc:'15 signals/day, 92% accuracy'},
-      {name:'Gold',icon:'🥇',dep:5000,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy'}
+      {name:'Bronze',icon:'🥉',dep:600,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Gold',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -1075,7 +1074,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
-      vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (₹600) — 5 signals/day, 89%\n🥈 Silver (₹2,000) — 15/day, 92%\n🥇 Gold (₹5,000) — Unlimited, 95%\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
+      vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (₹600) — 5 signals/day, 89%\n🥇 Gold (₹2,000) — 15/day, 92%\n🥇 Gold (₹5,000) — Unlimited, 95%\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
