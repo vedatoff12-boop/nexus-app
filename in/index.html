@@ -579,6 +579,7 @@
 
     // VIP
     const VIP_TIERS=[
+      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
       {name:'Bronze',icon:'🥉',dep:600,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
       {name:'Gold',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
     ];
@@ -594,7 +595,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=tier.acc+'% ACCURACY';
+      document.getElementById('vipAcc2').textContent=dep===0?'Deposit ₹600 to activate Bronze':(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -605,10 +606,18 @@
       const used=getDailySignals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
+        if(dep===0){sigEl.textContent='❔ Deposit ₹600 to activate Bronze';}
+        else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
         else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Signals refresh tomorrow';}
       }
-      if(idx<VIP_TIERS.length-1){
+      if(dep===0){
+        nw.style.display='';
+        nt.textContent='🥉 Bronze';
+        fill.style.width='0%';
+        left.textContent='₹600 to unlock Bronze';
+        hint.textContent='Deposit ₹600 to activate Bronze';
+      }
+      else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
         nw.style.display='';
         nt.textContent=next.icon+' '+next.name;
