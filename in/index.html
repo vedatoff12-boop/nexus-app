@@ -436,11 +436,11 @@
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;">NexusAI</div><div style="font-size:20px;font-weight:900;color:#fff;">CHAT</div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderSub">NexusAI Support · Limited</div><div style="font-size:20px;font-weight:900;color:#fff;">SUPPORT</div></div>
         </div>
         <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Ask NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
@@ -544,7 +544,9 @@
         names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
     };
     const REAL_NAME_POOL=["Audrey", "Khatri", "Rosdyana", "Mila", "Areziqizham", "HidayahSG", "Its", "jellyzheli", "Allaric", "Irfxnzzstoree", "Mr", "Jebat7", "EricSyamir", "Raja", "Ultranewge", "N1", "ake8833", "SNarainthirenrao", "Leehellens77", "scarletphantom96", "Zbsjkaoo", "Gzanfar", "BennVibe777", "FahmiNoor", "Adren10", "ChilleXtoX", "Nitêšh", "zhuohongwong", "zulaika", "Aaron", "zonan12", "adamabdullah94", "MomoeeAmpire", "Spd980", "soha5566", "Mohamed Basith", "Afz2071", "Narupetai", "faamyOsman", "ozan1290", "chaaaa2004", "IMRAN", "Rosnah", "ravi567889", "vinfel8", "Pongal2028", "Ajaya000", "ashhhh_1807", "Viduranga", "Dyana2711", "Kee Hui", "Rausyan", "viralvayyarey", "leongggg999", "Pinokiolah", "Water_Bottlee", "Shionys", "Krish", "Ruhen", "Casz", "BlackShoper", "Nikhil", "Jei_8780", "someonen10", "ayempireee", "Nadzirah33", "infinityGod1", "Weal", "zhaahir", "ciknabila69", "Michael", "MR_Black", "money4life10", "nickyap93", "Ceo Dugem", "Dashhaline", "Dex_9", "Abdul Aziz", "nia", "Ben", "Adiel210", "OriginalNorth", "MNZahwan", "Razak741009", "Mr Rabbit", "Hardcorethemonk", "weiweil0815", "Esmeralda4t3gwrvf", "Antorxz", "assacino", "Lee910908", "shahsiuu", "Xhanda1997", "omiyou", "Awie", "hammad82a", "jiehan223", "No", "Shawn", "MT", "Ryan", "Panjang", "JY", "sahana_riya17", "annewqq", "HilmiFuturesBot", "Poweryourr", "Ugen1012", "aidanwafiy", "SONZIT_SAREKR_ADOR", "motokriss", "dknerak", "Flintzjr", "Sukbir", "Shown", "Ayonhasan123", "Md", "UmloLT9015", "me", "Aieqa"];
-    const CHAT_WEBHOOK=null,CHAT_HISTORY_WEBHOOK=null;
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai1-chat';
+    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai1-history';
+    let accessMode='limited';
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo='in'; S.set('user_geo','in');
@@ -642,7 +644,7 @@
       {name:'Silver',icon:'🥈',dep:1000,sigs:5,acc:89,desc:'5 signals/day, 89% accuracy'},
       {name:'Gold',icon:'🥇',dep:15000,sigs:10,acc:93,desc:'10 signals/day, 93% accuracy'},
       {name:'Diamond',icon:'💎',dep:20000,sigs:0,acc:96,desc:'Unlimited, 96% accuracy'},
-      {name:'Platinum',icon:'👑',dep:25000,sigs:0,acc:98,desc:'98% + personal Zach alerts'}
+      {name:'Platinum',icon:'👑',dep:25000,sigs:0,acc:98,desc:'98% + personal AI alerts'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -684,7 +686,7 @@
         nw.style.display='none';
         fill.style.width='100%';
         left.textContent='MAX TIER';
-        hint.textContent='You are Zach\'s VIP 👑';
+        hint.textContent='You are NexusAI VIP 👑';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -800,7 +802,13 @@
       const d=await r.json();
       if(d.mines_free){minesFreeAvailable=true;S.set('mines_free','1');S.set('free_signal_used','0');}
       else if(d.free_signal_claimed){minesFreeAvailable=false;S.set('mines_free','0');}
-      if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}}catch(e){}
+      if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
+      if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
+      updateChatHeader();}catch(e){}
+    }
+    function updateChatHeader(){
+      const sub=document.getElementById('chatHeaderSub');
+      if(sub){sub.textContent=accessMode==='full'?'NexusAI Support \u00b7 Full Access':'NexusAI Support \u00b7 Limited';}
     }
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
@@ -863,7 +871,7 @@
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
-      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(k==='mines'&&S.get('free_signal_used')==='1'){box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free signal already used</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">Chat with Zach to unlock full access.</div></div>`;btn.disabled=true;btn.textContent='Used';return;}if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
+      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(k==='mines'&&S.get('free_signal_used')==='1'){box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free signal already used</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">Contact Support in chat to unlock full access.</div></div>`;btn.disabled=true;btn.textContent='Used';return;}if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
 
     const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
@@ -887,8 +895,8 @@ async function claimFreeSignal(){
         ov.innerHTML=`
           <div style="font-size:48px;margin-bottom:16px">🎁</div>
           <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px">Free Signal Used!</div>
-          <div style="font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin-bottom:24px">That was your free Mines signal.<br>Want unlimited signals for all 6 games?<br><strong style="color:var(--gold)">Activate VIP in chat 💬</strong></div>
-          <button onclick="this.parentElement.remove();switchTab('chat')" style="background:var(--gold);color:#000;font-weight:800;font-size:14px;padding:12px 32px;border:none;border-radius:999px;cursor:pointer;font-family:inherit">Chat with Zach →</button>
+          <div style="font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin-bottom:24px">That was your free Mines signal.<br>Want unlimited signals for all 6 games?<br><strong style="color:var(--gold)">Activate VIP in Support chat 💬</strong></div>
+          <button onclick="this.parentElement.remove();switchTab('chat')" style="background:var(--gold);color:#000;font-weight:800;font-size:14px;padding:12px 32px;border:none;border-radius:999px;cursor:pointer;font-family:inherit">Open Support →</button>
           <button onclick="this.parentElement.remove()" style="background:transparent;color:var(--muted);font-size:12px;font-weight:600;padding:8px 24px;border:none;cursor:pointer;margin-top:8px;font-family:inherit">Maybe later</button>
         `;
         document.body.appendChild(ov);
@@ -917,7 +925,7 @@ async function claimFreeSignal(){
 ];
     const SEED_EN=[
       '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
-      'bro 💀','insane','terbaik','same here','real','big W','zach cooked 🔥','who caught that??','gg room','that was fast',
+      'bro 💀','insane','terbaik','same here','real','big W','AI cooked 🔥','who caught that??','gg room','that was fast',
       'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
       'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
       'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
@@ -1021,17 +1029,22 @@ async function claimFreeSignal(){
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">₹${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div>';return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(accessMode==='full'){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🤖</div><div class="chat-welcome-title">NexusAI Support · Full Access</div><div class="chat-welcome-text">Account active. I can recommend signals, analyze games, and help maximize profits.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🤖</div><div class="chat-welcome-title">NexusAI Support · Limited</div><div class="chat-welcome-text">I can help with app questions and setup. Signal recommendations unlock after account activation.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
+      chatLD=true;
+      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      if(!CHAT_HISTORY_WEBHOOK)return;
+      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       try{
-        const raw=S.get('nexusaii_chat_in');
-        if(raw){
-          const arr=JSON.parse(raw);
-          if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:AbortSignal.timeout(10000)});
+        const d=await r.json();
+        if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
+          chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
+          try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          renderChat();
         }
       }catch(e){}
-      chatLD=true;
     }
 
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
@@ -1044,21 +1057,25 @@ async function claimFreeSignal(){
       _sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
       const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
       chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
-      inp.value='';inp.style.height='auto';removeChatImage();renderChat();
-      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
-      await new Promise(r=>setTimeout(r,900));
-      document.getElementById('tpI')?.remove();
-      const hasAccess=S.get('accessGranted')==='1';
-      const savedId=S.get(savedIdKey)||S.get('saved_player_id_in')||S.get('saved_player_id')||S.get('player_id')||'';
-      const totalDep=parseInt(S.get('totalDep')||'0');
-      let botText='First register in the bot and send your Account ID there. After that, top up the account to unlock access.';
-      if(hasAccess){
-        botText='Access is active ✅ Open Signals and start.';
-      }else if(savedId||totalDep>0){
-        botText='Your ID is linked. Top up your account, then send the deposit screenshot in the bot. Access unlocks automatically after confirmation.';
-      }else if(/deposit|paid|payment|top up|topup|fund/i.test(txt)){
-        botText='Top up your account in MostBet, then send the deposit screenshot in the bot. After confirmation, the app opens access automatically.';
+      inp.value='';inp.style.height='auto';
+      const imgPayload=chatImgB64;removeChatImage();renderChat();
+      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI is typing...';el.appendChild(tp);scrollChatBottom();
+      let botText='Sorry, something went wrong. Please try again.';
+      try{
+        const uid=String(tgUserId||S.get('tg_user_id')||'');
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode};
+        if(imgPayload)body.image=imgPayload;
+        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
+        const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
+        clearTimeout(timeout);
+        const d=await r.json();
+        if(d.reply)botText=d.reply;
+        else if(d.message)botText=d.message;
+        else if(d.text)botText=d.text;
+      }catch(e){
+        if(e.name==='AbortError')botText='Response timed out. Please try again.';
       }
+      document.getElementById('tpI')?.remove();
       chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
       try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
       renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
@@ -1102,7 +1119,7 @@ async function claimFreeSignal(){
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
-      vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (₹600) — 3 signals/day, 85%\n🥈 Silver (₹1,000) — 5/day, 89%\n🥇 Gold (₹15,000) — 10/day, 93%\n💎 Diamond (₹20,000) — Unlimited, 96%\n👑 Platinum (₹25,000) — 98% + Zach picks your games\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
+      vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (₹600) — 3 signals/day, 85%\n🥈 Silver (₹1,000) — 5/day, 89%\n🥇 Gold (₹15,000) — 10/day, 93%\n💎 Diamond (₹20,000) — Unlimited, 96%\n👑 Platinum (₹25,000) — 98% + personal AI signal picks\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
