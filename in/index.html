@@ -436,7 +436,7 @@
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderSub">NexusAI Support · Limited</div><div style="font-size:20px;font-weight:900;color:#fff;">SUPPORT</div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderSub">NexusAI Support · Limited</div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
         </div>
         <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
@@ -465,11 +465,11 @@
           </div>
           <div class="vip-next" id="vipNextWrap">
             <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥈 Silver</div>
+            <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">₹0 / ₹1,000</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">₹0 / ₹2,000</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
         <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
       </div>
 
@@ -547,6 +547,8 @@
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai1-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai1-history';
     let accessMode='limited';
+    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=2000)
+    let userTotalDeposit=0;
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo='in'; S.set('user_geo','in');
@@ -640,11 +642,8 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Bronze',icon:'🥉',dep:600,sigs:3,acc:85,desc:'3 signals/day, 85% accuracy'},
-      {name:'Silver',icon:'🥈',dep:1000,sigs:5,acc:89,desc:'5 signals/day, 89% accuracy'},
-      {name:'Gold',icon:'🥇',dep:15000,sigs:10,acc:93,desc:'10 signals/day, 93% accuracy'},
-      {name:'Diamond',icon:'💎',dep:20000,sigs:0,acc:96,desc:'Unlimited, 96% accuracy'},
-      {name:'Platinum',icon:'👑',dep:25000,sigs:0,acc:98,desc:'98% + personal AI alerts'}
+      {name:'Bronze',icon:'🥉',dep:600,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Gold',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -681,12 +680,12 @@
         fill.style.width=pct+'%';
         const remain=target-dep;
         left.textContent='₹'+dep.toLocaleString()+' / ₹'+target.toLocaleString();
-        hint.textContent='₹'+remain.toLocaleString()+' to '+next.name+' ('+next.acc+'%) ⬆';
+        hint.textContent='₹'+remain.toLocaleString()+' to '+next.name+' — Unlimited + AI Analyst ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='MAX TIER';
-        hint.textContent='You are NexusAI VIP 👑';
+        left.textContent='GOLD · MAX TIER';
+        hint.textContent='Unlimited signals + Personal AI Analyst 🥇';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -802,13 +801,25 @@
       const d=await r.json();
       if(d.mines_free){minesFreeAvailable=true;S.set('mines_free','1');S.set('free_signal_used','0');}
       else if(d.free_signal_claimed){minesFreeAvailable=false;S.set('mines_free','0');}
-      if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
+      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
+      chatTier=(userTotalDeposit>=2000)?2:1;
       updateChatHeader();}catch(e){}
     }
     function updateChatHeader(){
       const sub=document.getElementById('chatHeaderSub');
-      if(sub){sub.textContent=accessMode==='full'?'NexusAI Support \u00b7 Full Access':'NexusAI Support \u00b7 Limited';}
+      const title=document.getElementById('chatHeaderTitle');
+      if(chatTier===2){
+        if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
+        if(title)title.textContent='ANALYST';
+        const hdr=document.querySelector('.chat-header');
+        if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
+      }else{
+        if(sub)sub.textContent='NexusAI Support';
+        if(title)title.textContent='SUPPORT';
+        const hdr=document.querySelector('.chat-header');
+        if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
+      }
     }
     function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
 
@@ -1029,7 +1040,7 @@ async function claimFreeSignal(){
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">₹${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(accessMode==='full'){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🤖</div><div class="chat-welcome-title">NexusAI Support · Full Access</div><div class="chat-welcome-text">Account active. I can recommend signals, analyze games, and help maximize profits.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🤖</div><div class="chat-welcome-title">NexusAI Support · Limited</div><div class="chat-welcome-text">I can help with app questions and setup. Signal recommendations unlock after account activation.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🥇</div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🤖</div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
@@ -1063,7 +1074,7 @@ async function claimFreeSignal(){
       let botText='Sorry, something went wrong. Please try again.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode};
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
         if(imgPayload)body.image=imgPayload;
         const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
@@ -1119,7 +1130,7 @@ async function claimFreeSignal(){
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
-      vip:{title:'🏅 VIP Tier',text:'AI signal servers cost real money to run. Your deposit level determines how much server power is allocated to your account.\n\n🥉 Bronze (₹600) — 3 signals/day, 85%\n🥈 Silver (₹1,000) — 5/day, 89%\n🥇 Gold (₹15,000) — 10/day, 93%\n💎 Diamond (₹20,000) — Unlimited, 96%\n👑 Platinum (₹25,000) — 98% + personal AI signal picks\n\nBigger deposit → more resources → more signals → bigger wins → everyone profits 🤝'},
+      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (₹600) — 5 signals/day, 90% accuracy\n🥇 Gold (₹2,000) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
