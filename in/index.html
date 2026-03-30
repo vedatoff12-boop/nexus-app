@@ -544,7 +544,7 @@
         names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
     };
     const REAL_NAME_POOL=["Audrey", "Khatri", "Rosdyana", "Mila", "Areziqizham", "HidayahSG", "Its", "jellyzheli", "Allaric", "Irfxnzzstoree", "Mr", "Jebat7", "EricSyamir", "Raja", "Ultranewge", "N1", "ake8833", "SNarainthirenrao", "Leehellens77", "scarletphantom96", "Zbsjkaoo", "Gzanfar", "BennVibe777", "FahmiNoor", "Adren10", "ChilleXtoX", "Nitêšh", "zhuohongwong", "zulaika", "Aaron", "zonan12", "adamabdullah94", "MomoeeAmpire", "Spd980", "soha5566", "Mohamed Basith", "Afz2071", "Narupetai", "faamyOsman", "ozan1290", "chaaaa2004", "IMRAN", "Rosnah", "ravi567889", "vinfel8", "Pongal2028", "Ajaya000", "ashhhh_1807", "Viduranga", "Dyana2711", "Kee Hui", "Rausyan", "viralvayyarey", "leongggg999", "Pinokiolah", "Water_Bottlee", "Shionys", "Krish", "Ruhen", "Casz", "BlackShoper", "Nikhil", "Jei_8780", "someonen10", "ayempireee", "Nadzirah33", "infinityGod1", "Weal", "zhaahir", "ciknabila69", "Michael", "MR_Black", "money4life10", "nickyap93", "Ceo Dugem", "Dashhaline", "Dex_9", "Abdul Aziz", "nia", "Ben", "Adiel210", "OriginalNorth", "MNZahwan", "Razak741009", "Mr Rabbit", "Hardcorethemonk", "weiweil0815", "Esmeralda4t3gwrvf", "Antorxz", "assacino", "Lee910908", "shahsiuu", "Xhanda1997", "omiyou", "Awie", "hammad82a", "jiehan223", "No", "Shawn", "MT", "Ryan", "Panjang", "JY", "sahana_riya17", "annewqq", "HilmiFuturesBot", "Poweryourr", "Ugen1012", "aidanwafiy", "SONZIT_SAREKR_ADOR", "motokriss", "dknerak", "Flintzjr", "Sukbir", "Shown", "Ayonhasan123", "Md", "UmloLT9015", "me", "Aieqa"];
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat',CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history';
+    const CHAT_WEBHOOK=null,CHAT_HISTORY_WEBHOOK=null;
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo='in'; S.set('user_geo','in');
@@ -1022,23 +1022,47 @@ async function claimFreeSignal(){
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">₹${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
     function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div>';return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
-    async function loadChatHistory(){if(chatLD||!tgUserId)return;try{const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:tgUserId,first_name:userName||"User",geo:currentGeo})});if(!r.ok)throw new Error('history_http_'+r.status);const d=await r.json();if(d.messages&&d.messages.length){chatH=d.messages.map(m=>({r:m.role,t:m.text,tm:m.time||''}));renderChat();}chatLD=true;}catch(e){chatLD=true;}}
+    async function loadChatHistory(){
+      if(chatLD)return;
+      try{
+        const raw=S.get('nexusaii_chat_in');
+        if(raw){
+          const arr=JSON.parse(raw);
+          if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}
+        }
+      }catch(e){}
+      chatLD=true;
+    }
+
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
-    async function sendChatMessage(){if(_sendLock)return;const now=Date.now();const inp=document.getElementById('chatInput'),txt=inp.value.trim();if(!txt&&!chatImgB64)return;if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;_sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
-    const msgContent=chatImgB64?`${txt||'📸'}${chatImgB64?'<img>':''}`:txt;
-    const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
-    chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
-    const imgData=chatImgB64;
-    inp.value='';inp.style.height='auto';removeChatImage();renderChat();
-    const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
-    try{const urlFbclid=new URLSearchParams(window.location.search).get('fbclid')||'';const vt=getVipTier();const body={user_id:tgUserId,first_name:userName||"User",message:txt||'[photo]',geo:currentGeo,lang:lang,source:'miniapp',fbp:getFbParam('_fbp'),fbc:getFbParam('_fbc'),fbclid:urlFbclid,vip_tier:vt.name,vip_accuracy:vt.acc,total_deposit:parseInt(S.get('totalDep')||'0'),streak:parseInt(S.get('scnt')||'0')};if(imgData)body.image=imgData;
-    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});clearTimeout(timeout);if(!r.ok)throw new Error('chat_http_'+r.status);const raw=await r.text();let d={};try{d=raw?JSON.parse(raw):{};}catch(e){d={reply:raw};}const botText=d.reply||d.message||d.output||'Hmm something glitched bro, send that again 🙏';if(d.total_deposit&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}if(d.access_granted){S.set('accessGranted','1');}
-      if(d.free_signal_unlocked){minesFreeAvailable=true;S.set('mines_free','1');renderHome();}const typingDelay=Math.min(Math.max(botText.length*25,800),3000)+Math.random()*800;await new Promise(r=>setTimeout(r,typingDelay));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});}catch(e){clearTimeout&&clearTimeout(timeout);await new Promise(r=>setTimeout(r,1000));document.getElementById('tpI')?.remove();chatH.push({r:'bot',t:'Network hiccup bro, send that again 🔄',tm:hhmm(new Date())});}
-    renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;}
-    document.getElementById('chatInput').addEventListener('input',function(){this.style.height='42px';scrollChatBottom();});
-    document.getElementById('chatInput').addEventListener('focus',function(){document.getElementById('tabChat').style.height='100%';setTimeout(scrollChatBottom,120);});
-    document.getElementById('chatInput').addEventListener('blur',function(){setTimeout(scrollChatBottom,60);});
-    document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
+    async function sendChatMessage(){
+      if(_sendLock)return;
+      const now=Date.now();
+      const inp=document.getElementById('chatInput'),txt=inp.value.trim();
+      if(!txt&&!chatImgB64)return;
+      if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;
+      _sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
+      const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
+      chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
+      inp.value='';inp.style.height='auto';removeChatImage();renderChat();
+      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='Typing...';el.appendChild(tp);scrollChatBottom();
+      await new Promise(r=>setTimeout(r,900));
+      document.getElementById('tpI')?.remove();
+      const hasAccess=S.get('accessGranted')==='1';
+      const savedId=S.get(savedIdKey)||S.get('saved_player_id_in')||S.get('saved_player_id')||S.get('player_id')||'';
+      const totalDep=parseInt(S.get('totalDep')||'0');
+      let botText='First register in the bot and send your Account ID there. After that, top up the account to unlock access.';
+      if(hasAccess){
+        botText='Access is active ✅ Open Signals and start.';
+      }else if(savedId||totalDep>0){
+        botText='Your ID is linked. Top up your account, then send the deposit screenshot in the bot. Access unlocks automatically after confirmation.';
+      }else if(/deposit|paid|payment|top up|topup|fund/i.test(txt)){
+        botText='Top up your account in MostBet, then send the deposit screenshot in the bot. After confirmation, the app opens access automatically.';
+      }
+      chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
+      try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+      renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
+    }
 
     // TOP PLAYERS — weekly seed, multinational, $10k descending
     function sRnd(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
