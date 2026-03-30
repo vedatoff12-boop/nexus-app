@@ -203,51 +203,6 @@
     @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
     .tabs{margin-top:14px;}
 
-    /* DAILY BONUS FLOATING */
-    .daily-float{
-      position:absolute;bottom:74px;right:16px;z-index:250;
-      width:52px;height:52px;border-radius:50%;
-      background:linear-gradient(135deg,var(--gold),#f97316);
-      box-shadow:0 4px 20px rgba(245,158,11,0.4);
-      display:flex;align-items:center;justify-content:center;
-      font-size:24px;cursor:pointer;
-      animation:dailyBounce 3s ease-in-out infinite;
-      border:2px solid rgba(255,255,255,0.2);
-    }
-    .daily-float.claimed{background:var(--bg3);box-shadow:none;animation:none;opacity:0.4;border-color:var(--stroke);}
-    .daily-float-badge{
-      position:absolute;top:-2px;right:-2px;
-      width:16px;height:16px;border-radius:50%;
-      background:var(--red);font-size:9px;font-weight:900;color:#fff;
-      display:flex;align-items:center;justify-content:center;
-    }
-    .daily-float.claimed .daily-float-badge{display:none;}
-    @keyframes dailyBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-    /* DAILY POPUP */
-    .daily-popup{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.7);z-index:600;display:none;
-      align-items:center;justify-content:center;
-      backdrop-filter:blur(4px);
-    }
-    .daily-popup.open{display:flex;}
-    .daily-card{
-      background:var(--bg3);border:1px solid var(--stroke2);border-radius:20px;
-      padding:28px 24px;text-align:center;max-width:300px;width:90%;
-      box-shadow:0 20px 60px rgba(0,0,0,0.5);
-    }
-    .daily-card-icon{font-size:48px;margin-bottom:8px;}
-    .daily-card-title{font-size:20px;font-weight:900;color:#fff;}
-    .daily-card-sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4;}
-    .daily-card-btn{
-      margin-top:16px;width:100%;padding:14px;border:none;border-radius:14px;
-      background:linear-gradient(135deg,var(--gold),var(--gold2));
-      color:#0a0f1e;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;
-      box-shadow:0 6px 20px var(--gold-glow);
-    }
-    .daily-card-timer{margin-top:12px;font-size:13px;color:var(--muted);font-weight:600;}
-
     /* CONFETTI */
     .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
     .confetti-p{position:absolute;top:-10px;animation:cFall 3s ease-in forwards;}
@@ -263,12 +218,6 @@
     #splash{display:none !important;}
     .splash-text{font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:#fff;opacity:0;animation:fadeUp 2.5s ease forwards;}
     @keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}40%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
-
-    /* TUTORIAL */
-    #tutOverlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:5000;pointer-events:none;opacity:0;transition:opacity .5s;display:none;}
-    .focus-box{position:absolute;border-radius:16px;box-shadow:0 0 0 4000px rgba(0,0,0,0.88);transition:all .6s cubic-bezier(.25,1,.5,1);border:2px solid rgba(255,255,255,0.4);pointer-events:none;}
-    .tut-card{position:absolute;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);padding:16px;border-radius:16px;color:#fff;font-size:14px;line-height:1.4;max-width:280px;text-align:center;opacity:0;transition:opacity .4s .2s;z-index:5002;}
-    .skip-btn{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:99px;color:#fff;font-weight:700;font-size:12px;cursor:pointer;z-index:5003;pointer-events:auto;font-family:inherit;}
 
     /* GEO SELECTOR */
     #geoScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:8000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
@@ -415,20 +364,9 @@
     <div class="geo-grid" id="geoGrid"></div>
   </div>
   <div id="splash" style="display:none !important;"><div class="splash-text" id="splashName"></div></div>
-  <div id="tutOverlay"><div class="focus-box" id="focusBox"></div><div class="tut-card" id="tutText"></div><button class="skip-btn" id="skipBtn" onclick="skipTutorial()">SKIP</button></div>
   <div class="confetti-box" id="confettiBox"></div>
 
-  <!-- DAILY BONUS FLOAT -->
-  <div class="daily-float" id="dailyFloat" onclick="openDailyPopup()">🎁<div class="daily-float-badge">!</div></div>
-  <div class="daily-popup" id="dailyPopup">
-    <div class="daily-card">
-      <div class="daily-card-icon">🎁</div>
-      <div class="daily-card-title" id="dpTitle">Free VIP Signal <span class="help-icon" onclick="event.stopPropagation();showHelp('bonus')">?</span></div>
-      <div class="daily-card-sub" id="dpSub">Claim your daily bonus and get a free VIP-level signal prediction!</div>
-      <button class="daily-card-btn" id="dpBtn" onclick="claimDailyBonus()">CLAIM BONUS</button>
-      <div class="daily-card-timer" id="dpTimer"></div>
-    </div>
-  </div>
+
 
   <!-- CHAT TAB — outside app-wrap, fixed fullscreen -->
   <div class="app-shell">
@@ -527,7 +465,7 @@
         webhook:"https://n8nnexusai.uk/webhook/check-access-my",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
       in: { name:"India", flag:"🇮🇳", lang:"en", currency:"INR", sym:"₹", profitRange:[200,5000],
-        link:"https://nexusai.playmarkeet.cfd/", promo:"",
+        link:"https://nexusai.playmarkeet.cfd/", promo:"777IN777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-in",
         names:["Rahul","Amit","Priya","Raj","Arjun","Vikram","Deepak","Sunil","Ananya","Pooja","Kiran","Rohan","Sneha","Arun","Neha","Vivek","Meera","Sanjay","Kavita","Ravi"] },
       ca: { name:"Canada", flag:"🇨🇦", lang:"en", currency:"CAD", sym:"C$", profitRange:[5,50],
@@ -554,8 +492,7 @@
     let currentGeo='in'; S.set('user_geo','in');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-in';
-    const CLAIM_FREE_URL='https://n8nnexusai.uk/webhook/claim-free-signal-in';
-    let minesFreeAvailable=(S.get('mines_free')==='1');
+    
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
@@ -693,13 +630,6 @@
     }
     updVIP();
 
-    // DAILY BONUS
-    function updDaily(){const f=document.getElementById('dailyFloat'),lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){f.classList.add('claimed');}else{f.classList.remove('claimed');}}
-    function openDailyPopup(){const p=document.getElementById('dailyPopup');p.classList.add('open');const lc=S.get('dclaim'),now=Date.now();if(lc&&now-parseInt(lc)<864e5){const left=864e5-(now-parseInt(lc)),h=Math.floor(left/36e5),m=Math.floor((left%36e5)/6e4);document.getElementById('dpBtn').style.display='none';document.getElementById('dpTimer').textContent=`Next bonus in ${h}h ${m}m`;document.getElementById('dpSub').textContent='You already claimed today!';}else{document.getElementById('dpBtn').style.display='';document.getElementById('dpTimer').textContent='';document.getElementById('dpSub').textContent='Claim your daily bonus and get a free VIP signal!';}}
-    function claimDailyBonus(){S.set('dclaim',Date.now().toString());addProfit(rndInt(15,45));try{navigator.vibrate&&navigator.vibrate(100);}catch(e){}fireConfetti();document.getElementById('dailyPopup').classList.remove('open');updDaily();}
-    document.getElementById('dailyPopup').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
-    updDaily();
-
     // SOUND
     let actx=null;
     function playSfx(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.type='sine';o.frequency.setValueAtTime(800,actx.currentTime);o.frequency.setValueAtTime(1200,actx.currentTime+0.1);g.gain.setValueAtTime(0.2,actx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,actx.currentTime+0.3);o.start();o.stop(actx.currentTime+0.3);}catch(e){}}
@@ -709,11 +639,11 @@
 
     // TAB
     let curTab='signals';
-    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const df=document.getElementById('dailyFloat'),mq=document.getElementById('marqueeBar');
-    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';df.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';df.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';df.style.display='none';renderLiveRoom();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';df.style.display='none';renderTopPlayers();}}
+    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
+    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
+    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';renderHome();}
+    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -745,7 +675,7 @@
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Register & Send ID to Bot.",skip:"SKIP",wait:"Wait",tut:{s1:"Your MostBet ID synced with signals.",s2:"Select a game for AI signals.",s4:"Predicted coefficient.",s5:"Click GET SIGNAL."},
+      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
         g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
         ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
         av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
@@ -788,19 +718,17 @@
         const g=T().g[k],wr=WIN_RATES[k]||88;
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
         c.onclick=()=>handleGameClick(k,c);
-        const freeBadge=(k==='mines'&&minesFreeAvailable)?'<span style="position:absolute;top:6px;right:6px;background:var(--green);color:#000;font-size:9px;font-weight:900;padding:2px 7px;border-radius:999px;letter-spacing:.5px;animation:livePulse 2s infinite">FREE</span>':'';
         c.style.position='relative';
-        c.innerHTML=`${freeBadge}<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${k==='mines'&&minesFreeAvailable?'🎁 Free Signal':'Play'}</div></div>`;
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Play</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
     }
-    async function checkMinesFree(){
+    async function refreshAccessState(){
       const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
-      if(d.mines_free){minesFreeAvailable=true;S.set('mines_free','1');S.set('free_signal_used','0');}
-      else if(d.free_signal_claimed){minesFreeAvailable=false;S.set('mines_free','0');}
+      
       if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
       chatTier=(userTotalDeposit>=2000)?2:1;
@@ -821,24 +749,20 @@
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
     }
-    function applyStatic(){renderHome();buildLangMenu();checkMinesFree().then(()=>renderHome());}
+    function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
-      if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){S.set('free_signal_used','0');minesFreeAvailable=false;if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
-      else if(k==='mines'&&d.mines_free){
-        minesFreeAvailable=true;S.set('mines_free','1');if(el.contains(ld))el.removeChild(ld);renderGame(k);
-      }else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
-      catch(e){if(el.contains(ld))el.removeChild(ld);if(k==='mines' && minesFreeAvailable){renderGame('mines');return;}showLock(el);}
+      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
+      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
     function showLock(el){
-      if(el.dataset.game==='mines' && minesFreeAvailable) return;
       if(el.querySelector('.lock-text'))return;
       const g=geo();
       const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
@@ -878,11 +802,11 @@
         addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
-          if(minesFreeAvailable){minesFreeAvailable=false;S.set('mines_free','0');S.set('free_signal_used','1');if(timer)clearInterval(timer);const cdW2=document.getElementById('cdW');if(cdW2)cdW2.style.display='none';const btnRow=document.querySelector('.btnrow');if(btnRow){btnRow.innerHTML=`<button class="btn primary" disabled style="opacity:.55">Free signal used</button>`;}claimFreeSignal();}}
+        }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
-      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(k==='mines'&&S.get('free_signal_used')==='1'){box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:34px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Free signal already used</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px">Contact Support in chat to unlock full access.</div></div>`;btn.disabled=true;btn.textContent='Used';return;}if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
+      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
 
     const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
@@ -894,24 +818,6 @@
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
       nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ₹${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
-    }
-
-async function claimFreeSignal(){
-      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
-      try{await fetch(CLAIM_FREE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:String(uid)})});}catch(e){}
-      // Show overlay after short delay so they see the signal first
-      setTimeout(()=>{
-        const ov=document.createElement('div');
-        ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(8,12,24,0.95);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;backdrop-filter:blur(8px)';
-        ov.innerHTML=`
-          <div style="font-size:48px;margin-bottom:16px">🎁</div>
-          <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px">Free Signal Used!</div>
-          <div style="font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin-bottom:24px">That was your free Mines signal.<br>Want unlimited signals for all 6 games?<br><strong style="color:var(--gold)">Activate VIP in Support chat 💬</strong></div>
-          <button onclick="this.parentElement.remove();switchTab('chat')" style="background:var(--gold);color:#000;font-weight:800;font-size:14px;padding:12px 32px;border:none;border-radius:999px;cursor:pointer;font-family:inherit">Open Support →</button>
-          <button onclick="this.parentElement.remove()" style="background:transparent;color:var(--muted);font-size:12px;font-weight:600;padding:8px 24px;border:none;cursor:pointer;margin-top:8px;font-family:inherit">Maybe later</button>
-        `;
-        document.body.appendChild(ov);
-      },60000);
     }
 
     const LIVE_ROOM_NPCS=[
@@ -1119,20 +1025,11 @@ async function claimFreeSignal(){
     }
     function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥈','🥇','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
-    // TUTORIAL
-    const splash=document.getElementById("splash"),sName=document.getElementById("splashName"),overlay=document.getElementById("tutOverlay"),focusBox=document.getElementById("focusBox"),tutText=document.getElementById("tutText");let isSkipped=false;
-    function setFocus(el,text){if(!el)return;const r=el.getBoundingClientRect();focusBox.style.width=(r.width+12)+"px";focusBox.style.height=(r.height+12)+"px";focusBox.style.top=(r.top-6)+"px";focusBox.style.left=(r.left-6)+"px";tutText.style.opacity="0";setTimeout(()=>{if(isSkipped)return;tutText.textContent=text;let tp=r.bottom+20;if(tp>window.innerHeight-100)tp=r.top-100;tutText.style.top=tp+"px";tutText.style.left="50%";tutText.style.transform="translateX(-50%)";tutText.style.opacity="1";},300);}
-    async function startTutorial(force=false){if(S.get("st7")&&!force)return;isSkipped=false;switchTab('signals');renderHome();overlay.style.display="block";setTimeout(()=>overlay.style.opacity="1",10);if(isSkipped)return;setFocus(document.getElementById("userHeaderId"),T().tut.s1);await wait(5000);if(isSkipped)return;setFocus(document.getElementById("gamesGrid"),T().tut.s2);await wait(5000);if(isSkipped)return;tutText.style.opacity="0";renderGame('aviator');document.getElementById("cD").textContent="2.45x";await wait(2000);if(isSkipped)return;const c=document.getElementById("cD");if(c)setFocus(c.parentElement,T().tut.s4);await wait(5000);if(isSkipped)return;setFocus(document.getElementById("sBtn"),T().tut.s5);await wait(5000);endTutorial();}
-    function skipTutorial(){isSkipped=true;endTutorial();}
-    function endTutorial(){overlay.style.opacity="0";setTimeout(()=>{overlay.style.display="none";S.set("st7","1");renderHome();},500);}
-    function wait(ms){return new Promise(r=>setTimeout(r,ms));}
-
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app every day to build your streak. The longer your streak, the higher your VIP tier goes — which means better signal accuracy!'},
       vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (₹600) — 5 signals/day, 90% accuracy\n🥇 Gold (₹2,000) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
-      bonus:{title:'🎁 Daily Bonus',text:'Claim once every 24 hours. Gives you a free VIP-level signal with guaranteed profit added to your daily total.'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
     };
     function showHelp(key){
@@ -1168,9 +1065,7 @@ async function claimFreeSignal(){
 
     // INIT
     window.onload=function(){
-      splash.style.display="none";
       initApp();
-      setTimeout(()=>startTutorial(),500);
     };
   </script>
 </body>
