@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
@@ -351,7 +351,7 @@
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1351386483678073');
+    fbq('init', '706690828634853');
     fbq('track', 'PageView');
     window.trackBDEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
   </script>
@@ -359,8 +359,8 @@
 </head>
 <body>
   <div id="geoScreen">
-    <div class="geo-title">🌍 Select Your Country</div>
-    <div class="geo-sub">Choose to get started</div>
+    <div class="geo-title">🌍 Choisis ton pays</div>
+    <div class="geo-sub">Choisis pour commencer</div>
     <div class="geo-grid" id="geoGrid"></div>
   </div>
   <div id="splash" style="display:none !important;"><div class="splash-text" id="splashName"></div></div>
@@ -373,22 +373,22 @@
     <div class="app-body">
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Direct</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">Support NexusAI · Limité</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signaux?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Tu veux débloquer les signaux IA ?</div><div class="chat-welcome-text">Écris un message ci-dessous pour voir comment débloquer l’accès 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Ask NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Écris à NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
     <!-- SIGNALS TAB -->
     <div id="tabSignaux" class="tab-content">
       <div class="top-bar">
-        <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
+        <div class="top-left"><div class="live-dot"></div><span class="live-text">Direct</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
-          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
+          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">FR</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
       </div>
 
@@ -402,17 +402,17 @@
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
-            <div class="vip-next-label">NEXT TIER</div>
+            <div class="vip-next-label">PROCHAIN TIER</div>
             <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">৳0 / 250 MAD</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
-        <div id="vipSignauxLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">0 MAD / 250 MAD</span><span id="vipProgressHint">Dépose plus pour monter de tier ⬆</span></div>
+        <div id="vipSignauxLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signaux restants aujourd’hui</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">jour de série</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -428,11 +428,11 @@
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold tier to unlock chat">
-              <div class="room-lock-hint">Watch the room now · Gold members can join the conversation</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Atteins Gold pour débloquer le chat">
+              <div class="room-lock-hint">Regarde la salle maintenant · les membres Gold peuvent participer</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
+              <textarea class="room-input" id="liveRoomInput" placeholder="Écris un message..." maxlength="280"></textarea>
               <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
             </div>
           </div>
@@ -440,7 +440,7 @@
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub">Classement hebdo — plus gros gagnants de la semaine</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -467,7 +467,7 @@
       ma: { name:"Maroc", flag:"🇲🇦", lang:"fr", currency:"MAD", sym:"MAD ", profitRange:[30,600],
         link:"https://1xbet.com/fr/", promo:"777MA777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-ma",
-        names:["Youssef","Ayoub","Rachid","Karim","Sofiane","Hamza","Anas","Walid","Mehdi","Nabil","Sara","Salma","Imane","Khadija","Aya","Meryem","Nora","Lina","Yasmin","Ines"] },
+        names:["Rahim","Karim","Shakib","Tamim","Mushfiq","Liton","Nusrat","Tasnim","Farhan","Arif","Sohel","Rasel","Mamun","Jahid","Rubel","Mithila","Sabina","Farhana","Imran","Sajib"] },
       ca: { name:"Canada", flag:"🇨🇦", lang:"en", currency:"CAD", sym:"C$", profitRange:[5,50],
         link:"https://fastwin667.com/PDCDGj", promo:"777CA777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-ca",
@@ -490,7 +490,7 @@
     const S={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo='ma'; S.set('user_geo','ma');
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.ma;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-ma';
     
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
@@ -580,8 +580,8 @@
     // VIP
     const VIP_TIERS=[
       {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Dépose pour activer'},
-      {name:'Bronze',icon:'🥉',dep:700,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'Signaux illimités, 95% de précision + analyste IA personnel'}
+      {name:'Bronze',icon:'🥉',dep:120,sigs:5,acc:90,desc:'5 signaux/jour, 90% de précision'},
+      {name:'Gold',icon:'🥇',dep:250,sigs:0,acc:95,desc:'Signaux illimités, 95% de précision + analyste IA personnel'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignaux(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -595,7 +595,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Deposit 120 MAD to activate Bronze':(tier.acc+'% ACCURACY');
+      document.getElementById('vipAcc2').textContent=dep===0?'Dépose 120 MAD pour activer Bronze':(tier.acc+'% PRÉCISION');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -606,16 +606,16 @@
       const used=getDailySignaux();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignauxLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Deposit 120 MAD to activate Bronze';}
-        else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Signaux refresh tomorrow';}
+        if(dep===0){sigEl.textContent='❔ Dépose 120 MAD pour activer Bronze';}
+        else if(limit===0){sigEl.textContent='♾️ Signaux illimités aujourd’hui';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signaux restants aujourd’hui`:'🔒 Signaux rechargés demain';}
       }
       if(dep===0){
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
         left.textContent='120 MAD pour débloquer Bronze';
-        hint.textContent='Deposit 120 MAD to activate Bronze';
+        hint.textContent='Dépose 120 MAD pour activer Bronze';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -625,8 +625,8 @@
         const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
         fill.style.width=pct+'%';
         const remain=target-dep;
-        left.textContent='৳'+dep.toLocaleString()+' / ৳'+target.toLocaleString();
-        hint.textContent='৳'+remain.toLocaleString()+' to '+next.name+' — Unlimited + AI Analyst ⬆';
+        left.textContent=dep.toLocaleString()+' MAD / '+target.toLocaleString()+' MAD';
+        hint.textContent=remain.toLocaleString()+' MAD pour '+next.name+' — illimité + analyste IA ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
@@ -661,7 +661,7 @@
       const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
       const pick=rotated.slice(0,16);
-      const verbs=['won','cashed out','hit','withdrew'];
+      const verbs=['a gagné','a encaissé','a pris','a retiré'];
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
@@ -675,16 +675,25 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
-    let lang='en'; S.set('aslang','en');
-    function T(){return STR[lang]||STR.en;}
+    const LANGS=[{id:"fr",l:"FR"}];
+    let lang='fr'; S.set('aslang','fr');
+    function T(){return STR[lang]||STR.fr;}
+
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
     function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
+      fr:{cg:"Choisis un jeu :",back:"Menu",lt:"ACCÈS BLOQUÉ",lm:"⛔️ Termine l’activation dans le bot pour débloquer l’accès.",skip:"PASSER",wait:"Attends",tut:{s1:"",s2:"",s4:"",s5:""},
+        g:{aviator:{n:"Aviator",d:"Jeu crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Niveaux de risque"},penalty:{n:"Penalty",d:"Trouve la bonne zone"},mines:{n:"Mines",d:"Évite les bombes"},balloon:{n:"Balloon",d:"Encaisse avant l’explosion"}},
+        ch:{t:"Chicken Road",s:"Choisis la difficulté.",nx:"SUIVANT",w:(s)=>`Attends ${s}s`,tb:{easy:"Facile",medium:"Moyen",hard:"Difficile",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"Actualisé chaque minute.",b:"OBTENIR LE SIGNAL",l:"COEFFICIENT",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Max 10x.",b:"OBTENIR LE SIGNAL",l:"COEFFICIENT",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Vise la bonne zone.",b:"OBTENIR LE SIGNAL",l:"CIBLE",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Cases sûres marquées.",b:"OBTENIR LE SIGNAL",l:"CASES SÛRES",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Encaisse avant que ça explose.",b:"OBTENIR LE SIGNAL",l:"ENCASHER",u:(t)=>`Mise à jour à <strong>${t}</strong>`}},
+      en:{cg:"Choisis un jeu :",back:"Menu",lt:"ACCÈS BLOQUÉ",lm:"⛔️ Termine l’activation dans le bot pour débloquer l’accès.",skip:"PASSER",wait:"Attends",tut:{s1:"",s2:"",s4:"",s5:""},
         g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
         ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
         av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
@@ -728,7 +737,7 @@
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
         c.onclick=()=>handleGameClick(k,c);
         c.style.position='relative';
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Play</div></div>`;
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Jouer</div></div>`;
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(grid);
@@ -748,11 +757,11 @@
       const title=document.getElementById('chatHeaderTitle');
       if(chatTier===2){
         if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
-        if(title)title.textContent='ANALYST';
+        if(title)title.textContent='ANALYSTE';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
       }else{
-        if(sub)sub.textContent='NexusAI Support';
+        if(sub)sub.textContent='Support NexusAI';
         if(title)title.textContent='SUPPORT';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
@@ -774,13 +783,13 @@
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">S’inscrire →</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
-      try{window.trackBDEvent&&window.trackBDEvent('RegistrationIntent',{geo:'BD'});}catch(e){}
+      try{window.trackBDEvent&&window.trackBDEvent('RegistrationIntent',{geo:'MA'});}catch(e){}
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
     }
 
@@ -799,9 +808,9 @@
         if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ৳${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better accuracy.</div>${upgradeHint}</div>`;
-          btn.disabled=true;btn.textContent='Server limit';btn.style.opacity='0.3';return true;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Ajoute ${need.toLocaleString()} MAD dans le chat pour débloquer ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Limite serveur IA atteinte</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Les serveurs IA sont très chargés.<br>Les comptes ${tier.icon} ${tier.name} reçoivent ${tier.sigs} signaux/jour.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Plus le dépôt est élevé = plus de ressources serveur<br>pour ton compte = plus de signaux + meilleure précision.</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='Limite serveur';btn.style.opacity='0.3';return true;
         }
         return false;
       }
@@ -826,7 +835,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ৳${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Ajoute ${need.toLocaleString()} MAD dans le chat pour débloquer ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Limite serveur IA atteinte</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signaux/jour utilisés</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Dépôt plus élevé = plus de ressources serveur pour ton compte</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Limite serveur';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limite atteinte';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
@@ -955,11 +964,11 @@
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">৳${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">Analyste IA NexusAI</div><div class="chat-welcome-text">Compte actif. Je suis ton analyste IA personnel. On maximise les profits ensemble.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">Support NexusAI</div><div class="chat-welcome-text">Je peux aider sur l’app et l’activation. L’analyste IA personnel se débloque au tier Gold.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
-      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      try{const raw=S.get('nexusai_ma_chat');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
       if(!CHAT_HISTORY_WEBHOOK)return;
       const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       try{
@@ -967,7 +976,7 @@
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
-          try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          try{S.set('nexusai_ma_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
           renderChat();
         }
       }catch(e){}
@@ -985,8 +994,8 @@
       chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
       inp.value='';inp.style.height='auto';
       const imgPayload=chatImgB64;removeChatImage();renderChat();
-      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI is typing...';el.appendChild(tp);scrollChatBottom();
-      let botText='Sorry, something went wrong. Please try again.';
+      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI écrit...';el.appendChild(tp);scrollChatBottom();
+      let botText='Désolé, quelque chose a raté. Réessaie.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
         const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
@@ -999,11 +1008,11 @@
         else if(d.message)botText=d.message;
         else if(d.text)botText=d.text;
       }catch(e){
-        if(e.name==='AbortError')botText='Response timed out. Please try again.';
+        if(e.name==='AbortError')botText='La réponse a expiré. Réessaie.';
       }
       document.getElementById('tpI')?.remove();
       chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
-      try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+      try{S.set('nexusai_ma_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
       renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
     }
 
@@ -1032,14 +1041,14 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Semaine du ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">${p[i].am.toLocaleString()} MAD</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+${x.am.toLocaleString()} MAD</div></div>`).join('');}
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. Gold members get enhanced signal accuracy with longer streaks.'},
-      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (120 MAD) — 5 signals/day, 90% accuracy\n🥇 Gold (250 MAD) — Signaux illimités, 95% de précision + analyste IA personnel 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
-      profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
-      winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
+      streak:{title:'🔥 Série quotidienne',text:'Ouvre l’app chaque jour pour construire ta série. Les membres Gold profitent d’une meilleure précision avec des séries plus longues.'},
+      vip:{title:'🏅 Tier VIP',text:'Ton niveau de dépôt détermine les ressources IA allouées à ton compte.\n\n🥉 Bronze (120 MAD) — 5 signaux/jour, 90% de précision\n🥇 Gold (250 MAD) — Signaux illimités, 95% de précision + analyste IA personnel 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
+      profit:{title:'💰 Today\'s Profit',text:'Affiche le profit total des signaux suivis aujourd’hui. Réinitialisé chaque nuit à minuit.'},
+      winrate:{title:'📊 Taux de réussite',text:'Précision historique des prédictions IA pour ce jeu, basée sur des milliers de rounds analysés.'}
     };
     function showHelp(key){
       const d=HELP_DATA[key];if(!d)return;
@@ -1063,8 +1072,8 @@
 
     // APP INIT after geo is known
     function initApp(){
-      try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:'BD',lang:'en'});}catch(e){}
-      lang='en';S.set('aslang','en');
+      try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:'MA',lang:'fr'});}catch(e){}
+      lang='fr';S.set('aslang','fr');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on chat tab
       switchTab('chat');
