@@ -497,16 +497,16 @@
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
-    let userName="Guest",tgUserId=null;
+    let userName="Invité",tgUserId=null;
     if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
     function canUseSelfReset(){return String(tgUserId||S.get('tg_user_id')||'')===SELF_RESET_USER_ID;}
-    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Réinitialisation...':'↺ Reset';});}
     async function runSelfReset(){
       if(!canUseSelfReset()) return;
-      const ok=window.confirm('Full reset for this funnel? This will wipe chat, stage, VIP progress, deposit progress and local app state for your account only.');
+      const ok=window.confirm('Reset complet de cette funnel ? Cela va effacer le chat, la stage, la progression VIP, la progression dépôt et l’état local de l’app pour ton compte uniquement.');
       if(!ok) return;
       syncSelfResetButtons(true);
       try{
@@ -515,10 +515,10 @@
         const data=await res.json().catch(()=>({ok:false}));
         if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
         try{localStorage.clear();}catch(e){}
-        alert('Reset done. Funnel is back to fresh state.');
+        alert('Reset terminé. La funnel est revenue à l’état initial.');
         window.location.href=window.location.pathname;
       }catch(e){
-        alert('Reset failed: '+(e&&e.message?e.message:'unknown'));
+        alert('Reset échoué : '+(e&&e.message?e.message:'inconnu'));
         syncSelfResetButtons(false);
       }
     }
@@ -631,7 +631,7 @@
         nw.style.display='none';
         fill.style.width='100%';
         left.textContent='GOLD · MAX TIER';
-        hint.textContent='Unlimited signals + Personal AI Analyst 🥇';
+        hint.textContent='Signaux illimités + analyste IA personnel 🥇';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -694,13 +694,13 @@
         mi:{t:"Mines",s:"Cases sûres marquées.",b:"OBTENIR LE SIGNAL",l:"CASES SÛRES",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
         ba:{t:"Balloon",s:"Encaisse avant que ça explose.",b:"OBTENIR LE SIGNAL",l:"ENCASHER",u:(t)=>`Mise à jour à <strong>${t}</strong>`}},
       en:{cg:"Choisis un jeu :",back:"Menu",lt:"ACCÈS BLOQUÉ",lm:"⛔️ Termine l’activation dans le bot pour débloquer l’accès.",skip:"PASSER",wait:"Attends",tut:{s1:"",s2:"",s4:"",s5:""},
-        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
-        ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Max 10x.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Aim for target.",b:"GET SIGNAL",l:"TARGET",u:(t)=>`Updates at <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Safe spots marked.",b:"GET SIGNAL",l:"SAFE SPOTS",u:(t)=>`Updates at <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Cash out before pop.",b:"GET SIGNAL",l:"CASH OUT",u:(t)=>`Updates at <strong>${t}</strong>`}},
+        g:{aviator:{n:"Aviator",d:"Jeu crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Niveaux de risque"},penalty:{n:"Penalty",d:"Trouve la bonne zone"},mines:{n:"Mines",d:"Évite les bombes"},balloon:{n:"Balloon",d:"Encaisse avant l’explosion"}},
+        ch:{t:"Chicken Road",s:"Choisis la difficulté.",nx:"SUIVANT",w:(s)=>`Attends ${s}s`,tb:{easy:"Facile",medium:"Moyen",hard:"Difficile",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"Actualisé chaque minute.",b:"OBTENIR LE SIGNAL",l:"COEFFICIENT",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Max 10x.",b:"OBTENIR LE SIGNAL",l:"COEFFICIENT",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Vise la bonne zone.",b:"OBTENIR LE SIGNAL",l:"CIBLE",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Cases sûres marquées.",b:"OBTENIR LE SIGNAL",l:"CASES SÛRES",u:(t)=>`Mise à jour à <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Encaisse avant que ça explose.",b:"OBTENIR LE SIGNAL",l:"ENCASHER",u:(t)=>`Mise à jour à <strong>${t}</strong>`}},
       ru:{cg:"Выберите игру:",back:"Меню",lt:"ДОСТУП ЗАКРЫТ",lm:"⛔️ Отправьте ID боту.",skip:"ПРОПУСТИТЬ",wait:"Ждите",tut:{s1:"ID синхронизирован.",s2:"Выберите игру.",s4:"Прогноз.",s5:"Нажмите кнопку."},
         g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
         ch:{t:"Chicken Road",s:"Выберите сложность.",nx:"ДАЛЕЕ",w:(s)=>`Ждите ${s}с`,tb:{easy:"Лёгкий",medium:"Средний",hard:"Сложный",hardcore:"Хардкор"}},
@@ -724,7 +724,7 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signaux</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Signaux récents</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
@@ -882,7 +882,7 @@
     let liveRoomFeed=[];
     function liveRoomUnlocked(){return getVipTierIdx()>=1;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
-    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/70000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
+    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/70000);if(m<1)return 'à l’instant';if(m<60)return 'il y a '+m+' min';const h=Math.floor(m/60);if(h<24)return 'il y a '+h+' h';const dd=Math.floor(h/24);return 'il y a '+dd+' j';}
     function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
     function pickText(npc,seed){
       const lang=npc.lang||'en';const r=sRng(seed);
