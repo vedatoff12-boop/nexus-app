@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
@@ -308,7 +308,7 @@
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
-    /* ── Live Room ── */
+    /* ── 即時聊天室 ── */
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
     .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
@@ -373,22 +373,22 @@
     <div class="app-body">
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">即時</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ 重置</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI 支援 · 限定</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">支援中心</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI 訊號?</div><div class="chat-welcome-text">輸入訊息 below to learn how to get access 👇</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">想解鎖 AI 訊號嗎？</div><div class="chat-welcome-text">在下方輸入訊息，我會告訴你如何取得權限 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Ask NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="輸入你的問題..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
     <!-- SIGNALS TAB -->
     <div id="tab訊號" class="tab-content">
       <div class="top-bar">
-        <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
-        <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
+        <div class="top-left"><div class="live-dot"></div><span class="live-text">即時</span><span class="online-count" id="onlineCount">• 247</span></div>
+        <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ 重置</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
-          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
+          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">TW</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
       </div>
 
@@ -397,22 +397,22 @@
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% ACCURACY</div>
+              <div class="vip-badge-tier" id="vipTier2">青銅</div>
+              <div class="vip-badge-acc" id="vipAcc2">90% 勝率</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
-            <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
+            <div class="vip-next-label">下一等級</div>
+            <div class="vip-next-tier" id="vipNextTier">🥇 黃金</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">RM0 / 2000 TWD</span><span id="vipProgressHint">再存款即可升級 ⬆</span></div>
-        <div id="vip訊號Left" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">0 TWD / 2000 TWD</span><span id="vipProgressHint">再存款即可升級 ⬆</span></div>
+        <div id="vip訊號Left" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 今日剩餘 5/5 次訊號</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">天連續紀錄</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -420,27 +420,27 @@
     </div>
 
     <!-- TOP PLAYERS TAB -->
-    <div id="tabLiveRoom" class="tab-content">
+    <div id="tab即時Room" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Live Room</div>
+        <div class="live-room-label">即時聊天室</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold tier to unlock chat">
-              <div class="room-lock-hint">Watch the room now · Gold members can join the conversation</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 達到黃金等級即可解鎖聊天室">
+              <div class="room-lock-hint">目前可先觀看聊天室 · 黃金會員可參與對話</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
-              <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
+              <textarea class="room-input" id="liveRoomInput" placeholder="輸入訊息..." maxlength="280"></textarea>
+              <button class="room-send" id="liveRoomSend" onclick="send即時RoomMessage()">➤</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 排行榜</div><div class="top-header-sub">本週排行榜 — 本週獲利最高玩家</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -450,17 +450,17 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
+      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label" >聊天</span></button>
       <button class="tab-item" onclick="switchTab('signals')" id="btn訊號"><span class="tab-icon">🎯</span><span class="tab-label">訊號</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
-      <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btn即時Room"><span class="tab-icon">🌐</span><span class="tab-label">即時聊天室</span></button>
+      <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">前 100</span></button>
     </div>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      tw: { name:"Taiwan", flag:"🇹🇼", lang:"zh-Hant-TW", currency:"TWD", sym:"TWD ", profitRange:[20,200],
+      tw: { name:"台灣", flag:"🇹🇼", lang:"zh-Hant-TW", currency:"TWD", sym:"TWD ", profitRange:[20,200],
         link:"https://betoholictrack.net/cjTpxRmX?sub_id={subid}", promo:"777TW777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-tw",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
@@ -482,14 +482,14 @@
         names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
     };
     const REAL_NAME_POOL=["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"];
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-my-chat';
-    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-my-history';
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-tw-chat';
+    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-tw-history';
     let accessMode='limited';
     let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80)
     let userTotalDeposit=0;
     const APP_NS='nexustw'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo='tw'; S.set('user_geo','my');
+    let currentGeo='tw'; S.set('user_geo','tw');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.tw;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-tw';
     
@@ -498,15 +498,15 @@
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="Guest",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"用戶";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'用戶';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
     function canUseSelfReset(){return String(tgUserId||S.get('tg_user_id')||'')===SELF_RESET_USER_ID;}
-    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ 重置';});}
     async function runSelfReset(){
       if(!canUseSelfReset()) return;
-      const ok=window.confirm('Full reset for this funnel? This will wipe chat, stage, VIP progress, deposit progress and local app state for your account only.');
+      const ok=window.confirm('確定要完整重置這個漏斗嗎？這只會清除你自己的聊天、階段、VIP 進度、存款進度與本機狀態。');
       if(!ok) return;
       syncSelfResetButtons(true);
       try{
@@ -515,10 +515,10 @@
         const data=await res.json().catch(()=>({ok:false}));
         if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
         try{localStorage.clear();}catch(e){}
-        alert('Reset done. Funnel is back to fresh state.');
+        alert('重置完成，流程已恢復為全新狀態。');
         window.location.href=window.location.pathname;
       }catch(e){
-        alert('Reset failed: '+(e&&e.message?e.message:'unknown'));
+        alert('重置失敗：'+(e&&e.message?e.message:'unknown'));
         syncSelfResetButtons(false);
       }
     }
@@ -579,9 +579,9 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:80,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
+      {name:'未啟用',icon:'❔',dep:0,sigs:0,acc:0,desc:'存款後啟用'},
+      {name:'青銅',icon:'🥉',dep:1000,sigs:5,acc:90,desc:'每日 5 次訊號，90% 勝率'},
+      {name:'黃金',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'無限訊號，95% 勝率 + 專屬 AI 分析師'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDaily訊號(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -595,7 +595,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Deposit 1000 TWD to activate Bronze':(tier.acc+'% ACCURACY');
+      document.getElementById('vipAcc2').textContent=dep===0?'存款 1000 TWD 即可啟用青銅':(tier.acc+'% 勝率');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -606,16 +606,16 @@
       const used=getDaily訊號();const limit=tier.sigs;
       const sigEl=document.getElementById('vip訊號Left');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Deposit 1000 TWD to activate Bronze';}
-        else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 訊號 refresh tomorrow';}
+        if(dep===0){sigEl.textContent='❔ 存款 1000 TWD 即可啟用青銅';}
+        else if(limit===0){sigEl.textContent='♾️ 今日訊號無上限';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ 今日剩餘 ${rem}/${limit} 次訊號`:'🔒 訊號將於明天重置';}
       }
       if(dep===0){
         nw.style.display='';
-        nt.textContent='🥉 Bronze';
+        nt.textContent='🥉 青銅';
         fill.style.width='0%';
-        left.textContent='1000 TWD to unlock Bronze';
-        hint.textContent='Deposit 1000 TWD to activate Bronze';
+        left.textContent='1000 TWD 可解鎖青銅';
+        hint.textContent='存款 1000 TWD 即可啟用青銅';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -625,13 +625,13 @@
         const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
         fill.style.width=pct+'%';
         const remain=target-dep;
-        left.textContent='RM'+dep.toLocaleString()+' / RM'+target.toLocaleString();
-        hint.textContent='RM'+remain.toLocaleString()+' to '+next.name+' — Unlimited + AI Analyst ⬆';
+        left.textContent=dep.toLocaleString()+' TWD / '+target.toLocaleString()+' TWD';
+        hint.textContent='再存 '+remain.toLocaleString()+' TWD 即可升級到 '+next.name+' — 無限訊號 + AI 分析師 ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='GOLD · MAX TIER';
-        hint.textContent='Unlimited signals + Personal AI Analyst 🥇';
+        left.textContent='黃金 · 最高等級';
+        hint.textContent='無限訊號 + 專屬 AI 分析師 🥇';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -651,7 +651,7 @@
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
     if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
     else if(t==='signals'){document.getElementById('tab訊號').classList.add('active');document.getElementById('btn訊號').classList.add('active');mq.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}
+    else if(t==='liveRoom'){document.getElementById('tab即時Room').classList.add('active');document.getElementById('btn即時Room').classList.add('active');mq.style.display='none';render即時Room();}
     else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
@@ -675,23 +675,23 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
-    let lang='en'; S.set('aslang','en');
-    function T(){return STR[lang]||STR.en;}
+    const LANGS=[{id:"tw",l:"TW"}];
+    let lang='tw'; S.set('aslang','tw');
+    function T(){return STR[lang]||STR.tw;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
     function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
-        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
-        ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Max 10x.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Aim for target.",b:"GET SIGNAL",l:"TARGET",u:(t)=>`Updates at <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Safe spots marked.",b:"GET SIGNAL",l:"SAFE SPOTS",u:(t)=>`Updates at <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Cash out before pop.",b:"GET SIGNAL",l:"CASH OUT",u:(t)=>`Updates at <strong>${t}</strong>`}},
+      tw:{cg:"選擇遊戲：",back:"返回",lt:"權限未開啟",lm:"⛔️ 請先在 Telegram 機器人完成流程以解鎖。",skip:"略過",wait:"等待",tut:{s1:"",s2:"",s4:"",s5:""},
+        g:{aviator:{n:"Aviator",d:"爆點遊戲"},jetx:{n:"JetX",d:"SmartSoft 爆點遊戲"},chicken:{n:"Chicken Road",d:"難度關卡"},penalty:{n:"Penalty",d:"射門目標"},mines:{n:"Mines",d:"避開炸彈"},balloon:{n:"Balloon",d:"充氣後及時收手"}},
+        ch:{t:"Chicken Road",s:"選擇難度。",nx:"下一步",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"每分鐘更新一次。",b:"取得訊號",l:"倍率",u:(t)=>`將於 <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Max 10x.",b:"取得訊號",l:"倍率",u:(t)=>`將於 <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Aim for target.",b:"取得訊號",l:"目標",u:(t)=>`將於 <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Safe spots marked.",b:"取得訊號",l:"安全位置",u:(t)=>`將於 <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Cash out before pop.",b:"取得訊號",l:"建議收手點",u:(t)=>`將於 <strong>${t}</strong>`}},
       ru:{cg:"Выберите игру:",back:"Меню",lt:"ДОСТУП ЗАКРЫТ",lm:"⛔️ Отправьте ID боту.",skip:"ПРОПУСТИТЬ",wait:"Ждите",tut:{s1:"ID синхронизирован.",s2:"Выберите игру.",s4:"Прогноз.",s5:"Нажмите кнопку."},
         g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
         ch:{t:"Chicken Road",s:"Выберите сложность.",nx:"ДАЛЕЕ",w:(s)=>`Ждите ${s}с`,tb:{easy:"Лёгкий",medium:"Средний",hard:"Сложный",hardcore:"Хардкор"}},
@@ -702,8 +702,8 @@
         ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}},
       es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Enviar ID al bot.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Evita minas"},balloon:{n:"Balloon",d:"Infla y gana"}},ch:{t:"Chicken Road",s:"Dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Medio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta.",b:"OBTENER",l:"ZONA",u:(t)=>`Actualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTENER",l:"CELDAS",u:(t)=>`Actualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira.",b:"OBTENER",l:"RETIRAR",u:(t)=>`Actualiza <strong>${t}</strong>`}},
       pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
-      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
-      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Livelli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
+      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"目標",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
+      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft 爆點遊戲"},chicken:{n:"Chicken Road",d:"即時lli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
       mn:{cg:"Сонгох:",back:"Цэс",lt:"ХААГДЛАА",lm:"⛔️ ID илгээнэ.",skip:"АЛГАСАХ",wait:"Хүлээнэ",tut:{s1:"ID синхрон.",s2:"Тоглоом сонгох.",s4:"Таамаглал.",s5:"Дарна уу."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Эрсдэл"},penalty:{n:"Penalty",d:"Гоол"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Хүлээнэ ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
     };
 
@@ -747,13 +747,13 @@
       const sub=document.getElementById('chatHeaderSub');
       const title=document.getElementById('chatHeaderTitle');
       if(chatTier===2){
-        if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
-        if(title)title.textContent='ANALYST';
+        if(sub)sub.textContent='NexusAI 專屬分析師 \u00b7 24/7';
+        if(title)title.textContent='分析師';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
       }else{
-        if(sub)sub.textContent='NexusAI Support';
-        if(title)title.textContent='SUPPORT';
+        if(sub)sub.textContent='NexusAI 支援';
+        if(title)title.textContent='支援中心';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
@@ -774,7 +774,7 @@
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">立即註冊 →</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
@@ -799,9 +799,9 @@
         if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up RM${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better accuracy.</div>${upgradeHint}</div>`;
-          btn.disabled=true;btn.textContent='Server limit';btn.style.opacity='0.3';return true;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">再存 ${need.toLocaleString()} TWD 到聊天中即可解鎖 ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI 伺服器額度已用完</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">AI 伺服器目前正在高負載處理訊號。<br>${tier.icon} ${tier.name} 帳號可獲得 ${tier.sigs} 次訊號/天。</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">更高的存款 = 分配給你帳號的更多伺服器資源<br>= 更多訊號 + 更高勝率。</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='伺服器上限';btn.style.opacity='0.3';return true;
         }
         return false;
       }
@@ -826,28 +826,28 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up RM${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">再存 ${need.toLocaleString()} TWD 到聊天中即可解鎖 ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI 伺服器額度已用完</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='伺服器上限';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='已達上限';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
-{name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Gold',lang:'en'},
-{name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Gold',lang:'en'},
-{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Gold',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
-{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},
-{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'infinityGod1',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},
-{name:'Ceo Dugem',badge:'Gold',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'Panjang',badge:'Gold',lang:'en'},
-{name:'Shionys',badge:'Gold',lang:'en'},{name:'Aaron',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Michael',badge:'Gold',lang:'en'},
-{name:'Ryan',badge:'Gold',lang:'en'},{name:'Shawn',badge:'Gold',lang:'en'},
+{name:'Audrey',badge:'黃金',lang:'en'},{name:'Khatri',badge:'黃金',lang:'en'},{name:'Mila',badge:'黃金',lang:'en'},{name:'HidayahSG',badge:'黃金',lang:'en'},
+{name:'BennVibe777',badge:'黃金',lang:'en'},{name:'FahmiNoor',badge:'黃金',lang:'en'},{name:'Krish',badge:'黃金',lang:'en'},{name:'Nikhil',badge:'黃金',lang:'en'},
+{name:'BlackShoper',badge:'黃金',lang:'en'},{name:'IMRAN',badge:'黃金',lang:'en'},{name:'Sukbir',badge:'黃金',lang:'en'},{name:'Viduranga',badge:'黃金',lang:'en'},
+{name:'Mr Rabbit',badge:'黃金',lang:'en'},{name:'nickyap93',badge:'黃金',lang:'en'},{name:'MR_Black',badge:'黃金',lang:'en'},{name:'money4life10',badge:'黃金',lang:'en'},
+{name:'Pinokiolah',badge:'黃金',lang:'en'},{name:'infinityGod1',badge:'黃金',lang:'en'},{name:'scarletphantom96',badge:'黃金',lang:'en'},{name:'Dex_9',badge:'黃金',lang:'en'},
+{name:'Ceo Dugem',badge:'黃金',lang:'en'},{name:'Flintzjr',badge:'黃金',lang:'en'},{name:'ozan1290',badge:'黃金',lang:'en'},{name:'Panjang',badge:'黃金',lang:'en'},
+{name:'Shionys',badge:'黃金',lang:'en'},{name:'Aaron',badge:'黃金',lang:'en'},{name:'Ravi',badge:'黃金',lang:'en'},{name:'Michael',badge:'黃金',lang:'en'},
+{name:'Ryan',badge:'黃金',lang:'en'},{name:'Shawn',badge:'黃金',lang:'en'},
 
 
 
 
 
 
-{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Gold',lang:'es'},
-{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Gold',lang:'es'},
-{name:'pablo.r',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},
-{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Gold',lang:'es'}
+{name:'Esmeralda',badge:'黃金',lang:'es'},{name:'Antorxz',badge:'黃金',lang:'es'},{name:'carlos_m',badge:'黃金',lang:'es'},{name:'lucía🔥',badge:'黃金',lang:'es'},
+{name:'mateo',badge:'黃金',lang:'es'},{name:'elena_',badge:'黃金',lang:'es'},{name:'diego🎯',badge:'黃金',lang:'es'},{name:'sofía',badge:'黃金',lang:'es'},
+{name:'pablo.r',badge:'黃金',lang:'es'},{name:'valentina',badge:'黃金',lang:'es'},{name:'javi_',badge:'黃金',lang:'es'},{name:'sergio',badge:'黃金',lang:'es'},
+{name:'daniela',badge:'黃金',lang:'es'},{name:'nico',badge:'黃金',lang:'es'},{name:'martín',badge:'黃金',lang:'es'},{name:'alejandro',badge:'黃金',lang:'es'}
 ];
     const SEED_EN=[
       '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
@@ -895,7 +895,7 @@
       return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
     }
     let lastSlot=0;
-    function seedLiveRoomLocal(){
+    function seed即時RoomLocal(){
       const now=slotNow();
       if(liveRoomFeed.length&&lastSlot===now)return;
       if(!liveRoomFeed.length){for(let i=0;i<80;i++){liveRoomFeed.push(msgForSlot(now-80+1+i));}lastSlot=now;}
@@ -914,7 +914,7 @@
     let roomTickerStarted=false,roomTickerTimer=null,roomTypingTimer=null;
     function startRoomTicker(){
       if(roomTickerStarted)return;roomTickerStarted=true;startReactDrip();
-      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seedLiveRoomLocal();if(curTab==='liveRoom')renderLiveRoom(true);}},3000);
+      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seed即時RoomLocal();if(curTab==='liveRoom')render即時Room(true);}},3000);
     }
     let roomRenderedCount=0;
     function buildMsgEl(m){
@@ -924,19 +924,19 @@
       el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
       return el;
     }
-    function renderLiveRoom(appendOnly){
-      seedLiveRoomLocal();const feed=document.getElementById('liveRoomFeed');if(!feed)return;
+    function render即時Room(appendOnly){
+      seed即時RoomLocal();const feed=document.getElementById('liveRoomFeed');if(!feed)return;
       const lock=document.getElementById('liveRoomLock');const comp=document.getElementById('liveRoomComposer');
       const unlocked=liveRoomUnlocked();lock.style.display=unlocked?'none':'block';comp.style.display=unlocked?'flex':'none';
       if(!appendOnly||roomRenderedCount===0){feed.innerHTML='';roomRenderedCount=0;for(let i=0;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i]));}roomRenderedCount=liveRoomFeed.length;}
       else{for(let i=roomRenderedCount;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i]));}roomRenderedCount=liveRoomFeed.length;}
       feed.scrollTop=feed.scrollHeight;startRoomTicker();
     }
-    async function sendLiveRoomMessage(){
+    async function send即時RoomMessage(){
       if(!liveRoomUnlocked())return;const inp=document.getElementById('liveRoomInput');const txt=(inp.value||'').trim();if(!txt)return;
-      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,createdAt:new Date().toISOString(),role:'user',reactions:[]});inp.value='';renderLiveRoom(true);
+      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,createdAt:new Date().toISOString(),role:'user',reactions:[]});inp.value='';render即時Room(true);
     }
-    document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();sendLiveRoomMessage();}});
+    document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();send即時RoomMessage();}});
     // CHAT
     let chatH=[],chatLD=false,chatSnd=false,chatImgB64=null;
     function handleChatImage(input){
@@ -954,8 +954,8 @@
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">RM${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">TWD ${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI 專屬分析師</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI 支援</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at 黃金 tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
@@ -989,7 +989,7 @@
       let botText='Sorry, something went wrong. Please try again.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'用戶',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
         if(imgPayload)body.image=imgPayload;
         const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
@@ -1032,12 +1032,12 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 本週：${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">TWD ${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+TWD ${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. Gold members get enhanced signal accuracy with longer streaks.'},
-      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (1000 TWD) — 5 signals/day, 90% accuracy\n🥇 Gold (2000 TWD) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
+      streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. 黃金 members get enhanced signal accuracy with longer streaks.'},
+      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 青銅 (1000 TWD) — 每日 5 次訊號，90% 勝率\n🥇 黃金 (2000 TWD) — 無限訊號，95% 勝率 + 專屬 AI 分析師 24/7\n\n黃金 members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
     };
@@ -1063,8 +1063,8 @@
 
     // APP INIT after geo is known
     function initApp(){
-      try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'IN',lang:'en'});}catch(e){}
-      lang='en';S.set('aslang','en');
+      try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'TW',lang:'tw'});}catch(e){}
+      lang='tw';S.set('aslang','tw');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on chat tab
       switchTab('chat');
