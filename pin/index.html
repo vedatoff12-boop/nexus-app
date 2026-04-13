@@ -388,7 +388,7 @@
         <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
-          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">FR</button><div class="lang-menu" id="langMenu"></div></div>
+          <div class="lang-drop" style="display:none !important"></div>
         </div>
       </div>
 
@@ -696,11 +696,17 @@
     const LANGS=[{id:'en',l:'EN'},{id:'es',l:'ES'},{id:'uz',l:'UZ'},{id:'az',l:'AZ'}];
     let lang=geo().lang||'en'; S.set('aslang',lang);
     function T(){return STR[lang]||STR.en;}
+    const UI_STR={
+      en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Send a message below to get started 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',liveRoom:'Live Room',liveLock:'🔒 Reach Gold to unlock chat',liveHint:'Gold chat unlocks after reaching the local Gold deposit threshold',tabChat:'Chat',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
+      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',liveRoom:'Sala en vivo',liveLock:'🔒 Llega a Gold para desbloquear el chat',liveHint:'El chat Gold se desbloquea al alcanzar el umbral local de depósito Gold',tabChat:'Chat',tabSignals:'Señales',tabLive:'Sala live',tabTop:'Top 100'},
+      uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',liveRoom:'Jonli xona',liveLock:'🔒 Chatni ochish uchun Gold ga chiqing',liveHint:'Gold chat mahalliy Gold depozit chegarasiga yetganda ochiladi',tabChat:'Chat',tabSignals:'Signallar',tabLive:'Jonli xona',tabTop:'Top 100'},
+      az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',liveRoom:'Canlı otaq',liveLock:'🔒 Çatı açmaq üçün Gold-a çat',liveHint:'Gold chat yerli Gold depozit həddinə çatanda açılır',tabChat:'Chat',tabSignals:'Siqnallar',tabLive:'Canlı otaq',tabTop:'Top 100'}
+    };
 
-    function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
-    function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
-    function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
-    document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
+    function toggleLangMenu(){}
+    function setLang(id){}
+    function buildLangMenu(){}
+    document.addEventListener('click',e=>{});
 
     const STR={
       en:{cg:"Choose a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete activation in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"ID synced.",s2:"Choose a game.",s4:"Prediction.",s5:"Tap the button."},
@@ -797,7 +803,26 @@
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
     }
-    function applyStatic(){applyGeoChrome();renderHome();buildLangMenu();refreshAccessState().then(()=>{applyGeoChrome();renderHome();});}
+    function applyStatic(){
+      applyGeoChrome();
+      lang=geo().lang||'en'; S.set('aslang',lang);
+      REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
+      const ui=UI_STR[lang]||UI_STR.en;
+      const setTxt=(id,v)=>{const el=document.getElementById(id); if(el && v!==undefined) el.textContent=v;};
+      setTxt('chatHeaderSub', ui.chatHeaderSub); setTxt('chatHeaderTitle', ui.chatHeaderTitle);
+      setTxt('chatWelcomeTitle', ui.chatWelcomeTitle); setTxt('chatWelcomeText', ui.chatWelcomeText);
+      setTxt('liveRoomLabel', ui.liveRoom); setTxt('topSub', ui.topSub);
+      const topTitle=document.querySelector('.top-header-title'); if(topTitle) topTitle.textContent=ui.topTitle;
+      const lockInput=document.querySelector('#liveRoomLock input'); if(lockInput) lockInput.placeholder=ui.liveLock;
+      setTxt('liveRoomHint', ui.liveHint);
+      const btnChat=document.querySelector('#btnChat .tab-label'); if(btnChat) btnChat.textContent=ui.tabChat;
+      const btnSig=document.querySelector('#btnSignaux .tab-label'); if(btnSig) btnSig.textContent=ui.tabSignals;
+      const btnLive=document.querySelector('#btnLiveRoom .tab-label'); if(btnLive) btnLive.textContent=ui.tabLive;
+      const btnTop=document.querySelector('#btnTop .tab-label'); if(btnTop) btnTop.textContent=ui.tabTop;
+      const langDrop=document.querySelector('.lang-drop'); if(langDrop) langDrop.style.display='none';
+      renderHome();
+      refreshAccessState().then(()=>{applyGeoChrome();renderHome();});
+    }
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
@@ -1061,7 +1086,7 @@
       let botText=T().errGeneric||'Sorry, something went wrong. Try again.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier,geo:String(currentGeo||'bd').toUpperCase(),country:String(currentGeo||'bd').toUpperCase(),lang:lang||geo().lang||'en',currency:geo().currency};
         if(imgPayload)body.image=imgPayload;
         const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
@@ -1133,6 +1158,25 @@
       }
     }
 
+    async function hydrateGeoFromBackend(){
+      const uid=String(tgUserId||S.get('tg_user_id')||'');
+      if(!uid) return;
+      try{
+        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid})});
+        const d=await r.json();
+        const backendGeo=String(d.country||d.geo||'').toLowerCase();
+        if(GEO_CONFIG[backendGeo]){
+          currentGeo=backendGeo;
+          S.set('user_geo', currentGeo);
+          savedIdKey=`saved_player_id_${currentGeo}`;
+          lang=geo().lang||'en';
+          S.set('aslang', lang);
+          REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
+          const nextUrl=new URL(window.location.href); nextUrl.searchParams.set('geo', currentGeo); history.replaceState({},'',nextUrl);
+        }
+      }catch(e){}
+    }
+
     // APP INIT after geo is known
     function initApp(){
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||'bd').toUpperCase(),lang:geo().lang});}catch(e){}
@@ -1145,7 +1189,8 @@
     }
 
     // INIT
-    window.onload=function(){
+    window.onload=async function(){
+      await hydrateGeoFromBackend();
       initApp();
     };
   </script>
