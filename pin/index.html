@@ -373,7 +373,7 @@
     <div class="app-body">
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Direct</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
         </div>
         <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title" id="chatWelcomeTitle">NexusAI Support</div><div class="chat-welcome-text" id="chatWelcomeText">Send a message below to get started 👇</div></div></div></div>
@@ -385,7 +385,7 @@
     <!-- SIGNALS TAB -->
     <div id="tabSignaux" class="tab-content">
       <div class="top-bar">
-        <div class="top-left"><div class="live-dot"></div><span class="live-text">Direct</span><span class="online-count" id="onlineCount">• 247</span></div>
+        <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
           <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">FR</button><div class="lang-menu" id="langMenu"></div></div>
@@ -402,7 +402,7 @@
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
-            <div class="vip-next-label">PROCHAIN TIER</div>
+            <div class="vip-next-label" id="vipNextLabel">NEXT TIER</div>
             <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
           </div>
         </div>
@@ -412,7 +412,7 @@
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">jour de série</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)" id="streakLabel">day streak</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -422,14 +422,14 @@
     <!-- TOP PLAYERS TAB -->
     <div id="tabLiveRoom" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Salle Live</div>
+        <div class="live-room-label" id="liveRoomLabel">Live Room</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
               <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold to unlock chat">
-              <div class="room-lock-hint">Regarde la salle maintenant · les membres Gold peuvent participer</div>
+              <div class="room-lock-hint" id="roomLockHint">Watch the room now · Gold members can participate</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
               <textarea class="room-input" id="liveRoomInput" placeholder="Écris un message..." maxlength="280"></textarea>
@@ -440,7 +440,7 @@
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub">Classement hebdo - plus gros gagnants de la semaine</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub" id="topSub">Weekly ranking — biggest winners of the week</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -452,7 +452,7 @@
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
       <button class="tab-item" onclick="switchTab('signals')" id="btnSignaux"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Salle Live</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label" id="tabLiveRoomLabel">Live</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
