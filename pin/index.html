@@ -495,7 +495,7 @@
       az:["Murad","Tural","Orxan","Emin","Elvin","Rauf","Samir","Nihat","Aysel","Nigar","Leyla","Aynur","Günel","Sabina","Fidan","Lalə","Rəşad","Kənan","Zaur","İlkin","Farid","Ruslan","Vüsal","Cavid","Toğrul","Elşən","Ramil","Əli","Vüqar","Elçin","Namiq","Fuad","Ülvi","Sənan","Ceyhun","Oqtay","Məmməd","Tahir","Bəhruz","Xəyal","Aytən","Nərmin","Günay","Könül","Sevda","Ləman","Ülkər","Pərvin","Şəbnəm","Gülnar","Arzu","Türkan","Cəmilə","Nəzrin","Samirə","Aygün","Təranə","Rəna","Zülfiyyə","Mədinə","Aynurə","Nübar","Dilbər","Esmira","İlahə","Xədicə","Həcər","Kəmalə","Vəfa","Afət","Sevinc","Nailə","Ərtoğrul","Turan","Bəxtiyar","Mətin","Qəhrəman","Sahib","Aslan","Aqil","Araz","Natiq","Yusif","Rəfail","Vasif","Mahir","Əsgər","Kamal","Hikmət","Elmar","Vaqif","Mürsəl","Rövşən","Kamran","Bayram","Əhməd","Elnur","Hüseyn","Akif"],
       en:["Rahim","Karim","Nayeem","Sakib","Fahim","Tamim","Arafat","Hasan","Nusrat","Mim","Tania","Ayesha","Priya","Jannat","Nabila","Shakil","Rafi","Mehedi","Tanvir","Rupa","Imran","Sohel","Masud","Rasel","Jubayer","Milon","Arif","Sumon","Sabbir","Ripon","Shamim","Jahid","Rubel","Biplab","Nazmul","Rafiq","Ashraf","Sazzad","Mahin","Farhan","Tahmid","Niloy","Anik","Sadiq","Habib","Joynal","Firoz","Liton","Belal","Selim","Nusaiba","Fatima","Lamia","Tasnia","Raisa","Sadia","Mariam","Nafisa","Sumaiya","Israt","Tabassum","Sharmin","Dilara","Monira","Nazma","Halima","Rumana","Rehana","Kakoli","Laboni","Sabrina","Fahmida","Jannatul","Nasrin","Shanta","Roksana","Moushumi","Bithi","Farzana","Ritu","Shampa","Shirin","Poly","Mukta","Asma","Kohinoor","Mahbub","Zahid","Anwar","Enamul","Kamrul","Shafiq","Touhid","Mosharraf","Delwar","Mizanur","Lutfur","Aminul","Faruq","Badrul"]
     };
-    const REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
+    let REAL_NAME_POOL=NAME_POOLS.en;
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-pin-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-pin-history';
     let accessMode='limited';
@@ -506,6 +506,7 @@
     let currentGeo=String(urlParams.get('geo')||S.get('user_geo')||'bd').toLowerCase();
     if(!GEO_CONFIG[currentGeo]) currentGeo='bd'; S.set('user_geo',currentGeo);
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.bd;}
+    REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-pin';
     function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · Pin-UP access`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
 
