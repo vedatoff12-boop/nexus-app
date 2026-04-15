@@ -501,7 +501,7 @@
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo=String(urlParams.get('geo')||S.get('user_geo')||'uy').toLowerCase();
     if(!GEO_CONFIG[currentGeo]) currentGeo='uy'; S.set('user_geo',currentGeo);
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.bd;}
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.uy;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam';
     function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · Pin-UP access`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
@@ -565,8 +565,8 @@
       onlineVal+=Math.random()>0.5?delta:-delta;
       if(onlineVal<180)onlineVal+=Math.floor(Math.random()*10)+5;
       if(onlineVal>420)onlineVal-=Math.floor(Math.random()*10)+5;
-      document.getElementById('onlineCount').textContent='• '+onlineVal;
-      document.getElementById('onlineCount2').textContent=onlineVal;
+      const oc=document.getElementById('onlineCount');if(oc)oc.textContent='• '+onlineVal;
+      const oc2=document.getElementById('onlineCount2');if(oc2)oc2.textContent=onlineVal;
     }
     updOnline();setInterval(updOnline,4000);
 
@@ -1165,9 +1165,9 @@
     function updGeoSwitch(){
       const btn=document.getElementById('geoSwitchBtn');if(!btn)return;
       if(currentGeo){
-        const g=geo();
-        document.getElementById('geoSwitchFlag').textContent=g.flag;
-        document.getElementById('geoSwitchName').textContent=g.name;
+        const g=geo();if(!g)return;
+        const fl=document.getElementById('geoSwitchFlag');if(fl)fl.textContent=g.flag;
+        const nm=document.getElementById('geoSwitchName');if(nm)nm.textContent=g.name;
       }
     }
 
