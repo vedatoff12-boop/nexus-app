@@ -1050,20 +1050,37 @@
     const svgIcon='<svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg>';
     function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title" style="color:var(--gold)">${T().chatAnalystTitle||'NexusAI AI Analyst'}</div><div class="chat-welcome-text">${T().chatAnalystText||'Account active.'}</div></div>`;}else{e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title">${T().chatWelcomeTitle||'NexusAI Support'}</div><div class="chat-welcome-text">${T().chatWelcomeText||'I can help with the app and activation.'}</div></div>`;}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
-      if(chatLD)return;
+      if(chatLD){ if(!chatH.length) renderChat(); return; }
       chatLD=true;
-      try{const raw=S.get('nexusai_lat_chat');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      let rendered=false;
+      try{
+        const raw=S.get('nexusai_lat_chat');
+        if(raw){
+          const arr=JSON.parse(raw);
+          if(Array.isArray(arr)&&arr.length){
+            chatH=arr;
+            renderChat();
+            rendered=true;
+          }
+        }
+      }catch(e){}
+      if(!rendered) renderChat();
       if(!CHAT_HISTORY_WEBHOOK)return;
-      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
+      const uid=String(tgUserId||S.get('tg_user_id')||'');
+      if(!uid)return;
       try{
         const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:AbortSignal.timeout(10000)});
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
-          try{S.set('chat_history',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          try{S.set('nexusai_lat_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          renderChat();
+        } else if(!chatH.length) {
           renderChat();
         }
-      }catch(e){}
+      }catch(e){
+        if(!chatH.length) renderChat();
+      }
     }
 
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
