@@ -511,7 +511,7 @@
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="User",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);const _uhi=document.getElementById('userHeaderId');if(_uhi)_uhi.textContent=`TG: ${tgUserId}`;const _cti=document.getElementById('chatTgId');if(_cti)_cti.textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';const _uhi=document.getElementById('userHeaderId');if(_uhi)_uhi.textContent=`TG: ${tgUserId}`;const _cti=document.getElementById('chatTgId');if(_cti)_cti.textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
@@ -553,7 +553,7 @@
       savedIdKey=`saved_player_id_${code}`;
       lang=geo().lang||'en';S.set('aslang',lang);
       const nextUrl=new URL(window.location.href);nextUrl.searchParams.set('geo',code);history.replaceState({},'',nextUrl);
-      document.getElementById('geoScreen').classList.remove('open');
+      const _gs=document.getElementById('geoScreen');if(_gs)_gs.classList.remove('open');
       initApp();
     }
     function showGeoSelector(){ const el=document.getElementById('geoScreen'); if(el) el.classList.add('open'); }
@@ -606,9 +606,9 @@
       const dep=parseInt(S.get('totalDep')||'0');
       const idx=getVipTierIdx();const tier=VIP_TIERS[idx];
       // Badge
-      document.getElementById('vipIcon2').textContent=tier.icon;
-      document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?(`Deposit to unlock Bronze`):(tier.acc+'% ACCURACY');
+      (document.getElementById('vipIcon2')||{}).textContent=tier.icon;
+      (document.getElementById('vipTier2')||{}).textContent=tier.name;
+      (document.getElementById('vipAcc2')||{}).textContent=dep===0?(`Deposit to unlock Bronze`):(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -648,7 +648,7 @@
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
-      document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
+      (document.getElementById('vipCard')||{}).style.borderColor=colors[idx]||colors[0];
     }
     updVIP();
 
@@ -1069,7 +1069,7 @@
       const uid=String(tgUserId||S.get('tg_user_id')||'');
       if(!uid)return;
       try{
-        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:AbortSignal.timeout(10000)});
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:(()=>{try{const c=new AbortController();setTimeout(()=>c.abort(),10000);return c.signal;}catch(e){return undefined;}})()});
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
