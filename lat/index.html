@@ -587,7 +587,7 @@
     updProfit();
 
     // STREAK
-    function updStreak(){const d=new Date().toDateString(),ld=S.get('sday');let s=parseInt(S.get('scnt')||'0');if(ld!==d){const y=new Date(Date.now()-864e5).toDateString();if(ld===y)s++;else s=1;S.set('sday',d);S.set('scnt',s);}document.getElementById('streakNum').textContent=s;return s;}
+    function updStreak(){const d=new Date().toDateString(),ld=S.get('sday');let s=parseInt(S.get('scnt')||'0');if(ld!==d){const y=new Date(Date.now()-864e5).toDateString();if(ld===y)s++;else s=1;S.set('sday',d);S.set('scnt',s);}const streakEl=document.getElementById('streakNum');if(streakEl)streakEl.textContent=s;return s;}
     const curStreak=updStreak();
 
     // VIP
@@ -761,7 +761,7 @@
     // SIGNALS
     let timer=null;
     function renderHome(){
-      if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
+      if(timer)clearInterval(timer);const app=document.getElementById("app");if(!app)return;app.innerHTML='';
       const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
       const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
       ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
@@ -1142,7 +1142,7 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});const topDate=document.getElementById('topDate');const pd=document.getElementById('topPodium');const topList=document.getElementById('topList');if(!topDate||!pd||!topList)return;topDate.textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');topList.innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     function getHelpData(){return {
@@ -1211,9 +1211,13 @@
     function initApp(){
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||'uy').toUpperCase(),lang:geo().lang});}catch(e){}
       lang=geo().lang||'en';S.set('aslang',lang);
-      applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
+      try{applyStatic();}catch(e){try{console.warn('lat init applyStatic failed', e?.name||e, e?.message||'');}catch(_e){}}
+      try{buildMarquee();}catch(e){try{console.warn('lat init buildMarquee failed', e?.name||e, e?.message||'');}catch(_e){}}
+      try{updProfit();}catch(e){}
+      try{updOnline();}catch(e){}
+      try{updGeoSwitch();}catch(e){}
       forceChatFallback();
-      loadChatHistory();
+      try{loadChatHistory();}catch(e){try{console.warn('lat init loadChatHistory failed', e?.name||e, e?.message||'');}catch(_e){}}
     }
 
     let __latamBooted=false;
