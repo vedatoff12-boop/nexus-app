@@ -1158,7 +1158,10 @@
       const uid=String(tgUserId||S.get('tg_user_id')||'');
       if(!uid) return;
       try{
-        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid})});
+        const controller = new AbortController();
+        const timer = setTimeout(()=>controller.abort(), 3500);
+        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid}),signal:controller.signal});
+        clearTimeout(timer);
         const d=await r.json();
         const backendGeo=String(d.country||d.geo||'').toLowerCase();
         if(GEO_CONFIG[backendGeo]){
@@ -1170,7 +1173,9 @@
           REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
           const nextUrl=new URL(window.location.href); nextUrl.searchParams.set('geo', currentGeo); history.replaceState({},'',nextUrl);
         }
-      }catch(e){}
+      }catch(e){
+        try{console.warn('lat hydrateGeoFromBackend failed', e?.name||e, e?.message||'');}catch(_e){}
+      }
     }
 
     // APP INIT after geo is known
@@ -1185,9 +1190,11 @@
     }
 
     // INIT
-    window.onload=async function(){
-      await hydrateGeoFromBackend();
+    window.onload=function(){
       initApp();
+      hydrateGeoFromBackend().then(()=>{
+        try{ applyStatic(); buildMarquee(); updProfit(); updOnline(); updGeoSwitch(); if(curTab==='chat') renderChat(); }catch(e){}
+      }).catch(()=>{});
     };
   </script>
 </body>
