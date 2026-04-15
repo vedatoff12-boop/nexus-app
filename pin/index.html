@@ -460,19 +460,19 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      mx: { name:"México", flag:"🇲🇽", lang:"es", currency:"MXN", sym:"MXN ", gold:850, profitRange:[80,1800],
+      mx: { name:"México", flag:"🇲🇽", lang:"es", currency:"MXN", sym:"MXN ", bronze:51, gold:850, profitRange:[80,1800],
         link:"https://webpinplay.com/SO2kmnjt/?subId1={clickid}", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-pin",
         names:["Carlos","Javier","Luis","Diego","Andrés","Miguel","Mateo","Santiago","Valeria","Camila","Sofía","Fernanda","Daniela","Regina","Ximena","Paola","Andrea","Mariana","Emilio","Ángel"] },
-      cl: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"CLP ", gold:50000, profitRange:[5000,90000],
+      cl: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"CLP ", bronze:3000, gold:50000, profitRange:[5000,90000],
         link:"https://webpinplay.com/SO2kmnjt/?subId1={clickid}", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-pin",
         names:["Benjamín","Vicente","Matías","Tomás","Joaquín","Martín","Agustín","Catalina","Isidora","Emilia","Sofía","Josefa","Trinidad","Martina","Amanda","Florencia","Ignacio","Lucas","Máximo","Renata"] },
-      ec: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"$", gold:50, profitRange:[5,120],
+      ec: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"$", bronze:3, gold:50, profitRange:[5,120],
         link:"https://webpinplay.com/SO2kmnjt/?subId1={clickid}", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-pin",
         names:["Mateo","Sebastián","Daniel","Nicolás","Joaquín","Martín","Camila","Sofía","Valentina","Isabella","Luciana","Emilia","Danna","María","Salomé","Pedro","Juan","Andrés","Gabriel","Ana"] },
-      gt: { name:"Guatemala", flag:"🇬🇹", lang:"es", currency:"GTQ", sym:"GTQ ", gold:390, profitRange:[40,900],
+      gt: { name:"Guatemala", flag:"🇬🇹", lang:"es", currency:"GTQ", sym:"GTQ ", bronze:24, gold:390, profitRange:[40,900],
         link:"https://webpinplay.com/SO2kmnjt/?subId1={clickid}", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-pin",
         names:["José","Luis","Carlos","Andrés","Diego","Pablo","Mateo","Sofía","Camila","María","Valeria","Fernanda","Daniela","Alejandra","Ana","Lucas","Javier","Miguel","Gabriela","Paula"] },
@@ -484,7 +484,7 @@
         link:"https://webpinplay.com/SO2kmnjt/?subId1={clickid}", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-pin",
         names:["Murad","Tural","Orxan","Emin","Elvin","Rauf","Samir","Nihat","Aysel","Nigar","Leyla","Aynur","Günel","Sabina","Fidan","Lalə","Rəşad","Kənan","Zaur","İlkin"] },
-      bd: { name:"Bangladesh", flag:"🇧🇩", lang:"en", currency:"BDT", sym:"৳", gold:6000, profitRange:[600,12000],
+      bd: { name:"Bangladesh", flag:"🇧🇩", lang:"en", currency:"BDT", sym:"৳", bronze:360, gold:6000, profitRange:[600,12000],
         link:"https://webpinplay.com/SO2kmnjt/?subId1={clickid}", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-pin",
         names:["Rahim","Karim","Nayeem","Sakib","Fahim","Tamim","Arafat","Hasan","Nusrat","Mim","Tania","Ayesha","Priya","Jannat","Nabila","Shakil","Rafi","Mehedi","Tanvir","Rupa"] }
@@ -597,7 +597,7 @@
     // VIP
     const VIP_TIERS=[
       {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:1,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Bronze',icon:'🥉',dep:()=>Number(geo().bronze||1),sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
       {name:'Gold',icon:'🥇',dep:()=>Number(geo().gold||999999),sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + personal AI analyst'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){const req=typeof VIP_TIERS[i].dep==='function'?VIP_TIERS[i].dep():VIP_TIERS[i].dep;if(dep>=req)return i;}return 0;}
