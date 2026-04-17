@@ -460,7 +460,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      tr: { name:"Türkiye", flag:"🇹🇷", lang:"tr", currency:"TRY", sym:"₺", profitRange:[20,200],
+      tr: { name:"Türkiye", flag:"🇹🇷", lang:"tr", currency:"TRY", sym:"₺", profitRange:[2000,6000],
         link:"https://nexusaitr.appstor.cfd", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-tr",
         names:["Emre","Burak","Cem","Oğuz","Tolga","Serkan","Mert","Kaan","Yusuf","Ali","Deniz","Elif","Ayşe","Zeynep","Selin","Merve","Büşra","Esra","Gamze","Hande"] }
@@ -564,8 +564,8 @@
     // VIP
     const VIP_TIERS=[
       {name:'Başlangıç',icon:'❔',dep:0,sigs:0,acc:0,desc:'Yatırım to activate'},
-      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:80,sigs:0,acc:95,desc:'Unsınırlı signals, 95% accuracy + Personal AI Analyst'}
+      {name:'Bronze',icon:'🥉',dep:500,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Gold',icon:'🥇',dep:1000,sigs:0,acc:95,desc:'Unsınırlı signals, 95% accuracy + Personal AI Analyst'}
     ];
     function getVipSeviyeIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySinyaller(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigBugün','0');}return parseInt(S.get('sigBugün')||'0');}
@@ -722,9 +722,16 @@
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
       
-      if(d.total_deposit&&d.total_deposit>0){userTotalYatırım=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='sınırlı';S.set('accessGranted','0');}
-      chatSeviye=(userTotalYatırım>=2000)?2:1;
+      if(d.total_deposit&&d.total_deposit>0){userTotalYatırım=d.total_deposit;S.set('totalDep',String(d.total_deposit));}
+      if(d.allowed){
+        accessMode='full';S.set('accessGranted','1');
+        if(!(d.total_deposit>0) && userTotalYatırım < 500){
+          userTotalYatırım = 500;
+          S.set('totalDep','500');
+        }
+      }else{accessMode='sınırlı';S.set('accessGranted','0');}
+      chatSeviye=(userTotalYatırım>=1000)?2:1;
+      updVIP();
       updateSohbetHeader();}catch(e){}
     }
     function updateSohbetHeader(){
