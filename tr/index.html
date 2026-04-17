@@ -489,8 +489,8 @@
     let userTotalYatırım=0;
     const APP_NS='nexustr'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo='my'; S.set('user_geo','my');
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
+    let currentGeo='tr'; S.set('user_geo','tr');
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.tr;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-tr';
     
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
