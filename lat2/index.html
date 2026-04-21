@@ -462,27 +462,27 @@
         const GEO_CONFIG = {
       uy: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:160, gold:400, profitRange:[320,880],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
       py: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"USD ", bronze:5, gold:10, profitRange:[60000,165000],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
       pa: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"$", bronze:4, gold:10, profitRange:[8,22],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
       cr: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"VES", sym:"VES ", bronze:2500, gold:5000, profitRange:[4200,11330],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
       cu: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"BOB", sym:"BOB ", bronze:40, gold:80, profitRange:[1900,5280],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
       do: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"COP ", bronze:250, gold:600, profitRange:[500,1320],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] }
     };
     const NAME_POOLS={
@@ -503,7 +503,7 @@
     if(!GEO_CONFIG[currentGeo]) currentGeo='uy'; S.set('user_geo',currentGeo);
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.uy;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
-    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam22';
+    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam2';
     function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · NexusAI LATAM`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
