@@ -460,7 +460,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      vn: { name:"Việt Nam", flag:"🇻🇳", lang:"vi", currency:"VND", sym:"VND", profitRange:[20,200],
+      vn: { name:"Việt Nam", flag:"🇻🇳", lang:"vi", currency:"VND", sym:"VND", profitRange:[1000000,5000000],
         link:"https://nexusaivn.playzone.cfd", promo:"777VN777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-vn",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
@@ -1040,7 +1040,7 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('vi-VN',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Tuần của ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">VND${p[i].am.toLocaleString('vi-VN')}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+VND${x.am.toLocaleString('vi-VN')}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('vi-VN',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Tuần của ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString('en-US')}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString('en-US')}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     const HELP_DATA={
