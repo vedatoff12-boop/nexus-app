@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-  <title>NexusAI Signals</title>
+  <title>Tín hiệu NexusAI</title>
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -308,7 +308,7 @@
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
-    /* ── Live Room ── */
+    /* ── Phòng trực tiếp ── */
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
     .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
@@ -373,20 +373,20 @@
     <div class="app-body">
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Trực tiếp</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Làm mới</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">Hỗ trợ NexusAI · Giới hạn</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">HỖ TRỢ</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Muốn mở khóa tín hiệu AI?</div><div class="chat-welcome-text">Nhắn bên dưới để biết cách mở quyền truy cập 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Ask NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Nhắn cho Hỗ trợ NexusAI..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
     <!-- SIGNALS TAB -->
     <div id="tabSignals" class="tab-content">
       <div class="top-bar">
-        <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
-        <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
+        <div class="top-left"><div class="live-dot"></div><span class="live-text">Trực tiếp</span><span class="online-count" id="onlineCount">• 247</span></div>
+        <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Làm mới</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
           <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
@@ -397,22 +397,22 @@
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
+              <div class="vip-badge-tier" id="vipTier2">Đồng</div>
               <div class="vip-badge-acc" id="vipAcc2">85% ACCURACY</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
             <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
+            <div class="vip-next-tier" id="vipNextTier">🥇 Vàng</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">VND0 / 300000 VND</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">VND0 / 300000 VND</span><span id="vipProgressHint">Nạp thêm để nâng hạng ⬆</span></div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ Còn 3/3 tín hiệu hôm nay</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">ngày liên tiếp</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -422,17 +422,17 @@
     <!-- TOP PLAYERS TAB -->
     <div id="tabLiveRoom" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Live Room</div>
+        <div class="live-room-label">Phòng trực tiếp</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold tier to unlock chat">
-              <div class="room-lock-hint">Watch the room now · Gold members can join the conversation</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Đạt hạng Vàng để mở khóa chat">
+              <div class="room-lock-hint">Xem phòng ngay · Thành viên Vàng có thể tham gia trò chuyện</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
+              <textarea class="room-input" id="liveRoomInput" placeholder="Nhập tin nhắn..." maxlength="280"></textarea>
               <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
             </div>
           </div>
@@ -440,7 +440,7 @@
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Người chơi top</div><div class="top-header-sub">Bảng xếp hạng tuần — người thắng lớn tuần này</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -451,8 +451,8 @@
 
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
+      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Tín hiệu</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Phòng trực tiếp</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -460,7 +460,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      vn: { name:"Vietnam", flag:"🇻🇳", lang:"en", currency:"VND", sym:"VND", profitRange:[20,200],
+      vn: { name:"Việt Nam", flag:"🇻🇳", lang:"vi", currency:"VND", sym:"VND", profitRange:[20,200],
         link:"https://nexusaivn.playzone.cfd", promo:"777VN777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-vn",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
@@ -485,7 +485,7 @@
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-vn-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-vn-history';
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=300000)
+    let chatTier=1; // 1=Hỗ trợ, 2=Chuyên viên AI cá nhân (total_deposit>=300000)
     let userTotalDeposit=0;
     const APP_NS='nexusvn'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -498,12 +498,12 @@
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="Guest",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'Người dùng';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
     function canUseSelfReset(){return String(tgUserId||S.get('tg_user_id')||'')===SELF_RESET_USER_ID;}
-    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Làm mới';});}
     async function runSelfReset(){
       if(!canUseSelfReset()) return;
       const ok=window.confirm('Full reset for this funnel? This will wipe chat, stage, VIP progress, deposit progress and local app state for your account only.');
@@ -579,9 +579,9 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:140000,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:300000,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
+      {name:'Chưa xếp hạng',icon:'❔',dep:0,sigs:0,acc:0,desc:'Nạp tiền để kích hoạt'},
+      {name:'Đồng',icon:'🥉',dep:140000,sigs:5,acc:90,desc:'5 tín hiệu/ngày, độ chính xác 90%'},
+      {name:'Vàng',icon:'🥇',dep:300000,sigs:0,acc:95,desc:'Tín hiệu không giới hạn, độ chính xác 95% + Chuyên viên AI cá nhân'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -595,7 +595,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Deposit 140000 VND to activate Bronze':(tier.acc+'% ACCURACY');
+      document.getElementById('vipAcc2').textContent=dep===0?'Nạp 140000 VND để kích hoạt hạng Đồng':(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -606,16 +606,16 @@
       const used=getDailySignals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Deposit 140000 VND to activate Bronze';}
-        else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Signals refresh tomorrow';}
+        if(dep===0){sigEl.textContent='❔ Nạp 140000 VND để kích hoạt hạng Đồng';}
+        else if(limit===0){sigEl.textContent='♾️ Tín hiệu không giới hạn hôm nay';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} tín hiệu còn lại hôm nay`:'🔒 Tín hiệu sẽ làm mới vào ngày mai';}
       }
       if(dep===0){
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent='140000 VND to unlock Bronze';
-        hint.textContent='Deposit 140000 VND to activate Bronze';
+        left.textContent='140000 VND để mở hạng Đồng';
+        hint.textContent='Nạp 140000 VND để kích hoạt hạng Đồng';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -626,12 +626,12 @@
         fill.style.width=pct+'%';
         const remain=target-dep;
         left.textContent='VND'+dep.toLocaleString()+' / VND'+target.toLocaleString();
-        hint.textContent='VND'+remain.toLocaleString()+' to '+next.name+' — Unlimited + AI Analyst ⬆';
+        hint.textContent='VND'+remain.toLocaleString()+' to '+next.name+' — Không giới hạn + Chuyên viên AI ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='GOLD · MAX TIER';
-        hint.textContent='Unlimited signals + Personal AI Analyst 🥇';
+        left.textContent='VÀNG · HẠNG TỐI ĐA';
+        hint.textContent='Tín hiệu không giới hạn + Chuyên viên AI cá nhân 🥇';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -661,7 +661,7 @@
       const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
       const pick=rotated.slice(0,16);
-      const verbs=['won','cashed out','hit','withdrew'];
+      const verbs=['thắng','rút tiền','trúng','đã rút'];
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
@@ -675,8 +675,8 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
-    let lang='en'; S.set('aslang','en');
+    const LANGS=[{id:"vi",l:"VI"}];
+    let lang='vi'; S.set('aslang','vi');
     function T(){return STR[lang]||STR.en;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
@@ -684,6 +684,14 @@
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
+      vi:{cg:"Chọn trò chơi:",back:"Menu",lt:"CHƯA MỞ QUYỀN",lm:"⛔️ Hoàn tất thiết lập trong bot để mở quyền truy cập.",skip:"BỎ QUA",wait:"Đợi",tut:{s1:"",s2:"",s4:"",s5:""},
+        g:{aviator:{n:"Aviator",d:"Trò crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Mức rủi ro"},penalty:{n:"Penalty",d:"Sút vào khung thành"},mines:{n:"Mines",d:"Tránh bom"},balloon:{n:"Balloon",d:"Bơm rồi rút tiền"}},
+        ch:{t:"Chicken Road",s:"Chọn độ khó.",nx:"BƯỚC TIẾP",w:(s)=>`Đợi ${s}s`,tb:{easy:"Dễ",medium:"Vừa",hard:"Khó",hardcore:"Cực khó"}},
+        av:{t:"Aviator",s:"Làm mới mỗi phút.",b:"LẤY TÍN HIỆU",l:"HỆ SỐ",u:(t)=>`Cập nhật lúc <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Tối đa 10x.",b:"LẤY TÍN HIỆU",l:"HỆ SỐ",u:(t)=>`Cập nhật lúc <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Ngắm mục tiêu.",b:"LẤY TÍN HIỆU",l:"MỤC TIÊU",u:(t)=>`Cập nhật lúc <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Các ô an toàn được đánh dấu.",b:"LẤY TÍN HIỆU",l:"Ô AN TOÀN",u:(t)=>`Cập nhật lúc <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Rút trước khi nổ.",b:"LẤY TÍN HIỆU",l:"RÚT TIỀN",u:(t)=>`Cập nhật lúc <strong>${t}</strong>`}},
       en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
         g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
         ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
@@ -715,7 +723,7 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Tín hiệu gần đây</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
@@ -747,13 +755,13 @@
       const sub=document.getElementById('chatHeaderSub');
       const title=document.getElementById('chatHeaderTitle');
       if(chatTier===2){
-        if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
-        if(title)title.textContent='ANALYST';
+        if(sub)sub.textContent='Chuyên viên AI cá nhân NexusAI \u00b7 24/7';
+        if(title)title.textContent='PHÂN TÍCH';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
       }else{
-        if(sub)sub.textContent='NexusAI Support';
-        if(title)title.textContent='SUPPORT';
+        if(sub)sub.textContent='Hỗ trợ NexusAI';
+        if(title)title.textContent='HỖ TRỢ';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
@@ -774,7 +782,7 @@
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Đăng ký ngay →</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
@@ -800,8 +808,8 @@
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
           if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up VND${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better accuracy.</div>${upgradeHint}</div>`;
-          btn.disabled=true;btn.textContent='Server limit';btn.style.opacity='0.3';return true;
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Đã chạm giới hạn máy chủ AI</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Máy chủ AI đang xử lý tín hiệu với tải cao.<br>${tier.icon} ${tier.name} tài khoản được ${tier.sigs} tín hiệu/ngày.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Nạp cao hơn = nhiều tài nguyên máy chủ hơn<br>cho tài khoản = nhiều tín hiệu hơn + chính xác hơn.</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='Giới hạn máy chủ';btn.style.opacity='0.3';return true;
         }
         return false;
       }
@@ -826,30 +834,37 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up VND${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up VND${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Đã chạm giới hạn máy chủ AI</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Nạp cao hơn = thêm tài nguyên máy chủ cho tài khoản của bạn</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Giới hạn máy chủ';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Đã chạm giới hạn';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
-{name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Gold',lang:'en'},
-{name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Gold',lang:'en'},
-{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Gold',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
-{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},
-{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'infinityGod1',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},
-{name:'Ceo Dugem',badge:'Gold',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'Panjang',badge:'Gold',lang:'en'},
-{name:'Shionys',badge:'Gold',lang:'en'},{name:'Aaron',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Michael',badge:'Gold',lang:'en'},
-{name:'Ryan',badge:'Gold',lang:'en'},{name:'Shawn',badge:'Gold',lang:'en'},
+{name:'Audrey',badge:'Vàng',lang:'en'},{name:'Khatri',badge:'Vàng',lang:'en'},{name:'Mila',badge:'Vàng',lang:'en'},{name:'HidayahSG',badge:'Vàng',lang:'en'},
+{name:'BennVibe777',badge:'Vàng',lang:'en'},{name:'FahmiNoor',badge:'Vàng',lang:'en'},{name:'Krish',badge:'Vàng',lang:'en'},{name:'Nikhil',badge:'Vàng',lang:'en'},
+{name:'BlackShoper',badge:'Vàng',lang:'en'},{name:'IMRAN',badge:'Vàng',lang:'en'},{name:'Sukbir',badge:'Vàng',lang:'en'},{name:'Viduranga',badge:'Vàng',lang:'en'},
+{name:'Mr Rabbit',badge:'Vàng',lang:'en'},{name:'nickyap93',badge:'Vàng',lang:'en'},{name:'MR_Black',badge:'Vàng',lang:'en'},{name:'money4life10',badge:'Vàng',lang:'en'},
+{name:'Pinokiolah',badge:'Vàng',lang:'en'},{name:'infinityGod1',badge:'Vàng',lang:'en'},{name:'scarletphantom96',badge:'Vàng',lang:'en'},{name:'Dex_9',badge:'Vàng',lang:'en'},
+{name:'Ceo Dugem',badge:'Vàng',lang:'en'},{name:'Flintzjr',badge:'Vàng',lang:'en'},{name:'ozan1290',badge:'Vàng',lang:'en'},{name:'Panjang',badge:'Vàng',lang:'en'},
+{name:'Shionys',badge:'Vàng',lang:'en'},{name:'Aaron',badge:'Vàng',lang:'en'},{name:'Ravi',badge:'Vàng',lang:'en'},{name:'Michael',badge:'Vàng',lang:'en'},
+{name:'Ryan',badge:'Vàng',lang:'en'},{name:'Shawn',badge:'Vàng',lang:'en'},
 
 
 
 
 
 
-{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Gold',lang:'es'},
-{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Gold',lang:'es'},
-{name:'pablo.r',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},
-{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Gold',lang:'es'}
+{name:'Esmeralda',badge:'Vàng',lang:'es'},{name:'Antorxz',badge:'Vàng',lang:'es'},{name:'carlos_m',badge:'Vàng',lang:'es'},{name:'lucía🔥',badge:'Vàng',lang:'es'},
+{name:'mateo',badge:'Vàng',lang:'es'},{name:'elena_',badge:'Vàng',lang:'es'},{name:'diego🎯',badge:'Vàng',lang:'es'},{name:'sofía',badge:'Vàng',lang:'es'},
+{name:'pablo.r',badge:'Vàng',lang:'es'},{name:'valentina',badge:'Vàng',lang:'es'},{name:'javi_',badge:'Vàng',lang:'es'},{name:'sergio',badge:'Vàng',lang:'es'},
+{name:'daniela',badge:'Vàng',lang:'es'},{name:'nico',badge:'Vàng',lang:'es'},{name:'martín',badge:'Vàng',lang:'es'},{name:'alejandro',badge:'Vàng',lang:'es'}
 ];
     const SEED_EN=[
+      'quá ổn','vào đẹp quá','ăn rồi 💰','chuẩn luôn','ngon','🔥','kèo đẹp','đỉnh thật','vừa ăn xong','ez','lên nào','ảo thật','😭😭','W','quá cháy','không thể tin nổi','chuẩn bài',
+      'bro 💀','căng đấy','quá mượt','tôi cũng vậy','thật luôn','big W','AI gánh đẹp 🔥','ai bắt kèo này rồi??','phòng cháy quá','vào nhanh thật',
+      'mines 3 hàng liền 💰','aviator vừa nổ 2.1x','chicken road lại ăn lol','penalty quá sạch','balloon bay mạnh',
+      'cú 6x điên thật','timing crash đang ngon hơn','vừa lên Vàng 🥇','3 kèo thắng liên tiếp',
+      'ăn ít nhưng vẫn ổn','hôm nay không phải ngày đẹp nhất nhưng ok','ít nhất cũng gỡ vốn','kèo đầu trượt nhưng kèo sau cứu lại',
+      'im im rồi nổ profit 💸','phòng Vàng chạy nhanh','yên ắng rồi 3 kèo W liền','vào muộn vẫn có lời',
+      'ngủ quên mất kèo 😭','dậy là thấy profit','tiền free thật','đã nói rồi','chuẩn quá','không tệ chút nào'
       '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
       'bro 💀','insane','terbaik','same here','real','big W','AI cooked 🔥','who caught that??','gg room','that was fast',
       'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
@@ -859,12 +874,20 @@
       'lol i was sleeping and missed it 😭','woke up to profit','free money fr','told yall','called it','not bad at all'
     ];
     const SEED_KR=[
+      'quá ổn','ăn đậm','tôi cũng vào','chuẩn đó','balloon 4.6x ngon','JetX 3.2x vừa nổ','ai vào 2.4x rồi?',
+      'hôm nay lời ổn','đỡ hơn hôm qua','tín hiệu chuẩn thật','tỷ lệ đẹp đấy','balloon nổ ác','thấy chưa?',
+      'đạt 80k rồi','hôm nay đẹp trời','mines 3 kèo liền 💰','ảo thật','đúng là real','vừa lên Vàng 🥇',
+      'timing crash ổn đấy','penalty sạch','chicken road ngon','aviator vừa nổ','nice','gg'
       'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
       '오늘 수익 괜찮다','어제보다 낫다','신호 정확했어','승률 괜찮네','balloon터짐 ㄹㅇ','봤지?',
       '₩80k 달성 ㅋㅋ','오늘 하루 좋았다','mines 3연속 💰','진짜 미쳤다','이건 real','방금 gold 달성 🥇',
       'crash 타이밍 좋았어','penalty 깔끔','chicken road ㅋㅋ','aviator 방금 터짐','nice','gg'
     ];
     const SEED_ES=[
+      'quá ngon','lại một ngày có lời','chuỗi vẫn đang chạy 💪','ngày đầu đã có profit','hôm nay thắng rồi',
+      'cú crash 5.8x quá điên','kèo này dính đẹp','hôm qua chưa được nhưng hôm nay có 🙌','mines hôm nay dọn sạch 💰',
+      'đã bảo là sẽ vào','kèo này free luôn','balloon bay quá ác','penalty đẹp','không tệ','nice',
+      'JetX 3.2x vừa nổ','timing crash đang tốt hơn','mới vào là đã có lời','gg','🔥','💰💰'
       'genial','otro día otro profit','la racha sigue 💪','primer día y ya profit','hoy ganamos',
       'ese crash de 5.8x fue loco','esto pegó bien','ayer no pero hoy sí 🙌','mines limpió hoy 💰',
       'dije que iba a pegar','ese fue gratis','balloon subió loco','penalty limpio','not bad','nice',
@@ -873,7 +896,7 @@
     let liveRoomFeed=[];
     function liveRoomUnlocked(){return getVipTierIdx()>=1;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
-    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
+    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'vừa xong';if(m<60)return m+' phút trước';const h=Math.floor(m/60);if(h<24)return h+' giờ trước';const dd=Math.floor(h/24);return dd+' ngày trước';}
     function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
     function pickText(npc,seed){
       const lang=npc.lang||'en';const r=sRng(seed);
@@ -914,14 +937,14 @@
     let roomTickerStarted=false,roomTickerTimer=null,roomTypingTimer=null;
     function startRoomTicker(){
       if(roomTickerStarted)return;roomTickerStarted=true;startReactDrip();
-      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seedLiveRoomLocal();if(curTab==='liveRoom')renderLiveRoom(true);}},3000);
+      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} đang nhập<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seedLiveRoomLocal();if(curTab==='liveRoom')renderLiveRoom(true);}},3000);
     }
     let roomRenderedCount=0;
     function buildMsgEl(m){
       const el=document.createElement('div');el.className='room-msg'+(m.role==='user'?' user':'');
       const rt=roomReplyTarget(m.text);const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
       const bi=roomBadgeIcon(m.badge);
-      el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
+      el.innerHTML=`${rt?`<div class="room-reply">↳ trả lời ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
       return el;
     }
     function renderLiveRoom(appendOnly){
@@ -955,11 +978,11 @@
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">VND${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">Chuyên viên AI cá nhân NexusAI</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">Hỗ trợ NexusAI</div><div class="chat-welcome-text">Tôi có thể hỗ trợ về app và cách thiết lập. Chuyên viên AI cá nhân sẽ mở ở hạng Vàng.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
-      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      try{const raw=S.get('nexusvn_chat');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
       if(!CHAT_HISTORY_WEBHOOK)return;
       const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       try{
@@ -967,7 +990,7 @@
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
-          try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          try{S.set('nexusvn_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
           renderChat();
         }
       }catch(e){}
@@ -985,11 +1008,11 @@
       chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
       inp.value='';inp.style.height='auto';
       const imgPayload=chatImgB64;removeChatImage();renderChat();
-      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI is typing...';el.appendChild(tp);scrollChatBottom();
-      let botText='Sorry, something went wrong. Please try again.';
+      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI đang nhập...';el.appendChild(tp);scrollChatBottom();
+      let botText='Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'Người dùng',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
         if(imgPayload)body.image=imgPayload;
         const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
@@ -999,11 +1022,11 @@
         else if(d.message)botText=d.message;
         else if(d.text)botText=d.text;
       }catch(e){
-        if(e.name==='AbortError')botText='Response timed out. Please try again.';
+        if(e.name==='AbortError')botText='Phản hồi quá lâu. Vui lòng thử lại.';
       }
       document.getElementById('tpI')?.remove();
       chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
-      try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+      try{S.set('nexusvn_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
       renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
     }
 
@@ -1013,7 +1036,7 @@
     function genTop(){
       const ws=getWeekSeed();
       const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
+      while(baseNames.length<100){baseNames.push(`Người chơi${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
@@ -1032,14 +1055,14 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('vi-VN',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Tuần của ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">VND${p[i].am.toLocaleString('vi-VN')}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+VND${x.am.toLocaleString('vi-VN')}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. Gold members get enhanced signal accuracy with longer streaks.'},
-      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (140000 VND) — 5 signals/day, 90% accuracy\n🥇 Gold (300000 VND) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
-      profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
-      winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
+      streak:{title:'🔥 Chuỗi ngày hoạt động',text:'Mở app mỗi ngày để duy trì chuỗi. Thành viên Vàng sẽ nhận độ chính xác cao hơn khi chuỗi dài hơn.'},
+      vip:{title:'🏅 Hạng VIP',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (140000 VND) — 5 signals/day, 90% accuracy\n🥇 Gold (300000 VND) — Unlimited signals, 95% accuracy + Chuyên viên AI cá nhân 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
+      profit:{title:'💰 Today\'s Profit',text:'Hiển thị tổng lợi nhuận từ tất cả tín hiệu bạn theo hôm nay. Số này sẽ reset vào nửa đêm mỗi ngày. Dùng nhiều tín hiệu hơn để tăng thu nhập trong ngày!'},
+      winrate:{title:'📊 Tỷ lệ thắng',text:'Độ chính xác lịch sử của dự đoán AI cho trò chơi này. Dựa trên hàng nghìn ván đã phân tích.'}
     };
     function showHelp(key){
       const d=HELP_DATA[key];if(!d)return;
@@ -1063,8 +1086,8 @@
 
     // APP INIT after geo is known
     function initApp(){
-      try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'IN',lang:'en'});}catch(e){}
-      lang='en';S.set('aslang','en');
+      try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'VN',lang:'vi'});}catch(e){}
+      lang='vi';S.set('aslang','vi');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on chat tab
       switchTab('chat');
