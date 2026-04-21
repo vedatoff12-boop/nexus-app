@@ -460,29 +460,29 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
         const GEO_CONFIG = {
-      uy: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"UYU", sym:"UYU ", bronze:160, gold:400, profitRange:[320,880],
+      uy: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:160, gold:400, profitRange:[320,880],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      py: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"PYG", sym:"PYG ", bronze:30000, gold:75000, profitRange:[60000,165000],
+      py: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"USD ", bronze:5, gold:10, profitRange:[60000,165000],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      pa: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"PAB", sym:"$", bronze:4, gold:10, profitRange:[8,22],
+      pa: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"$", bronze:4, gold:10, profitRange:[8,22],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      cr: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"CRC", sym:"CRC ", bronze:2100, gold:5150, profitRange:[4200,11330],
+      cr: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"VES", sym:"VES ", bronze:2500, gold:5000, profitRange:[4200,11330],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      cu: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"CUP", sym:"CUP ", bronze:950, gold:2400, profitRange:[1900,5280],
+      cu: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"BOB", sym:"BOB ", bronze:40, gold:80, profitRange:[1900,5280],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      do: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"DOP", sym:"DOP ", bronze:250, gold:600, profitRange:[500,1320],
+      do: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"COP ", bronze:250, gold:600, profitRange:[500,1320],
         link:"https://lat.playmrkt.bond/", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam22",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] }
     };
     const NAME_POOLS={
@@ -503,7 +503,7 @@
     if(!GEO_CONFIG[currentGeo]) currentGeo='uy'; S.set('user_geo',currentGeo);
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.uy;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
-    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam2';
+    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam22';
     function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · NexusAI LATAM`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
@@ -685,7 +685,7 @@
         if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       });
       c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
-      c.style.animationDelay=`-${Date.now()%300000}ms`;
+      c.style.animationDelay=`-${Date.now()%50}ms`;
     }
 
     // LANGS
@@ -752,7 +752,7 @@
     function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
     function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
     function getCd(k){return Math.max(0,Math.ceil((parseInt(S.get(`cd_${k}`)||'0')-Date.now())/1000));}
-    function setCd(k){S.set(`cd_${k}`,Date.now()+30000);}
+    function setCd(k){S.set(`cd_${k}`,Date.now()+5);}
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
@@ -1101,7 +1101,7 @@
         const uid=String(tgUserId||S.get('tg_user_id')||'');
         const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier,geo:String(currentGeo||'uy').toUpperCase(),country:String(currentGeo||'uy').toUpperCase(),lang:lang||geo().lang||'es',currency:geo().currency};
         if(imgPayload)body.image=imgPayload;
-        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
+        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),5);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
         clearTimeout(timeout);
         const d=await r.json();
