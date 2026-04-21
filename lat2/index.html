@@ -508,7 +508,7 @@
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.bd;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam2';
-    function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · Pin-UP access`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
+    function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · 1xBet access`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
@@ -1059,15 +1059,24 @@
       try{const raw=S.get('nexusai_lat_chat');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
       if(!CHAT_HISTORY_WEBHOOK)return;
       const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
+      const g=String(currentGeo||S.get('geo')||'pe').toLowerCase();
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),10000);
       try{
-        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:AbortSignal.timeout(10000)});
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:g}),signal:controller.signal});
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
           try{S.set('chat_history',JSON.stringify(chatH.slice(-40)));}catch(e){}
           renderChat();
+        } else {
+          renderChat();
         }
-      }catch(e){}
+      }catch(e){
+        renderChat();
+      } finally {
+        clearTimeout(timer);
+      }
     }
 
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
