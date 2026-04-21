@@ -236,7 +236,7 @@
     .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
 
     /* APP SHELL + TAB BAR */
-    .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100vh;height:100dvh;}
+    .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100dvh;}
     .app-body{flex:1;min-height:0;position:relative;overflow:hidden;}
     .tab-bar{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);flex-shrink:0;}
     .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 0;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;}
@@ -371,7 +371,7 @@
   <!-- CHAT TAB - outside app-wrap, fixed fullscreen -->
   <div class="app-shell">
     <div class="app-body">
-      <div id="tabChat" class="tab-content active">
+      <div id="tabChat" class="tab-content">
         <div class="chat-header">
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
@@ -460,28 +460,32 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
         const GEO_CONFIG = {
-      uy: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:160, gold:400, profitRange:[320,880],
-        link:"https://lat.playmrkt.bond/", promo:"",
+      pe: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:20, gold:40, profitRange:[320,880],
+        link:"https://lat.playmrkt.bond/", promo:"777PE777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      py: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"USD ", bronze:5, gold:10, profitRange:[60000,165000],
-        link:"https://lat.playmrkt.bond/", promo:"",
+      ec: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"USD ", bronze:5, gold:10, profitRange:[60,165],
+        link:"https://lat.playmrkt.bond/", promo:"777EC777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      pa: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"$", bronze:4, gold:10, profitRange:[8,22],
-        link:"https://lat.playmrkt.bond/", promo:"",
+      cl: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"CLP ", bronze:5000, gold:10000, profitRange:[8000,22000],
+        link:"https://lat.playmrkt.bond/", promo:"777CL777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      cr: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"VES", sym:"VES ", bronze:2500, gold:5000, profitRange:[4200,11330],
-        link:"https://lat.playmrkt.bond/", promo:"",
+      ve: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"VES", sym:"VES ", bronze:2500, gold:5000, profitRange:[4200,11330],
+        link:"https://lat.playmrkt.bond/", promo:"777VE777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      cu: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"BOB", sym:"BOB ", bronze:40, gold:80, profitRange:[1900,5280],
-        link:"https://lat.playmrkt.bond/", promo:"",
+      bo: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"BOB", sym:"BOB ", bronze:40, gold:80, profitRange:[190,528],
+        link:"https://lat.playmrkt.bond/", promo:"777BO777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      do: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"COP ", bronze:250, gold:600, profitRange:[500,1320],
-        link:"https://lat.playmrkt.bond/", promo:"",
+      co: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"COP ", bronze:16000, gold:35000, profitRange:[50000,132000],
+        link:"https://lat.playmrkt.bond/", promo:"777CO777",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
+        names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
+      ar: { name:"Argentina", flag:"🇦🇷", lang:"es", currency:"ARS", sym:"ARS ", bronze:8000, gold:16000, profitRange:[24000,66000],
+        link:"https://lat.playmrkt.bond/", promo:"777AR777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] }
     };
@@ -492,26 +496,26 @@
       en:["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"]
     };
     let REAL_NAME_POOL=NAME_POOLS.en;
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-latam-chat';
-    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-latam-history';
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-latam2-chat';
+    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-latam2-history';
     let accessMode='limited';
     let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=250)
     let userTotalDeposit=0;
-    const APP_NS='nexuslat'; const S={get(k){try{return localStorage.getItem(APP_NS+':'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem(APP_NS+':'+k,v)}catch(e){}}};
+    const APP_NS='nexuslat2'; const S={get(k){try{return localStorage.getItem(APP_NS+':'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem(APP_NS+':'+k,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo=String(urlParams.get('geo')||S.get('user_geo')||'uy').toLowerCase();
-    if(!GEO_CONFIG[currentGeo]) currentGeo='uy'; S.set('user_geo',currentGeo);
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.uy;}
+    let currentGeo=String(urlParams.get('geo')||S.get('user_geo')||'pe').toLowerCase();
+    if(!GEO_CONFIG[currentGeo]) currentGeo='pe'; S.set('user_geo',currentGeo);
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.bd;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam2';
-    function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · NexusAI LATAM`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
+    function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · Pin-UP access`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="User",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);const _uhi=document.getElementById('userHeaderId');if(_uhi)_uhi.textContent=`TG: ${tgUserId}`;const _cti=document.getElementById('chatTgId');if(_cti)_cti.textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';const _uhi=document.getElementById('userHeaderId');if(_uhi)_uhi.textContent=`TG: ${tgUserId}`;const _cti=document.getElementById('chatTgId');if(_cti)_cti.textContent=`TG: ${tgUserId}`;}}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
@@ -549,11 +553,11 @@
       });
     }
     function selectGeo(code){
-      currentGeo=String(code||'uy').toLowerCase();S.set('user_geo',currentGeo);
-      savedIdKey=`saved_player_id_${currentGeo}`;
+      currentGeo=String(code||'bd').toLowerCase();S.set('user_geo',currentGeo);
+      savedIdKey=`saved_player_id_${code}`;
       lang=geo().lang||'en';S.set('aslang',lang);
-      const nextUrl=new URL(window.location.href);nextUrl.searchParams.set('geo',currentGeo);history.replaceState({},'',nextUrl);
-      const _gs=document.getElementById('geoScreen');if(_gs)_gs.classList.remove('open');
+      const nextUrl=new URL(window.location.href);nextUrl.searchParams.set('geo',code);history.replaceState({},'',nextUrl);
+      document.getElementById('geoScreen').classList.remove('open');
       initApp();
     }
     function showGeoSelector(){ const el=document.getElementById('geoScreen'); if(el) el.classList.add('open'); }
@@ -565,8 +569,8 @@
       onlineVal+=Math.random()>0.5?delta:-delta;
       if(onlineVal<180)onlineVal+=Math.floor(Math.random()*10)+5;
       if(onlineVal>420)onlineVal-=Math.floor(Math.random()*10)+5;
-      const oc=document.getElementById('onlineCount');if(oc)oc.textContent='• '+onlineVal;
-      const oc2=document.getElementById('onlineCount2');if(oc2)oc2.textContent=onlineVal;
+      document.getElementById('onlineCount').textContent='• '+onlineVal;
+      document.getElementById('onlineCount2').textContent=onlineVal;
     }
     updOnline();setInterval(updOnline,4000);
 
@@ -587,7 +591,7 @@
     updProfit();
 
     // STREAK
-    function updStreak(){const d=new Date().toDateString(),ld=S.get('sday');let s=parseInt(S.get('scnt')||'0');if(ld!==d){const y=new Date(Date.now()-864e5).toDateString();if(ld===y)s++;else s=1;S.set('sday',d);S.set('scnt',s);}const streakEl=document.getElementById('streakNum');if(streakEl)streakEl.textContent=s;return s;}
+    function updStreak(){const d=new Date().toDateString(),ld=S.get('sday');let s=parseInt(S.get('scnt')||'0');if(ld!==d){const y=new Date(Date.now()-864e5).toDateString();if(ld===y)s++;else s=1;S.set('sday',d);S.set('scnt',s);}document.getElementById('streakNum').textContent=s;return s;}
     const curStreak=updStreak();
 
     // VIP
@@ -606,9 +610,9 @@
       const dep=parseInt(S.get('totalDep')||'0');
       const idx=getVipTierIdx();const tier=VIP_TIERS[idx];
       // Badge
-      (document.getElementById('vipIcon2')||{}).textContent=tier.icon;
-      (document.getElementById('vipTier2')||{}).textContent=tier.name;
-      (document.getElementById('vipAcc2')||{}).textContent=dep===0?(`Deposit to unlock Bronze`):(tier.acc+'% ACCURACY');
+      document.getElementById('vipIcon2').textContent=tier.icon;
+      document.getElementById('vipTier2').textContent=tier.name;
+      document.getElementById('vipAcc2').textContent=dep===0?(`Deposit to unlock Bronze`):(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -648,7 +652,7 @@
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
-      (document.getElementById('vipCard')||{}).style.borderColor=colors[idx]||colors[0];
+      document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
     }
     updVIP();
 
@@ -685,7 +689,7 @@
         if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       });
       c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
-      c.style.animationDelay=`-${Date.now()%50}ms`;
+      c.style.animationDelay=`-${Date.now()%300000}ms`;
     }
 
     // LANGS
@@ -752,7 +756,7 @@
     function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
     function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
     function getCd(k){return Math.max(0,Math.ceil((parseInt(S.get(`cd_${k}`)||'0')-Date.now())/1000));}
-    function setCd(k){S.set(`cd_${k}`,Date.now()+5);}
+    function setCd(k){S.set(`cd_${k}`,Date.now()+30000);}
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
@@ -761,7 +765,7 @@
     // SIGNALS
     let timer=null;
     function renderHome(){
-      if(timer)clearInterval(timer);const app=document.getElementById("app");if(!app)return;app.innerHTML='';
+      if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
       const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
       const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
       ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
@@ -1048,39 +1052,22 @@
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${geo().sym}${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
     const svgIcon='<svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg>';
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title" style="color:var(--gold)">${T().chatAnalystTitle||'NexusAI AI Analyst'}</div><div class="chat-welcome-text">${T().chatAnalystText||'Account active.'}</div></div>`;}else{e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title">${T().chatWelcomeTitle||'NexusAI Support'}</div><div class="chat-welcome-text">${T().chatWelcomeText||'I can help with the app and activation.'}</div></div>`;}return;}e.innerHTML='';chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title" style="color:var(--gold)">${T().chatAnalystTitle||'NexusAI AI Analyst'}</div><div class="chat-welcome-text">${T().chatAnalystText||'Account active.'}</div></div>`;}else{e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title">${T().chatWelcomeTitle||'NexusAI Support'}</div><div class="chat-welcome-text">${T().chatWelcomeText||'I can help with the app and activation.'}</div></div>`;}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
-      if(chatLD){ if(!chatH.length) renderChat(); return; }
+      if(chatLD)return;
       chatLD=true;
-      let rendered=false;
-      try{
-        const raw=S.get('nexusai_lat_chat');
-        if(raw){
-          const arr=JSON.parse(raw);
-          if(Array.isArray(arr)&&arr.length){
-            chatH=arr;
-            renderChat();
-            rendered=true;
-          }
-        }
-      }catch(e){}
-      if(!rendered) renderChat();
+      try{const raw=S.get('nexusai_lat_chat');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
       if(!CHAT_HISTORY_WEBHOOK)return;
-      const uid=String(tgUserId||S.get('tg_user_id')||'');
-      if(!uid)return;
+      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       try{
-        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:(()=>{try{const c=new AbortController();setTimeout(()=>c.abort(),10000);return c.signal;}catch(e){return undefined;}})()});
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:AbortSignal.timeout(10000)});
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
-          try{S.set('nexusai_lat_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
-          renderChat();
-        } else if(!chatH.length) {
+          try{S.set('chat_history',JSON.stringify(chatH.slice(-40)));}catch(e){}
           renderChat();
         }
-      }catch(e){
-        if(!chatH.length) renderChat();
-      }
+      }catch(e){}
     }
 
     let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
@@ -1101,7 +1088,7 @@
         const uid=String(tgUserId||S.get('tg_user_id')||'');
         const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier,geo:String(currentGeo||'uy').toUpperCase(),country:String(currentGeo||'uy').toUpperCase(),lang:lang||geo().lang||'es',currency:geo().currency};
         if(imgPayload)body.image=imgPayload;
-        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),5);
+        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
         clearTimeout(timeout);
         const d=await r.json();
@@ -1142,7 +1129,7 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});const topDate=document.getElementById('topDate');const pd=document.getElementById('topPodium');const topList=document.getElementById('topList');if(!topDate||!pd||!topList)return;topDate.textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');topList.innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     function getHelpData(){return {
@@ -1165,9 +1152,9 @@
     function updGeoSwitch(){
       const btn=document.getElementById('geoSwitchBtn');if(!btn)return;
       if(currentGeo){
-        const g=geo();if(!g)return;
-        const fl=document.getElementById('geoSwitchFlag');if(fl)fl.textContent=g.flag;
-        const nm=document.getElementById('geoSwitchName');if(nm)nm.textContent=g.name;
+        const g=geo();
+        document.getElementById('geoSwitchFlag').textContent=g.flag;
+        document.getElementById('geoSwitchName').textContent=g.name;
       }
     }
 
@@ -1175,10 +1162,7 @@
       const uid=String(tgUserId||S.get('tg_user_id')||'');
       if(!uid) return;
       try{
-        const controller = new AbortController();
-        const timer = setTimeout(()=>controller.abort(), 3500);
-        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid}),signal:controller.signal});
-        clearTimeout(timer);
+        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid})});
         const d=await r.json();
         const backendGeo=String(d.country||d.geo||'').toLowerCase();
         if(GEO_CONFIG[backendGeo]){
@@ -1190,20 +1174,6 @@
           REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
           const nextUrl=new URL(window.location.href); nextUrl.searchParams.set('geo', currentGeo); history.replaceState({},'',nextUrl);
         }
-      }catch(e){
-        try{console.warn('lat hydrateGeoFromBackend failed', e?.name||e, e?.message||'');}catch(_e){}
-      }
-    }
-
-    function forceChatFallback(){
-      try{
-        document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
-        document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));
-        const tab=document.getElementById('tabChat'); if(tab) tab.classList.add('active');
-        const btn=document.getElementById('btnChat'); if(btn) btn.classList.add('active');
-        const mq=document.getElementById('marqueeBar'); if(mq) mq.style.display='none';
-        if(!chatH.length) renderChat();
-        setTimeout(scrollChatBottom,50);
       }catch(e){}
     }
 
@@ -1211,35 +1181,17 @@
     function initApp(){
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||'uy').toUpperCase(),lang:geo().lang});}catch(e){}
       lang=geo().lang||'en';S.set('aslang',lang);
-      try{applyStatic();}catch(e){try{console.warn('lat init applyStatic failed', e?.name||e, e?.message||'');}catch(_e){}}
-      try{buildMarquee();}catch(e){try{console.warn('lat init buildMarquee failed', e?.name||e, e?.message||'');}catch(_e){}}
-      try{updProfit();}catch(e){}
-      try{updOnline();}catch(e){}
-      try{updGeoSwitch();}catch(e){}
-      forceChatFallback();
-      try{loadChatHistory();}catch(e){try{console.warn('lat init loadChatHistory failed', e?.name||e, e?.message||'');}catch(_e){}}
-    }
-
-    let __latamBooted=false;
-    function bootLatamApp(){
-      if(__latamBooted) return;
-      __latamBooted=true;
-      forceChatFallback();
-      initApp();
-      hydrateGeoFromBackend().then(()=>{
-        try{ applyStatic(); buildMarquee(); updProfit(); updOnline(); updGeoSwitch(); forceChatFallback(); if(curTab==='chat') renderChat(); }catch(e){}
-      }).catch(()=>{ try{ forceChatFallback(); }catch(e){} });
+      applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
+      // Start on chat tab
+      switchTab('chat');
+      // Load chat history
+      loadChatHistory();
     }
 
     // INIT
-    document.addEventListener('DOMContentLoaded', ()=>{
-      forceChatFallback();
-      setTimeout(()=>{ try{ bootLatamApp(); }catch(e){ try{ forceChatFallback(); }catch(_e){} } }, 0);
-    });
-    window.addEventListener('error', ()=>{ setTimeout(()=>{ try{ forceChatFallback(); }catch(e){} }, 0); });
-    window.onload=function(){
-      try{ bootLatamApp(); }catch(e){ try{ forceChatFallback(); }catch(_e){} }
-      setTimeout(()=>{ try{ forceChatFallback(); }catch(e){} }, 1200);
+    window.onload=async function(){
+      await hydrateGeoFromBackend();
+      initApp();
     };
   </script>
 </body>
