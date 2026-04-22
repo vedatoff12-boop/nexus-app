@@ -665,11 +665,11 @@
 
     // TAB
     let curTab='signals';
-    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
-    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignaux').classList.add('active');document.getElementById('btnSignaux').classList.add('active');mq.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
+    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');const appWrap=document.querySelector('.app-wrap');
+    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');if(appWrap)appWrap.style.display='none';mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
+    else if(t==='signals'){document.getElementById('tabSignaux').classList.add('active');document.getElementById('btnSignaux').classList.add('active');if(appWrap)appWrap.style.display='block';mq.style.display='';renderHome();}
+    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');if(appWrap)appWrap.style.display='block';mq.style.display='none';renderLiveRoom();}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');if(appWrap)appWrap.style.display='block';mq.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
