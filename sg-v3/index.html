@@ -407,7 +407,7 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">S$0 / S$80</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">S$0 / S$120</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
         <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
       </div>
 
@@ -482,10 +482,10 @@
         names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
     };
     const REAL_NAME_POOL=["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"];
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-my-chat';
-    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-my-history';
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-chat-sg-v3';
+    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-history-sg-v3';
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80)
+    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=120)
     let userTotalDeposit=0;
     const APP_NS = 'nexussg3'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -580,8 +580,8 @@
     // VIP
     const VIP_TIERS=[
       {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:80,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
+      {name:'Bronze',icon:'🥉',dep:60,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Gold',icon:'🥇',dep:120,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -740,7 +740,7 @@
       
       if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
-      chatTier=(userTotalDeposit>=2000)?2:1;
+      chatTier=(userTotalDeposit>=120)?2:1;
       updateChatHeader();}catch(e){}
     }
     function updateChatHeader(){
