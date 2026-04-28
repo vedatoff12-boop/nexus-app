@@ -371,7 +371,7 @@
   <!-- CHAT TAB — outside app-wrap, fixed fullscreen -->
   <div class="app-shell">
     <div class="app-body">
-      <div id="tabChat" class="tab-content">
+      <div id="tabChat" class="tab-content active">
         <div class="chat-header">
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
           <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
@@ -460,7 +460,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      my: { name:"Singapore", flag:"🇲🇾", lang:"en", currency:"SGD", sym:"S$", profitRange:[20,200],
+      sg: { name:"Singapore", flag:"🇸🇬", lang:"en", currency:"SGD", sym:"S$", profitRange:[500,2000],
         link:"https://nexussg3.gameaps.net", promo:"777SG777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-sg-v3",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
@@ -511,7 +511,7 @@
       syncSelfResetButtons(true);
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
+        const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:'sg'})});
         const data=await res.json().catch(()=>({ok:false}));
         if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
         try{localStorage.clear();}catch(e){}
@@ -570,7 +570,7 @@
     function profitSym(){return currentGeo?geo().sym:'$';}
     function profitFmt(v){return profitSym()+v.toLocaleString();}
     function updProfit(){const ds=new Date().toDateString();if(S.get('pday')!==ds){S.set('pday',ds);S.set('pval','0');}todayProfit=parseInt(S.get('pval')||'0');}
-    function addProfit(v){if(!currentGeo)v=rndInt(5,50);else{const r=geo().profitRange;v=rndInt(r[0],r[1]);}todayProfit+=v;S.set('pval',todayProfit.toString());}
+    function addProfit(v){if(!currentGeo)v=rndInt(500,2000);else{const r=geo().profitRange;v=rndInt(r[0],r[1]);}todayProfit+=v;S.set('pval',todayProfit.toString());}
     updProfit();
 
     // STREAK
@@ -665,7 +665,7 @@
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
-        const amt=currentGeo?rndInt(geo().profitRange[0],geo().profitRange[1]*2):rndInt(50,500);
+        const amt=currentGeo?rndInt(geo().profitRange[0],geo().profitRange[1]):rndInt(500,2000);
         const verb=verbs[(nowBucket+i)%verbs.length];
         h+=`${name} ${verb} <span>${sym}${amt.toLocaleString()}</span>`;
         if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -826,7 +826,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up S$${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up S$${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(500,2000));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
