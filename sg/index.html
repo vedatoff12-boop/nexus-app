@@ -460,38 +460,22 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      my: { name:"Singapore", flag:"🇲🇾", lang:"en", currency:"SGD", sym:"S$", profitRange:[20,200],
-        link:"https://nexusmy.gameaps.net", promo:"777SG777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-my",
-        names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
-      in: { name:"India", flag:"🇮🇳", lang:"en", currency:"INR", sym:"₹", profitRange:[200,5000],
-        link:"https://nexusmy.gameaps.net/", promo:"777SG777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-my",
-        names:["Rahul","Amit","Priya","Raj","Arjun","Vikram","Deepak","Sunil","Ananya","Pooja","Kiran","Rohan","Sneha","Arun","Neha","Vivek","Meera","Sanjay","Kavita","Ravi"] },
-      ca: { name:"Canada", flag:"🇨🇦", lang:"en", currency:"CAD", sym:"C$", profitRange:[5,50],
-        link:"https://fastwin667.com/PDCDGj", promo:"777CA777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-ca",
-        names:["James","Michael","David","Ryan","Tyler","Chris","Matt","Josh","Alex","Kyle","Emma","Sarah","Jessica","Emily","Ashley","Megan","Lauren","Hannah","Chloe","Sophie"] },
-      es: { name:"España", flag:"🇪🇸", lang:"es", currency:"EUR", sym:"€", profitRange:[5,50],
-        link:"https://sp1nwin.com/WLwJLLgK", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-es",
-        names:["Carlos","Javier","Pablo","Alejandro","Diego","Sergio","Álvaro","Adrián","Daniel","Miguel","Lucía","María","Marta","Laura","Ana","Carmen","Sara","Paula","Elena","Alba"] },
-      it: { name:"Italia", flag:"🇮🇹", lang:"it", currency:"EUR", sym:"€", profitRange:[5,50],
-        link:"", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-it",
-        names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
+      sg: { name:"Singapore", flag:"🇸🇬", lang:"en", currency:"SGD", sym:"S$", profitRange:[20,200],
+        link:"https://betoholictrack.net/eALtRpPq", promo:"777SG777",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-sg",
+        names:["Wei Jie","Jun Hao","Zhi Wei","Yi Xuan","Jia Yi","Ming Yang","Kai Xuan","Zhi Hao","Jia Wen","Yu Xuan","Priya","Raj","Arjun","Deepak","Kiran","Siti","Nurul","Aisyah","Hafiz","Aiman"] }
     };
-    const REAL_NAME_POOL=["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"];
+    const REAL_NAME_POOL=["Wei Jie","Jun Hao","jy_","Zhi Wei","Priya","karthik","Raj","Alex L.","Daniel","Arjun","Hafiz","Aiman","Kevin","jason tan","Bryan","siti","nurul","aisyah","Deepak","Kiran","Alan","Ming","cheng","ryan","Tyler","sam","JH","zw_","yx","leon","marcus","nick","ben","dave","ian","sean","darren","jj","timothy","joel","adrian","faiz","haziq","Danish","liyana","fatin","sarah","emily","rachel","jessica","amy","grace","chloe","hannah","natalie","ashley","megan","vanessa","nicole","karen","yi ling","xin yi","hui min","wen xin","jia min"];
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-sg-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-sg-history';
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80)
+    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=100)
     let userTotalDeposit=0;
-    const APP_NS='nexusmy'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
+    const APP_NS='nexussg'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo='my'; S.set('user_geo','my');
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
-    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-my';
+    let currentGeo='sg'; S.set('user_geo','sg');
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.sg;}
+    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-sg';
     
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
