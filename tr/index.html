@@ -407,7 +407,7 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">₺0 / ₺1000</span><span id="vipProgressHint">Yükseltmek için daha fazla yatır ⬆</span></div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">₺0 / ₺2000</span><span id="vipProgressHint">Yükseltmek için daha fazla yatır ⬆</span></div>
         <div id="vipSinyallerLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 bugün kalan sinyal</div>
       </div>
 
@@ -469,7 +469,7 @@
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-tr-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-tr-history';
     let accessMode='sınırlı';
-    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (total_deposit>=1000)
+    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (total_deposit>=2000)
     let userTotalYatırım=0;
     const APP_NS='nexustr'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -564,8 +564,8 @@
     // VIP
     const VIP_TIERS=[
       {name:'Başlangıç',icon:'❔',dep:0,sigs:0,acc:0,desc:'Yatırım to activate'},
-      {name:'Bronze',icon:'🥉',dep:500,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:1000,sigs:0,acc:95,desc:'Unsınırlı signals, 95% accuracy + Personal AI Analyst'}
+      {name:'Bronze',icon:'🥉',dep:1000,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Gold',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'Unsınırlı signals, 95% accuracy + Personal AI Analyst'}
     ];
     function getVipSeviyeIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySinyaller(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigBugün','0');}return parseInt(S.get('sigBugün')||'0');}
@@ -579,7 +579,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipSeviye2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Yatırım ₺500 to activate Bronze':(tier.acc+'% ACCURACY');
+      document.getElementById('vipAcc2').textContent=dep===0?'Yatırım ₺1000 to activate Bronze':(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -590,7 +590,7 @@
       const used=getDailySinyaller();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSinyallerLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Yatırım ₺500 to activate Bronze';}
+        if(dep===0){sigEl.textContent='❔ Yatırım ₺1000 to activate Bronze';}
         else if(limit===0){sigEl.textContent='♾️ Unsınırlı signals today';}
         else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} bugün kalan sinyal`:'🔒 Sinyaller refresh tomorrow';}
       }
@@ -598,8 +598,8 @@
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent='₺500 to unlock Bronze';
-        hint.textContent='Yatırım ₺500 to activate Bronze';
+        left.textContent='₺1000 to unlock Bronze';
+        hint.textContent='Yatırım ₺1000 to activate Bronze';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -725,12 +725,12 @@
       if(d.total_deposit&&d.total_deposit>0){userTotalYatırım=d.total_deposit;S.set('totalDep',String(d.total_deposit));}
       if(d.allowed){
         accessMode='full';S.set('accessGranted','1');
-        if(!(d.total_deposit>0) && userTotalYatırım < 500){
-          userTotalYatırım = 500;
-          S.set('totalDep','500');
+        if(!(d.total_deposit>0) && userTotalYatırım < 1000){
+          userTotalYatırım = 1000;
+          S.set('totalDep','1000');
         }
       }else{accessMode='sınırlı';S.set('accessGranted','0');}
-      chatSeviye=(userTotalYatırım>=1000)?2:1;
+      chatSeviye=(userTotalYatırım>=2000)?2:1;
       updVIP();
       updateSohbetHeader();}catch(e){}
     }
@@ -1029,7 +1029,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. Gold members get enhanced signal accuracy with longer streaks.'},
-      vip:{title:'🏅 VIP Seviye',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (₺500) — 5 signals/day, 90% accuracy\n🥇 Gold (₺1000) — Unsınırlı signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
+      vip:{title:'🏅 VIP Seviye',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (₺1000) — 5 signals/day, 90% accuracy\n🥇 Gold (₺2000) — Unsınırlı signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
       profit:{title:'💰 Bugün\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
     };
