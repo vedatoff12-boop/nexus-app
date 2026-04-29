@@ -460,7 +460,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      mn: { name:"Mongolia", flag:"🇲🇳", lang:"mn", currency:"MNT", sym:"₮", profitRange:[20,200],
+      mn: { name:"Mongolia", flag:"🇲🇳", lang:"mn", currency:"MNT", sym:"₮", profitRange:[500000,2000000],
         link:"https://nexusai.gameaps.net", promo:"777MG777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-mn",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
@@ -482,8 +482,8 @@
         names:["Marco","Luca","Alessandro","Andrea","Francesco","Matteo","Lorenzo","Davide","Giuseppe","Simone","Giulia","Sara","Francesca","Chiara","Valentina","Alessia","Elisa","Martina","Sofia","Anna"] }
     };
     const REAL_NAME_POOL=["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"];
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-my-chat';
-    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-my-history';
+    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-mn-chat';
+    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-mn-history';
     let accessMode='limited';
     let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80000)
     let userTotalDeposit=0;
@@ -661,7 +661,9 @@
       const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
       const pick=rotated.slice(0,16);
-      const verbs=['won','cashed out','hit','withdrew'];
+      const verbs=currentGeo==='mn'
+        ? ['хожлоо','авлаа','кэшаут хийлээ','гаргалаа']
+        : ['won','cashed out','hit','withdrew'];
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
@@ -1074,6 +1076,12 @@
 
     // INIT
     window.onload=function(){
+      initApp();
+    };
+  </script>
+</body>
+</html>
+ad=function(){
       initApp();
     };
   </script>
