@@ -788,19 +788,30 @@
         const left=getCd('slot_'+k);
         if(left>0){btn.disabled=true;btn.textContent=copy.loadingTitle;}else{btn.disabled=false;btn.textContent=copy.cta;}
       }
+      function checkSlotLimit(){
+        if(isSinyalLimitReached()){
+          const tier=getVipSeviye();const idx=getVipSeviyeIdx();
+          let upgradeHint='';
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ₺${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing slot signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Your daily limit has ended.<br>Upgrade to Gold for unlimited slot signals.</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='Server limit';btn.style.opacity='0.3';return true;
+        }
+        btn.style.opacity='';
+        return false;
+      }
       function renderSlotSignalCard(sig){
         const signalText=sig.mode==='enter'?copy.enter:copy.wait;
         const signalSub=sig.mode==='enter'?copy.enterSub:copy.waitSub;
         const tier=getVipSeviye();
         box.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px"><div class="slot-hero"><div class="slot-badge">${tier.icon} ${tier.name} · ${tier.sigs===0?'Sınırsız':'Günlük '+tier.sigs+' sinyal'}</div><div class="slot-hero-icon ${sig.mode==='enter'?'slot-hero-enter':'slot-hero-wait'}">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:24px;font-weight:900;color:${sig.mode==='enter'?'#22c55e':'#facc15'};margin-top:4px">${signalText}</div><div style="font-size:12px;color:var(--muted);margin-top:2px">${signalSub}</div></div><div style="display:grid;gap:8px"><div class="slot-status-line"><span>${copy.signal}</span><strong>${signalText}</strong></div><div class="slot-status-line"><span>${copy.bonus}</span><strong>${sig.bonus}</strong></div><div class="slot-status-line"><span>${copy.spins}</span><strong>${sig.spins===0?'-':sig.spins}</strong></div><div class="slot-status-line"><span>${copy.risk}</span><strong>${sig.risk}</strong></div></div><div style="margin-top:2px;padding:10px;border-radius:12px;background:rgba(255,255,255,0.05);font-size:13px;line-height:1.5;color:#fff"><span style="color:var(--muted)">${copy.tip}:</span> ${sig.tip}</div></div>`;
       }
-      updateSlotBtn();
-      timer=setInterval(updateSlotBtn,1000);
+      if(!checkSlotLimit()){updateSlotBtn();timer=setInterval(updateSlotBtn,1000);}
       btn.onclick=()=>{
+        if(checkSlotLimit())return;
         setCd('slot_'+k);updateSlotBtn();
         box.innerHTML=`<div class="slot-analyzing"><div style="font-size:42px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff">${copy.loadingTitle}</div><div class="slot-wave"><span></span><span></span><span></span><span></span><span></span></div><div style="font-size:12px;color:var(--muted)">${copy.loadingSub}</div><div style="font-size:12px;color:var(--gold)">${copy.readyIn(10)}</div></div>`;
         try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}
-        setTimeout(()=>{addDailySinyal();renderSlotSignalCard(pickSlotSignal(k));playSfx();updateSlotBtn();updVIP();if(isSinyalLimitReached())btn.textContent='Limit doldu';},10000);
+        setTimeout(()=>{addDailySinyal();renderSlotSignalCard(pickSlotSignal(k));playSfx();updVIP();if(!checkSlotLimit())updateSlotBtn();},10000);
       };
     }
     async function refreshAccessState(){
