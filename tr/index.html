@@ -767,11 +767,10 @@
       games.forEach((k,i)=>{
         const g=T().g[k];
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
-        c.onclick=()=>signalMode==='slot'?(slotSignalsUnlocked()?renderSlotGame(k):showSlotLock(c)):handleGameClick(k,c);
+        c.onclick=()=>signalMode==='slot'?renderSlotGame(k):handleGameClick(k,c);
         c.style.position='relative';
         const icon=signalMode==='slot'?(SLOT_ICONS[k]||'🎰'):(ICONS[k]||'🎮');
         c.innerHTML=`<div class="game-top"><div class="game-icon">${icon}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${signalMode==='slot'?'Sinyal Al':'Oyna'}</div></div>`;
-        if(signalMode==='slot' && !slotSignalsUnlocked()){c.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">Slot Sinyalleri Kilitli</div><div class="lock-msg">Slot sinyallerini açmak için Bronze veya Gold seviyesine geç.</div><div class="slot-lock-sell"><div style="font-size:12px;font-weight:800;color:#fff">🥉 Bronze</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Günlük 5 slot sinyali</div><div style="font-size:12px;font-weight:800;color:#fff;margin-top:10px">🥇 Gold</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Sınırsız slot sinyali</div></div></div>`;}
         grid.appendChild(c);
       });
       app.appendChild(h);app.appendChild(switcher);app.appendChild(grid);
@@ -779,7 +778,14 @@
       document.getElementById('modeSlot').onclick=()=>{signalMode='slot';renderHome();};
     }
     function renderSlotGame(k){
-      if(!slotSignalsUnlocked()){renderHome();return;}
+      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
+      if(!slotSignalsUnlocked()){
+        const g=T().g[k];
+        const regBtn=geo().link?`<button class="btn primary" onclick="openRegLink()">Şimdi Kayıt Ol →</button>`:'';
+        const promoTxt=geo().promo?`<div class="promo-text" style="margin-top:10px">Promo: ${geo().promo}</div>`:'';
+        app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${T().slot.sub}</div><div class="stepbox"><div class="lock-icon" style="margin-bottom:10px">🔒</div><div class="lock-text">ERİŞİM KAPALI</div><div class="lock-msg" style="max-width:260px;margin:8px auto 0">Slot sinyallerini açmak için önce Bronze veya Gold seviyesine geçmelisin.</div><div class="slot-lock-sell"><div style="font-size:12px;font-weight:800;color:#fff">🥉 Bronze</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Günlük 5 slot sinyali</div><div style="font-size:12px;font-weight:800;color:#fff;margin-top:10px">🥇 Gold</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Sınırsız slot sinyali</div>${promoTxt}</div><div class="btnrow">${regBtn}</div></div></div>`;
+        return;
+      }
       if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const copy=T().slot;const g=T().g[k];
       app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto" class="slot-mini-pill">${getVipSeviye().icon} ${getVipSeviye().name}</div></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${copy.sub}</div><div class="stepbox slot-sell" id="slotBox"><div style="text-align:center;padding:10px 6px"><div class="slot-badge">AI SLOT SIGNAL</div><div style="font-size:42px;margin-top:10px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:10px">${copy.title}</div><div style="font-size:12px;color:var(--muted);margin-top:8px">${copy.loadingSub}</div></div></div><div class="btnrow"><button class="btn primary" id="slotBtn">${copy.cta}</button></div></div>`;
