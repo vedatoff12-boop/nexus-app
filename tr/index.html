@@ -778,7 +778,9 @@
       document.getElementById('modeSlot').onclick=()=>{signalMode='slot';renderHome();};
     }
     function renderSlotGame(k){
-      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
+      if(timer)clearInterval(timer);
+      const app=document.getElementById('app');
+      app.innerHTML='';
       if(!slotSignalsUnlocked()){
         const g=T().g[k];
         const regBtn=geo().link?`<button class="btn primary" onclick="openRegLink()">Şimdi Kayıt Ol →</button>`:'';
@@ -786,7 +788,6 @@
         app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${T().slot.sub}</div><div class="stepbox"><div class="lock-icon" style="margin-bottom:10px">🔒</div><div class="lock-text">ERİŞİM KAPALI</div><div class="lock-msg" style="max-width:260px;margin:8px auto 0">Slot sinyallerini açmak için önce Bronze veya Gold seviyesine geçmelisin.</div><div class="slot-lock-sell"><div style="font-size:12px;font-weight:800;color:#fff">🥉 Bronze</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Günlük 5 slot sinyali</div><div style="font-size:12px;font-weight:800;color:#fff;margin-top:10px">🥇 Gold</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Sınırsız slot sinyali</div>${promoTxt}</div><div class="btnrow">${regBtn}</div></div></div>`;
         return;
       }
-      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const copy=T().slot;const g=T().g[k];
       app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto" class="slot-mini-pill">${getVipSeviye().icon} ${getVipSeviye().name}</div></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${copy.sub}</div><div class="stepbox slot-sell" id="slotBox"><div style="text-align:center;padding:10px 6px"><div class="slot-badge">AI SLOT SIGNAL</div><div style="font-size:42px;margin-top:10px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:10px">${copy.title}</div><div style="font-size:12px;color:var(--muted);margin-top:8px">${copy.loadingSub}</div></div></div><div class="btnrow"><button class="btn primary" id="slotBtn">${copy.cta}</button></div></div>`;
       const btn=document.getElementById('slotBtn'),box=document.getElementById('slotBox');
