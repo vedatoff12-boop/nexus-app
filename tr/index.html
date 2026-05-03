@@ -716,47 +716,28 @@
     let signalMode='crash';
     const SLOT_GAMES=['sweet','gates','sugar'];
     const SLOT_ICONS={sweet:'🍭',gates:'⚡',sugar:'🍬'};
-    const SLOT_SIGNAL_PRESETS={
-      sweet:{enter:[
-        {bonus:'Yüksek',spins:7,risk:'Orta',tip:'Talimata uy ve oyuna şimdi giriş yap.'},
-        {bonus:'Orta',spins:10,risk:'Yüksek',tip:'Sinyal aktif, kısa spin serisine başlayabilirsin.'},
-        {bonus:'Yüksek',spins:5,risk:'Orta',tip:'Şu an oyuna giriş için iyi bir pencere var.'},
-        {bonus:'Orta',spins:12,risk:'Yüksek',tip:'Giriş fırsatı açık, şimdi oyuna girebilirsin.'}
-      ],wait:[
-        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Şu an boş fazda. Biraz sonra yeni sinyal al.'},
-        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdilik oyuna girme, yeni sinyali bekle.'},
-        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Oyun şu an zayıf görünüyor, girişi pas geç.'},
-        {bonus:'Orta',spins:0,risk:'Orta',tip:'Daha güçlü bir giriş için sonraki sinyali bekle.'}
-      ]},
-      gates:{enter:[
-        {bonus:'Yüksek',spins:7,risk:'Orta',tip:'Sinyal aktif, oyuna şimdi giriş yapabilirsin.'},
-        {bonus:'Orta',spins:10,risk:'Yüksek',tip:'Kısa bir spin serisi denemek için uygun zaman.'},
-        {bonus:'Yüksek',spins:5,risk:'Orta',tip:'Şu an giriş için iyi bir an yakalandı.'},
-        {bonus:'Orta',spins:12,risk:'Yüksek',tip:'Pencere açık, şimdi giriş yapıp devam et.'}
-      ],wait:[
-        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Şu an zayıf fazda, yeni sinyali biraz sonra al.'},
-        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdilik giriş yapma, bir sonraki pencereyi bekle.'},
-        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Bu turu geç, daha temiz bir sinyal bekle.'},
-        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdi değil, biraz sonra tekrar sinyal al.'}
-      ]},
-      sugar:{enter:[
-        {bonus:'Yüksek',spins:7,risk:'Orta',tip:'Şu an oyuna giriş için iyi bir zaman.'},
-        {bonus:'Orta',spins:10,risk:'Yüksek',tip:'Oyuna girip spin serisini başlatabilirsin.'},
-        {bonus:'Yüksek',spins:5,risk:'Orta',tip:'Sinyali takip et ve şimdi giriş yap.'},
-        {bonus:'Orta',spins:12,risk:'Yüksek',tip:'Giriş penceresi açık, oyuna başlayabilirsin.'}
-      ],wait:[
-        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Şu an boş fazda, yeni sinyali bekle.'},
-        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdilik oyuna giriş yapma.'},
-        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Biraz sonra tekrar sinyal alman daha iyi olur.'},
-        {bonus:'Orta',spins:0,risk:'Orta',tip:'Giriş için acele etme, sıradaki sinyali bekle.'}
-      ]}
+    const SLOT_STRATEGY_PRESETS={
+      sweet:[
+        {risk:'Orta',steps:['4 TL — 20 çevir','6 TL — 15 çevir','8 TL — 12 çevir','4 TL — 16 çevir'],tip:'Tur bitince oyundan çık, tekrar giriş yap ve yeni strateji al.'},
+        {risk:'Düşük',steps:['4 TL — 18 çevir','6 TL — 14 çevir','4 TL — 18 çevir'],tip:'Seri tamamlanınca oyunu yenileyip bir sonraki plana geç.'},
+        {risk:'Yüksek',steps:['6 TL — 15 çevir','8 TL — 12 çevir','10 TL — 10 çevir','8 TL — 12 çevir','6 TL — 14 çevir'],tip:'Tüm adımlar bitince oyundan çık ve yeni strateji bekle.'}
+      ],
+      gates:[
+        {risk:'Orta',steps:['6 TL — 14 çevir','8 TL — 12 çevir','10 TL — 10 çevir','6 TL — 14 çevir'],tip:'Tur bitince oyundan çık, tekrar giriş yap ve yeni strateji al.'},
+        {risk:'Yüksek',steps:['8 TL — 12 çevir','10 TL — 10 çevir','12 TL — 8 çevir','8 TL — 12 çevir'],tip:'Bu seri bittiğinde oyunu kapatıp tekrar giriş yap.'},
+        {risk:'Orta',steps:['4 TL — 16 çevir','6 TL — 14 çevir','8 TL — 12 çevir','10 TL — 10 çevir','4 TL — 16 çevir'],tip:'Son adımdan sonra yeni strateji için yeniden giriş yap.'}
+      ],
+      sugar:[
+        {risk:'Orta',steps:['4 TL — 18 çevir','8 TL — 15 çevir','6 TL — 20 çevir','4 TL — 14 çevir'],tip:'Hepsini bitirdikten sonra oyundan çık ve tekrar giriş yap.'},
+        {risk:'Orta',steps:['6 TL — 16 çevir','8 TL — 12 çevir','10 TL — 10 çevir','6 TL — 14 çevir'],tip:'Seri tamamlanınca oyunu yenile ve yeni strateji al.'},
+        {risk:'Yüksek',steps:['4 TL — 15 çevir','6 TL — 15 çevir','8 TL — 12 çevir','10 TL — 10 çevir','4 TL — 12 çevir'],tip:'Bütün adımlar bitince oyundan çık ve sıradaki plana geç.'}
+      ]
     };
     function slotSignalsUnlocked(){return getVipSeviyeIdx()>=1;}
     function pickSlotSignal(k){
-      const mode=Math.random()<0.4?'enter':'wait';
-      const pool=SLOT_SIGNAL_PRESETS[k] && SLOT_SIGNAL_PRESETS[k][mode] ? SLOT_SIGNAL_PRESETS[k][mode] : SLOT_SIGNAL_PRESETS.sweet[mode];
+      const pool=SLOT_STRATEGY_PRESETS[k] || SLOT_STRATEGY_PRESETS.sugar;
       const item=pool[Math.floor(Math.random()*pool.length)];
-      return {mode,...item};
+      return {...item, stepCount:item.steps.length};
     }
     function renderHome(){
       if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
@@ -807,10 +788,9 @@
         return false;
       }
       function renderSlotSignalCard(sig){
-        const signalText=sig.mode==='enter'?copy.enter:copy.wait;
-        const signalSub=sig.mode==='enter'?copy.enterSub:copy.waitSub;
         const tier=getVipSeviye();
-        box.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px"><div class="slot-hero"><div class="slot-badge">${tier.icon} ${tier.name} · ${tier.sigs===0?'Sınırsız':'Günlük '+tier.sigs+' sinyal'}</div><div class="slot-hero-icon ${sig.mode==='enter'?'slot-hero-enter':'slot-hero-wait'}">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:24px;font-weight:900;color:${sig.mode==='enter'?'#22c55e':'#facc15'};margin-top:4px">${signalText}</div><div style="font-size:12px;color:var(--muted);margin-top:2px">${signalSub}</div></div><div style="display:grid;gap:8px"><div class="slot-status-line"><span>${copy.signal}</span><strong>${signalText}</strong></div><div class="slot-status-line"><span>${copy.bonus}</span><strong>${sig.bonus}</strong></div><div class="slot-status-line"><span>${copy.spins}</span><strong>${sig.spins===0?'-':sig.spins}</strong></div><div class="slot-status-line"><span>${copy.risk}</span><strong>${sig.risk}</strong></div></div><div style="margin-top:2px;padding:10px;border-radius:12px;background:rgba(255,255,255,0.05);font-size:13px;line-height:1.5;color:#fff"><span style="color:var(--muted)">${copy.tip}:</span> ${sig.tip}</div></div>`;
+        const stepsHtml=sig.steps.map((step,idx)=>`<div class="slot-status-line"><span>${idx+1}. Adım</span><strong>${step}</strong></div>`).join('');
+        box.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px"><div class="slot-hero"><div class="slot-badge">${tier.icon} ${tier.name} · ${tier.sigs===0?'Sınırsız':'Günlük '+tier.sigs+' strateji'}</div><div class="slot-hero-icon slot-hero-enter">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:24px;font-weight:900;color:#fff;margin-top:4px">AKTİF SLOT STRATEJİSİ</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Hazır plan aktif · ${sig.stepCount} adım</div></div><div style="display:grid;gap:8px"><div class="slot-status-line"><span>Risk</span><strong>${sig.risk}</strong></div><div class="slot-status-line"><span>Toplam Adım</span><strong>${sig.stepCount}</strong></div></div><div style="display:grid;gap:8px;margin-top:2px">${stepsHtml}</div><div style="margin-top:2px;padding:10px;border-radius:12px;background:rgba(255,255,255,0.05);font-size:13px;line-height:1.5;color:#fff"><span style="color:var(--muted)">Tur bitince:</span> ${sig.tip}</div></div>`;
       }
       if(!checkSlotLimit()){updateSlotBtn();timer=setInterval(updateSlotBtn,1000);}
       btn.onclick=()=>{
