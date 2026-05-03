@@ -475,7 +475,7 @@
       const pick=rotated.slice(0,16);
       const verbs=['수익 실현','출금 완료','적중 성공','캐시아웃 완료'];
       let h='';
-      pick.forEach((name,i)=>{h+=`${name}`;if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';});
+      pick.forEach((name,i)=>{const amt=rndInt(geo().profitRange[0],geo().profitRange[1]*2);h+=`${name} <span>₩${amt.toLocaleString()}</span>`;if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';});
       c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
       c.style.animationDelay=`-${Date.now()%300000}ms`;
     }
