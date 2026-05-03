@@ -668,6 +668,16 @@
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
+      tr:{cg:"Bir oyun seç:",back:"Menü",lt:"ERİŞİM KAPALI",lm:"⛔️ Erişimi açmak için kurulumu botta tamamla.",skip:"GEÇ",wait:"Bekle",tut:{s1:"",s2:"",s4:"",s5:""},
+        tabs:{crash:"Crash",slot:"Slot"},
+        slot:{title:"Slot Sinyalleri",sub:"Oyunu seç, sinyali al ve 30 saniyelik analizi bekle.",cta:"SİNYAL AL",loadingTitle:"Oyun analiz ediliyor...",loadingSub:"Yeni sinyal hazırlanıyor",readyIn:(s)=>`Yeni sinyal ${s} sn içinde hazır olacak`,signal:"Sinyal",bonus:"Bonus Şansı",spins:"Döndürülecek Spin",risk:"Risk",tip:"Tavsiye",enter:"GİR",wait:"BEKLE",enterSub:"Oyuna şimdi giriş yapabilirsin",waitSub:"Şimdilik giriş yapma, yeni sinyali bekle"},
+        g:{aviator:{n:"Aviator",d:"Crash oyunu"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk seviyeleri"},penalty:{n:"Penalty",d:"Kaleye vur"},mines:{n:"Mines",d:"Bombalardan kaç"},balloon:{n:"Balloon",d:"Şişir ve çek"},sweet:{n:"Sweet Bonanza",d:"Tatlı slot sinyalleri"},gates:{n:"Gate of Olympus",d:"Zeus slot sinyalleri"},sugar:{n:"Sugar Rush",d:"Şeker slot sinyalleri"}},
+        ch:{t:"Chicken Road",s:"Zorluk seçin.",nx:"SONRAKİ ADIM",w:(s)=>`Bekle ${s} sn`,tb:{easy:"Kolay",medium:"Orta",hard:"Zor",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"Her dakika yenilenir.",b:"SİNYAL AL",l:"KATSAYI",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        jx:{t:"JetX",s:"Maksimum 10x.",b:"SİNYAL AL",l:"KATSAYI",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        pe:{t:"Penalty",s:"Hedef bölgeyi seç.",b:"SİNYAL AL",l:"HEDEF",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        mi:{t:"Mines",s:"Güvenli kutular işaretli.",b:"SİNYAL AL",l:"GÜVENLİ KUTULAR",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        ba:{t:"Balloon",s:"Patlamadan önce çek.",b:"SİNYAL AL",l:"ÇEKİM",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`}},
       en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
         g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
         ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
@@ -703,19 +713,92 @@
 
     // SIGNALS
     let timer=null;
+    let signalMode='crash';
+    const SLOT_GAMES=['sweet','gates','sugar'];
+    const SLOT_ICONS={sweet:'🍭',gates:'⚡',sugar:'🍬'};
+    const SLOT_SIGNAL_PRESETS={
+      sweet:{enter:[
+        {bonus:'Yüksek',spins:7,risk:'Orta',tip:'Talimata uy ve oyuna şimdi giriş yap.'},
+        {bonus:'Orta',spins:10,risk:'Yüksek',tip:'Sinyal aktif, kısa spin serisine başlayabilirsin.'},
+        {bonus:'Yüksek',spins:5,risk:'Orta',tip:'Şu an oyuna giriş için iyi bir pencere var.'},
+        {bonus:'Orta',spins:12,risk:'Yüksek',tip:'Giriş fırsatı açık, şimdi oyuna girebilirsin.'}
+      ],wait:[
+        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Şu an boş fazda. Biraz sonra yeni sinyal al.'},
+        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdilik oyuna girme, yeni sinyali bekle.'},
+        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Oyun şu an zayıf görünüyor, girişi pas geç.'},
+        {bonus:'Orta',spins:0,risk:'Orta',tip:'Daha güçlü bir giriş için sonraki sinyali bekle.'}
+      ]},
+      gates:{enter:[
+        {bonus:'Yüksek',spins:7,risk:'Orta',tip:'Sinyal aktif, oyuna şimdi giriş yapabilirsin.'},
+        {bonus:'Orta',spins:10,risk:'Yüksek',tip:'Kısa bir spin serisi denemek için uygun zaman.'},
+        {bonus:'Yüksek',spins:5,risk:'Orta',tip:'Şu an giriş için iyi bir an yakalandı.'},
+        {bonus:'Orta',spins:12,risk:'Yüksek',tip:'Pencere açık, şimdi giriş yapıp devam et.'}
+      ],wait:[
+        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Şu an zayıf fazda, yeni sinyali biraz sonra al.'},
+        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdilik giriş yapma, bir sonraki pencereyi bekle.'},
+        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Bu turu geç, daha temiz bir sinyal bekle.'},
+        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdi değil, biraz sonra tekrar sinyal al.'}
+      ]},
+      sugar:{enter:[
+        {bonus:'Yüksek',spins:7,risk:'Orta',tip:'Şu an oyuna giriş için iyi bir zaman.'},
+        {bonus:'Orta',spins:10,risk:'Yüksek',tip:'Oyuna girip spin serisini başlatabilirsin.'},
+        {bonus:'Yüksek',spins:5,risk:'Orta',tip:'Sinyali takip et ve şimdi giriş yap.'},
+        {bonus:'Orta',spins:12,risk:'Yüksek',tip:'Giriş penceresi açık, oyuna başlayabilirsin.'}
+      ],wait:[
+        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Şu an boş fazda, yeni sinyali bekle.'},
+        {bonus:'Orta',spins:0,risk:'Orta',tip:'Şimdilik oyuna giriş yapma.'},
+        {bonus:'Düşük',spins:0,risk:'Minimum',tip:'Biraz sonra tekrar sinyal alman daha iyi olur.'},
+        {bonus:'Orta',spins:0,risk:'Orta',tip:'Giriş için acele etme, sıradaki sinyali bekle.'}
+      ]}
+    };
+    function pickSlotSignal(k){
+      const mode=Math.random()<0.4?'enter':'wait';
+      const pool=SLOT_SIGNAL_PRESETS[k] && SLOT_SIGNAL_PRESETS[k][mode] ? SLOT_SIGNAL_PRESETS[k][mode] : SLOT_SIGNAL_PRESETS.sweet[mode];
+      const item=pool[Math.floor(Math.random()*pool.length)];
+      return {mode,...item};
+    }
     function renderHome(){
       if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
       const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
+      const switcher=document.createElement('div');switcher.className='segmented';switcher.style.margin='0 0 14px';switcher.innerHTML=`<button class="seg-btn${signalMode==='crash'?' active':''}" id="modeCrash">${T().tabs.crash}</button><button class="seg-btn${signalMode==='slot'?' active':''}" id="modeSlot">${T().tabs.slot}</button>`;
       const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
-      ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
-        const g=T().g[k],wr=WIN_RATES[k]||88;
+      const games=signalMode==='slot'?SLOT_GAMES:["aviator","jetx","mines","penalty","balloon","chicken"];
+      games.forEach((k,i)=>{
+        const g=T().g[k];
         const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
-        c.onclick=()=>handleGameClick(k,c);
+        c.onclick=()=>signalMode==='slot'?renderSlotGame(k):handleGameClick(k,c);
         c.style.position='relative';
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Oyna</div></div>`;
+        const icon=signalMode==='slot'?(SLOT_ICONS[k]||'🎰'):(ICONS[k]||'🎮');
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${icon}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${signalMode==='slot'?'Sinyal Al':'Oyna'}</div></div>`;
         grid.appendChild(c);
       });
-      app.appendChild(h);app.appendChild(grid);
+      app.appendChild(h);app.appendChild(switcher);app.appendChild(grid);
+      document.getElementById('modeCrash').onclick=()=>{signalMode='crash';renderHome();};
+      document.getElementById('modeSlot').onclick=()=>{signalMode='slot';renderHome();};
+    }
+    function renderSlotGame(k){
+      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
+      const copy=T().slot;const g=T().g[k];
+      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${copy.sub}</div><div class="stepbox" id="slotBox"><div style="text-align:center;padding:10px 6px"><div style="font-size:42px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:10px">${copy.title}</div><div style="font-size:12px;color:var(--muted);margin-top:8px">${copy.loadingSub}</div></div></div><div class="cd-wrap" id="slotCdWrap" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="slotCdProg" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="slotCdNum">30</div></div><div class="btnrow"><button class="btn primary" id="slotBtn">${copy.cta}</button></div></div>`;
+      const btn=document.getElementById('slotBtn'),box=document.getElementById('slotBox'),wrap=document.getElementById('slotCdWrap'),prog=document.getElementById('slotCdProg'),num=document.getElementById('slotCdNum');
+      const circ=175.93;
+      function updateSlotBtn(){
+        const left=getCd('slot_'+k);
+        if(left>0){btn.disabled=true;btn.textContent=`${copy.readyIn(left)}`;wrap.style.display='';prog.style.strokeDashoffset=circ*(1-left/30);num.textContent=left;}else{btn.disabled=false;btn.textContent=copy.cta;wrap.style.display='none';}
+      }
+      function renderSlotSignalCard(sig){
+        const signalText=sig.mode==='enter'?copy.enter:copy.wait;
+        const signalSub=sig.mode==='enter'?copy.enterSub:copy.waitSub;
+        box.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px"><div style="text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.08)"><div style="font-size:42px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:22px;font-weight:900;color:${sig.mode==='enter'?'#22c55e':'#facc15'};margin-top:10px">${signalText}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${signalSub}</div></div><div style="display:grid;gap:8px"><div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--muted)">${copy.signal}</span><strong style="color:#fff">${signalText}</strong></div><div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--muted)">${copy.bonus}</span><strong style="color:#fff">${sig.bonus}</strong></div><div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--muted)">${copy.spins}</span><strong style="color:#fff">${sig.spins===0?'-':sig.spins}</strong></div><div style="display:flex;justify-content:space-between;gap:12px"><span style="color:var(--muted)">${copy.risk}</span><strong style="color:#fff">${sig.risk}</strong></div></div><div style="margin-top:2px;padding:10px;border-radius:12px;background:rgba(255,255,255,0.05);font-size:13px;line-height:1.5;color:#fff"><span style="color:var(--muted)">${copy.tip}:</span> ${sig.tip}</div></div>`;
+      }
+      updateSlotBtn();
+      timer=setInterval(updateSlotBtn,1000);
+      btn.onclick=()=>{
+        setCd('slot_'+k);updateSlotBtn();
+        box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:42px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:10px">${copy.loadingTitle}</div><div style="font-size:12px;color:var(--muted);margin-top:8px">${copy.loadingSub}</div><div style="font-size:12px;color:var(--gold);margin-top:8px">${copy.readyIn(30)}</div></div>`;
+        try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}
+        setTimeout(()=>{renderSlotSignalCard(pickSlotSignal(k));playSfx();},30000);
+      };
     }
     async function refreshAccessState(){
       const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
