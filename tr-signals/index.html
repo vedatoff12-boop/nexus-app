@@ -404,6 +404,12 @@
     <div class="tab-bar" style="display:none!important"></div>
   </div>
 
+  <div style="display:none!important">
+    <div id="chatGönderBtn"></div><div id="chatImgPreview"></div><div id="chatInput"></div><div id="chatMessages"></div><div id="chatTgId"></div>
+    <div id="geoSwitchBtn"></div><div id="geoSwitchFlag"></div><div id="geoSwitchName"></div><div id="langBtn"></div><div id="langMenu"></div>
+    <div id="liveRoomComposer"></div><div id="liveRoomFeed"></div><div id="liveRoomInput"></div><div id="liveRoomLock"></div><div id="roomTyping"></div>
+    <div id="topDate"></div><div id="topList"></div><div id="topPodium"></div><div id="tpI"></div><div id="userHeaderId"></div>
+  </div>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
@@ -1038,6 +1044,16 @@
       // Start on chat tab
       switchTab('signals');
     }
+
+    function updGeoSwitch(){}
+    function loadSohbetGeçmiş(){}
+    function scrollSohbetBottom(){}
+    function renderCanlıRoom(){}
+    function renderTopOynaers(){}
+    function sendSohbetMessage(){}
+    function handleSohbetImage(){}
+    function runSelfReset(){}
+    function showHelp(){}
 
     // INIT
     window.onload=function(){
