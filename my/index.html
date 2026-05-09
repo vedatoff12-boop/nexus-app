@@ -758,7 +758,13 @@
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
     }
-    function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>renderHome());}
+    function applyStatic(){
+      renderHome();
+      buildLangMenu();
+      refreshAccessState().then(()=>{
+        if(curTab==='signals') renderHome();
+      }).catch(()=>{});
+    }
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
@@ -1072,11 +1078,15 @@
     function initApp(){
       try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'IN',lang:'en'});}catch(e){}
       lang='en';S.set('aslang','en');
-      applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
+      applyStatic();
+      updProfit();
+      updOnline();
+      updGeoSwitch();
       // Start on signals tab to avoid Telegram WebView crashes on first chat/history render
       switchTab('signals');
-      // Preload chat history safely after the main UI is already visible
-      setTimeout(()=>{try{loadChatHistory();}catch(e){}},0);
+      // Defer non-critical UI work until the first screen is already visible
+      setTimeout(()=>{try{buildMarquee();}catch(e){}},0);
+      setTimeout(()=>{try{loadChatHistory();}catch(e){}},50);
     }
 
     // INIT
