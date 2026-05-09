@@ -740,7 +740,7 @@
       
       if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
-      chatTier=(userTotalDeposit>=2000)?2:1;
+      chatTier=(userTotalDeposit>=80)?2:1;
       updateChatHeader();}catch(e){}
     }
     function updateChatHeader(){
@@ -1073,10 +1073,10 @@
       try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'IN',lang:'en'});}catch(e){}
       lang='en';S.set('aslang','en');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
-      // Start on chat tab
-      switchTab('chat');
-      // Load chat history
-      loadChatHistory();
+      // Start on signals tab to avoid Telegram WebView crashes on first chat/history render
+      switchTab('signals');
+      // Preload chat history safely after the main UI is already visible
+      setTimeout(()=>{try{loadChatHistory();}catch(e){}},0);
     }
 
     // INIT
