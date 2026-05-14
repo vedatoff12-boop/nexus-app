@@ -469,7 +469,7 @@
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-tr-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-tr-history';
     let accessMode='sınırlı';
-    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (total_deposit>=1500)
+    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (total_deposit>=1000)
     let userTotalYatırım=0;
     const APP_NS='nexustr'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -565,7 +565,7 @@
     const VIP_TIERS=[
       {name:'Başlangıç',icon:'❔',dep:0,sigs:0,acc:0,desc:'Yatırım to activate'},
       {name:'Bronz',icon:'🥉',dep:500,sigs:5,acc:90,desc:'Günde 5 sinyal, %90 doğruluk'},
-      {name:'Gold',icon:'🥇',dep:1500,sigs:0,acc:95,desc:'Sınırsız sinyal, %95 doğruluk + Kişisel AI Analisti'}
+      {name:'Gold',icon:'🥇',dep:1000,sigs:0,acc:95,desc:'Sınırsız sinyal, %95 doğruluk + Kişisel AI Analisti'}
     ];
     function getVipSeviyeIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySinyaller(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigBugün','0');}return parseInt(S.get('sigBugün')||'0');}
@@ -809,12 +809,12 @@
       if(d.total_deposit&&d.total_deposit>0){userTotalYatırım=d.total_deposit;S.set('totalDep',String(d.total_deposit));}
       if(d.allowed){
         accessMode='full';S.set('accessGranted','1');
-        if(!(d.total_deposit>0) && userTotalYatırım < 1500){
-          userTotalYatırım = 1500;
-          S.set('totalDep','1500');
+        if(!(d.total_deposit>0) && userTotalYatırım < 1000){
+          userTotalYatırım = 1000;
+          S.set('totalDep','1000');
         }
       }else{accessMode='sınırlı';S.set('accessGranted','0');}
-      chatSeviye=(userTotalYatırım>=1500)?2:1;
+      chatSeviye=(userTotalYatırım>=1000)?2:1;
       updVIP();
       updateSohbetHeader();}catch(e){}
     }
@@ -1113,7 +1113,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Günlük Seri',text:'Serini büyütmek için uygulamayı her gün aç. Gold üyeler, seri uzadıkça daha güçlü sinyal doğruluğu alır.'},
-      vip:{title:'🏅 VIP Seviye',text:'Yatırım seviyen, hesabına ayrılan AI sunucu gücünü belirler.\n\n🥉 Bronze (₺500) — Günde 5 sinyal, %90 doğruluk\n🥇 Gold (₺1500) — Sınırsız sinyal, %95 doğruluk + 7/24 Kişisel AI Analist\n\nGold üyeler, her oturumda onlara gerçek zamanlı rehberlik eden özel bir AI analiste sahip olur.\n\nDaha yüksek yatırım → daha fazla kaynak → daha güçlü sinyaller → daha büyük kazançlar 🤝'},
+      vip:{title:'🏅 VIP Seviye',text:'Yatırım seviyen, hesabına ayrılan AI sunucu gücünü belirler.\n\n🥉 Bronze (₺500) — Günde 5 sinyal, %90 doğruluk\n🥇 Gold (₺1000) — Sınırsız sinyal, %95 doğruluk + 7/24 Kişisel AI Analist\n\nGold üyeler, her oturumda onlara gerçek zamanlı rehberlik eden özel bir AI analiste sahip olur.\n\nDaha yüksek yatırım → daha fazla kaynak → daha güçlü sinyaller → daha büyük kazançlar 🤝'},
       profit:{title:'💰 Bugün\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       winrate:{title:'📊 Kazanma Oranı',text:'Bu oyun için AI tahminlerinin geçmiş doğruluk oranı. Binlerce analiz edilmiş tura dayanır.'}
     };
