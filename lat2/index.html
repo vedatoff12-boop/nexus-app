@@ -1172,8 +1172,9 @@
     async function hydrateGeoFromBackend(){
       const uid=String(tgUserId||S.get('tg_user_id')||'');
       if(!uid) return;
+      const ac=new AbortController();const tm=setTimeout(()=>ac.abort(),5000);
       try{
-        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid})});
+        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid}),signal:ac.signal});
         const d=await r.json();
         const backendGeo=String(d.country||d.geo||'').toLowerCase();
         if(GEO_CONFIG[backendGeo]){
@@ -1185,7 +1186,7 @@
           REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
           const nextUrl=new URL(window.location.href); nextUrl.searchParams.set('geo', currentGeo); history.replaceState({},'',nextUrl);
         }
-      }catch(e){}
+      }catch(e){}finally{clearTimeout(tm);}
     }
 
     // APP INIT after geo is known
@@ -1200,7 +1201,7 @@
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
-    const APP_VERSION='20260519b';
+    const APP_VERSION='20260520a';
     (function cacheBust(){
       const lk='nexus_lat2_ver';
       const prev=S.get(lk);
