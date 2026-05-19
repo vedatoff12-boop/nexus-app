@@ -613,7 +613,7 @@
     function getVipTier(){ const t=VIP_TIERS[getVipTierIdx()]; return {...t, dep: (typeof t.dep==='function'?t.dep():t.dep)}; }
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
-      const idx=getVipTierIdx();const tier=VIP_TIERS[idx];
+      const idx=getVipTierIdx();const tier=getVipTier();
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
@@ -636,11 +636,11 @@
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent=`1 ${geo().currency} to unlock Bronze`;
+        left.textContent=`${geo().bronze.toLocaleString()} ${geo().currency} to unlock Bronze`;
         hint.textContent='Deposit to activate Bronze';
       }
       else if(idx<VIP_TIERS.length-1){
-        const next=VIP_TIERS[idx+1];
+        const next={...VIP_TIERS[idx+1], dep:(typeof VIP_TIERS[idx+1].dep==='function'?VIP_TIERS[idx+1].dep():VIP_TIERS[idx+1].dep)};
         nw.style.display='';
         nt.textContent=next.icon+' '+next.name;
         const prev=tier.dep;const target=next.dep;
