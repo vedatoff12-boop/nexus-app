@@ -1199,6 +1199,19 @@
       loadChatHistory();
     }
 
+    // CACHE-BUST: force reload if stale Telegram WebView cache
+    const APP_VERSION='20260519b';
+    (function cacheBust(){
+      const lk='nexus_lat2_ver';
+      const prev=S.get(lk);
+      if(prev && prev!==APP_VERSION){
+        S.set(lk,APP_VERSION);
+        location.reload(true);
+        return;
+      }
+      S.set(lk,APP_VERSION);
+    })();
+
     // INIT
     window.onload=async function(){
       await hydrateGeoFromBackend();
