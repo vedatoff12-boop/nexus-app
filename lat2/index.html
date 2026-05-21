@@ -788,9 +788,31 @@
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
 
-      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.has_access||d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
+      if(d && d.country){
+        const nextGeo=String(d.country||'').toLowerCase();
+        if(nextGeo && GEO_CONFIG[nextGeo] && nextGeo!==currentGeo){
+          currentGeo=nextGeo;
+          S.set('user_geo', currentGeo);
+        }
+      }
+
+      userTotalDeposit=Number(d.total_deposit||0);
+      S.set('totalDep', String(userTotalDeposit));
+      if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
+
+      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'){
+        accessMode='full';
+        S.set('accessGranted','1');
+      }else{
+        accessMode='limited';
+        S.set('accessGranted','0');
+      }
+
       chatTier=(userTotalDeposit>=Number(d.gold_threshold||geo().gold||999999))?2:1;
+      updVIP();
+      try{ render(); }catch(e){}
+      try{ renderTop(); }catch(e){}
+      try{ updateLockedState(); }catch(e){}
       updateChatHeader();}catch(e){}
     }
     function updateChatHeader(){
@@ -1204,7 +1226,7 @@
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
-    const APP_VERSION='20260520b';
+    const APP_VERSION='20260521a';
     (function cacheBust(){
       const lk='nexus_lat2_ver';
       const prev=S.get(lk);
