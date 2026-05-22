@@ -511,11 +511,15 @@
       syncSelfResetButtons(true);
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
-        const data=await res.json().catch(()=>({ok:false}));
-        if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
+        // Always clear local state first — server reset is best-effort
         try{localStorage.clear();}catch(e){}
-        alert('Reset done. Funnel is back to fresh state.');
+        let serverOk=false;
+        try{
+          const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
+          const data=await res.json().catch(()=>({ok:false}));
+          serverOk=res.ok&&data.ok;
+        }catch(e){}
+        alert(serverOk?'Reset done. Funnel is back to fresh state.':'Local state cleared. Server had no data to reset.');
         window.location.href=window.location.pathname;
       }catch(e){
         alert('Reset failed: '+(e&&e.message?e.message:'unknown'));
