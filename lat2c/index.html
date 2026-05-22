@@ -1257,19 +1257,26 @@
       lang=geo().lang||'en';S.set('aslang',lang);
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on chat tab
-      switchTab('chat');
-      // Load chat history
-      loadChatHistory();
+      switchTab('signals');
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
     // Guarded against infinite reload loops via sessionStorage flag.
-    const APP_VERSION='20260522-global4';
+    const APP_VERSION='20260522-global5';
     (function cacheBust(){
       try{
         const lk='nexus_lat2c_ver';
         const reloadFlag='nexus_lat2c_reloaded';
+        const urlReloadFlag='nexus_lat2c_url_reloaded';
         const prev=S.get(lk);
+        const currentUrl=new URL(window.location.href);
+        const urlVersion=currentUrl.searchParams.get('v');
+        if(urlVersion!==APP_VERSION && sessionStorage.getItem(urlReloadFlag)!==APP_VERSION){
+          sessionStorage.setItem(urlReloadFlag,APP_VERSION);
+          currentUrl.searchParams.set('v',APP_VERSION);
+          window.location.replace(currentUrl.toString());
+          return;
+        }
         const alreadyReloaded=sessionStorage.getItem(reloadFlag)===APP_VERSION;
         if(prev && prev!==APP_VERSION && !alreadyReloaded){
           sessionStorage.setItem(reloadFlag,APP_VERSION);
