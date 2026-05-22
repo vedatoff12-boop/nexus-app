@@ -515,9 +515,33 @@
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
-    // Fix Telegram WebView viewport height
-    function fixVH(){const vh=window.innerHeight;document.querySelector('.app-shell').style.height=vh+'px';}
-    fixVH();window.addEventListener('resize',fixVH);
+    // Stable Telegram WebView viewport sync
+    function syncViewportHeight(){
+      const root=document.documentElement;
+      const cssVh=(window.innerHeight||document.documentElement.clientHeight||640)*0.01;
+      root.style.setProperty('--vh', cssVh+'px');
+      const tgVh=(tg&&typeof tg.viewportHeight==='number'&&tg.viewportHeight>0)?tg.viewportHeight:null;
+      if(tgVh){
+        root.style.setProperty('--tg-viewport-height', tgVh+'px');
+      } else {
+        root.style.removeProperty('--tg-viewport-height');
+      }
+      const shell=document.querySelector('.app-shell');
+      if(shell){
+        const px=tgVh||window.innerHeight||document.documentElement.clientHeight||640;
+        shell.style.height=px+'px';
+        shell.style.minHeight=px+'px';
+      }
+    }
+    syncViewportHeight();
+    window.addEventListener('resize', syncViewportHeight, {passive:true});
+    window.addEventListener('orientationchange', syncViewportHeight, {passive:true});
+    if(tg&&typeof tg.onEvent==='function'){
+      try{tg.onEvent('viewportChanged', syncViewportHeight);}catch(e){}
+    }
+    setTimeout(syncViewportHeight, 80);
+    setTimeout(syncViewportHeight, 300);
+    setTimeout(syncViewportHeight, 900);
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="User",tgUserId=null;
     if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
@@ -788,9 +812,31 @@
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
 
-      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.has_access||d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
+      if(d && d.country){
+        const nextGeo=String(d.country||'').toLowerCase();
+        if(nextGeo && GEO_CONFIG[nextGeo] && nextGeo!==currentGeo){
+          currentGeo=nextGeo;
+          S.set('user_geo', currentGeo);
+        }
+      }
+
+      userTotalDeposit=Number(d.total_deposit||0);
+      S.set('totalDep', String(userTotalDeposit));
+      if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
+
+      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'){
+        accessMode='full';
+        S.set('accessGranted','1');
+      }else{
+        accessMode='limited';
+        S.set('accessGranted','0');
+      }
+
       chatTier=(userTotalDeposit>=Number(d.gold_threshold||geo().gold||999999))?2:1;
+      updVIP();
+      try{ render(); }catch(e){}
+      try{ renderTop(); }catch(e){}
+      try{ updateLockedState(); }catch(e){}
       updateChatHeader();}catch(e){}
     }
     function updateChatHeader(){
@@ -1193,7 +1239,10 @@
     }
 
     // APP INIT after geo is known
+    let appStarted=false;
     function initApp(){
+      if(appStarted) return;
+      appStarted=true;
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||'uy').toUpperCase(),lang:geo().lang});}catch(e){}
       lang=geo().lang||'en';S.set('aslang',lang);
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
@@ -1204,7 +1253,7 @@
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
-    const APP_VERSION='20260520c';
+    const APP_VERSION='20260522-global1';
     (function cacheBust(){
       const lk='nexus_lat2c_ver';
       const prev=S.get(lk);
@@ -1217,10 +1266,21 @@
     })();
 
     // INIT
-    window.onload=async function(){
-      await hydrateGeoFromBackend();
+    function bootApp(){
       initApp();
-    };
+      hydrateGeoFromBackend().then(()=>{
+        applyGeoChrome();
+        applyStatic();
+        updGeoSwitch();
+        refreshAccessState();
+      }).catch(()=>{});
+    }
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded', bootApp, {once:true});
+    }else{
+      bootApp();
+    }
+    setTimeout(bootApp, 1200);
   </script>
 </body>
 </html>

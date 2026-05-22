@@ -1215,7 +1215,10 @@
     }
 
     // APP INIT after geo is known
+    let appStarted=false;
     function initApp(){
+      if(appStarted) return;
+      appStarted=true;
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||'uy').toUpperCase(),lang:geo().lang});}catch(e){}
       lang=geo().lang||'en';S.set('aslang',lang);
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
@@ -1226,7 +1229,7 @@
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
-    const APP_VERSION='20260521a';
+    const APP_VERSION='20260522-global1';
     (function cacheBust(){
       const lk='nexus_lat2_ver';
       const prev=S.get(lk);
@@ -1239,10 +1242,21 @@
     })();
 
     // INIT
-    window.onload=async function(){
-      await hydrateGeoFromBackend();
+    function bootApp(){
       initApp();
-    };
+      hydrateGeoFromBackend().then(()=>{
+        applyGeoChrome();
+        applyStatic();
+        updGeoSwitch();
+        refreshAccessState();
+      }).catch(()=>{});
+    }
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded', bootApp, {once:true});
+    }else{
+      bootApp();
+    }
+    setTimeout(bootApp, 1200);
   </script>
 </body>
 </html>
