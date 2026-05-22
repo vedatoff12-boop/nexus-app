@@ -854,7 +854,7 @@
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
+      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),4000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
@@ -1088,7 +1088,7 @@
       const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       const g=String(currentGeo||S.get('geo')||'pe').toLowerCase();
       const controller=new AbortController();
-      const timer=setTimeout(()=>controller.abort(),10000);
+      const timer=setTimeout(()=>controller.abort(),4000);
       try{
         const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:g}),signal:controller.signal});
         const d=await r.json();
@@ -1229,7 +1229,7 @@
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
-    const APP_VERSION='20260522-global1';
+    const APP_VERSION='20260522-global2';
     (function cacheBust(){
       const lk='nexus_lat2_ver';
       const prev=S.get(lk);
@@ -1242,14 +1242,28 @@
     })();
 
     // INIT
+    let _watchdog=null;
     function bootApp(){
+      if(_watchdog) return; // already running
+      _watchdog = setTimeout(()=>{
+        const main=document.getElementById('mainApp');
+        if(main && main.style.display==='none'){
+          console.warn('[boot] watchdog triggered: forcing UI visible');
+          main.style.display='block';
+          const splash=document.getElementById('splash');
+          if(splash) splash.style.display='none';
+        }
+      },2500);
       initApp();
       hydrateGeoFromBackend().then(()=>{
         applyGeoChrome();
         applyStatic();
         updGeoSwitch();
         refreshAccessState();
-      }).catch(()=>{});
+        if(_watchdog){clearTimeout(_watchdog);_watchdog=null;}
+      }).catch(()=>{
+        if(_watchdog){clearTimeout(_watchdog);_watchdog=null;}
+      });
     }
     if(document.readyState==='loading'){
       document.addEventListener('DOMContentLoaded', bootApp, {once:true});
