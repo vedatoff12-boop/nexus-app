@@ -644,6 +644,17 @@
     function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
     function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignaux()>=tier.sigs;}
     function getVipTier(){ const t=VIP_TIERS[getVipTierIdx()]; return {...t, dep: (typeof t.dep==='function'?t.dep():t.dep)}; }
+    function hasDepositAccess(data){
+      const dep=Number((data&&data.total_deposit!==undefined)?data.total_deposit:(S.get('totalDep')||0));
+      const bronze=Number((data&&data.bronze_threshold)||geo().bronze||1);
+      return dep>=bronze;
+    }
+    function openGameFromCard(k,el,ld){
+      accessMode='full';
+      S.set('accessGranted','1');
+      if(el&&ld&&el.contains(ld))el.removeChild(ld);
+      if(k==="chicken")renderChicken();else renderGame(k);
+    }
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
       const idx=getVipTierIdx();const tier=getVipTier();
@@ -833,7 +844,7 @@
       S.set('totalDep', String(userTotalDeposit));
       if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
 
-      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'){
+      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(d)){
         accessMode='full';
         S.set('accessGranted','1');
       }else{
@@ -887,14 +898,14 @@
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      if(accessMode==='full'||S.get('accessGranted')==='1'){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);return;}
+      if(accessMode==='full'||S.get('accessGranted')==='1'||hasDepositAccess()){openGameFromCard(k,el,ld);return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'){accessMode='full';S.set('accessGranted','1');if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(d)){openGameFromCard(k,el,ld);}
       else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
-      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
+      catch(e){if(hasDepositAccess()){openGameFromCard(k,el,ld);return;}if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
@@ -1262,7 +1273,7 @@
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
     // Guarded against infinite reload loops via sessionStorage flag.
-    const APP_VERSION='20260522-global5';
+    const APP_VERSION='20260522-global6';
     (function cacheBust(){
       try{
         const lk='nexus_lat2c_ver';
