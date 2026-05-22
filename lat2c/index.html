@@ -514,7 +514,16 @@
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
-    const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
+    const tg=window.Telegram?Telegram.WebApp:null;
+    // Telegram WebApp init: ready FIRST, then expand.
+    try{tg&&tg.ready();}catch(e){console.warn('[tg] ready failed',e);}
+    try{tg&&tg.expand();}catch(e){console.warn('[tg] expand failed',e);}
+    // Prevent iOS Telegram swipe-close from freezing WebView interactions
+    try{tg&&tg.disableVerticalSwipes&&tg.disableVerticalSwipes();}catch(e){}
+    try{tg&&tg.enableClosingConfirmation&&tg.enableClosingConfirmation();}catch(e){}
+    // Global error trap so a single throw can't freeze the whole UI
+    window.addEventListener('error',function(ev){console.warn('[global error]',ev.message,ev.filename,ev.lineno);});
+    window.addEventListener('unhandledrejection',function(ev){console.warn('[unhandled promise]',ev.reason);});
     // Stable Telegram WebView viewport sync
     function syncViewportHeight(){
       const root=document.documentElement;
@@ -1253,49 +1262,47 @@
     }
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
-    const APP_VERSION='20260522-global2';
+    // Guarded against infinite reload loops via sessionStorage flag.
+    const APP_VERSION='20260522-global3';
     (function cacheBust(){
-      const lk='nexus_lat2c_ver';
-      const prev=S.get(lk);
-      if(prev && prev!==APP_VERSION){
+      try{
+        const lk='nexus_lat2c_ver';
+        const reloadFlag='nexus_lat2c_reloaded';
+        const prev=S.get(lk);
+        const alreadyReloaded=sessionStorage.getItem(reloadFlag)===APP_VERSION;
+        if(prev && prev!==APP_VERSION && !alreadyReloaded){
+          sessionStorage.setItem(reloadFlag,APP_VERSION);
+          S.set(lk,APP_VERSION);
+          location.reload(true);
+          return;
+        }
         S.set(lk,APP_VERSION);
-        location.reload(true);
-        return;
-      }
-      S.set(lk,APP_VERSION);
+      }catch(e){console.warn('[cacheBust]',e);}
     })();
 
-    // INIT
-    let _watchdog=null;
+    // INIT — robust boot, never blocks on async work
+    let _bootStarted=false;
     function bootApp(){
-      if(_watchdog) return; // already running
-      _watchdog = setTimeout(()=>{
-        // Watchdog: если через 2.5с UI всё ещё скрыт, форсируем показ
-        const main=document.getElementById('mainApp');
-        if(main && main.style.display==='none'){
-          console.warn('[boot] watchdog triggered: forcing UI visible');
-          main.style.display='block';
-          const splash=document.getElementById('splash');
-          if(splash) splash.style.display='none';
-        }
-      },2500);
-      initApp();
-      // hydrateGeoFromBackend — non-blocking, в фоне
-      hydrateGeoFromBackend().then(()=>{
-        applyGeoChrome();
-        applyStatic();
-        updGeoSwitch();
-        refreshAccessState();
-        if(_watchdog){clearTimeout(_watchdog);_watchdog=null;}
-      }).catch(()=>{
-        if(_watchdog){clearTimeout(_watchdog);_watchdog=null;}
-      });
+      if(_bootStarted) return;
+      _bootStarted=true;
+      try{initApp();}catch(e){console.warn('[bootApp] initApp failed',e);}
+      try{syncViewportHeight();}catch(e){}
+      // Background hydration — never blocks UI, errors swallowed
+      Promise.resolve().then(()=>{
+        return hydrateGeoFromBackend();
+      }).then(()=>{
+        try{applyGeoChrome();}catch(e){}
+        try{applyStatic();}catch(e){}
+        try{updGeoSwitch();}catch(e){}
+        try{refreshAccessState();}catch(e){}
+      }).catch(e=>{console.warn('[bootApp] hydrate failed',e);});
     }
     if(document.readyState==='loading'){
       document.addEventListener('DOMContentLoaded', bootApp, {once:true});
     }else{
       bootApp();
     }
+    // Failsafe: if something blocks DOMContentLoaded, run anyway after 1.2s
     setTimeout(bootApp, 1200);
   </script>
 </body>
