@@ -878,11 +878,12 @@
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),4000);
+      if(accessMode==='full'||S.get('accessGranted')==='1'){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);return;}
+      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.has_access||d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'){accessMode='full';S.set('accessGranted','1');if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
       else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
@@ -1254,7 +1255,7 @@
 
     // CACHE-BUST: force reload if stale Telegram WebView cache
     // Guarded against infinite reload loops via sessionStorage flag.
-    const APP_VERSION='20260522-global3';
+    const APP_VERSION='20260522-global4';
     (function cacheBust(){
       try{
         const lk='nexus_lat2_ver';
