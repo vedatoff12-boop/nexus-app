@@ -420,25 +420,6 @@
     </div>
 
     <!-- TOP PLAYERS TAB -->
-    <div id="tabCanlıRoom" class="tab-content">
-      <div class="live-room">
-        <div class="live-room-label">Canlı Room</div>
-        <div class="live-room-shell">
-          <div class="live-room-feed" id="liveRoomFeed"></div>
-          <div class="room-typing" id="roomTyping"></div>
-          <div class="room-composer">
-            <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="Live Room aktif">
-              <div class="room-lock-hint">Canlı oda herkese açık</div>
-            </div>
-            <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
-              <button class="room-send" id="liveRoomGönder" onclick="sendCanlıRoomMessage()">➤</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div id="tabTop" class="tab-content">
       <div class="top-header"><div class="top-header-title">🏆 En İyi Oyuncular</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
@@ -451,7 +432,6 @@
 
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('signals')" id="btnSinyaller"><span class="tab-icon">🎯</span><span class="tab-label">Sinyaller</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnCanlıRoom"><span class="tab-icon">🌐</span><span class="tab-label">Canlı Room</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -613,7 +593,6 @@
     let curTab='signals';
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
     if(t==='signals'){document.getElementById('tabSinyaller').classList.add('active');document.getElementById('btnSinyaller').classList.add('active');mq.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabCanlıRoom').classList.add('active');document.getElementById('btnCanlıRoom').classList.add('active');mq.style.display='none';renderCanlıRoom();}
     else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopOynaers();}}
 
     // MARQUEE
@@ -811,18 +790,11 @@
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
     }
-    function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>renderHome());}
+    function removeLiveRoomEntry(){}
+    function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>{renderHome();});}
 
     async function handleGameClick(k,el){
-      const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
-      try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
-      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
-      if(d.player_id){S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
-      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
-      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
+      if(k==="chicken")renderChicken();else renderGame(k);
     }
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
