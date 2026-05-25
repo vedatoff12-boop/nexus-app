@@ -504,6 +504,8 @@
     let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=250)
     let userTotalDeposit=0;
     const APP_NS='nexuslat2'; const S={get(k){try{return localStorage.getItem(APP_NS+':'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem(APP_NS+':'+k,v)}catch(e){}}};
+    function clearAppStorageNamespace(){try{const prefix=APP_NS+':';for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k&&k.indexOf(prefix)===0)localStorage.removeItem(k);}}catch(e){}}
+    (function handleEmergencyReset(){try{const u=new URL(window.location.href);if(u.searchParams.get('reset')==='1'){clearAppStorageNamespace();['nexus_lat2_reloaded','nexus_lat2_url_reloaded'].forEach(k=>{try{sessionStorage.removeItem(k);}catch(e){}});u.searchParams.delete('reset');history.replaceState({},'',u.toString());console.warn('[reset] scoped app storage cleared');}}catch(e){console.warn('[reset]',e);}})();
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo=String(urlParams.get('geo')||S.get('user_geo')||'pe').toLowerCase();
     if(!GEO_CONFIG[currentGeo]) currentGeo='pe'; S.set('user_geo',currentGeo);
@@ -566,7 +568,7 @@
         const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
         const data=await res.json().catch(()=>({ok:false}));
         if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
-        try{localStorage.clear();}catch(e){}
+        try{clearAppStorageNamespace();}catch(e){}
         alert(T().resetDone||'Reset complete.');
         window.location.href=window.location.pathname;
       }catch(e){
@@ -746,7 +748,7 @@
     // LANGS
     const LANGS=[{id:'en',l:'EN'},{id:'es',l:'ES'},{id:'uz',l:'UZ'},{id:'az',l:'AZ'}];
     let lang=geo().lang||'en'; S.set('aslang',lang);
-    function T(){return STR[lang]||STR.en;}
+    function T(){try{return STR[lang]||STR.en;}catch(e){return {};}}
     const UI_STR={
       en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Send a message below to get started 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',liveRoom:'Live Room',liveLock:'🔒 Reach Gold to unlock chat',liveHint:'Gold chat unlocks after reaching the local Gold deposit threshold',tabChat:'Chat',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
       es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',liveRoom:'Sala en vivo',liveLock:'🔒 Llega a Gold para desbloquear el chat',liveHint:'El chat Gold se desbloquea al alcanzar el umbral local de depósito Gold',tabChat:'Chat',tabSignals:'Señales',tabLive:'Sala live',tabTop:'Top 100'},
@@ -829,55 +831,64 @@
       });
       app.appendChild(h);app.appendChild(grid);
     }
+    let accessRefreshPromise=null;
     async function refreshAccessState(){
-      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
-      try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid,geo:currentGeo})});
-      const d=await r.json();
+      if(accessRefreshPromise) return accessRefreshPromise;
+      accessRefreshPromise=(async()=>{
+        const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
+        const controller=new AbortController();
+        const timeout=setTimeout(()=>controller.abort(),9000);
+        try{
+          const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid,geo:currentGeo}),signal:controller.signal});
+          const d=await r.json();
 
-      if(d && (d.geo||d.country)){
-        const nextGeo=String(d.geo||d.country||'').toLowerCase();
-        if(nextGeo && GEO_CONFIG[nextGeo] && nextGeo!==currentGeo){
-          currentGeo=nextGeo;
-          S.set('user_geo', currentGeo);
-        }
-      }
+          if(d && (d.geo||d.country)){
+            const nextGeo=String(d.geo||d.country||'').toLowerCase();
+            if(nextGeo && GEO_CONFIG[nextGeo] && nextGeo!==currentGeo){
+              currentGeo=nextGeo;
+              S.set('user_geo', currentGeo);
+            }
+          }
 
-      latam2AccessState={
-        source:'backend',
-        user_id:d.user_id||uid,
-        geo:String(d.geo||d.country||currentGeo).toLowerCase(),
-        tier:normTier(d.tier),
-        has_access:!!(d.has_access||d.allowed),
-        display_currency:d.display_currency||geo().currency,
-        deposit_amount_original:Number(d.deposit_amount_original??d.deposit_amount??0),
-        deposit_currency_original:d.deposit_currency_original||d.currency||geo().currency,
-        deposit_usd_equivalent:Number(d.deposit_usd_equivalent??0),
-        total_deposit_original:Number(d.total_deposit_original??d.total_deposit??0),
-        total_deposit_usd_equivalent:Number(d.total_deposit_usd_equivalent??d.deposit_usd_equivalent??d.total_deposit??0),
-        bronze_threshold_display:d.bronze_threshold_display||moneyText(geo().bronze,geo().currency),
-        gold_threshold_display:d.gold_threshold_display||moneyText(geo().gold,geo().currency),
-        bronze_usd:Number(d.bronze_usd||LATAM2_USD_TIERS.bronze),
-        gold_usd:Number(d.gold_usd||LATAM2_USD_TIERS.gold)
-      };
+          latam2AccessState={
+            source:'backend',
+            user_id:d.user_id||uid,
+            geo:String(d.geo||d.country||currentGeo).toLowerCase(),
+            tier:normTier(d.tier),
+            has_access:!!(d.has_access||d.allowed),
+            display_currency:d.display_currency||geo().currency,
+            deposit_amount_original:Number(d.deposit_amount_original??d.deposit_amount??0),
+            deposit_currency_original:d.deposit_currency_original||d.currency||geo().currency,
+            deposit_usd_equivalent:Number(d.deposit_usd_equivalent??0),
+            total_deposit_original:Number(d.total_deposit_original??d.total_deposit??0),
+            total_deposit_usd_equivalent:Number(d.total_deposit_usd_equivalent??d.deposit_usd_equivalent??d.total_deposit??0),
+            bronze_threshold_display:d.bronze_threshold_display||moneyText(geo().bronze,geo().currency),
+            gold_threshold_display:d.gold_threshold_display||moneyText(geo().gold,geo().currency),
+            bronze_usd:Number(d.bronze_usd||LATAM2_USD_TIERS.bronze),
+            gold_usd:Number(d.gold_usd||LATAM2_USD_TIERS.gold)
+          };
 
-      userTotalDeposit=latam2AccessState.total_deposit_usd_equivalent||latam2AccessState.deposit_usd_equivalent||0;
-      S.set('totalDep', String(userTotalDeposit));
-      if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
+          userTotalDeposit=latam2AccessState.total_deposit_usd_equivalent||latam2AccessState.deposit_usd_equivalent||0;
+          S.set('totalDep', String(userTotalDeposit));
+          if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
 
-      if(latam2AccessState.has_access||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(latam2AccessState)){
-        accessMode='full';
-        S.set('accessGranted','1');
-      }else{
-        accessMode='limited';
-        S.set('accessGranted','0');
-      }
+          if(latam2AccessState.has_access||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(latam2AccessState)){
+            accessMode='full';
+            S.set('accessGranted','1');
+          }else{
+            accessMode='limited';
+            S.set('accessGranted','0');
+          }
 
-      chatTier=getVipTierIdx()>=2?2:1;
-      updVIP();
-      try{ render(); }catch(e){}
-      try{ renderTop(); }catch(e){}
-      try{ updateLockedState(); }catch(e){}
-      updateChatHeader();}catch(e){}
+          chatTier=getVipTierIdx()>=2?2:1;
+          updVIP();
+          try{ render(); }catch(e){}
+          try{ renderTop(); }catch(e){}
+          try{ updateLockedState(); }catch(e){}
+          updateChatHeader();
+        }catch(e){console.warn('[refreshAccessState]',e&&e.message?e.message:e);}finally{clearTimeout(timeout);}
+      })();
+      try{return await accessRefreshPromise;}finally{accessRefreshPromise=null;}
     }
     function updateChatHeader(){
       const sub=document.getElementById('chatHeaderSub');
@@ -912,7 +923,7 @@
       const btnTop=document.querySelector('#btnTop .tab-label'); if(btnTop) btnTop.textContent=ui.tabTop;
       const langDrop=document.querySelector('.lang-drop'); if(langDrop) langDrop.style.display='none';
       renderHome();
-      refreshAccessState().then(()=>{applyGeoChrome();renderHome();});
+      // Access refresh is started once from bootApp; keep applyStatic synchronous/clickable.
     }
 
     async function handleGameClick(k,el){
@@ -1260,13 +1271,9 @@
     }
 
     async function hydrateGeoFromBackend(){
-      const uid=String(tgUserId||S.get('tg_user_id')||'');
-      if(!uid) return;
-      const ac=new AbortController();const tm=setTimeout(()=>ac.abort(),5000);
+      await refreshAccessState();
       try{
-        const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid}),signal:ac.signal});
-        const d=await r.json();
-        const backendGeo=String(d.country||d.geo||'').toLowerCase();
+        const backendGeo=String((latam2AccessState&&latam2AccessState.geo)||'').toLowerCase();
         if(GEO_CONFIG[backendGeo]){
           currentGeo=backendGeo;
           S.set('user_geo', currentGeo);
@@ -1276,7 +1283,7 @@
           REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
           const nextUrl=new URL(window.location.href); nextUrl.searchParams.set('geo', currentGeo); history.replaceState({},'',nextUrl);
         }
-      }catch(e){}finally{clearTimeout(tm);}
+      }catch(e){}
     }
 
     // APP INIT after geo is known
@@ -1291,42 +1298,35 @@
       switchTab('signals');
     }
 
-    // CACHE-BUST: force reload if stale Telegram WebView cache
-    // Guarded against infinite reload loops via sessionStorage flag.
-    const APP_VERSION='20260522-global6';
+    // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
+    const APP_VERSION='20260526-freeze1';
     (function cacheBust(){
       try{
         const lk='nexus_lat2_ver';
-        const reloadFlag='nexus_lat2_reloaded';
-        const urlReloadFlag='nexus_lat2_url_reloaded';
-        const prev=S.get(lk);
         const currentUrl=new URL(window.location.href);
         const urlVersion=currentUrl.searchParams.get('v');
-        if(urlVersion!==APP_VERSION && sessionStorage.getItem(urlReloadFlag)!==APP_VERSION){
-          sessionStorage.setItem(urlReloadFlag,APP_VERSION);
+        if(urlVersion!==APP_VERSION){
           currentUrl.searchParams.set('v',APP_VERSION);
-          window.location.replace(currentUrl.toString());
-          return;
-        }
-        // sessionStorage flag prevents reload loops even if localStorage write fails
-        const alreadyReloaded=sessionStorage.getItem(reloadFlag)===APP_VERSION;
-        if(prev && prev!==APP_VERSION && !alreadyReloaded){
-          sessionStorage.setItem(reloadFlag,APP_VERSION);
-          S.set(lk,APP_VERSION);
-          location.reload(true);
-          return;
+          history.replaceState({},'',currentUrl.toString());
         }
         S.set(lk,APP_VERSION);
       }catch(e){console.warn('[cacheBust]',e);}
     })();
 
+    function bootFailsafeRender(){
+      try{lang=geo().lang||'es';S.set('aslang',lang);}catch(e){}
+      try{applyGeoChrome();}catch(e){}
+      try{renderHome();}catch(e){}
+      try{switchTab('signals');}catch(e){}
+      try{updateChatHeader();}catch(e){}
+    }
     // INIT — robust boot, never blocks on async work
     let _bootStarted=false;
     function bootApp(){
       if(_bootStarted) return;
       _bootStarted=true;
       // Init synchronously — UI is visible immediately after this returns
-      try{initApp();}catch(e){console.warn('[bootApp] initApp failed',e);}
+      try{initApp();}catch(e){console.warn('[bootApp] initApp failed',e);bootFailsafeRender();}
       // Always force viewport fix again after init
       try{fixVH();}catch(e){}
       // Background hydration — never blocks UI, errors swallowed
@@ -1336,7 +1336,7 @@
         try{applyGeoChrome();}catch(e){}
         try{applyStatic();}catch(e){}
         try{updGeoSwitch();}catch(e){}
-        try{refreshAccessState();}catch(e){}
+        // hydrateGeoFromBackend already performs the single access refresh.
       }).catch(e=>{console.warn('[bootApp] hydrate failed',e);});
     }
     if(document.readyState==='loading'){
@@ -1346,6 +1346,7 @@
     }
     // Failsafe: if something blocks DOMContentLoaded, run anyway after 1.2s
     setTimeout(bootApp, 1200);
+    setTimeout(()=>{try{if(!appStarted)bootFailsafeRender();}catch(e){}}, 1800);
   </script>
 </body>
 </html>
