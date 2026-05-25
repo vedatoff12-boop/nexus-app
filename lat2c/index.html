@@ -462,27 +462,27 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
         const GEO_CONFIG = {
-      pe: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:20, gold:40, profitRange:[320,880],
+      pe: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:15, gold:37, profitRange:[320,880],
         link:"https://lat22.playzone.cfd/", promo:"777PE777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      ec: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"USD ", bronze:5, gold:10, profitRange:[60,165],
+      ec: { name:"Ecuador", flag:"🇪🇨", lang:"es", currency:"USD", sym:"USD ", bronze:4, gold:10, profitRange:[60,165],
         link:"https://lat22.playzone.cfd/", promo:"777EC777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      cl: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"CLP ", bronze:5000, gold:10000, profitRange:[8000,22000],
+      cl: { name:"Chile", flag:"🇨🇱", lang:"es", currency:"CLP", sym:"CLP ", bronze:3800, gold:9500, profitRange:[8000,22000],
         link:"https://lat22.playzone.cfd/", promo:"777CL777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      ve: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"VES", sym:"VES ", bronze:2500, gold:5000, profitRange:[4200,11330],
+      ve: { name:"Venezuela", flag:"🇻🇪", lang:"es", currency:"VES", sym:"VES ", bronze:560, gold:1400, profitRange:[4200,11330],
         link:"https://lat22.playzone.cfd/", promo:"777VE777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      bo: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"BOB", sym:"BOB ", bronze:40, gold:80, profitRange:[190,528],
+      bo: { name:"Bolivia", flag:"🇧🇴", lang:"es", currency:"BOB", sym:"BOB ", bronze:28, gold:69, profitRange:[190,528],
         link:"https://lat22.playzone.cfd/", promo:"777BO777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
-      co: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"COP ", bronze:16000, gold:35000, profitRange:[50000,132000],
+      co: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"COP ", bronze:16000, gold:40000, profitRange:[50000,132000],
         link:"https://lat22.playzone.cfd/", promo:"777CO777",
         webhook:"https://n8nnexusai.uk/webhook/check-access-latam2",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] },
@@ -510,6 +510,12 @@
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.bd;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-latam2';
+    const LATAM2_USD_TIERS={bronze:4,gold:10};
+    let latam2AccessState={tier:null,has_access:false,display_currency:null,deposit_usd_equivalent:0,total_deposit_usd_equivalent:0,deposit_amount_original:0,total_deposit_original:0,bronze_threshold_display:null,gold_threshold_display:null,source:'fallback'};
+    function normTier(v){v=String(v||'').trim().toLowerCase();if(v==='gold')return'Gold';if(v==='bronze')return'Bronze';return'Unranked';}
+    function tierIdxFromState(st){const t=normTier(st&&st.tier);if(t==='Gold')return 2;if(t==='Bronze')return 1;if(st&&(st.has_access===true||st.allowed===true))return 1;return 0;}
+    function moneyText(v,c){const n=Number(v||0);return `${Number.isFinite(n)?n.toLocaleString():0} ${c||geo().currency}`;}
+    function thresholdText(kind){const st=latam2AccessState||{};const key=kind==='gold'?'gold_threshold_display':'bronze_threshold_display';if(st[key])return String(st[key]);const g=geo();return moneyText(kind==='gold'?g.gold:g.bronze,g.currency);}
     function applyGeoChrome(){ const g=geo(); document.title=`NEXUS ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · 1xBet access`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`0 ${g.currency} / ${g.gold} ${g.currency}`; }
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
@@ -635,19 +641,27 @@
     // VIP
     const VIP_TIERS=[
       {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:()=>Number(geo().bronze||1),sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:()=>Number(geo().gold||999999),sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + personal AI analyst'}
+      {name:'Bronze',icon:'🥉',dep:()=>LATAM2_USD_TIERS.bronze,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
+      {name:'Gold',icon:'🥇',dep:()=>LATAM2_USD_TIERS.gold,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + personal AI analyst'}
     ];
-    function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){const req=typeof VIP_TIERS[i].dep==='function'?VIP_TIERS[i].dep():VIP_TIERS[i].dep;if(dep>=req)return i;}return 0;}
+    function getVipTierIdx(){
+      if(latam2AccessState&&latam2AccessState.source==='backend') return tierIdxFromState(latam2AccessState);
+      const dep=Number(S.get('totalDep')||'0');
+      for(let i=VIP_TIERS.length-1;i>=0;i--){const req=typeof VIP_TIERS[i].dep==='function'?VIP_TIERS[i].dep():VIP_TIERS[i].dep;if(dep>=req)return i;}
+      return 0;
+    }
     function getDailySignaux(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
     function addDailySignal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
     function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
     function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignaux()>=tier.sigs;}
-    function getVipTier(){ const t=VIP_TIERS[getVipTierIdx()]; return {...t, dep: (typeof t.dep==='function'?t.dep():t.dep)}; }
+    function getVipTier(){ const t=VIP_TIERS[getVipTierIdx()]||VIP_TIERS[0]; return {...t, dep: (typeof t.dep==='function'?t.dep():t.dep)}; }
     function hasDepositAccess(data){
-      const dep=Number((data&&data.total_deposit!==undefined)?data.total_deposit:(S.get('totalDep')||0));
-      const bronze=Number((data&&data.bronze_threshold)||geo().bronze||1);
-      return dep>=bronze;
+      const st=data||latam2AccessState||{};
+      if(st.has_access===true||st.allowed===true)return true;
+      const t=normTier(st.tier);
+      if(t==='Bronze'||t==='Gold')return true;
+      const depUsd=Number(st.total_deposit_usd_equivalent??st.deposit_usd_equivalent??S.get('totalDep')??0);
+      return depUsd>=LATAM2_USD_TIERS.bronze;
     }
     function openGameFromCard(k,el,ld){
       accessMode='full';
@@ -656,51 +670,48 @@
       if(k==="chicken")renderChicken();else renderGame(k);
     }
     function updVIP(){
-      const dep=parseInt(S.get('totalDep')||'0');
-      const idx=getVipTierIdx();const tier=getVipTier();
-      // Badge
+      const idx=getVipTierIdx();const tier=VIP_TIERS[idx]||VIP_TIERS[0];
+      const st=latam2AccessState||{};
+      const depUsd=Number(st.total_deposit_usd_equivalent??st.deposit_usd_equivalent??S.get('totalDep')??0);
+      const displayCurrency=st.display_currency||geo().currency;
+      const displayTotal=Number(st.total_deposit_original??st.deposit_amount_original??0);
+      const displayAmount=displayTotal>0?moneyText(displayTotal,displayCurrency):moneyText(depUsd,'USD');
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?(`Deposit to unlock Bronze`):(tier.acc+'% ACCURACY');
-      // Progress to next
+      document.getElementById('vipAcc2').textContent=idx===0?(`Deposit to unlock Bronze`):(tier.acc+'% ACCURACY');
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
       const left=document.getElementById('vipProgressLeft');
       const hint=document.getElementById('vipProgressHint');
       const nt=document.getElementById('vipNextTier');
-      // Signaux remaining
       const used=getDailySignaux();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignauxLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Deposit to unlock Bronze';}
+        if(idx===0){sigEl.textContent='❔ Deposit to unlock Bronze';}
         else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
         else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Signals reset tomorrow';}
       }
-      if(dep===0){
+      if(idx===0){
         nw.style.display='';
         nt.textContent='🥉 Bronze';
-        fill.style.width='0%';
-        left.textContent=`${geo().bronze.toLocaleString()} ${geo().currency} to unlock Bronze`;
+        fill.style.width=Math.min(100,Math.max(0,(depUsd/LATAM2_USD_TIERS.bronze)*100))+'%';
+        left.textContent=`${displayAmount} / ${thresholdText('bronze')}`;
         hint.textContent='Deposit to activate Bronze';
       }
-      else if(idx<VIP_TIERS.length-1){
-        const next={...VIP_TIERS[idx+1], dep:(typeof VIP_TIERS[idx+1].dep==='function'?VIP_TIERS[idx+1].dep():VIP_TIERS[idx+1].dep)};
+      else if(idx===1){
         nw.style.display='';
-        nt.textContent=next.icon+' '+next.name;
-        const prev=tier.dep;const target=next.dep;
-        const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
-        fill.style.width=pct+'%';
-        const remain=target-dep;
-        left.textContent=dep.toLocaleString()+' '+geo().currency+' / '+target.toLocaleString()+' '+geo().currency;
-        hint.textContent=remain.toLocaleString()+' '+geo().currency+' to '+next.name+' - unlock more ⬆';
+        nt.textContent='🥇 Gold';
+        fill.style.width=Math.min(100,Math.max(0,((depUsd-LATAM2_USD_TIERS.bronze)/(LATAM2_USD_TIERS.gold-LATAM2_USD_TIERS.bronze))*100))+'%';
+        left.textContent=`${displayAmount} / ${thresholdText('gold')}`;
+        const remainUsd=Math.max(0,LATAM2_USD_TIERS.gold-depUsd);
+        hint.textContent=remainUsd>0?`${remainUsd.toFixed(2)} USD to Gold - unlock more ⬆`:'Gold ready';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
         left.textContent='GOLD · MAX TIER';
         hint.textContent=T().vipMaxHint||'Unlimited signals + personal AI analyst 🥇';
       }
-      // Card border color by tier
-      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
+      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)'};
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
     }
     updVIP();
@@ -829,22 +840,40 @@
     }
     async function refreshAccessState(){
       const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
-      try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
+      try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid,geo:currentGeo})});
       const d=await r.json();
 
-      if(d && d.country){
-        const nextGeo=String(d.country||'').toLowerCase();
+      if(d && (d.geo||d.country)){
+        const nextGeo=String(d.geo||d.country||'').toLowerCase();
         if(nextGeo && GEO_CONFIG[nextGeo] && nextGeo!==currentGeo){
           currentGeo=nextGeo;
           S.set('user_geo', currentGeo);
         }
       }
 
-      userTotalDeposit=Number(d.total_deposit||0);
+      latam2AccessState={
+        source:'backend',
+        user_id:d.user_id||uid,
+        geo:String(d.geo||d.country||currentGeo).toLowerCase(),
+        tier:normTier(d.tier),
+        has_access:!!(d.has_access||d.allowed),
+        display_currency:d.display_currency||geo().currency,
+        deposit_amount_original:Number(d.deposit_amount_original??d.deposit_amount??0),
+        deposit_currency_original:d.deposit_currency_original||d.currency||geo().currency,
+        deposit_usd_equivalent:Number(d.deposit_usd_equivalent??0),
+        total_deposit_original:Number(d.total_deposit_original??d.total_deposit??0),
+        total_deposit_usd_equivalent:Number(d.total_deposit_usd_equivalent??d.deposit_usd_equivalent??d.total_deposit??0),
+        bronze_threshold_display:d.bronze_threshold_display||moneyText(geo().bronze,geo().currency),
+        gold_threshold_display:d.gold_threshold_display||moneyText(geo().gold,geo().currency),
+        bronze_usd:Number(d.bronze_usd||LATAM2_USD_TIERS.bronze),
+        gold_usd:Number(d.gold_usd||LATAM2_USD_TIERS.gold)
+      };
+
+      userTotalDeposit=latam2AccessState.total_deposit_usd_equivalent||latam2AccessState.deposit_usd_equivalent||0;
       S.set('totalDep', String(userTotalDeposit));
       if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
 
-      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(d)){
+      if(latam2AccessState.has_access||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(latam2AccessState)){
         accessMode='full';
         S.set('accessGranted','1');
       }else{
@@ -852,7 +881,7 @@
         S.set('accessGranted','0');
       }
 
-      chatTier=(userTotalDeposit>=Number(d.gold_threshold||geo().gold||999999))?2:1;
+      chatTier=getVipTierIdx()>=2?2:1;
       updVIP();
       try{ render(); }catch(e){}
       try{ renderTop(); }catch(e){}
