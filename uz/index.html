@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>NexusAI Uzbekistan</title>
+  <meta name="theme-color" content="#070815" />
+  <style>
+    :root{
+      --bg:#070815;--card:#101326;--card2:#151a33;--text:#f7f8ff;--muted:#a9b0cc;
+      --line:rgba(255,255,255,.10);--gold:#ffd166;--bronze:#c77d3a;--blue:#6ee7ff;--ok:#4ade80;--bad:#fb7185;
+    }
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 10% 0%,#182052 0,#070815 42%,#04050d 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;min-height:100vh}
+    .app{max-width:520px;margin:0 auto;padding:18px 16px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;gap:10px;align-items:center}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),#8b5cf6);display:grid;place-items:center;font-weight:900;color:#050611}.brand h1{font-size:18px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:8px 10px;font-size:12px;color:var(--muted)}
+    .hero{padding:20px;border:1px solid var(--line);border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));box-shadow:0 20px 70px rgba(0,0,0,.35);overflow:hidden;position:relative}.hero:before{content:"";position:absolute;right:-60px;top:-70px;width:190px;height:190px;border-radius:999px;background:rgba(110,231,255,.16);filter:blur(4px)}.hero>*{position:relative}.tier{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 12px;background:rgba(255,255,255,.08);font-size:13px}.dot{width:9px;height:9px;border-radius:50%;background:var(--bad)}.dot.bronze{background:var(--bronze)}.dot.gold{background:var(--gold)}.hero h2{font-size:30px;line-height:1.05;margin:16px 0 10px}.hero p{color:var(--muted);line-height:1.5;margin:0 0 18px}.actions{display:grid;gap:10px}.btn{width:100%;border:0;border-radius:16px;padding:14px 16px;font-weight:800;color:#050611;background:linear-gradient(135deg,var(--blue),#a78bfa);cursor:pointer}.btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line)}.btn:disabled{opacity:.55;cursor:not-allowed}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.card{border:1px solid var(--line);border-radius:20px;background:rgba(16,19,38,.80);padding:15px;min-height:120px}.card h3{margin:0 0 8px;font-size:15px}.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.4}.locked{filter:grayscale(.55);opacity:.72}.badge{display:inline-block;margin-top:12px;border-radius:999px;padding:6px 9px;font-size:11px;background:rgba(255,255,255,.08);color:var(--muted)}.badge.ok{color:#052e16;background:var(--ok)}.badge.gold{color:#332000;background:var(--gold)}.status{margin-top:14px;border:1px solid var(--line);border-radius:18px;padding:12px;background:rgba(0,0,0,.18);color:var(--muted);font-size:13px;line-height:1.45}.foot{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="top">
+      <div class="brand"><div class="logo">N</div><div><h1>NexusAI Uzbekistan</h1><p>Telegram Mini App · UZS</p></div></div>
+      <div class="pill" id="geoPill">UZ · uz</div>
+    </section>
+
+    <section class="hero">
+      <div class="tier"><span class="dot" id="tierDot"></span><span id="tierLabel">Kirish tekshirilmoqda...</span></div>
+      <h2 id="headline">VIP zonaga kirish</h2>
+      <p id="subline">Bronze yoki Gold daraja tasdiqlangandan so‘ng o‘yinlar va bonuslar ochiladi.</p>
+      <div class="actions">
+        <button class="btn" id="refreshBtn">Statusni yangilash</button>
+        <button class="btn secondary" id="tgBtn">Telegramga qaytish</button>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Access tiers">
+      <article class="card" id="bronzeCard"><h3>Bronze</h3><p>Start daraja. Asosiy VIP kontent va bonuslar.</p><span class="badge" id="bronzeBadge">locked</span></article>
+      <article class="card" id="goldCard"><h3>Gold</h3><p>Yuqori daraja. Premium kontent va kuchaytirilgan bonuslar.</p><span class="badge" id="goldBadge">locked</span></article>
+    </section>
+
+    <section class="status" id="statusBox">Telegram profilingiz tekshiriladi. Access bot orqali skrinshot tasdiqlangandan keyin ochiladi.</section>
+    <div class="foot">APP_NS: nexusuz · geo: uz · currency: UZS · language: Uzbek</div>
+  </main>
+
+  <script>
+    'use strict';
+    const APP_NS = 'nexusuz';
+    const GEO = 'uz';
+    const COUNTRY = 'Uzbekistan';
+    const LOCALE = 'uz-UZ';
+    const CURRENCY = 'UZS';
+    const CHECK_ACCESS_ENDPOINT = 'https://n8nnexusai.uk/webhook/check-access-uz';
+    const ACCESS_STATES = Object.freeze({ LOCKED: 'locked', BRONZE: 'bronze', GOLD: 'gold' });
+
+    const $ = (id) => document.getElementById(id);
+    const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+    if (tg) { try { tg.ready(); tg.expand(); } catch (_) {} }
+
+    function setStatus(text) { $('statusBox').textContent = text; }
+    function normalizeTier(value) {
+      const tier = String(value || '').toLowerCase();
+      if (tier === ACCESS_STATES.GOLD) return ACCESS_STATES.GOLD;
+      if (tier === ACCESS_STATES.BRONZE) return ACCESS_STATES.BRONZE;
+      return ACCESS_STATES.LOCKED;
+    }
+    function render(tier, note) {
+      const state = normalizeTier(tier);
+      const dot = $('tierDot');
+      dot.className = 'dot' + (state === 'gold' ? ' gold' : state === 'bronze' ? ' bronze' : '');
+      $('tierLabel').textContent = state === 'gold' ? 'Gold ochilgan' : state === 'bronze' ? 'Bronze ochilgan' : 'Locked';
+      $('headline').textContent = state === 'locked' ? 'Kirish hali yopiq' : 'VIP zona ochiq';
+      $('subline').textContent = state === 'gold'
+        ? 'Gold daraja faol. Premium bloklar mavjud.'
+        : state === 'bronze'
+          ? 'Bronze daraja faol. Asosiy VIP bloklar mavjud.'
+          : 'Bronze yoki Gold daraja tasdiqlangandan so‘ng kontent ochiladi.';
+      $('bronzeCard').classList.toggle('locked', state === 'locked');
+      $('goldCard').classList.toggle('locked', state !== 'gold');
+      $('bronzeBadge').textContent = state === 'locked' ? 'locked' : 'open';
+      $('bronzeBadge').className = 'badge' + (state === 'locked' ? '' : ' ok');
+      $('goldBadge').textContent = state === 'gold' ? 'open' : 'locked';
+      $('goldBadge').className = 'badge' + (state === 'gold' ? ' gold' : '');
+      if (note) setStatus(note);
+    }
+    async function checkAccess() {
+      if (!CHECK_ACCESS_ENDPOINT) {
+        render(ACCESS_STATES.LOCKED, 'BLOCKED: UZ uchun public check-access endpoint sozlanmagan. Secrets frontendga qo‘yilmagan.');
+        return;
+      }
+      $('refreshBtn').disabled = true;
+      setStatus('Status tekshirilmoqda...');
+      try {
+        const tgUser = tg && tg.initDataUnsafe ? (tg.initDataUnsafe.user || null) : null;
+        const telegramId = tgUser && tgUser.id ? String(tgUser.id) : '';
+        const payload = {
+          user_id: telegramId,
+          telegram_id: telegramId,
+          geo: GEO
+        };
+        const res = await fetch(CHECK_ACCESS_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          credentials: 'omit'
+        });
+        if (!res.ok) throw new Error(`check_access_${res.status}`);
+        const data = await res.json();
+        const tier = normalizeTier(data.access_tier || data.tier || (data.has_access ? 'bronze' : 'locked'));
+        render(tier, `Status yangilandi: ${tier}.`);
+      } catch (err) {
+        render(ACCESS_STATES.LOCKED, `Check-access xatosi. Qayta urinib ko‘ring. (${err.message})`);
+      } finally {
+        $('refreshBtn').disabled = false;
+      }
+    }
+    $('refreshBtn').addEventListener('click', checkAccess);
+    $('tgBtn').addEventListener('click', () => { if (tg) tg.close(); else history.back(); });
+    render(ACCESS_STATES.LOCKED);
+    checkAccess();
+  </script>
+</body>
+</html>
