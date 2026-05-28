@@ -450,8 +450,8 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signal</span></button>
+      <button class="tab-item" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
+      <button class="tab-item active" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signal</span></button>
       <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Jonli xona</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
@@ -702,17 +702,76 @@
       }
     };
 
+    // UTILS + UZ access adapter
+    function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
+    function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+    function getCd(k){return Math.max(0,Math.ceil((parseInt(S.get(`cd_${k}`)||'0')-Date.now())/1000));}
+    function setCd(k){S.set(`cd_${k}`,Date.now()+30000);}
+    function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
+    function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
+    function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function normalizeUzAccess(d){
+      d=d||{};
+      const tier=String(d.access_tier||d.tier||'none').toLowerCase();
+      const bronze=(tier==='bronze'||tier==='gold'||d.bronze_unlocked===true||d.access_granted===true||d.allowed===true);
+      const gold=(tier==='gold'||d.gold_unlocked===true);
+      const total=Number(d.total_deposit!==undefined?d.total_deposit:(gold?200000:(bronze?100000:0)))||0;
+      return Object.assign({},d,{access_tier:tier,bronze_unlocked:bronze,gold_unlocked:gold,access_granted:bronze,deposit_verified:bronze,allowed:bronze,total_deposit:total});
+    }
+
+    // SIGNALS — donor MN layout preserved: cards are always visible; lock only blocks details.
+    let timer=null;
+    function renderHome(){
+      if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
+      const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
+      const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
+      ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
+        const g=T().g[k],wr=WIN_RATES[k]||88;
+        const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
+        c.onclick=()=>handleGameClick(k,c);
+        c.style.position='relative';
+        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-wr"><span class="game-wr-dot"></span><span class="game-wr-text">${wr}%</span></div><div class="game-play">Play</div></div>`;
+        grid.appendChild(c);
+      });
+      app.appendChild(h);app.appendChild(grid);
+    }
+    async function refreshAccessState(){
+      const uid=tgUserId||S.get('tg_user_id');if(!uid){updateChatHeader();return;}
+      try{const r=await fetch(ACCESS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
+      const d=normalizeUzAccess(await r.json());
+      if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
+      userTotalDeposit=d.total_deposit||0;S.set('totalDep',String(userTotalDeposit));updVIP();
+      if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
+      chatTier=(userTotalDeposit>=200000)?2:1;
+      updateChatHeader();}catch(e){updateChatHeader();}
+    }
+    function updateChatHeader(){
+      const sub=document.getElementById('chatHeaderSub');
+      const title=document.getElementById('chatHeaderTitle');
+      if(chatTier===2){
+        if(sub)sub.textContent='NexusAI Personal AI Analyst · 24/7';
+        if(title)title.textContent='ANALYST';
+        const hdr=document.querySelector('.chat-header');
+        if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
+      }else{
+        if(sub)sub.textContent='NexusAI yordam · tez orada';
+        if(title)title.textContent='SIGNALLAR';
+        const hdr=document.querySelector('.chat-header');
+        if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
+      }
+    }
     function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
-      const r=await fetch(geo().accessUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
+      const r=await fetch(geo().accessUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=normalizeUzAccess(await r.json());
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
-      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
+      userTotalDeposit=d.total_deposit||0;S.set('totalDep',String(userTotalDeposit));updVIP();
+      if(d.allowed){accessMode='full';S.set('accessGranted','1');chatTier=(userTotalDeposit>=200000)?2:1;updateChatHeader();if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      else{accessMode='limited';S.set('accessGranted','0');chatTier=1;updateChatHeader();if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
     function showLock(el){
@@ -724,7 +783,7 @@
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
-      try{window.trackIndiaEvent&&window.trackIndiaEvent('RegistrationIntent',{geo:'MN'});}catch(e){}
+      try{window.trackIndiaEvent&&window.trackIndiaEvent('RegistrationIntent',{geo:'UZ'});}catch(e){}
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
     }
 
@@ -903,7 +962,7 @@
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
-      try{const raw=S.get('nexusai_chat_mn');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      try{const raw=S.get('nexusai_chat_uz');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
       if(!CHAT_HISTORY_URL)return;
       const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       try{
@@ -911,7 +970,7 @@
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
-          try{S.set('nexusai_chat_mn',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          try{S.set('nexusai_chat_uz',JSON.stringify(chatH.slice(-40)));}catch(e){}
           renderChat();
         }
       }catch(e){}
@@ -947,7 +1006,7 @@
       }
       document.getElementById('tpI')?.remove();
       chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
-      try{S.set('nexusai_chat_mn',JSON.stringify(chatH.slice(-40)));}catch(e){}
+      try{S.set('nexusai_chat_uz',JSON.stringify(chatH.slice(-40)));}catch(e){}
       renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
     }
 
@@ -1010,10 +1069,8 @@
       try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'UZ',lang:'uz'});}catch(e){}
       lang='uz';S.set('aslang','uz');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
-      // Start on chat tab
-      switchTab('chat');
-      // Load chat history
-      loadChatHistory();
+      // Start on Signal tab for UZ; chat endpoints are optional and must not block signals.
+      switchTab('signals');
     }
 
     // INIT
