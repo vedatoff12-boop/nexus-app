@@ -374,11 +374,11 @@
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Jonli</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Yordam · Хязгаартай</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">YORDAM</div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Yordam · Cheklangan</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">YORDAM</div></div>
         </div>
         <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">AI signallarni ochmoqchimisiz?</div><div class="chat-welcome-text">Quyida xabar yozing va access olish yo‘lini bilib oling 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="NexusAI тусламжаас асуугаарай..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="NexusAI yordamchisidan so‘rang..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
@@ -407,8 +407,8 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">0 / 80,000 UZS</span><span id="vipProgressHint">Upgrade uchun qo‘shimcha deposit qiling ⬆</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ Bugun 3/3 signal qoldi</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">0 / 200 000 UZS</span><span id="vipProgressHint">Upgrade uchun qo‘shimcha depozit qiling ⬆</span></div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ Bugun 3/3 ta signal qoldi</div>
       </div>
 
       <div class="meta-bar">
@@ -422,7 +422,7 @@
     <!-- TOP PLAYERS TAB -->
     <div id="tabLiveRoom" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Jonli өрөө</div>
+        <div class="live-room-label">Jonli xona</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
@@ -440,7 +440,7 @@
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub">Haftalik reyting — bu haftaning eng yaxshi o‘yinchilari</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -452,7 +452,7 @@
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
       <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signal</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Jonli өрөө</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Jonli xona</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -487,7 +487,7 @@
     const CHAT_URL=wh('nexusai-uz-chat');
     const CHAT_HISTORY_URL=wh('nexusai-uz-history');
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80000)
+    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=200000)
     let userTotalDeposit=0;
     const APP_NS='nexusuz'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -495,7 +495,7 @@
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.uz;}
     const ACCESS_URL=wh('check-access-uz');
     // UZ legacy access mapping: backend check-access-uz reads users_uz and returns access_tier none|bronze|gold.
-    // Frontend maps none -> locked, bronze -> Bronze access, gold -> Gold access. No direct database access here.
+    // Frontend maps none -> Yopiq, bronze -> Bronze access, gold -> Gold access. No direct database access here.
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
@@ -583,9 +583,9 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit qilib faollashtiring'},
-      {name:'Bronze',icon:'🥉',dep:40000,sigs:5,acc:90,desc:'Kuniga 5 signal, 90% aniqlik'},
-      {name:'Gold',icon:'🥇',dep:80000,sigs:0,acc:95,desc:'Cheksiz signal, 95% aniqlik + Personal AI Analyst'}
+      {name:'Darajasiz',icon:'❔',dep:0,sigs:0,acc:0,desc:'Depozit qilib faollashtiring'},
+      {name:'Bronze',icon:'🥉',dep:100000,sigs:5,acc:90,desc:'Kuniga 5 signal, 90% aniqlik'},
+      {name:'Gold',icon:'🥇',dep:200000,sigs:0,acc:95,desc:'Cheksiz signal, 95% aniqlik + Personal AI Analyst'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
@@ -599,7 +599,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Bronze faollashtirish uchun 40,000 UZS deposit qiling':(tier.acc+'% НАРИЙВЧЛАЛ');
+      document.getElementById('vipAcc2').textContent=dep===0?'Bronze faollashtirish uchun 100 000 UZS depozit qiling':(tier.acc+'% ANIQLIK');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -610,16 +610,16 @@
       const used=getDailySignals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Bronze faollashtirish uchun 40,000 UZS deposit qiling';}
+        if(dep===0){sigEl.textContent='❔ Bronze faollashtirish uchun 100 000 UZS depozit qiling';}
         else if(limit===0){sigEl.textContent='♾️ Bugun cheksiz signal';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ Өнөөдөр ${rem}/${limit} сигнал үлдсэн`:'🔒 Signal маргааш сэргэнэ';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ Bugun ${rem}/${limit} ta signal qoldi`:'🔒 Signallar ertaga tiklanadi';}
       }
       if(dep===0){
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent='Bronze нээхийн тулд 40,000 UZS хэрэгтэй';
-        hint.textContent='Bronze faollashtirish uchun 40,000 UZS deposit qiling';
+        left.textContent='Bronze ochish uchun 100 000 UZS kerak';
+        hint.textContent='Bronze faollashtirish uchun 100 000 UZS depozit qiling';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -681,89 +681,27 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
+    const LANGS=[{id:"uz",l:"UZ"}];
     let lang='uz'; S.set('aslang','uz');
-    function T(){return STR[lang]||STR.en;}
+    function T(){return STR[lang]||STR.uz;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
     function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
-        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
-        ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Max 10x.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Aim for target.",b:"GET SIGNAL",l:"TARGET",u:(t)=>`Updates at <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Safe spots marked.",b:"GET SIGNAL",l:"SAFE SPOTS",u:(t)=>`Updates at <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Cash out before pop.",b:"GET SIGNAL",l:"CASH OUT",u:(t)=>`Updates at <strong>${t}</strong>`}},
-      ru:{cg:"Выберите игру:",back:"Меню",lt:"ДОСТУП ЗАКРЫТ",lm:"⛔️ Отправьте ID боту.",skip:"ПРОПУСТИТЬ",wait:"Ждите",tut:{s1:"ID синхронизирован.",s2:"Выберите игру.",s4:"Прогноз.",s5:"Нажмите кнопку."},
-        g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
-        ch:{t:"Chicken Road",s:"Выберите сложность.",nx:"ДАЛЕЕ",w:(s)=>`Ждите ${s}с`,tb:{easy:"Лёгкий",medium:"Средний",hard:"Сложный",hardcore:"Хардкор"}},
-        av:{t:"Aviator",s:"Каждую минуту.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Макс 10x.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Бей в зону.",b:"ПОЛУЧИТЬ",l:"ЗОНА",u:(t)=>`Обновится в <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Безопасные клетки.",b:"ПОЛУЧИТЬ",l:"ЯЧЕЙКИ",u:(t)=>`Обновится в <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}},
-      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Enviar ID al bot.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Evita minas"},balloon:{n:"Balloon",d:"Infla y gana"}},ch:{t:"Chicken Road",s:"Dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Medio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta.",b:"OBTENER",l:"ZONA",u:(t)=>`Actualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTENER",l:"CELDAS",u:(t)=>`Actualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira.",b:"OBTENER",l:"RETIRAR",u:(t)=>`Actualiza <strong>${t}</strong>`}},
-      pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
-      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
-      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Livelli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
-      uz:{cg:"Tanlang:",back:"Menyu",lt:"YOPIQ",lm:"⛔️ ID yuboring.",skip:"O‘TKAZIB YUBORISH",wait:"Kuting",tut:{s1:"ID sinxronlandi.",s2:"O‘yin tanlang.",s4:"Prognoz.",s5:"Tugmani bosing."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risk"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Kuting ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
+      uz:{cg:"Tanlang:",back:"Menyu",lt:"YOPIQ",lm:"⛔️ Access olish uchun botga ID yoki skrinshot yuboring.",skip:"O‘TKAZIB YUBORISH",wait:"Kuting",
+        tut:{s1:"ID sinxronlandi.",s2:"O‘yin tanlang.",s4:"Prognoz tayyor.",s5:"Signal olish tugmasini bosing."},
+        g:{aviator:{n:"Aviator",d:"Crash o‘yini"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk darajalari"},penalty:{n:"Penalty",d:"Gol uring"},mines:{n:"Mines",d:"Bombalardan qoching"},balloon:{n:"Balloon",d:"Shishiring va yuting"}},
+        ch:{t:"Chicken Road",s:"Qiyinlikni tanlang.",nx:"KEYINGI",w:(sec)=>`Kuting ${sec}s`,tb:{easy:"Oson",medium:"O‘rtacha",hard:"Qiyin",hardcore:"Hardkor"}},
+        av:{t:"Aviator",s:"Har daqiqada.",b:"SIGNAL OLISH",l:"KOEFF.",u:(t)=>`<strong>${t}</strong> ichida yangilanadi`},
+        jx:{t:"JetX",s:"Maks 10x.",b:"SIGNAL OLISH",l:"KOEFF.",u:(t)=>`<strong>${t}</strong> ichida yangilanadi`},
+        pe:{t:"Penalty",s:"Zonani tanlang.",b:"SIGNAL OLISH",l:"ZONA",u:(t)=>`<strong>${t}</strong> ichida yangilanadi`},
+        mi:{t:"Mines",s:"Xavfsiz kataklar.",b:"SIGNAL OLISH",l:"KATAKLAR",u:(t)=>`<strong>${t}</strong> ichida yangilanadi`},
+        ba:{t:"Balloon",s:"Portlashdan oldin oling.",b:"SIGNAL OLISH",l:"OLISH",u:(t)=>`<strong>${t}</strong> ichida yangilanadi`}
+      }
     };
 
-    // UTILS
-    function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
-    function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
-    function getCd(k){return Math.max(0,Math.ceil((parseInt(S.get(`cd_${k}`)||'0')-Date.now())/1000));}
-    function setCd(k){S.set(`cd_${k}`,Date.now()+30000);}
-    function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
-    function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
-    function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
-
-    // SIGNALS
-    let timer=null;
-    function renderHome(){
-      if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
-      const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
-      const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
-      ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
-        const g=T().g[k],wr=WIN_RATES[k]||88;
-        const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
-        c.onclick=()=>handleGameClick(k,c);
-        c.style.position='relative';
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">Play</div></div>`;
-        grid.appendChild(c);
-      });
-      app.appendChild(h);app.appendChild(grid);
-    }
-    async function refreshAccessState(){
-      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
-      try{const r=await fetch(ACCESS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
-      const d=await r.json();
-
-      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
-      chatTier=(userTotalDeposit>=80000)?2:1;
-      updateChatHeader();}catch(e){}
-    }
-    function updateChatHeader(){
-      const sub=document.getElementById('chatHeaderSub');
-      const title=document.getElementById('chatHeaderTitle');
-      if(chatTier===2){
-        if(sub)sub.textContent='NexusAI Shaxsiy AI Analyst · 24/7';
-        if(title)title.textContent='ANALYST';
-        const hdr=document.querySelector('.chat-header');
-        if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
-      }else{
-        if(sub)sub.textContent='NexusAI Yordam';
-        if(title)title.textContent='YORDAM';
-        const hdr=document.querySelector('.chat-header');
-        if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
-      }
-    }
     function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
@@ -805,8 +743,8 @@
         if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} сигнал/өдөр, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Chat дээр ${need.toLocaleString()} нэмээд unlock хийгээрэй ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI server limiti tugadi</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Одоо AI серверүүд сигнал боловсруулж ачаалалтай байна.<br>${tier.icon} ${tier.name} түвшин өдөрт ${tier.sigs} сигнал авна.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Илүү өндөр депозит = илүү их серверийн нөөц<br>= илүү олон сигнал + илүү сайн нарийвчлал.</div>${upgradeHint}</div>`;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signal/kun, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Chat orqali ${need.toLocaleString()} qo‘shib unlock qiling ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI server limiti tugadi</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Hozir AI serverlar signal tayyorlashda band.<br>${tier.icon} ${tier.name} daraja kuniga ${tier.sigs} signal oladi.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Yuqoriroq depozit = ko‘proq server resursi<br>= ko‘proq signal + yaxshiroq aniqlik.</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent='Server limiti';btn.style.opacity='0.3';return true;
         }
         return false;
@@ -960,7 +898,7 @@
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${next.icon} ${next.name} хүрэхэд ${remain.toLocaleString()} дутуу байна (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% нарийвчлал</span>${hint}</div>`;}
+    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${next.icon} ${next.name} darajagacha ${remain.toLocaleString()} yetmayapti (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% aniqlik</span>${hint}</div>`;}
     function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
@@ -1019,7 +957,7 @@
     function genTop(){
       const ws=getWeekSeed();
       const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
+      while(baseNames.length<100){baseNames.push(`O‘ynasher${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
@@ -1043,7 +981,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Kunlik streak',text:'Appni har kuni oching va streakni oshiring. Gold a’zolar uzun streak bilan aniqroq signal oladi.'},
-      vip:{title:'🏅 VIP daraja',text:'Deposit miqdori AI server sizga ajratadigan resursni belgilaydi.\n\n🥉 Bronze (40,000 UZS) — kuniga 5 signal, 90% aniqlik\n🥇 Gold (80,000 UZS) — cheksiz signal, 95% aniqlik + 24/7 Personal AI Analyst\n\nHar bir Gold foydalanuvchida real vaqtda yo‘naltiradigan shaxsiy AI analyst bo‘ladi.\n\nKo‘proq deposit → ko‘proq resurs → yaxshiroq signal → yuqoriroq foyda 🤝'},
+      vip:{title:'🏅 VIP daraja',text:'Deposit miqdori AI server sizga ajratadigan resursni belgilaydi.\n\n🥉 Bronze (100 000 UZS) — kuniga 5 signal, 90% aniqlik\n🥇 Gold (200 000 UZS) — cheksiz signal, 95% aniqlik + 24/7 Personal AI Analyst\n\nHar bir Gold foydalanuvchida real vaqtda yo‘naltiradigan shaxsiy AI analyst bo‘ladi.\n\nKo‘proq deposit → ko‘proq resurs → yaxshiroq signal → yuqoriroq foyda 🤝'},
       profit:{title:'💰 Bugungi foyda',text:'Bugun ishlatilgan signallarning umumiy foydasini ko‘rsatadi. Bu ko‘rsatkich har kecha reset bo‘ladi. Ko‘proq signal ishlatsangiz, kunlik foydani oshirasiz.'},
       winrate:{title:'📊 Muvaffaqiyat foizi',text:'Bu o‘yindagi AI prognozlarining tarixiy aniqligi. Minglab raundlar analiziga asoslangan.'}
     };
