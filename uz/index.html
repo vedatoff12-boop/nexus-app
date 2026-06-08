@@ -202,6 +202,25 @@
     .penalty-ball{font-size:22px;animation:popIn .3s cubic-bezier(.175,.885,.32,1.275);}
     @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
     .tabs{margin-top:14px;}
+    .segmented{
+      display:flex;align-items:stretch;gap:6px;width:100%;max-width:100%;
+      padding:5px;border-radius:18px;background:rgba(255,255,255,0.035);
+      border:1px solid rgba(250,204,21,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .seg-btn{
+      flex:1 1 0;min-width:0;padding:10px 6px;border-radius:13px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02));
+      color:var(--muted);font-family:inherit;font-size:11px;font-weight:900;
+      line-height:1.15;white-space:normal;text-align:center;cursor:pointer;
+      transition:transform .12s ease,background .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease;
+    }
+    .seg-btn:active{transform:scale(.97);}
+    .seg-btn.active{
+      color:#0a0f1e;border-color:rgba(255,255,255,0.35);
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      box-shadow:0 8px 24px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,0.35);
+    }
 
     /* CONFETTI */
     .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
@@ -826,11 +845,11 @@
     function renderChicken(){
       if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const p=document.createElement('div');p.className='panel';
-      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
+      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">QADAM</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
-      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=({easy:'🟢 Oson',medium:'🟡 O‘rtacha',hard:'🟠 Qiyin',hardcore:'🔴 Hardkor'}[d]||T().ch.tb[d]);b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — kuniga ${next.sigs||'∞'} signal, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Chat orqali ${need.toLocaleString()} qo'shib oching ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI server limiti tugadi</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} daraja — kuniga ${tier.sigs} signal</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Yuqoriroq depozit = hisobingiz uchun ko'proq server resursi</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limiti';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`${rndInt(1,6)} qadam`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit tugadi';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
