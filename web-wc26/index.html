@@ -208,6 +208,19 @@
 
 
 
+
+
+    /* Conversion access block */
+    #acceso{background:radial-gradient(circle at 18% 8%,rgba(250,204,21,.16),transparent 28rem),radial-gradient(circle at 82% 18%,rgba(34,197,94,.10),transparent 24rem)}
+    .access-premium-card{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.72fr);gap:24px;align-items:stretch;border:1px solid rgba(250,204,21,.34);border-radius:34px;background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(13,19,36,.88) 42%,rgba(8,12,24,.97));box-shadow:0 34px 105px rgba(0,0,0,.42),0 20px 76px rgba(250,204,21,.12);padding:26px;position:relative;overflow:hidden;isolation:isolate}
+    .access-premium-card::before{content:'';position:absolute;inset:-1px;background:radial-gradient(circle at 12% 0%,rgba(250,204,21,.24),transparent 34%),radial-gradient(circle at 90% 10%,rgba(34,197,94,.14),transparent 32%);pointer-events:none;z-index:-1}
+    .access-copy{min-width:0;padding:10px 4px}.access-copy h2{max-width:760px}.access-copy p{max-width:760px;color:var(--text-soft)}
+    .access-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}.access-steps div{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:20px;padding:15px;min-width:0}.access-steps strong{display:grid;place-items:center;width:32px;height:32px;border-radius:999px;background:linear-gradient(135deg,#facc15,#f59e0b);color:#07101f;font-weight:950;margin-bottom:10px}.access-steps span{display:block;color:#dbe6ff;font-size:14px;line-height:1.42;font-weight:800}.access-steps b{color:var(--gold);font-weight:950}
+    .access-action-panel{display:flex;flex-direction:column;justify-content:center;gap:14px;border:1px solid rgba(250,204,21,.22);border-radius:28px;background:radial-gradient(circle at 50% 0%,rgba(250,204,21,.17),transparent 38%),rgba(5,8,16,.46);padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .access-badge{display:inline-flex;width:max-content;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.10);color:#86efac;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}.promo-code-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;border:1px solid rgba(250,204,21,.35);border-radius:24px;background:rgba(250,204,21,.08);padding:16px 18px}.promo-code-box span{min-width:0;color:#fff;font-size:clamp(34px,5vw,58px);font-weight:950;letter-spacing:.04em;text-shadow:0 0 28px rgba(250,204,21,.22);line-height:1}.copy-code-btn{white-space:nowrap;border-radius:999px;padding:13px 18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);color:#fff;font-weight:900;transition:background .18s,transform .18s}.copy-code-btn:hover{background:rgba(255,255,255,.13);transform:translateY(-1px)}.copy-code-btn.copied{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.38);color:#bbf7d0}.access-main-btn{width:100%;min-height:58px;font-size:16px;text-align:center;padding:16px 18px}.access-chat-link{display:inline-flex;align-self:center;color:var(--gold);font-size:14px;font-weight:900;text-decoration:underline;text-underline-offset:4px}
+    @media(max-width:900px){.access-premium-card{grid-template-columns:1fr}.access-steps{grid-template-columns:1fr}.access-action-panel{padding:18px}.promo-code-box{gap:16px}.promo-code-box span{font-size:44px}}
+    @media(max-width:520px){.access-premium-card{padding:16px;border-radius:26px;gap:18px}.access-copy{padding:0}.promo-code-box{grid-template-columns:1fr;gap:14px;padding:15px;border-radius:20px}.copy-code-btn,.access-main-btn{width:100%}.copy-code-btn{padding:14px 18px}.promo-code-box span{text-align:center;font-size:38px}.access-action-panel{border-radius:22px}.access-copy p{font-size:15px}.access-steps div{padding:13px}}
+
     /* Premium live AI chat */
     #chat-ia .chat-demo-intro{max-width:780px;color:var(--muted);font-size:15px;line-height:1.6;margin:10px 0 18px}
     .ai-chat-demo{max-width:850px;margin:18px auto 0;border:1px solid rgba(250,204,21,.22);border-radius:28px;background:radial-gradient(circle at 20% 0%,rgba(250,204,21,.16),transparent 28%),linear-gradient(145deg,rgba(255,255,255,.075),rgba(13,19,36,.94));box-shadow:0 24px 70px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden}
@@ -592,10 +605,27 @@
 
     <section class="section reveal" id="acceso">
       <div class="container">
-        <span class="eyebrow">Acceso</span>
-        <h2>Activa tu centro AI del Mundial.</h2>
-        <p>Entrá al chat, creá tu cuenta con el código ARWC26 y completá el acceso premium desde la web.</p>
-        <div class="hero-actions"><a class="cta" href="#hero">Quiero acceso anticipado</a><a class="ghost-cta" href="#como-funciona">Cómo funciona</a></div>
+        <div class="access-premium-card">
+          <div class="access-copy">
+            <span class="eyebrow">Acceso</span>
+            <h2>Acceso premium · Mundial 2026.</h2>
+            <p>Activá tu cuenta con el código correcto y mandá la captura desde el chat. El sistema valida el acceso y libera los pronósticos completos.</p>
+            <div class="access-steps" aria-label="Pasos para activar el acceso premium">
+              <div><strong>1</strong><span>Registrate con <b>ARWC26</b></span></div>
+              <div><strong>2</strong><span>Depositá desde <b>14.000 ARS</b></span></div>
+              <div><strong>3</strong><span>Mandás la captura en el chat y se desbloquean los pronósticos</span></div>
+            </div>
+          </div>
+          <div class="access-action-panel" aria-label="Código promocional y registro">
+            <span class="access-badge">Código premium</span>
+            <div class="promo-code-box">
+              <span id="premiumPromoCode">ARWC26</span>
+              <button type="button" id="copyPromoBtn" class="copy-code-btn" aria-label="Copiar código ARWC26">Copiar código</button>
+            </div>
+            <a class="cta access-main-btn" id="premiumRegLink" href="https://sp1nwin.com/5chgyd" target="_blank" rel="noopener">Crear cuenta en 1xBet con ARWC26</a>
+            <a class="access-chat-link" href="#chat-ia">¿Dudas? Preguntá en el chat</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -625,6 +655,28 @@
       const WEB_CHAT_URL='https://n8nnexusai.uk/webhook/wc26es-web-chat';
       const WEB_CHECK_ACCESS_URL='https://n8nnexusai.uk/webhook/check-access-wc26es-web';
       const WEB_CHAT_GEO='ar';
+      const REG_BASE_URL='https://sp1nwin.com/5chgyd';
+      const buildRegUrl=()=>`${REG_BASE_URL}?sub_id=${encodeURIComponent(webId)}&sub=${encodeURIComponent(webId)}`;
+      const premiumRegLink=document.getElementById('premiumRegLink');
+      if(premiumRegLink)premiumRegLink.href=buildRegUrl();
+      const copyPromoBtn=document.getElementById('copyPromoBtn');
+      copyPromoBtn?.addEventListener('click',async()=>{
+        const code='ARWC26';
+        const original='Copiar código';
+        try{
+          if(navigator.clipboard?.writeText){
+            await navigator.clipboard.writeText(code);
+          }else{
+            const t=document.createElement('textarea');t.value=code;t.setAttribute('readonly','');t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();
+          }
+          copyPromoBtn.textContent='¡Copiado!';
+          copyPromoBtn.classList.add('copied');
+          setTimeout(()=>{copyPromoBtn.textContent=original;copyPromoBtn.classList.remove('copied')},1500);
+        }catch(e){
+          copyPromoBtn.textContent='Copiá: ARWC26';
+          setTimeout(()=>{copyPromoBtn.textContent=original},1800);
+        }
+      });
       const chatWindow=document.getElementById('webChatWindow');
       const chatForm=document.getElementById('webChatForm');
       const chatInput=document.getElementById('webChatInput');
