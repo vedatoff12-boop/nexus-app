@@ -64,15 +64,15 @@
     .section{min-height:58vh;padding:92px 0;border-top:1px solid rgba(255,255,255,.045);position:relative}
     .section h2{font-size:clamp(34px,5vw,68px);line-height:.96;letter-spacing:-.055em;font-weight:900;margin-top:14px}
     .section p{max-width:680px;color:var(--muted);font-size:18px;line-height:1.65;margin-top:18px}
-    .placeholder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-    .placeholder-card{min-height:180px;border:1px solid var(--stroke);border-radius:var(--r-md);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 18px 50px rgba(0,0,0,.16);padding:22px;position:relative;overflow:hidden}
-    .placeholder-card::after{content:'';position:absolute;inset:auto -20% -45% 15%;height:120px;background:radial-gradient(circle,rgba(250,204,21,.16),transparent 66%)}
-    .placeholder-card b{font-size:19px}.placeholder-card span{display:block;margin-top:10px;color:var(--muted);line-height:1.5}
+    .content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+    .content-card{min-height:180px;border:1px solid var(--stroke);border-radius:var(--r-md);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 18px 50px rgba(0,0,0,.16);padding:22px;position:relative;overflow:hidden}
+    .content-card::after{content:'';position:absolute;inset:auto -20% -45% 15%;height:120px;background:radial-gradient(circle,rgba(250,204,21,.16),transparent 66%)}
+    .content-card b{font-size:19px}.content-card span{display:block;margin-top:10px;color:var(--muted);line-height:1.5}
     .flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
     .flow-card{min-height:220px;border:1px solid rgba(250,204,21,.20);border-radius:var(--r-md);background:linear-gradient(145deg,rgba(250,204,21,.095),rgba(255,255,255,.052) 35%,rgba(13,19,36,.90));box-shadow:0 22px 68px rgba(0,0,0,.24),0 12px 44px rgba(250,204,21,.055);padding:24px;position:relative;overflow:hidden;isolation:isolate}
     .flow-card::before{content:'';position:absolute;inset:-1px;background:radial-gradient(circle at 18% 0%,rgba(250,204,21,.20),transparent 36%),radial-gradient(circle at 94% 20%,rgba(34,197,94,.12),transparent 34%);pointer-events:none;z-index:-1}
     .flow-card::after{content:'';position:absolute;right:-34px;bottom:-52px;width:150px;height:150px;border-radius:50%;background:rgba(250,204,21,.10);filter:blur(2px);pointer-events:none}
-    .flow-step{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(250,204,21,.32);background:rgba(250,204,21,.10);color:var(--gold);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
+    .flow-label{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(250,204,21,.32);background:rgba(250,204,21,.10);color:var(--gold);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
     .flow-card h3{margin-top:18px;font-size:clamp(22px,2.2vw,30px);line-height:1;letter-spacing:-.045em;color:#fff}
     .flow-card p{margin-top:13px;font-size:16px;line-height:1.55;color:var(--text-soft);max-width:none}
     .flow-card strong{color:var(--gold);font-weight:950}.flow-note{margin-top:14px;display:inline-flex;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:999px;padding:7px 10px;color:#dbe6ff;font-size:12px;font-weight:850}
@@ -133,7 +133,7 @@
 
     /* Pronósticos core */
     .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px}.section-copy{max-width:720px}.section-copy p{margin-top:16px}.section-stat{border:1px solid rgba(250,204,21,.22);border-radius:22px;background:rgba(250,204,21,.07);padding:16px 18px;min-width:190px;text-align:right;box-shadow:0 16px 42px rgba(0,0,0,.18)}.section-stat b{display:block;font-size:28px;color:#fff;letter-spacing:-.04em}.section-stat span{display:block;color:var(--muted);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
-    .pronosticos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}.prediction-card{position:relative;border:1px solid rgba(255,255,255,.10);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(13,19,36,.86) 42%,rgba(8,12,24,.96));box-shadow:0 22px 70px rgba(0,0,0,.28);padding:20px;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.prediction-card::before{content:'';position:absolute;inset:-1px;background:radial-gradient(circle at 18% 0%,rgba(250,204,21,.18),transparent 34%),radial-gradient(circle at 88% 18%,rgba(34,197,94,.13),transparent 32%);pointer-events:none;opacity:.85}.prediction-card:hover{transform:translateY(-4px);border-color:rgba(250,204,21,.28);box-shadow:0 28px 90px rgba(0,0,0,.38),0 14px 48px rgba(250,204,21,.08)}.prediction-card.featured{grid-column:span 2;border-color:rgba(250,204,21,.42);box-shadow:0 30px 95px rgba(0,0,0,.38),0 20px 70px rgba(250,204,21,.12)}.prediction-card.locked{min-height:100%}.prediction-inner{position:relative;z-index:2}.prediction-match-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.prediction-date{color:var(--text-soft);text-transform:none;letter-spacing:0;font-size:13px}.prediction-group,.ai-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 10px;border:1px solid rgba(250,204,21,.20);background:rgba(250,204,21,.08);color:var(--gold);font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.ai-badge{border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.09);color:#86efac}.prediction-teams-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px}.prediction-team{display:grid;gap:7px;justify-items:center;text-align:center;min-width:0;flex:1}.prediction-team .flag{font-size:25px}.prediction-team b{font-size:17px;line-height:1.1}.prediction-vs{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(250,204,21,.11);border:1px solid rgba(250,204,21,.24);color:var(--gold);font-weight:950}.prediction-venue{color:var(--muted);font-size:13px;line-height:1.42;margin-bottom:16px}.prediction-hero{padding:17px;border-radius:22px;background:linear-gradient(145deg,rgba(250,204,21,.17),rgba(34,197,94,.10) 48%,rgba(255,255,255,.055));border:1px solid rgba(250,204,21,.30);box-shadow:inset 4px 0 0 rgba(250,204,21,.76),0 16px 45px rgba(0,0,0,.22);margin:14px 0}.prediction-label{font-size:10px;color:var(--gold);font-weight:950;text-transform:uppercase;letter-spacing:.16em}.main-pick{font-size:clamp(23px,2.4vw,34px);line-height:1.02;font-weight:950;color:#fff;margin-top:7px;letter-spacing:-.04em;text-shadow:0 0 28px rgba(250,204,21,.15)}.main-comment{font-size:14px;color:#d7def0;line-height:1.48;margin-top:9px}.confidence-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px;color:var(--muted);font-size:12px;font-weight:850}.confidence-bar{height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px}.confidence-bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--gold));box-shadow:0 0 22px rgba(250,204,21,.25)}.markets-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:14px}.market{border:1px solid rgba(255,255,255,.105);background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(17,24,39,.88));border-radius:18px;padding:13px;min-height:112px;position:relative;overflow:hidden}.market.primary{border-color:rgba(250,204,21,.28);box-shadow:inset 3px 0 0 rgba(250,204,21,.82)}.market-icon{font-size:19px;line-height:1;margin-bottom:7px}.market-title{font-size:10px;color:#8d97b6;text-transform:uppercase;font-weight:950;letter-spacing:.08em}.market-pick{font-size:17px;font-weight:950;color:var(--gold);margin-top:6px;line-height:1.12}.market.primary .market-pick{color:#86efac}.market-note{font-size:12px;color:#b7c0d8;line-height:1.34;margin-top:7px}.analysis-details{margin-top:14px;display:grid;gap:10px}.analysis-details details{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);border-radius:18px;overflow:hidden}.analysis-details summary{list-style:none;cursor:pointer;padding:14px 15px;font-size:14px;font-weight:950;color:#fff}.analysis-details summary::-webkit-details-marker{display:none}.analysis-details ul{padding:0 16px 15px 33px;color:#bdc6dd;font-size:13px;line-height:1.46}.analysis-details li{margin-top:7px}.informative-note{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.45}.blurred{filter:blur(4.5px);user-select:none;pointer-events:none;opacity:.72}.locked-wrap{position:absolute;z-index:4;left:18px;right:18px;bottom:18px;border-radius:22px;border:1px solid rgba(250,204,21,.28);background:linear-gradient(145deg,rgba(8,12,24,.86),rgba(17,24,39,.94));backdrop-filter:blur(16px);padding:17px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.44)}.lock-icon{font-size:30px}.lock-title{font-size:17px;font-weight:950;margin-top:4px}.lock-copy{font-size:13px;color:var(--text-soft);line-height:1.4;margin-top:6px}.unlock-btn{display:inline-flex;justify-content:center;align-items:center;width:100%;margin-top:13px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#07101f;font-size:14px;font-weight:950;padding:13px 14px;box-shadow:0 12px 28px rgba(250,204,21,.22)}.locked-preview .main-pick{filter:blur(2px)}html[data-premium-access="true"] .blurred{filter:none;user-select:auto;pointer-events:auto;opacity:1}html[data-premium-access="true"] .locked-wrap{display:none!important}html[data-premium-access="true"] .locked-preview .main-pick{filter:none}.prediction-card.unlocked{border-color:rgba(34,197,94,.36);box-shadow:0 28px 90px rgba(0,0,0,.34),0 14px 48px rgba(34,197,94,.08)}
+    .pronosticos-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}.prediction-card{position:relative;border:1px solid rgba(255,255,255,.10);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(13,19,36,.86) 42%,rgba(8,12,24,.96));box-shadow:0 22px 70px rgba(0,0,0,.28);padding:20px;overflow:hidden;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.prediction-card::before{content:'';position:absolute;inset:-1px;background:radial-gradient(circle at 18% 0%,rgba(250,204,21,.18),transparent 34%),radial-gradient(circle at 88% 18%,rgba(34,197,94,.13),transparent 32%);pointer-events:none;opacity:.85}.prediction-card:hover{transform:translateY(-4px);border-color:rgba(250,204,21,.28);box-shadow:0 28px 90px rgba(0,0,0,.38),0 14px 48px rgba(250,204,21,.08)}.prediction-card.featured{grid-column:span 2;border-color:rgba(250,204,21,.42);box-shadow:0 30px 95px rgba(0,0,0,.38),0 20px 70px rgba(250,204,21,.12)}.prediction-card.locked{min-height:100%}.prediction-inner{position:relative;z-index:2}.prediction-match-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.prediction-date{color:var(--text-soft);text-transform:none;letter-spacing:0;font-size:13px}.prediction-group,.ai-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 10px;border:1px solid rgba(250,204,21,.20);background:rgba(250,204,21,.08);color:var(--gold);font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.ai-badge{border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.09);color:#86efac}.prediction-teams-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px}.prediction-team{display:grid;gap:7px;justify-items:center;text-align:center;min-width:0;flex:1}.prediction-team .flag{font-size:25px}.prediction-team b{font-size:17px;line-height:1.1}.prediction-vs{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(250,204,21,.11);border:1px solid rgba(250,204,21,.24);color:var(--gold);font-weight:950}.prediction-venue{color:var(--muted);font-size:13px;line-height:1.42;margin-bottom:16px}.prediction-hero{padding:17px;border-radius:22px;background:linear-gradient(145deg,rgba(250,204,21,.17),rgba(34,197,94,.10) 48%,rgba(255,255,255,.055));border:1px solid rgba(250,204,21,.30);box-shadow:inset 4px 0 0 rgba(250,204,21,.76),0 16px 45px rgba(0,0,0,.22);margin:14px 0}.prediction-label{font-size:10px;color:var(--gold);font-weight:950;text-transform:uppercase;letter-spacing:.16em}.main-pick{font-size:clamp(23px,2.4vw,34px);line-height:1.02;font-weight:950;color:#fff;margin-top:7px;letter-spacing:-.04em;text-shadow:0 0 28px rgba(250,204,21,.15)}.main-comment{font-size:14px;color:#d7def0;line-height:1.48;margin-top:9px}.confidence-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px;color:var(--muted);font-size:12px;font-weight:850}.confidence-bar{height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px}.confidence-bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--gold));box-shadow:0 0 22px rgba(250,204,21,.25)}.markets-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:14px}.market{border:1px solid rgba(255,255,255,.105);background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(17,24,39,.88));border-radius:18px;padding:13px;min-height:112px;position:relative;overflow:hidden}.market.primary{border-color:rgba(250,204,21,.28);box-shadow:inset 3px 0 0 rgba(250,204,21,.82)}.market-icon{font-size:19px;line-height:1;margin-bottom:7px}.market-title{font-size:10px;color:#8d97b6;text-transform:uppercase;font-weight:950;letter-spacing:.08em}.market-pick{font-size:17px;font-weight:950;color:var(--gold);margin-top:6px;line-height:1.12}.market.primary .market-pick{color:#86efac}.market-note{font-size:12px;color:#b7c0d8;line-height:1.34;margin-top:7px}.analysis-details{margin-top:14px;display:grid;gap:10px}.analysis-details details{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);border-radius:18px;overflow:hidden}.analysis-details summary{list-style:none;cursor:pointer;padding:14px 15px;font-size:14px;font-weight:950;color:#fff}.analysis-details summary::-webkit-details-marker{display:none}.analysis-details ul{padding:0 16px 15px 33px;color:#bdc6dd;font-size:13px;line-height:1.46}.analysis-details li{margin-top:7px}.informative-note{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.45}.blurred{filter:blur(4.5px);user-select:none;pointer-events:none;opacity:.72}.locked-wrap{position:absolute;z-index:4;left:18px;right:18px;bottom:18px;border-radius:22px;border:1px solid rgba(250,204,21,.28);background:linear-gradient(145deg,rgba(8,12,24,.86),rgba(17,24,39,.94));backdrop-filter:blur(16px);padding:17px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.44)}.lock-icon{font-size:30px}.lock-title{font-size:17px;font-weight:950;margin-top:4px}.lock-copy{font-size:13px;color:var(--text-soft);line-height:1.4;margin-top:6px}.unlock-btn{display:inline-flex;justify-content:center;align-items:center;width:100%;margin-top:13px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#07101f;font-size:14px;font-weight:950;padding:13px 14px;box-shadow:0 12px 28px rgba(250,204,21,.22)}.locked-teaser .main-pick{filter:blur(2px)}html[data-premium-access="true"] .blurred{filter:none;user-select:auto;pointer-events:auto;opacity:1}html[data-premium-access="true"] .locked-wrap{display:none!important}html[data-premium-access="true"] .locked-teaser .main-pick{filter:none}.prediction-card.unlocked{border-color:rgba(34,197,94,.36);box-shadow:0 28px 90px rgba(0,0,0,.34),0 14px 48px rgba(34,197,94,.08)}
 
 
 
@@ -183,7 +183,7 @@
       .container{width:min(calc(100% - 28px),var(--container))}
       .nav-links{position:fixed;left:14px;right:14px;top:calc(var(--nav-h) + 10px);display:grid;gap:8px;border-radius:24px;padding:14px;background:rgba(8,12,24,.96);backdrop-filter:blur(22px);box-shadow:var(--shadow);transform:translateY(-12px);opacity:0;pointer-events:none;transition:.24s ease}.nav-links.open{transform:none;opacity:1;pointer-events:auto}.nav-links a{padding:15px 16px;background:rgba(255,255,255,.035)}
       .burger{display:block}.nav-actions .cta{display:none}
-      .hero{padding-top:calc(var(--nav-h) + 38px)}.hero-grid{grid-template-columns:1fr;gap:34px}.hero-panel{max-width:560px;margin:0 auto}.hero h1{font-size:clamp(38px,10.5vw,58px);line-height:.94}.placeholder-grid,.flow-grid{grid-template-columns:1fr}.flow-card{min-height:auto}.section{padding:72px 0;min-height:auto}.scroll-cue{display:none}.section-head{display:block}.section-stat{text-align:left;margin-top:18px}.pronosticos-grid{grid-template-columns:1fr 1fr}.prediction-card.featured{grid-column:span 2}.live-card{grid-template-columns:1fr}.live-visual{min-height:240px}.live-section{padding:72px 0}
+      .hero{padding-top:calc(var(--nav-h) + 38px)}.hero-grid{grid-template-columns:1fr;gap:34px}.hero-panel{max-width:560px;margin:0 auto}.hero h1{font-size:clamp(38px,10.5vw,58px);line-height:.94}.content-grid,.flow-grid{grid-template-columns:1fr}.flow-card{min-height:auto}.section{padding:72px 0;min-height:auto}.scroll-cue{display:none}.section-head{display:block}.section-stat{text-align:left;margin-top:18px}.pronosticos-grid{grid-template-columns:1fr 1fr}.prediction-card.featured{grid-column:span 2}.live-card{grid-template-columns:1fr}.live-visual{min-height:240px}.live-section{padding:72px 0}
     }
     @media (max-width:900px){.stadium-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.groups-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (max-width:520px){
@@ -261,10 +261,10 @@
           </div>
         </div>
 
-        <aside class="hero-panel reveal delay-2" aria-label="Vista previa de pronóstico">
+        <aside class="hero-panel reveal delay-2" aria-label="Tarjeta de pronóstico">
           <div class="stadium-visual"></div>
           <div class="match-card">
-            <div class="match-top"><span id="nextMatchLabel">Próximo partido</span><span class="live-pill">AI Preview</span></div>
+            <div class="match-top"><span id="nextMatchLabel">Próximo partido</span><span class="live-pill">AI Signal</span></div>
             <div class="teams">
               <div class="team"><div class="flag">🇲🇽</div><b id="homeTeam">México</b></div>
               <div class="vs">VS</div>
@@ -305,19 +305,19 @@
         <p>Un flujo simple para Argentina: primero probás NexusAI en el chat, después activás el acceso completo cuando ya estás listo.</p>
         <div class="flow-grid" aria-label="Pasos para desbloquear NexusAI">
           <article class="flow-card">
-            <span class="flow-step">Paso 1</span>
+            <span class="flow-label">1</span>
             <h3>Entrás al chat</h3>
             <p>Entrás al chat con NexusAI y preguntás por cualquier partido del Mundial.</p>
             <span class="flow-note">Chat IA en español</span>
           </article>
           <article class="flow-card">
-            <span class="flow-step">Paso 2</span>
+            <span class="flow-label">2</span>
             <h3>Recibís señales</h3>
             <p>Te damos señales y análisis. Para el acceso completo, creás tu cuenta en 1xBet con el código <strong>ARWC26</strong>.</p>
             <span class="flow-note">Código ARWC26</span>
           </article>
           <article class="flow-card">
-            <span class="flow-step">Paso 3</span>
+            <span class="flow-label">3</span>
             <h3>Desbloqueás todo</h3>
             <p>Hacés tu depósito desde <strong>14.000 ARS</strong>, mandás la captura y se desbloquean todos los pronósticos.</p>
             <span class="flow-note">Captura + acceso</span>
@@ -332,9 +332,9 @@
           <div class="section-copy">
             <span class="eyebrow">Pronósticos</span>
             <h2>Señales AI para los primeros partidos del Mundial.</h2>
-            <p>Preview informativo en español LATAM: lectura de resultado, goles, ambos anotan, primer gol, córners y marcador exacto como referencia.</p>
+            <p>Análisis informativo en español LATAM: lectura de resultado, goles, ambos anotan, primer gol, córners y marcador exacto como referencia.</p>
           </div>
-          <div class="section-stat"><b>6</b><span>partidos preview</span></div>
+          <div class="section-stat"><b>6</b><span>partidos iniciales</span></div>
         </div>
         <div class="pronosticos-grid" id="pronosticosGrid" aria-live="polite"></div>
       </div>
@@ -356,7 +356,7 @@
             <div class="typing-demo is-hidden" id="webChatTyping" aria-hidden="true"><span></span><span></span><span></span><em>escribiendo análisis…</em></div>
           </div>
           <form class="ai-chat-input-row" id="webChatForm" aria-label="Entrada de chat NexusAI">
-            <input type="text" id="webChatInput" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta" autocomplete="off">
+            <input type="text" id="webChatInput" aria-label="Escribe tu pregunta" autocomplete="off">
             <button type="submit" id="webChatSend" aria-label="Enviar mensaje">➤</button>
           </form>
         </div>
@@ -586,7 +586,7 @@
       <div class="container">
         <span class="eyebrow">Opiniones</span>
         <h2>Prueba social sin ruido.</h2>
-        <p>Placeholder para testimonios, métricas de uso y capturas aprobadas. En Step 1 no hay datos reales ni claims inventados.</p>
+        <p>Opiniones y métricas se muestran solo cuando estén verificadas. Sin claims inventados ni promesas de resultado.</p>
       </div>
     </section>
 
@@ -594,7 +594,7 @@
       <div class="container">
         <span class="eyebrow">Acceso</span>
         <h2>Activa tu centro AI del Mundial.</h2>
-        <p>CTA final placeholder. No conecta con servicios externos todavía.</p>
+        <p>Entrá al chat, creá tu cuenta con el código ARWC26 y completá el acceso premium desde la web.</p>
         <div class="hero-actions"><a class="cta" href="#hero">Quiero acceso anticipado</a><a class="ghost-cta" href="#como-funciona">Cómo funciona</a></div>
       </div>
     </section>
@@ -602,7 +602,7 @@
 
   <footer>
     <div class="container footer-row">
-      <span><b>NexusAI · FIFA 2026</b> — Web concept F0 / Step 1</span>
+      <span><b>NexusAI · FIFA 2026</b> — © 2026</span>
       <span id="webIdFoot">web_id: creando…</span>
     </div>
   </footer>
@@ -784,7 +784,7 @@
       const fmtMatchDate=iso=>new Intl.DateTimeFormat(navigator.language||'es-MX',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}).format(new Date(iso));
       function marketTile(m,i){const meta=MARKET_META[m[0]]||{label:m[0],icon:'✦'};return `<div class="market ${i<4?'primary':''}"><div class="market-icon">${meta.icon}</div><div class="market-title">${escapeHtml(meta.label)}</div><div class="market-pick">${escapeHtml(m[1])}</div><div class="market-note">${escapeHtml(m[2])}</div></div>`}
       function analysisBlocks(blocks){return `<div class="analysis-details">${blocks.map((b,i)=>`<details ${i===0?'open':''}><summary>${escapeHtml(b[0])}</summary><ul>${b[1].map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></details>`).join('')}</div>`}
-      function predictionCard(m){const locked=!hasPremiumAccess&&!m.featured;const core=`<div class="prediction-hero ${locked?'locked-preview':''}"><div class="prediction-label">Pronóstico principal</div><div class="main-pick">${escapeHtml(m.main)}</div><div class="main-comment">${escapeHtml(m.comment)}</div><div class="confidence-row"><span>Confianza del modelo</span><b>${m.confidence}%</b></div><div class="confidence-bar"><span style="width:${m.confidence}%"></span></div></div><div class="${locked?'blurred':''}"><div class="markets-grid">${m.markets.map(marketTile).join('')}</div>${analysisBlocks(m.blocks)}<div class="informative-note">Análisis informativo. El marcador exacto es solo referencia y no garantiza resultado.</div></div>`;return `<article class="prediction-card ${m.featured?'featured':(locked?'locked':'unlocked')}"><div class="prediction-inner"><div class="prediction-match-top"><span class="prediction-date">${fmtMatchDate(m.iso)}</span><span class="prediction-group">Grupo ${escapeHtml(m.group)}</span></div><div class="prediction-teams-row"><div class="prediction-team"><div class="flag">${m.flagH}</div><b>${escapeHtml(m.home)}</b></div><div class="prediction-vs">VS</div><div class="prediction-team"><div class="flag">${m.flagA}</div><b>${escapeHtml(m.away)}</b></div></div><div class="prediction-venue">📍 ${escapeHtml(m.stadium)} · ${escapeHtml(m.city)} <span class="ai-badge">AI PREVIEW</span></div>${core}<a class="prediction-live-link" href="https://www.directvgo.com" target="_blank" rel="noopener noreferrer">Ver en vivo por DSports / DGO</a></div>${locked?`<div class="locked-wrap"><div class="lock-icon">🔒</div><div class="lock-title">Análisis completo bloqueado</div><div class="lock-copy">Mira el teaser. Desbloquea mercados, notas y lectura de riesgo.</div><a class="unlock-btn" href="#acceso">Desbloquear acceso</a></div>`:''}</article>`}
+      function predictionCard(m){const locked=!hasPremiumAccess&&!m.featured;const core=`<div class="prediction-hero ${locked?'locked-teaser':''}"><div class="prediction-label">Pronóstico principal</div><div class="main-pick">${escapeHtml(m.main)}</div><div class="main-comment">${escapeHtml(m.comment)}</div><div class="confidence-row"><span>Confianza del modelo</span><b>${m.confidence}%</b></div><div class="confidence-bar"><span style="width:${m.confidence}%"></span></div></div><div class="${locked?'blurred':''}"><div class="markets-grid">${m.markets.map(marketTile).join('')}</div>${analysisBlocks(m.blocks)}<div class="informative-note">Análisis informativo. El marcador exacto es solo referencia y no garantiza resultado.</div></div>`;return `<article class="prediction-card ${m.featured?'featured':(locked?'locked':'unlocked')}"><div class="prediction-inner"><div class="prediction-match-top"><span class="prediction-date">${fmtMatchDate(m.iso)}</span><span class="prediction-group">Grupo ${escapeHtml(m.group)}</span></div><div class="prediction-teams-row"><div class="prediction-team"><div class="flag">${m.flagH}</div><b>${escapeHtml(m.home)}</b></div><div class="prediction-vs">VS</div><div class="prediction-team"><div class="flag">${m.flagA}</div><b>${escapeHtml(m.away)}</b></div></div><div class="prediction-venue">📍 ${escapeHtml(m.stadium)} · ${escapeHtml(m.city)} <span class="ai-badge">AI SIGNAL</span></div>${core}<a class="prediction-live-link" href="https://www.directvgo.com" target="_blank" rel="noopener noreferrer">Ver en vivo por DSports / DGO</a></div>${locked?`<div class="locked-wrap"><div class="lock-icon">🔒</div><div class="lock-title">Análisis completo bloqueado</div><div class="lock-copy">Mira el teaser. Desbloquea mercados, notas y lectura de riesgo.</div><a class="unlock-btn" href="#acceso">Desbloquear acceso</a></div>`:''}</article>`}
       function renderPronosticos(){const grid=document.getElementById('pronosticosGrid');if(grid)grid.innerHTML=PRONOSTICOS.map(predictionCard).join('')}
       renderPronosticos();
       async function checkWebAccess(){
@@ -821,7 +821,7 @@
         const sec=Math.floor(diff/1000);
         return `${d>0?`${d}d `:''}${pad(h)}h ${pad(min)}m ${pad(sec)}s`;
       };
-      function syncHeroPreview(now=new Date()){
+      function syncHeroCard(now=new Date()){
         const {match:m}=getLiveCandidate(now);
         if(!m)return;
         document.getElementById('homeTeam').textContent=m.home;
@@ -843,8 +843,8 @@
         const {match:m,status}=getLiveCandidate(now);
         const isFeatured=m.featured&&m.home==='México'&&m.away==='Sudáfrica';
         const statusText=status==='live'?'🔴 EN VIVO':status==='next'?'⏳ PRÓXIMO':'Calendario jugado';
-        const meta=status==='live'?`Termina aprox. ${fmtLocal(matchEnd(m).toISOString())}`:status==='next'?`Inicio local: ${fmtLocal(m.iso)}`:`Último preview: ${fmtLocal(m.iso)}`;
-        const countdown=status==='live'?`En juego · ${countdownText(matchEnd(m),now)} restantes`:status==='next'?`Arranca en <strong>${countdownText(matchStart(m),now)}</strong>`:'Todos los previews pasaron. Revisa el calendario completo.';
+        const meta=status==='live'?`Termina aprox. ${fmtLocal(matchEnd(m).toISOString())}`:status==='next'?`Inicio local: ${fmtLocal(m.iso)}`:`Último análisis: ${fmtLocal(m.iso)}`;
+        const countdown=status==='live'?`En juego · ${countdownText(matchEnd(m),now)} restantes`:status==='next'?`Arranca en <strong>${countdownText(matchStart(m),now)}</strong>`:'Todos los análisis iniciales pasaron. Revisa el calendario completo.';
         document.getElementById('liveStat').textContent=status==='live'?'EN VIVO':status==='next'?'PRÓXIMO':'ARCHIVO';
         target.innerHTML=`
           <div class="live-visual" aria-hidden="true"></div>
@@ -872,7 +872,7 @@
             <p class="live-disclaimer">Transmisión por terceros (Telefe, TV Pública, DSports/DGO). NexusAI no aloja señales.</p>
           </div>`;
       }
-      function tick(){const now=new Date();syncHeroPreview(now);renderLive(now)}
+      function tick(){const now=new Date();syncHeroCard(now);renderLive(now)}
       tick();setInterval(tick,1000);
 
       const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
