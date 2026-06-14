@@ -239,12 +239,12 @@
 
     /* APP SHELL + TAB BAR */
     .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100vh;height:100dvh;}
-    .app-body{flex:1;min-height:0;position:relative;overflow:hidden;}
-    .tab-bar{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);flex-shrink:0;}
-    .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 0;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;}
-    .tab-item.active{color:var(--gold);}
+    .app-body{flex:1;min-height:0;position:relative;overflow:hidden;padding-bottom:calc(64px + var(--safeB));}
+    .tab-bar{position:fixed;left:50%;right:auto;bottom:0;transform:translateX(-50%);max-width:480px;width:100%;height:calc(60px + var(--safeB));padding-bottom:var(--safeB);background:#060a14;border-top:1px solid rgba(250,204,21,0.18);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;z-index:5000;box-shadow:0 -8px 30px rgba(0,0,0,0.65);}
+    .tab-item{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 4px;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:transparent;font-family:inherit;-webkit-tap-highlight-color:transparent;}
+    .tab-item.active{color:var(--gold);background:rgba(250,204,21,0.06);}
     .tab-item .tab-icon{font-size:20px;line-height:1;}
-    .tab-item .tab-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tab-item .tab-label{font-size:10px;font-weight:800;text-transform:none;letter-spacing:.1px;white-space:nowrap;}
     .tab-content{display:none;height:100%;}
     .tab-content.active{display:block;}
 
@@ -413,7 +413,7 @@
 
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('signals')" id="btnSignaux"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label" id="tabLiveRoomLabel">Live</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label" id="tabLiveRoomLabel">Live Room</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -684,9 +684,9 @@
     function T(){try{return STR[lang]||STR.en;}catch(e){return {};}}
     const UI_STR={
       en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Send a message below to get started 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',liveRoom:'Live Room',liveLock:'🔒 Reach Gold to unlock chat',liveHint:'Gold chat unlocks after reaching the local Gold deposit threshold',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
-      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',liveRoom:'Sala en vivo',liveLock:'🔒 Llega a Gold para desbloquear el chat',liveHint:'El chat Gold se desbloquea al alcanzar el umbral local de depósito Gold',tabSignals:'Señales',tabLive:'Sala live',tabTop:'Top 100'},
-      uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',liveRoom:'Jonli xona',liveLock:'🔒 Chatni ochish uchun Gold ga chiqing',liveHint:'Gold chat mahalliy Gold depozit chegarasiga yetganda ochiladi',tabSignals:'Signallar',tabLive:'Jonli xona',tabTop:'Top 100'},
-      az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',liveRoom:'Canlı otaq',liveLock:'🔒 Çatı açmaq üçün Gold-a çat',liveHint:'Gold chat yerli Gold depozit həddinə çatanda açılır',tabSignals:'Siqnallar',tabLive:'Canlı otaq',tabTop:'Top 100'}
+      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',liveRoom:'Sala en vivo',liveLock:'🔒 Llega a Gold para desbloquear el chat',liveHint:'El chat Gold se desbloquea al alcanzar el umbral local de depósito Gold',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
+      uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',liveRoom:'Jonli xona',liveLock:'🔒 Chatni ochish uchun Gold ga chiqing',liveHint:'Gold chat mahalliy Gold depozit chegarasiga yetganda ochiladi',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
+      az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',liveRoom:'Canlı otaq',liveLock:'🔒 Çatı açmaq üçün Gold-a çat',liveHint:'Gold chat yerli Gold depozit həddinə çatanda açılır',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'}
     };
 
     function toggleLangMenu(){}
