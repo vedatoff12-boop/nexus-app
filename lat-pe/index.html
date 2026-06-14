@@ -248,36 +248,6 @@
     .tab-content{display:none;height:100%;}
     .tab-content.active{display:block;}
 
-    /* CHAT - stable fullscreen mobile layout */
-    #tabChat{height:100%;background:var(--bg);display:none;grid-template-rows:auto minmax(0,1fr) auto auto;overflow:hidden;position:relative;}
-    #tabChat.active{display:grid !important;}
-    .chat-header{padding:calc(8px + var(--safeT)) 16px 4px;flex-shrink:0;background:var(--bg);}
-    .chat-box{min-height:0;height:100%;overflow:hidden;display:flex;flex-direction:column;padding:0 16px 0;}
-    .chat-msgs{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch;min-height:0;max-height:100%;overscroll-behavior:contain;}
-    .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;word-wrap:break-word;animation:msgIn .3s ease;}
-    @keyframes msgIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
-    .msg.bot{align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid var(--stroke);color:var(--text);border-bottom-left-radius:4px;}
-    .msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:700;border-bottom-right-radius:4px;}
-    .msg.typing{align-self:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--stroke);color:var(--muted);font-style:italic;}
-    .msg-time{font-size:9px;color:var(--muted2);margin-top:3px;}
-    .chat-input-row{display:flex;gap:8px;padding:8px 16px 8px;border-top:1px solid var(--stroke);align-items:flex-end;flex-shrink:0;background:var(--bg);}
-    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:16px;line-height:1.25;outline:none;font-family:inherit;resize:none;height:42px;min-height:42px;max-height:42px;overflow-y:auto;-webkit-text-size-adjust:100%;}
-    .chat-input::placeholder{color:var(--muted2);}
-    .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,0.1);}
-    .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
-    .chat-send:active{transform:scale(0.9);}
-    .chat-send:disabled{opacity:0.3;}
-    .chat-attach{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);color:var(--muted);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-family:inherit;}
-    .chat-attach:active{transform:scale(0.9);background:rgba(255,255,255,0.1);}
-    .chat-img-preview{position:relative;max-width:180px;margin:4px 0;border-radius:12px;overflow:hidden;}
-    .chat-img-preview img{width:100%;display:block;border-radius:12px;}
-    .chat-img-remove{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    .msg img{max-width:100%;border-radius:10px;margin-top:4px;}
-    .chat-welcome{text-align:center;padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
-    .chat-welcome-icon{font-size:44px;}
-    .chat-welcome-title{font-size:18px;font-weight:900;color:#fff;}
-    .chat-welcome-text{font-size:13px;color:var(--muted);line-height:1.5;max-width:260px;}
-
     /* HELP TOOLTIP */
     .help-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--muted);font-size:9px;font-weight:800;cursor:pointer;margin-left:4px;flex-shrink:0;vertical-align:middle;line-height:1;}
     .help-tooltip{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg3);border:1px solid var(--stroke2);border-radius:16px;padding:16px 20px;color:var(--text);font-size:13px;line-height:1.5;max-width:280px;z-index:7000;box-shadow:0 20px 60px rgba(0,0,0,0.7);animation:ttIn .2s ease;}
@@ -373,19 +343,9 @@
   <!-- CHAT TAB - outside app-wrap, fixed fullscreen -->
   <div class="app-shell">
     <div class="app-body">
-      <div id="tabChat" class="tab-content active">
-        <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
-        </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title" id="chatWelcomeTitle">NexusAI Support</div><div class="chat-welcome-text" id="chatWelcomeText">Send a message below to get started 👇</div></div></div></div>
-        <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Écris à NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
-      </div>
-
       <div class="app-wrap">
     <!-- SIGNALS TAB -->
-    <div id="tabSignaux" class="tab-content">
+    <div id="tabSignaux" class="tab-content active">
       <div class="top-bar">
         <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
@@ -452,8 +412,7 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')" id="btnSignaux"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
+      <button class="tab-item active" onclick="switchTab('signals')" id="btnSignaux"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
       <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label" id="tabLiveRoomLabel">Live</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
@@ -474,8 +433,6 @@
       en:["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"]
     };
     let REAL_NAME_POOL=NAME_POOLS.en;
-    const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-lat-pe-chat';
-    const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-lat-pe-history';
     let accessMode='limited';
     let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=250)
     let userTotalDeposit=0;
@@ -528,12 +485,12 @@
     window.addEventListener('unhandledrejection',function(ev){console.warn('[unhandled promise]',ev.reason);});
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="User",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
     function canUseSelfReset(){return String(tgUserId||S.get('tg_user_id')||'')===SELF_RESET_USER_ID;}
-    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?(T().resetting||'Resetting...'):'↺ Reset';});}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?(T().resetting||'Resetting...'):'↺ Reset';});}
     async function runSelfReset(){
       if(!canUseSelfReset()) return;
       const ok=window.confirm(T().resetConfirm||'Full reset of this funnel?');
@@ -626,15 +583,16 @@
     function getVipTier(){ const t=VIP_TIERS[getVipTierIdx()]||VIP_TIERS[0]; return {...t, dep: (typeof t.dep==='function'?t.dep():t.dep)}; }
     function hasDepositAccess(data){
       const st=data||latpeAccessState||{};
-      if(st.has_access===true||st.allowed===true)return true;
-      const t=normTier(st.tier);
-      if(t==='Bronze'||t==='Gold')return true;
-      const depUsd=Number(st.total_deposit_usd_equivalent??st.deposit_usd_equivalent??S.get('totalDep')??0);
-      return depUsd>=LATPE_USD_TIERS.bronze;
+      return st.has_access===true || String(st.stage||'').toUpperCase()==='ACCESS';
     }
+    function freeSignalKey(){return `freeSignalUsed:${String(tgUserId||S.get('tg_user_id')||'anon')}`;}
+    function isFullAccess(){return accessMode==='full' || S.get('accessGranted')==='1' || hasDepositAccess();}
+    function isFreeSignalUsed(){return S.get(freeSignalKey())==='1';}
+    function setFreeSignalUsed(v){S.set(freeSignalKey(),v?'1':'0');}
+    function isLimitedLocked(){return !isFullAccess() && isFreeSignalUsed();}
+    function freeSignalNotice(){return 'Esa fue tu señal gratis 🎁 Pon tu depósito y manda el screenshot al bot para tener acceso completo 👇';}
+    function lockedSignalNotice(){return 'Pon tu depósito para desbloquear todas las señales 🔒';}
     function openGameFromCard(k,el,ld){
-      accessMode='full';
-      S.set('accessGranted','1');
       if(el&&ld&&el.contains(ld))el.removeChild(ld);
       if(k==="chicken")renderChicken();else renderGame(k);
     }
@@ -695,10 +653,9 @@
     // TAB
     let curTab='signals';
     function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');const appWrap=document.querySelector('.app-wrap');
-    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');if(appWrap)appWrap.style.display='none';mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignaux').classList.add('active');document.getElementById('btnSignaux').classList.add('active');if(appWrap)appWrap.style.display='block';mq.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');if(appWrap)appWrap.style.display='block';mq.style.display='none';renderLiveRoom();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');if(appWrap)appWrap.style.display='block';mq.style.display='none';renderTopPlayers();}}
+    if(t==='signals'){document.getElementById('tabSignaux').classList.add('active');document.getElementById('btnSignaux').classList.add('active');if(appWrap)appWrap.style.display='block';if(mq)mq.style.display='';renderHome();}
+    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');if(appWrap)appWrap.style.display='block';if(mq)mq.style.display='none';renderLiveRoom();}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');if(appWrap)appWrap.style.display='block';if(mq)mq.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -726,10 +683,10 @@
     let lang=geo().lang||'en'; S.set('aslang',lang);
     function T(){try{return STR[lang]||STR.en;}catch(e){return {};}}
     const UI_STR={
-      en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Send a message below to get started 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',liveRoom:'Live Room',liveLock:'🔒 Reach Gold to unlock chat',liveHint:'Gold chat unlocks after reaching the local Gold deposit threshold',tabChat:'Chat',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
-      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',liveRoom:'Sala en vivo',liveLock:'🔒 Llega a Gold para desbloquear el chat',liveHint:'El chat Gold se desbloquea al alcanzar el umbral local de depósito Gold',tabChat:'Chat',tabSignals:'Señales',tabLive:'Sala live',tabTop:'Top 100'},
-      uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',liveRoom:'Jonli xona',liveLock:'🔒 Chatni ochish uchun Gold ga chiqing',liveHint:'Gold chat mahalliy Gold depozit chegarasiga yetganda ochiladi',tabChat:'Chat',tabSignals:'Signallar',tabLive:'Jonli xona',tabTop:'Top 100'},
-      az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',liveRoom:'Canlı otaq',liveLock:'🔒 Çatı açmaq üçün Gold-a çat',liveHint:'Gold chat yerli Gold depozit həddinə çatanda açılır',tabChat:'Chat',tabSignals:'Siqnallar',tabLive:'Canlı otaq',tabTop:'Top 100'}
+      en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Send a message below to get started 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',liveRoom:'Live Room',liveLock:'🔒 Reach Gold to unlock chat',liveHint:'Gold chat unlocks after reaching the local Gold deposit threshold',tabSignals:'Signals',tabLive:'Live Room',tabTop:'Top 100'},
+      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',liveRoom:'Sala en vivo',liveLock:'🔒 Llega a Gold para desbloquear el chat',liveHint:'El chat Gold se desbloquea al alcanzar el umbral local de depósito Gold',tabSignals:'Señales',tabLive:'Sala live',tabTop:'Top 100'},
+      uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',liveRoom:'Jonli xona',liveLock:'🔒 Chatni ochish uchun Gold ga chiqing',liveHint:'Gold chat mahalliy Gold depozit chegarasiga yetganda ochiladi',tabSignals:'Signallar',tabLive:'Jonli xona',tabTop:'Top 100'},
+      az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',liveRoom:'Canlı otaq',liveLock:'🔒 Çatı açmaq üçün Gold-a çat',liveHint:'Gold chat yerli Gold depozit həddinə çatanda açılır',tabSignals:'Siqnallar',tabLive:'Canlı otaq',tabTop:'Top 100'}
     };
 
     function toggleLangMenu(){}
@@ -804,8 +761,22 @@
         c.style.position='relative';
         c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${T().play||'Play'}</div></div>`;
         grid.appendChild(c);
+        if(isLimitedLocked()) showLock(c, lockedSignalNotice());
       });
       app.appendChild(h);app.appendChild(grid);
+      updateLockedState();
+    }
+    function updateLockedState(){
+      try{
+        const locked=isLimitedLocked();
+        document.querySelectorAll('.game-card').forEach(card=>{
+          const old=card.querySelector('.locked-overlay');
+          if(old) old.remove();
+          if(locked) showLock(card, lockedSignalNotice());
+        });
+        const btn=document.getElementById('sBtn')||document.getElementById('nxB');
+        if(btn&&locked){btn.disabled=true;btn.textContent=T().limitBtn||'Server limit';btn.style.opacity='0.3';}
+      }catch(e){console.warn('[updateLockedState]',e);}
     }
     let accessRefreshPromise=null;
     async function refreshAccessState(){
@@ -841,14 +812,15 @@
             bronze_threshold_display:d.bronze_threshold_display||moneyText(geo().bronze,geo().currency),
             gold_threshold_display:d.gold_threshold_display||moneyText(geo().gold,geo().currency),
             bronze_usd:Number(d.bronze_usd||LATPE_USD_TIERS.bronze),
-            gold_usd:Number(d.gold_usd||LATPE_USD_TIERS.gold)
+            gold_usd:Number(d.gold_usd||LATPE_USD_TIERS.gold),
+            stage:String(d.stage||'')
           };
 
           userTotalDeposit=latpeAccessState.total_deposit_usd_equivalent||latpeAccessState.deposit_usd_equivalent||0;
           S.set('totalDep', String(userTotalDeposit));
           if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
 
-          if(latpeAccessState.has_access||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(latpeAccessState)){
+          if(hasDepositAccess(latpeAccessState)){
             accessMode='full';
             S.set('accessGranted','1');
           }else{
@@ -861,25 +833,10 @@
           try{ render(); }catch(e){}
           try{ renderTop(); }catch(e){}
           try{ updateLockedState(); }catch(e){}
-          updateChatHeader();
+
         }catch(e){console.warn('[refreshAccessState]',e&&e.message?e.message:e);}finally{clearTimeout(timeout);}
       })();
       try{return await accessRefreshPromise;}finally{accessRefreshPromise=null;}
-    }
-    function updateChatHeader(){
-      const sub=document.getElementById('chatHeaderSub');
-      const title=document.getElementById('chatHeaderTitle');
-      if(chatTier===2){
-        if(sub)sub.textContent=(T().chatAnalystTitle||'NexusAI AI Analyst')+' · 24/7';
-        if(title)title.textContent={es:'ANALISTA',uz:'TAHLILCHI',az:'ANALİTİK',en:'ANALYST'}[lang]||'ANALYST';
-        const hdr=document.querySelector('.chat-header');
-        if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
-      }else{
-        if(sub)sub.textContent=T().chatWelcomeTitle||'NexusAI Support';
-        if(title)title.textContent='SUPPORT';
-        const hdr=document.querySelector('.chat-header');
-        if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
-      }
     }
     function applyStatic(){
       applyGeoChrome();
@@ -887,13 +844,11 @@
       REAL_NAME_POOL=NAME_POOLS[lang]||NAME_POOLS.en;
       const ui=UI_STR[lang]||UI_STR.en;
       const setTxt=(id,v)=>{const el=document.getElementById(id); if(el && v!==undefined) el.textContent=v;};
-      setTxt('chatHeaderSub', ui.chatHeaderSub); setTxt('chatHeaderTitle', ui.chatHeaderTitle);
       setTxt('chatWelcomeTitle', ui.chatWelcomeTitle); setTxt('chatWelcomeText', ui.chatWelcomeText);
       setTxt('liveRoomLabel', ui.liveRoom); setTxt('topSub', ui.topSub);
       const topTitle=document.querySelector('.top-header-title'); if(topTitle) topTitle.textContent=ui.topTitle;
       const lockInput=document.querySelector('#liveRoomLock input'); if(lockInput) lockInput.placeholder=ui.liveLock;
       setTxt('liveRoomHint', ui.liveHint);
-      const btnChat=document.querySelector('#btnChat .tab-label'); if(btnChat) btnChat.textContent=ui.tabChat;
       const btnSig=document.querySelector('#btnSignaux .tab-label'); if(btnSig) btnSig.textContent=ui.tabSignals;
       const btnLive=document.querySelector('#btnLiveRoom .tab-label'); if(btnLive) btnLive.textContent=ui.tabLive;
       const btnTop=document.querySelector('#btnTop .tab-label'); if(btnTop) btnTop.textContent=ui.tabTop;
@@ -905,21 +860,33 @@
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      if(accessMode==='full'||S.get('accessGranted')==='1'||hasDepositAccess()){openGameFromCard(k,el,ld);return;}
+      if(isFullAccess()){openGameFromCard(k,el,ld);return;}
+      if(isFreeSignalUsed()){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.has_access||d.allowed||String(d.stage||'').toUpperCase()==='ACCESS'||hasDepositAccess(d)){openGameFromCard(k,el,ld);}
-      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
-      catch(e){if(hasDepositAccess()){openGameFromCard(k,el,ld);return;}if(el.contains(ld))el.removeChild(ld);showLock(el);}
+      if(hasDepositAccess(d)){accessMode='full';S.set('accessGranted','1');openGameFromCard(k,el,ld);}
+      else{accessMode='limited';S.set('accessGranted','0');openGameFromCard(k,el,ld);}}
+      catch(e){if(isFullAccess()){openGameFromCard(k,el,ld);return;}if(isFreeSignalUsed()){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}openGameFromCard(k,el,ld);}
     }
-    function showLock(el){
+    function showLock(el,msg){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
       const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">${T().register||'Register →'}</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
-      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
+      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${msg||T().lm}</div>${regBtn}${promoTxt}</div>`;
+    }
+    function showInlineNotice(text){
+      try{const box=document.getElementById('gBox')||document.querySelector('.stepbox');if(!box)return;const n=document.createElement('div');n.style.cssText='margin-top:12px;padding:10px;border-radius:12px;border:1px solid rgba(250,204,21,0.25);background:rgba(250,204,21,0.08);color:#fff;font-size:12px;line-height:1.4;text-align:center';n.textContent=text;box.appendChild(n);}catch(e){}
+    }
+    function consumeLimitedFreeSignal(){
+      if(isFullAccess()) return false;
+      if(isFreeSignalUsed()){showInlineNotice(lockedSignalNotice());updateLockedState();return true;}
+      setFreeSignalUsed(true);
+      showInlineNotice(freeSignalNotice());
+      setTimeout(updateLockedState,0);
+      return false;
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
@@ -939,7 +906,8 @@
       const circ=175.93;
       function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
       function checkLimit(){
-        if(isSignalLimitReached()){
+        if(!isFullAccess() && isFreeSignalUsed()){box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🔒</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lockedSignalNotice()}</div></div>`;btn.disabled=true;btn.textContent=T().limitBtn||'Server limit';btn.style.opacity='0.3';return true;}
+        if(isFullAccess() && isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
           if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}
@@ -951,12 +919,12 @@
       function showSig(){
         if(checkLimit())return;
         const v=genVal(k);try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
-        addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
+        if(isFullAccess()) addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
         }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
-        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
+        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}consumeLimitedFreeSignal();updVIP();
       }
       if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
@@ -969,7 +937,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🔒</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lockedSignalNotice()}</div></div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
@@ -1112,86 +1080,6 @@
       liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,createdAt:new Date().toISOString(),role:'user',reactions:[]});inp.value='';renderLiveRoom(true);
     }
     document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();sendLiveRoomMessage();}});
-    // CHAT
-    let chatH=[],chatLD=false,chatSnd=false,chatImgB64=null;
-    function handleChatImage(input){
-      const file=input.files[0];if(!file)return;
-      const reader=new FileReader();
-      reader.onload=function(e){
-        chatImgB64=e.target.result; // data:image/...;base64,...
-        const prev=document.getElementById('chatImgPreview');
-        prev.style.display='block';
-        prev.innerHTML=`<div class="chat-img-preview"><img src="${chatImgB64}"><button class="chat-img-remove" onclick="removeChatImage()">✕</button></div>`;
-      };
-      reader.readAsDataURL(file);
-      input.value='';
-    }
-    function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
-    function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
-    function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${geo().sym}${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    const svgIcon='<svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg>';
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title" style="color:var(--gold)">${T().chatAnalystTitle||'NexusAI AI Analyst'}</div><div class="chat-welcome-text">${T().chatAnalystText||'Account active.'}</div></div>`;}else{e.innerHTML=`<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center">${svgIcon}</div><div class="chat-welcome-title">${T().chatWelcomeTitle||'NexusAI Support'}</div><div class="chat-welcome-text">${T().chatWelcomeText||'I can help with the app and activation.'}</div></div>`;}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
-    async function loadChatHistory(){
-      if(chatLD)return;
-      chatLD=true;
-      try{const raw=S.get('nexusai_lat_chat');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
-      if(!CHAT_HISTORY_WEBHOOK)return;
-      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
-      const g=String(currentGeo||S.get('geo')||'pe').toLowerCase();
-      const controller=new AbortController();
-      const timer=setTimeout(()=>controller.abort(),4000);
-      try{
-        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:g}),signal:controller.signal});
-        const d=await r.json();
-        if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
-          chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
-          try{S.set('chat_history',JSON.stringify(chatH.slice(-40)));}catch(e){}
-          renderChat();
-        } else {
-          renderChat();
-        }
-      }catch(e){
-        renderChat();
-      } finally {
-        clearTimeout(timer);
-      }
-    }
-
-    let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
-    async function sendChatMessage(){
-      if(_sendLock)return;
-      const now=Date.now();
-      const inp=document.getElementById('chatInput'),txt=inp.value.trim();
-      if(!txt&&!chatImgB64)return;
-      if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;
-      _sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
-      const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
-      chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
-      inp.value='';inp.style.height='auto';
-      const imgPayload=chatImgB64;removeChatImage();renderChat();
-      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent=T().typing||'NexusAI typing...';el.appendChild(tp);scrollChatBottom();
-      let botText=T().errGeneric||'Sorry, something went wrong. Try again.';
-      try{
-        const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier,geo:String(currentGeo||'uy').toUpperCase(),country:String(currentGeo||'uy').toUpperCase(),lang:lang||geo().lang||'es',currency:geo().currency};
-        if(imgPayload)body.image=imgPayload;
-        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
-        const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
-        clearTimeout(timeout);
-        const d=await r.json();
-        if(d.reply)botText=d.reply;
-        else if(d.message)botText=d.message;
-        else if(d.text)botText=d.text;
-      }catch(e){
-        if(e.name==='AbortError')botText=T().errTimeout||'Response timed out. Try again.';
-      }
-      document.getElementById('tpI')?.remove();
-      chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
-      try{S.set('nexusai_lat_chat',JSON.stringify(chatH.slice(-40)));}catch(e){}
-      renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
-    }
-
     // TOP PLAYERS - weekly seed, multinational, $10k descending
     function sRnd(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
@@ -1217,6 +1105,7 @@
       }
       return p;
     }
+    function renderTop(){return renderTopPlayers();}
     function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
@@ -1270,7 +1159,7 @@
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||'uy').toUpperCase(),lang:geo().lang});}catch(e){}
       lang=geo().lang||'en';S.set('aslang',lang);
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
-      // Start on chat tab
+      // Start on signals tab
       switchTab('signals');
     }
 
