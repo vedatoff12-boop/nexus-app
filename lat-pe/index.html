@@ -536,7 +536,7 @@
     function setFreeSignalUsed(v){S.set(freeSignalKey(),v?'1':'0');}
     function isLimitedLocked(){return !isFullAccess() && isFreeSignalUsed();}
     function freeSignalNotice(){return 'Esa fue tu señal gratis 🎁 Pon tu depósito y manda el screenshot al bot para tener acceso completo 👇';}
-    function lockedSignalNotice(){return 'Pon tu depósito para desbloquear todas las señales 🔒';}
+    function lockedSignalNotice(){return 'Recarga tu cuenta 1xBet para desbloquear las señales 🔒';}
     function openGameFromCard(k,el,ld){
       if(el&&ld&&el.contains(ld))el.removeChild(ld);
       if(k==="chicken")renderChicken();else renderGame(k);
@@ -724,7 +724,6 @@
         c.style.position='relative';
         c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${T().play||'Play'}</div></div>`;
         grid.appendChild(c);
-        if(isLimitedLocked()) showLock(c, lockedSignalNotice());
       });
       app.appendChild(h);app.appendChild(grid);
       updateLockedState();
@@ -732,13 +731,8 @@
     function updateLockedState(){
       try{
         const locked=isLimitedLocked();
-        document.querySelectorAll('.game-card').forEach(card=>{
-          const old=card.querySelector('.locked-overlay');
-          if(old) old.remove();
-          if(locked) showLock(card, lockedSignalNotice());
-        });
         const btn=document.getElementById('sBtn')||document.getElementById('nxB');
-        if(btn&&locked){btn.disabled=true;btn.textContent=T().limitBtn||'Server limit';btn.style.opacity='0.3';}
+        if(btn&&locked){btn.disabled=false;btn.textContent='💰 Recarga en 1xBet';btn.style.opacity='1';btn.onclick=openRegLink;}
       }catch(e){console.warn('[updateLockedState]',e);}
     }
     let accessRefreshPromise=null;
@@ -833,7 +827,7 @@
     function showLock(el,msg){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">${T().register||'Register →'}</button>`:'';
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">💰 Recargar mi cuenta</button>`:'';
       const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${msg||T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
@@ -866,7 +860,7 @@
       const circ=175.93;
       function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
       function checkLimit(){
-        if(!isFullAccess() && isFreeSignalUsed()){box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🔒</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lockedSignalNotice()}</div></div>`;btn.disabled=true;btn.textContent=T().limitBtn||'Server limit';btn.style.opacity='0.3';return true;}
+        if(!isFullAccess() && isFreeSignalUsed()){if(timer){clearInterval(timer);timer=null;}if(cdW)cdW.style.display='none';box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">Esa fue tu señal gratis. Recarga tu cuenta 1xBet y envía la captura al bot para desbloquear señales ILIMITADAS 👇</div></div>`;btn.disabled=false;btn.textContent='💰 Recarga en 1xBet';btn.style.opacity='1';btn.onclick=openRegLink;return true;}
         if(isFullAccess() && isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
@@ -878,15 +872,35 @@
       }
       function showSig(){
         if(checkLimit())return;
-        const v=genVal(k);try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
-        if(isFullAccess()) addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
+        const isFreeSig=!isFullAccess() && !isFreeSignalUsed();
+        let v;
+        if(isFreeSig && (k==='aviator'||k==='jetx'||k==='balloon')) v=(1.30+Math.random()*0.35).toFixed(2)+'x';
+        else if(isFreeSig && k==='mines'){v=[];while(v.length<8){const r=Math.floor(Math.random()*25);if(!v.includes(r))v.push(r);}}
+        else v=genVal(k);
+        try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
+        if(isFullAccess()) addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());
+        if(isFreeSig){let h=getSigHist(k);h.push(1);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));}else addSigHist(k);
+        addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
         }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
         const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}consumeLimitedFreeSignal();updVIP();
       }
-      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
+      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);btn.onclick=()=>{
+        if(checkLimit())return;
+        setCd(k);
+        showSig();
+        if(!isFullAccess() && isFreeSignalUsed()){
+          // бесплатный сигнал только что показан — оставляем коэффициент в боксе,
+          // глушим cooldown-таймер и меняем ТОЛЬКО нижнюю кнопку на депозитную
+          if(timer){clearInterval(timer);timer=null;}
+          if(cdW)cdW.style.display='none';
+          btn.disabled=false;btn.textContent='💰 Recarga en 1xBet';btn.style.opacity='1';btn.onclick=openRegLink;
+        } else {
+          if(!checkLimit())uBtn();
+        }
+      };}
     }
 
     const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
@@ -897,7 +911,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🔒</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${lockedSignalNotice()}</div></div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">Esa fue tu señal gratis. Recarga tu cuenta 1xBet y envía la captura al bot para desbloquear señales ILIMITADAS 👇</div></div>`;nxB.disabled=false;nxB.textContent='💰 Recarga en 1xBet';nxB.style.opacity='1';nxB.onclick=openRegLink;return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
     }
 
     // TOP PLAYERS - weekly seed, multinational, $10k descending
@@ -984,7 +998,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260526-freeze1';
+    const APP_VERSION='20260615-freesignal';
     (function cacheBust(){
       try{
         const lk='nexus_latpe_ver';
