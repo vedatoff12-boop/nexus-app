@@ -36,7 +36,7 @@
     /* MAIN WRAPPER */
     .app-wrap{
       max-width:480px;margin:0 auto;height:100%;overflow-y:auto;
-      padding:calc(12px + var(--safeT)) 16px calc(120px + var(--safeB));
+      padding:calc(12px + var(--safeT)) 16px calc(180px + var(--safeB));
       position:relative;
       -webkit-overflow-scrolling:touch;
       overscroll-behavior:contain;
@@ -531,12 +531,8 @@
       const st=data||latpeAccessState||{};
       return st.has_access===true || String(st.stage||'').toUpperCase()==='ACCESS';
     }
-    function freeSignalKey(){return `freeSignalUsed:${String(tgUserId||S.get('tg_user_id')||'anon')}`;}
     function isFullAccess(){return accessMode==='full' || S.get('accessGranted')==='1' || hasDepositAccess();}
-    function isFreeSignalUsed(){return S.get(freeSignalKey())==='1';}
-    function setFreeSignalUsed(v){S.set(freeSignalKey(),v?'1':'0');}
-    function isLimitedLocked(){return !isFullAccess() && isFreeSignalUsed();}
-    function freeSignalNotice(){return 'That was your free signal 🎁 Make your deposit and send the screenshot to the bot for full access 👇';}
+    function isLimitedLocked(){return !isFullAccess();}
     function lockedSignalNotice(){return 'Top up your 1xBet account to unlock the signals 🔒';}
     function openGameFromCard(k,el,ld){
       if(el&&ld&&el.contains(ld))el.removeChild(ld);
@@ -814,16 +810,18 @@
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
-      try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      if(isFullAccess()){openGameFromCard(k,el,ld);return;}
-      if(isFreeSignalUsed()){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}
-      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
-      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
-      if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(hasDepositAccess(d)){accessMode='full';S.set('accessGranted','1');openGameFromCard(k,el,ld);}
-      else{accessMode='limited';S.set('accessGranted','0');openGameFromCard(k,el,ld);}}
-      catch(e){if(isFullAccess()){openGameFromCard(k,el,ld);return;}if(isFreeSignalUsed()){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}openGameFromCard(k,el,ld);}
+      try{
+        const uid=tgUserId||S.get('tg_user_id');
+        if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}
+        if(isFullAccess()){openGameFromCard(k,el,ld);return;}
+        if(el.contains(ld))el.removeChild(ld);
+        showLock(el,lockedSignalNotice());
+        return;
+      }catch(e){
+        if(isFullAccess()){openGameFromCard(k,el,ld);return;}
+        if(el.contains(ld))el.removeChild(ld);
+        showLock(el,lockedSignalNotice());
+      }
     }
     function showLock(el,msg){
       if(el.querySelector('.lock-text'))return;
@@ -834,14 +832,6 @@
     }
     function showInlineNotice(text){
       try{const box=document.getElementById('gBox')||document.querySelector('.stepbox');if(!box)return;const n=document.createElement('div');n.style.cssText='margin-top:12px;padding:10px;border-radius:12px;border:1px solid rgba(250,204,21,0.25);background:rgba(250,204,21,0.08);color:#fff;font-size:12px;line-height:1.4;text-align:center';n.textContent=text;box.appendChild(n);}catch(e){}
-    }
-    function consumeLimitedFreeSignal(){
-      if(isFullAccess()) return false;
-      if(isFreeSignalUsed()){showInlineNotice(lockedSignalNotice());updateLockedState();return true;}
-      setFreeSignalUsed(true);
-      showInlineNotice(freeSignalNotice());
-      setTimeout(updateLockedState,0);
-      return false;
     }
     function openRegLink(){
       const url=geo().link;if(!url)return;
@@ -861,7 +851,7 @@
       const circ=175.93;
       function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
       function checkLimit(){
-        if(!isFullAccess() && isFreeSignalUsed()){if(timer){clearInterval(timer);timer=null;}if(cdW)cdW.style.display='none';box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">That was your free signal. Top up your 1xBet account and send the screenshot to the bot to unlock UNLIMITED signals 👇</div></div>`;btn.disabled=false;btn.textContent='💰 Top up on 1xBet';btn.style.opacity='1';btn.onclick=openRegLink;return true;}
+        if(!isFullAccess()){if(timer){clearInterval(timer);timer=null;}if(cdW)cdW.style.display='none';box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🔒</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">${lockedSignalNotice()}</div></div>`;btn.disabled=false;btn.textContent='💰 Top up on 1xBet';btn.style.opacity='1';btn.onclick=openRegLink;return true;}
         if(isFullAccess() && isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
@@ -873,34 +863,22 @@
       }
       function showSig(){
         if(checkLimit())return;
-        const isFreeSig=!isFullAccess() && !isFreeSignalUsed();
-        let v;
-        if(isFreeSig && (k==='aviator'||k==='jetx'||k==='balloon')) v=(1.30+Math.random()*0.35).toFixed(2)+'x';
-        else if(isFreeSig && k==='mines'){v=[];while(v.length<8){const r=Math.floor(Math.random()*25);if(!v.includes(r))v.push(r);}}
-        else v=genVal(k);
+        let v=genVal(k);
         try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
         if(isFullAccess()) addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());
-        if(isFreeSig){let h=getSigHist(k);h.push(1);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));}else addSigHist(k);
+        addSigHist(k);
         addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
         }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
-        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}consumeLimitedFreeSignal();updVIP();
+        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
       if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);btn.onclick=()=>{
         if(checkLimit())return;
         setCd(k);
         showSig();
-        if(!isFullAccess() && isFreeSignalUsed()){
-          // бесплатный сигнал только что показан — оставляем коэффициент в боксе,
-          // глушим cooldown-таймер и меняем ТОЛЬКО нижнюю кнопку на депозитную
-          if(timer){clearInterval(timer);timer=null;}
-          if(cdW)cdW.style.display='none';
-          btn.disabled=false;btn.textContent='💰 Top up on 1xBet';btn.style.opacity='1';btn.onclick=openRegLink;
-        } else {
-          if(!checkLimit())uBtn();
-        }
+        if(!checkLimit())uBtn();
       };}
     }
 
@@ -912,7 +890,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">That was your free signal. Top up your 1xBet account and send the screenshot to the bot to unlock UNLIMITED signals 👇</div></div>`;nxB.disabled=false;nxB.textContent='💰 Top up on 1xBet';nxB.style.opacity='1';nxB.onclick=openRegLink;return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(!isFullAccess()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🔒</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">${lockedSignalNotice()}</div></div>`;nxB.disabled=false;nxB.textContent='💰 Top up on 1xBet';nxB.style.opacity='1';nxB.onclick=openRegLink;return;}if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');updVIP();},900);};dT();
     }
 
     // TOP PLAYERS - weekly seed, multinational, $10k descending
@@ -999,7 +977,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260616-may100-1';
+    const APP_VERSION='20260616-may100-nofree';
     (function cacheBust(){
       try{
         const lk='nexus_may100_ver';
