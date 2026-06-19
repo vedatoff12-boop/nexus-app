@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Signals</title>
+  <!-- latpe-scroll-fix-20260620 -->
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -20,12 +21,16 @@
       --safeT:env(safe-area-inset-top,0px);--safeB:env(safe-area-inset-bottom,0px);
     }
     *{box-sizing:border-box;margin:0;padding:0;}
-    html,body{height:100%;overflow-x:hidden;}
+    html{min-height:100%;height:auto;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;}
     body{
+      min-height:100%;height:auto;overflow-x:hidden;overflow-y:visible;
       font-family:'Outfit',system-ui,-apple-system,sans-serif;
       color:var(--text);
       background:var(--bg);
       -webkit-tap-highlight-color:transparent;
+      -webkit-overflow-scrolling:touch;
+      touch-action:pan-y;
+      overscroll-behavior-y:auto;
     }
     body.rtl{direction:rtl;}
 
@@ -35,11 +40,12 @@
 
     /* MAIN WRAPPER */
     .app-wrap{
-      max-width:480px;margin:0 auto;height:100%;overflow-y:auto;
-      padding:calc(12px + var(--safeT)) 16px calc(120px + var(--safeB));
+      max-width:480px;margin:0 auto;min-height:0;overflow:visible;
+      padding:calc(12px + var(--safeT)) 16px calc(320px + var(--safeB));
       position:relative;
       -webkit-overflow-scrolling:touch;
-      overscroll-behavior:contain;
+      overscroll-behavior-y:auto;
+      touch-action:pan-y;
     }
 
     /* TOP BAR */
@@ -165,6 +171,8 @@
 
     /* GAME DETAIL PANEL */
     .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(13,19,36,0.8);padding:16px;backdrop-filter:blur(8px);}
+    .panel.game-detail{margin-bottom:calc(220px + var(--safeB));scroll-margin-bottom:calc(160px + var(--safeB));}
+    .panel.game-detail .btnrow{position:fixed;left:50%;bottom:calc(72px + var(--safeB));transform:translateX(-50%);z-index:450;max-width:448px;width:calc(100% - 32px);background:linear-gradient(180deg,rgba(13,19,36,0),rgba(13,19,36,.96) 26%,rgba(13,19,36,.96));padding-top:10px;padding-bottom:4px;}
     .backrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
     .back{border:1px solid var(--stroke);background:rgba(255,255,255,0.04);color:var(--muted);padding:8px 14px;border-radius:var(--pill);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
     .p-title{font-size:22px;font-weight:900;color:#fff;}
@@ -196,7 +204,7 @@
     .cd-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:17px;font-weight:900;color:var(--gold);}
 
     /* MINES & PENALTY */
-    .mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:280px;margin:16px auto;}
+    .mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:min(280px,82vw);margin:16px auto;}
     .mines-cell{aspect-ratio:1;background:rgba(255,255,255,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--stroke);}
     .mines-cell.active{background:var(--gold);box-shadow:0 0 12px var(--gold-glow);border-color:#fff;animation:popIn .3s ease;}
     .penalty-wrapper{width:100%;max-width:300px;height:180px;margin:16px auto;border:3px solid rgba(255,255,255,0.2);border-bottom:none;background:rgba(0,0,0,0.15);display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);border-radius:8px 8px 0 0;}
@@ -238,14 +246,14 @@
     .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
 
     /* APP SHELL + TAB BAR */
-    .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100vh;height:100dvh;}
-    .app-body{flex:1;min-height:0;position:relative;overflow:hidden;padding-bottom:calc(64px + var(--safeB));}
+    .app-shell{position:relative;min-height:100vh;min-height:100dvh;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:block;overflow:visible;}
+    .app-body{position:relative;overflow:visible;padding-bottom:calc(64px + var(--safeB));}
     .tab-bar{position:fixed;left:50%;right:auto;bottom:0;transform:translateX(-50%);max-width:480px;width:100%;height:calc(60px + var(--safeB));padding-bottom:var(--safeB);background:#060a14;border-top:1px solid rgba(250,204,21,0.18);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;z-index:5000;box-shadow:0 -8px 30px rgba(0,0,0,0.65);}
     .tab-item{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 4px;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:transparent;font-family:inherit;-webkit-tap-highlight-color:transparent;}
     .tab-item.active{color:var(--gold);background:rgba(250,204,21,0.06);}
     .tab-item .tab-icon{font-size:20px;line-height:1;}
     .tab-item .tab-label{font-size:10px;font-weight:800;text-transform:none;letter-spacing:.1px;white-space:nowrap;}
-    .tab-content{display:none;height:100%;}
+    .tab-content{display:none;min-height:0;}
     .tab-content.active{display:block;}
 
     /* HELP TOOLTIP */
@@ -415,7 +423,7 @@
         const docH=document.documentElement.clientHeight||0;
         const vh=Math.max(tgH,winH,docH,window.screen&&window.screen.height||0,400);
         const shell=document.querySelector('.app-shell');
-        if(shell){shell.style.height=vh+'px';shell.style.minHeight=vh+'px';}
+        if(shell){shell.style.height='auto';shell.style.minHeight='100dvh';}
       }catch(e){console.warn('[fixVH]',e);}
     }
     fixVH();
@@ -848,6 +856,29 @@
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
     }
 
+    function keepPrimaryButtonAboveTab(){
+      try{
+        const btn=document.getElementById('sBtn')||document.getElementById('nxB');
+        const tab=document.querySelector('.tab-bar');
+        if(!btn||!tab)return;
+        requestAnimationFrame(()=>{
+          const br=btn.getBoundingClientRect();
+          const tr=tab.getBoundingClientRect();
+          const gap=tr.top-br.bottom;
+          if(gap<18){
+            const delta=18-gap;
+            const root=document.scrollingElement||document.documentElement;
+            const current=Math.max(window.pageYOffset||0,document.body.scrollTop||0,root.scrollTop||0);
+            const next=current+delta;
+            window.scrollTo({top:next,behavior:'smooth'});
+            root.scrollTop=next;
+            document.documentElement.scrollTop=next;
+            document.body.scrollTop=next;
+          }
+        });
+      }catch(e){}
+    }
+
     function renderGame(k){
       if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const gk={aviator:'av',jetx:'jx',mines:'mi',penalty:'pe',balloon:'ba'}[k]||'av';
@@ -855,8 +886,9 @@
       let ch=`<div class="stepnum" id="cD">...</div><div class="steplabel">${td.l}</div>`;
       if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++)g+='<div class="mines-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
       else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++)g+='<div class="penalty-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
-      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipTier().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipTier().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
+      app.innerHTML=`<div class="panel game-detail"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipTier().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipTier().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
       const btn=document.getElementById('sBtn'),box=document.getElementById('gBox'),cdW=document.getElementById('cdW'),cdP=document.getElementById('cdP'),cdN=document.getElementById('cdN');
+      keepPrimaryButtonAboveTab();
       const circ=175.93;
       function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
       function checkLimit(){
@@ -885,7 +917,7 @@
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
         }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
-        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}consumeLimitedFreeSignal();updVIP();
+        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}consumeLimitedFreeSignal();updVIP();keepPrimaryButtonAboveTab();
       }
       if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);btn.onclick=()=>{
         if(checkLimit())return;
@@ -906,9 +938,9 @@
     const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
     function renderChicken(){
       if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
-      const p=document.createElement('div');p.className='panel';
+      const p=document.createElement('div');p.className='panel game-detail';
       p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
-      app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
+      app.appendChild(p);document.getElementById('bkB').onclick=renderHome;keepPrimaryButtonAboveTab();
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
       nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">Esa fue tu señal gratis. Recarga tu cuenta 1xBet y envía la captura al bot para desbloquear señales ILIMITADAS 👇</div></div>`;nxB.disabled=false;nxB.textContent='💰 Recarga en 1xBet';nxB.style.opacity='1';nxB.onclick=openRegLink;return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'AI server limit reached'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'AI servers are under heavy load.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Higher deposit = more server resources.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
@@ -998,7 +1030,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260615-freesignal';
+    const APP_VERSION='20260620-latpe-game-scrollfix';
     (function cacheBust(){
       try{
         const lk='nexus_latpe_ver';
