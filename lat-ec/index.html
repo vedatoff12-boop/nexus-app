@@ -539,7 +539,7 @@
       return st.has_access===true || String(st.stage||'').toUpperCase()==='ACCESS';
     }
     function freeSignalKey(){return `freeSignalUsed:${String(tgUserId||S.get('tg_user_id')||'anon')}`;}
-    function isFullAccess(){return accessMode==='full' || S.get('accessGranted')==='1' || hasDepositAccess();}
+    function isFullAccess(){return hasDepositAccess(latecAccessState);}
     function isFreeSignalUsed(){return S.get(freeSignalKey())==='1';}
     function setFreeSignalUsed(v){S.set(freeSignalKey(),v?'1':'0');}
     function isLimitedLocked(){return !isFullAccess() && isFreeSignalUsed();}
@@ -823,14 +823,13 @@
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
       if(isFullAccess()){openGameFromCard(k,el,ld);return;}
-      if(isFreeSignalUsed()){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
       if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
       if(hasDepositAccess(d)){accessMode='full';S.set('accessGranted','1');openGameFromCard(k,el,ld);}
-      else{accessMode='limited';S.set('accessGranted','0');openGameFromCard(k,el,ld);}}
-      catch(e){if(isFullAccess()){openGameFromCard(k,el,ld);return;}if(isFreeSignalUsed()){if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());return;}openGameFromCard(k,el,ld);}
+      else{accessMode='limited';S.set('accessGranted','0');if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());}}
+      catch(e){accessMode='limited';S.set('accessGranted','0');if(el.contains(ld))el.removeChild(ld);showLock(el,'No pude verificar el acceso ahora. Intenta otra vez o completa la activación en el bot.');}
     }
     function showLock(el,msg){
       if(el.querySelector('.lock-text'))return;
