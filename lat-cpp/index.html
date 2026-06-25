@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Señales</title>
-  <!-- latcpp-20260624-stage1B -->
+  <!-- latcpp-20260625-games-ui-top100-fix -->
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -171,8 +171,8 @@
 
     /* GAME DETAIL PANEL */
     .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(13,19,36,0.8);padding:16px;backdrop-filter:blur(8px);}
-    .panel.game-detail{margin-bottom:calc(220px + var(--safeB));scroll-margin-bottom:calc(160px + var(--safeB));}
-    .panel.game-detail .btnrow{position:fixed;left:50%;bottom:calc(72px + var(--safeB));transform:translateX(-50%);z-index:450;max-width:448px;width:calc(100% - 32px);background:linear-gradient(180deg,rgba(13,19,36,0),rgba(13,19,36,.96) 26%,rgba(13,19,36,.96));padding-top:10px;padding-bottom:4px;}
+    .panel.game-detail{margin-bottom:calc(180px + var(--safeB));scroll-margin-bottom:calc(130px + var(--safeB));}
+    .panel.game-detail .btnrow{position:relative;z-index:2;width:100%;background:transparent;padding:0;margin-top:16px;}
     .backrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
     .back{border:1px solid var(--stroke);background:rgba(255,255,255,0.04);color:var(--muted);padding:8px 14px;border-radius:var(--pill);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
     .p-title{font-size:22px;font-weight:900;color:#fff;}
@@ -183,7 +183,7 @@
     .btn.primary{color:#0a0f1e;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 6px 20px var(--gold-glow);}
     .btn[disabled]{opacity:0.4;cursor:not-allowed;background:#1e293b;color:var(--muted);box-shadow:none;}
     .stepbox{margin-top:14px;border-radius:16px;border:1px solid var(--stroke);background:rgba(255,255,255,0.02);padding:20px;text-align:center;}
-    .stepnum{font-size:52px;font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);}
+    .stepnum{font-size:clamp(38px,12vw,52px);font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);line-height:1.05;}
     .steplabel{color:var(--muted2);font-weight:800;letter-spacing:1.5px;font-size:11px;text-transform:uppercase;margin-top:4px;}
     .stepnote{margin-top:10px;color:var(--muted);font-size:12px;}
 
@@ -212,6 +212,9 @@
     .penalty-ball{font-size:22px;animation:popIn .3s cubic-bezier(.175,.885,.32,1.275);}
     @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
     .tabs{margin-top:14px;}
+    .segmented{display:flex;align-items:stretch;gap:6px;width:100%;max-width:100%;overflow:hidden;padding:3px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid var(--stroke2);}
+    .seg-btn{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;padding:9px 4px;border-radius:11px;border:1px solid transparent;background:rgba(255,255,255,0.035);color:var(--muted);font-family:inherit;font-size:11px;font-weight:900;line-height:1;cursor:pointer;}
+    .seg-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;border-color:rgba(255,255,255,0.35);box-shadow:0 6px 18px var(--gold-glow);}
 
     /* CONFETTI */
     .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
@@ -714,7 +717,7 @@
         pe:{t:"Penalty",s:"Бей в зону.",b:"ПОЛУЧИТЬ",l:"ЗОНА",u:(t)=>`Обновится в <strong>${t}</strong>`},
         mi:{t:"Mines",s:"Безопасные клетки.",b:"ПОЛУЧИТЬ",l:"ЯЧЕЙКИ",u:(t)=>`Обновится в <strong>${t}</strong>`},
         ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}},
-      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Completa la activación en el bot para desbloquear el acceso.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles de riesgo"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Evita las minas"},balloon:{n:"Balloon",d:"Retira antes de explotar"}},ch:{t:"Chicken Road",s:"Elige la dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Media",hard:"Difícil",hardcore:"Extrema"}},av:{t:"Aviator",s:"Se actualiza cada minuto.",b:"OBTENER SEÑAL",l:"COEFICIENTE",u:(t)=>`Actualizado a las <strong>${t}</strong>`},jx:{t:"JetX",s:"Máx. 10x.",b:"OBTENER SEÑAL",l:"COEFICIENTE",u:(t)=>`Actualizado a las <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta a la zona correcta.",b:"OBTENER SEÑAL",l:"ZONA",u:(t)=>`Actualizado a las <strong>${t}</strong>`},mi:{t:"Mines",s:"Celdas seguras marcadas.",b:"OBTENER SEÑAL",l:"CELDAS SEGURAS",u:(t)=>`Actualizado a las <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira antes de que explote.",b:"OBTENER SEÑAL",l:"RETIRAR",u:(t)=>`Actualizado a las <strong>${t}</strong>`},
+      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Completa la activación en el bot para desbloquear el acceso.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles de riesgo"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Evita las minas"},balloon:{n:"Balloon",d:"Retira antes de explotar"}},ch:{t:"Chicken Road",s:"Elige la dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Media",hard:"Difícil",hardcore:"Extrema"},step:"PASO",stepPrefix:"Paso"},av:{t:"Aviator",s:"Se actualiza cada minuto.",b:"OBTENER SEÑAL",l:"COEFICIENTE",u:(t)=>`Actualizado a las <strong>${t}</strong>`},jx:{t:"JetX",s:"Máx. 10x.",b:"OBTENER SEÑAL",l:"COEFICIENTE",u:(t)=>`Actualizado a las <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta a la zona correcta.",b:"OBTENER SEÑAL",l:"ZONA",u:(t)=>`Actualizado a las <strong>${t}</strong>`},mi:{t:"Mines",s:"Celdas seguras marcadas.",b:"OBTENER SEÑAL",l:"CELDAS SEGURAS",u:(t)=>`Actualizado a las <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira antes de que explote.",b:"OBTENER SEÑAL",l:"RETIRAR",u:(t)=>`Actualizado a las <strong>${t}</strong>`},
         play:"Jugar",limit:"Límite del servidor IA alcanzado",limitSub:"Los servidores IA están bajo carga alta.",limitDeposit:"Mayor depósito = más recursos del servidor = más señales + mejor precisión.",limitBtn:"Límite del servidor",limitReached:"Límite alcanzado",register:"Registrarse →",typing:"NexusAI escribiendo...",errGeneric:"Lo siento, algo salió mal. Inténtalo de nuevo.",errTimeout:"Tiempo de respuesta agotado. Inténtalo de nuevo.",weekOf:"📅 Semana del",recentSig:"Señales recientes",chatWelcomeTitle:"Soporte NexusAI",chatWelcomeText:"Puedo ayudarte con la app y la activación. El analista IA personal se desbloquea en el nivel Oro.",chatAnalystTitle:"Analista IA NexusAI",chatAnalystText:"Cuenta activa. Soy tu analista IA personal. Maximicemos las ganancias juntos.",vipMaxHint:"Señales ilimitadas + analista IA personal 🥇",justNow:"ahora",minsAgo:(m)=>`hace ${m} min`,hrsAgo:(h)=>`hace ${h}h`,daysAgo:(d)=>`hace ${d}d`,resetConfirm:"¿Reiniciar completamente este embudo?",resetDone:"Reinicio completado.",resetFailed:"Error al reiniciar",resetting:"Reiniciando..."},
       pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
       id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
@@ -951,7 +954,7 @@
     function renderChicken(){
       if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const p=document.createElement('div');p.className='panel game-detail';
-      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">PASO</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
+      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">${T().ch.step||'PASO'}</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;keepPrimaryButtonAboveTab();
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
@@ -963,9 +966,9 @@
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
     function genTop(){
       const ws=getWeekSeed();
-      const baseNames=[...new Set(((geo().names&&geo().names.length)?geo().names:REAL_NAME_POOL).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Jugador${baseNames.length+1}`);}
-      const gn=["Aviator","JetX","Mines","Chicken Road","Balloon","Penalty"];
+      const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
+      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
+      const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
       let prevAmt=10500;
@@ -984,7 +987,7 @@
       return p;
     }
     function renderTop(){return renderTopPlayers();}
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('es-419',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`${T().weekOf||'📅 Semana del'} ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">${profitSym()}${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+${profitSym()}${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     function getHelpData(){return {
@@ -1042,7 +1045,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260624-latcpp-B6a';
+    const APP_VERSION='20260625-games-ui-top100-fix';
     (function cacheBust(){
       try{
         const lk='nexus_latcpp_ver';
