@@ -294,10 +294,10 @@
 
 
     /* FIRST-TIME ONBOARDING */
-    .tutorial-overlay{position:fixed;inset:0;background:rgba(2,6,23,.74);z-index:9000;display:none;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);}
+    .tutorial-overlay{position:fixed;inset:0;background:transparent;z-index:9000;display:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
     .tutorial-overlay.active{display:block;}
-    .tutorial-skip-top{position:fixed;top:calc(12px + var(--safeT));right:14px;z-index:9004;border:1px solid rgba(255,255,255,.18);background:rgba(15,23,42,.72);color:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;font-family:inherit;box-shadow:0 10px 30px rgba(0,0,0,.35);}
-    .tutorial-spotlight{position:fixed;z-index:9002;border:2px solid var(--gold);border-radius:18px;box-shadow:0 0 0 9999px rgba(2,6,23,.74),0 0 28px rgba(250,204,21,.72),inset 0 0 18px rgba(250,204,21,.2);pointer-events:none;transition:all .25s ease;}
+    .tutorial-skip-top{position:fixed;top:calc(12px + var(--safeT));left:14px;right:auto;z-index:9004;border:1px solid rgba(255,255,255,.18);background:rgba(15,23,42,.82);color:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;font-family:inherit;box-shadow:0 10px 30px rgba(0,0,0,.28);}
+    .tutorial-spotlight{position:fixed;z-index:9002;border:2px solid var(--gold);border-radius:18px;box-shadow:0 0 0 9999px rgba(2,6,23,.42),0 0 24px rgba(250,204,21,.72),inset 0 0 10px rgba(250,204,21,.10);pointer-events:none;transition:all .25s ease;background:rgba(250,204,21,.025);}
     .tutorial-card{position:fixed;left:16px;right:16px;bottom:calc(78px + var(--safeB));z-index:9003;max-width:448px;margin:0 auto;padding:16px;border-radius:20px;background:linear-gradient(145deg,rgba(15,23,42,.98),rgba(9,13,25,.98));border:1px solid rgba(250,204,21,.28);box-shadow:0 22px 70px rgba(0,0,0,.72);color:#fff;}
     .tutorial-kicker{font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
     .tutorial-title{font-size:18px;font-weight:950;line-height:1.15;margin-bottom:8px;}
@@ -1134,7 +1134,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260625-top100-no-player100';
+    const APP_VERSION='20260625-onboarding-visual-fix';
     (function cacheBust(){
       try{
         const lk='nexus_latcpp_ver';
