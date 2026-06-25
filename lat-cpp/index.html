@@ -291,6 +291,23 @@
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-game{font-size:10px;color:var(--muted2);font-weight:700;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
+
+
+    /* FIRST-TIME ONBOARDING */
+    .tutorial-overlay{position:fixed;inset:0;background:rgba(2,6,23,.74);z-index:9000;display:none;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);}
+    .tutorial-overlay.active{display:block;}
+    .tutorial-skip-top{position:fixed;top:calc(12px + var(--safeT));right:14px;z-index:9004;border:1px solid rgba(255,255,255,.18);background:rgba(15,23,42,.72);color:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;font-family:inherit;box-shadow:0 10px 30px rgba(0,0,0,.35);}
+    .tutorial-spotlight{position:fixed;z-index:9002;border:2px solid var(--gold);border-radius:18px;box-shadow:0 0 0 9999px rgba(2,6,23,.74),0 0 28px rgba(250,204,21,.72),inset 0 0 18px rgba(250,204,21,.2);pointer-events:none;transition:all .25s ease;}
+    .tutorial-card{position:fixed;left:16px;right:16px;bottom:calc(78px + var(--safeB));z-index:9003;max-width:448px;margin:0 auto;padding:16px;border-radius:20px;background:linear-gradient(145deg,rgba(15,23,42,.98),rgba(9,13,25,.98));border:1px solid rgba(250,204,21,.28);box-shadow:0 22px 70px rgba(0,0,0,.72);color:#fff;}
+    .tutorial-kicker{font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+    .tutorial-title{font-size:18px;font-weight:950;line-height:1.15;margin-bottom:8px;}
+    .tutorial-text{font-size:13px;line-height:1.48;color:rgba(255,255,255,.84);font-weight:600;}
+    .tutorial-actions{display:flex;align-items:center;gap:10px;margin-top:14px;}
+    .tutorial-btn{flex:1;border:none;border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b1020;font-size:13px;font-weight:950;font-family:inherit;box-shadow:0 10px 28px rgba(250,204,21,.22);}
+    .tutorial-ghost{border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:900;font-family:inherit;padding:10px;}
+    .tutorial-progress{font-size:11px;color:var(--muted);font-weight:800;min-width:36px;text-align:right;}
+    .tutorial-replay{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;border:1px solid rgba(250,204,21,.22);background:rgba(250,204,21,.08);color:var(--gold);font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;}
+    body.tutorial-open{overflow:hidden;}
   </style>
 
   <script>
@@ -325,6 +342,7 @@
       <div class="top-bar">
         <div class="top-left"><div class="live-dot"></div><span class="live-text">En vivo</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reiniciar</button>
+          <button class="tutorial-replay" id="tutorialReplayBtn" onclick="startTutorial(true)" aria-label="Cómo funciona">?</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
           <div class="lang-drop" style="display:none !important"></div>
         </div>
@@ -371,6 +389,23 @@
     <div class="tab-bar">
       <button class="tab-item active" onclick="switchTab('signals')" id="btnSignaux"><span class="tab-icon">🎯</span><span class="tab-label">Señales</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
+    </div>
+  </div>
+
+
+
+  <div class="tutorial-overlay" id="tutorialOverlay" aria-hidden="true">
+    <button class="tutorial-skip-top" onclick="skipTutorial()">Omitir</button>
+    <div class="tutorial-spotlight" id="tutorialSpotlight"></div>
+    <div class="tutorial-card" id="tutorialCard">
+      <div class="tutorial-kicker" id="tutorialKicker">Nexus AI · 20 segundos</div>
+      <div class="tutorial-title" id="tutorialTitle">Cómo funciona</div>
+      <div class="tutorial-text" id="tutorialText"></div>
+      <div class="tutorial-actions">
+        <button class="tutorial-ghost" onclick="skipTutorial()">Omitir</button>
+        <button class="tutorial-btn" id="tutorialNextBtn" onclick="nextTutorialStep()">Empezar</button>
+        <div class="tutorial-progress" id="tutorialProgress">1/4</div>
+      </div>
     </div>
   </div>
 
@@ -1032,6 +1067,59 @@
       }catch(e){}
     }
 
+
+
+    // FIRST-TIME ONBOARDING
+    const TUTORIAL_KEY='tutorial_seen_v1';
+    let tutorialStep=0;
+    const TUTORIAL_STEPS=[
+      {target:'#userHeaderId',title:'Tu cuenta conectada',text:'Cuando envíes tu ID de 1xBet al bot, Nexus AI sincroniza las señales con tu cuenta. Aquí verás tu ID y sabrás que la app está lista para trabajar contigo.',action:'home'},
+      {target:'#firstGameCard',title:'Elige el juego correcto',text:'Selecciona el juego donde quieres entrar. Nexus AI analiza patrones, actividad y probabilidad para preparar el mejor momento de señal.',action:'home'},
+      {target:'#sBtn,#nxB',title:'Pide una señal nueva',text:'Cuando estés listo, toca “Obtener señal”. El motor IA calcula el valor exacto para el juego seleccionado y lo actualiza en segundos.',action:'game'},
+      {target:'#gBox,.stepbox',title:'Usa el valor en 1xBet',text:'Aquí aparece tu señal: coeficiente, zona, celdas o paso. Abre el mismo juego en 1xBet y usa este valor en tu cuenta con calma y disciplina.',action:'signal'}
+    ];
+    function tutorialEls(){return{ov:document.getElementById('tutorialOverlay'),sp:document.getElementById('tutorialSpotlight'),tt:document.getElementById('tutorialTitle'),tx:document.getElementById('tutorialText'),nb:document.getElementById('tutorialNextBtn'),pg:document.getElementById('tutorialProgress')}}
+    function prepareTutorialStep(step){
+      try{
+        if(step.action==='home'){renderHome();}
+        if(step.action==='game'||step.action==='signal'){
+          if(!document.querySelector('.game-detail')) renderGame('aviator');
+          if(step.action==='signal'){
+            const box=document.getElementById('gBox')||document.querySelector('.stepbox');
+            if(box&&!box.dataset.tutorialPreview){box.dataset.tutorialPreview='1';box.innerHTML='<div class="stepnum">1.74x</div><div class="steplabel">COEFICIENTE</div><div class="stepnote">Ejemplo de señal IA</div>';}
+          }
+        }
+      }catch(e){console.warn('[tutorial prepare]',e);}
+    }
+    function findTutorialTarget(sel){for(const s of String(sel||'').split(',')){const el=document.querySelector(s.trim());if(el)return el;}return null;}
+    function placeTutorial(){
+      const e=tutorialEls(),step=TUTORIAL_STEPS[tutorialStep];if(!e.ov||!step)return;
+      prepareTutorialStep(step);
+      requestAnimationFrame(()=>{
+        const target=findTutorialTarget(step.target)||document.querySelector('.app-shell')||document.body;
+        const r=target.getBoundingClientRect(),pad=8;
+        const top=Math.max(8,r.top-pad),left=Math.max(8,r.left-pad),right=Math.min(window.innerWidth-8,r.right+pad),bottom=Math.min(window.innerHeight-8,r.bottom+pad);
+        e.sp.style.top=top+'px';e.sp.style.left=left+'px';e.sp.style.width=Math.max(40,right-left)+'px';e.sp.style.height=Math.max(32,bottom-top)+'px';
+        e.sp.style.borderRadius=(target.classList&&target.classList.contains('tg-id'))?'999px':'18px';
+        e.tt.textContent=step.title;e.tx.textContent=step.text;e.pg.textContent=(tutorialStep+1)+'/'+TUTORIAL_STEPS.length;
+        e.nb.textContent=tutorialStep===0?'Empezar':(tutorialStep===TUTORIAL_STEPS.length-1?'Comenzar':'Siguiente');
+      });
+    }
+    function startTutorial(force){
+      if(!force&&S.get(TUTORIAL_KEY)==='1')return;
+      tutorialStep=0;const e=tutorialEls();if(!e.ov)return;
+      e.ov.classList.add('active');e.ov.setAttribute('aria-hidden','false');document.body.classList.add('tutorial-open');placeTutorial();
+    }
+    function nextTutorialStep(){
+      if(tutorialStep>=TUTORIAL_STEPS.length-1){skipTutorial();return;}
+      tutorialStep++;placeTutorial();
+    }
+    function skipTutorial(){
+      S.set(TUTORIAL_KEY,'1');const e=tutorialEls();if(e.ov){e.ov.classList.remove('active');e.ov.setAttribute('aria-hidden','true');}
+      document.body.classList.remove('tutorial-open');try{renderHome();}catch(err){}
+    }
+    window.addEventListener('resize',()=>{const e=tutorialEls();if(e.ov&&e.ov.classList.contains('active'))placeTutorial();});
+
     // APP INIT after geo is known
     let appStarted=false;
     function initApp(){
@@ -1042,6 +1130,7 @@
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
       // Start on signals tab
       switchTab('signals');
+      setTimeout(()=>startTutorial(false),650);
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
