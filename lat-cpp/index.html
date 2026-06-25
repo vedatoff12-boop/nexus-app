@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Señales</title>
-  <!-- latcpp-20260625-winner-marquee-social-usd -->
+  <!-- latcpp-20260625-winner-marquee-top100-restored -->
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -1007,23 +1007,21 @@
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
     function genTop(){
       const ws=getWeekSeed();
-      const baseNames=[...new Set(((geo().names&&geo().names.length)?geo().names:LATAM_SOCIAL_HANDLES).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`@user${String(baseNames.length+1).padStart(3,'0')}`);}
+      const baseNames=[...new Set(((NAME_POOLS.en&&NAME_POOLS.en.length)?NAME_POOLS.en:(REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names])).map(x=>String(x).trim()).filter(Boolean))];
+      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
-      const ordered=baseNames.map((name,i)=>({name,score:sRnd(ws+i*29)})).sort((a,b)=>a.score-b.score).map(x=>x.name).slice(0,100);
+      const ordered=baseNames.slice(0,100);
       const p=[];
-      let prevAmt=1501;
+      let prevAmt=10500;
       for(let i=0;i<100;i++){
         const r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11);
         const nm=ordered[i];
         const gm=gn[Math.floor(r2*gn.length)];
-        let am;
-        if(i<3){am=Math.round(1250-r3*180-i*65);}
-        else if(r3>0.96){am=rndInt(1000,1500);}
-        else{am=Math.round(980*Math.pow(0.972,i)+(r3*70));}
-        am=Math.min(1500,Math.max(50,am));
-        am=Math.min(am,prevAmt-1);
-        if(am<50) am=50;
+        const base=10200*Math.pow(0.952,i);
+        const jitter=(r3-0.5)*base*0.15;
+        let am=Math.round(base+jitter);
+        am=Math.min(am,prevAmt-Math.floor(r3*30+10));
+        am=Math.max(am,50);
         prevAmt=am;
         p.push({rk:i+1,nm,gm,am});
       }
@@ -1165,7 +1163,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260625-winner-marquee-social-usd';
+    const APP_VERSION='20260625-winner-marquee-top100-restored';
     (function cacheBust(){
       try{
         const lk='nexus_latcpp_ver';
