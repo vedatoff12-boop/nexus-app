@@ -298,10 +298,10 @@
     .tutorial-overlay.active{display:block;}
     .tutorial-skip-top{position:fixed;top:calc(12px + var(--safeT));left:14px;right:auto;z-index:9004;border:1px solid rgba(255,255,255,.18);background:rgba(15,23,42,.82);color:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;font-family:inherit;box-shadow:0 10px 30px rgba(0,0,0,.28);}
     .tutorial-spotlight{position:fixed;z-index:9002;border:2px solid var(--gold);border-radius:18px;box-shadow:0 0 0 9999px rgba(2,6,23,.42),0 0 24px rgba(250,204,21,.72),inset 0 0 10px rgba(250,204,21,.10);pointer-events:none;transition:all .25s ease;background:rgba(250,204,21,.025);}
-    .tutorial-card{position:fixed;left:16px;right:16px;bottom:calc(78px + var(--safeB));z-index:9003;max-width:448px;margin:0 auto;padding:16px;border-radius:20px;background:linear-gradient(145deg,rgba(15,23,42,.98),rgba(9,13,25,.98));border:1px solid rgba(250,204,21,.28);box-shadow:0 22px 70px rgba(0,0,0,.72);color:#fff;}
+    .tutorial-card{position:fixed;left:16px;right:auto;top:auto;bottom:auto;z-index:9003;width:calc(100vw - 32px);max-width:448px;margin:0;padding:14px;border-radius:20px;background:linear-gradient(145deg,rgba(15,23,42,.98),rgba(9,13,25,.98));border:1px solid rgba(250,204,21,.28);box-shadow:0 22px 70px rgba(0,0,0,.72);color:#fff;transition:top .22s ease,left .22s ease;}
     .tutorial-kicker{font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-    .tutorial-title{font-size:18px;font-weight:950;line-height:1.15;margin-bottom:8px;}
-    .tutorial-text{font-size:13px;line-height:1.48;color:rgba(255,255,255,.84);font-weight:600;}
+    .tutorial-title{font-size:17px;font-weight:950;line-height:1.15;margin-bottom:7px;}
+    .tutorial-text{font-size:12px;line-height:1.42;color:rgba(255,255,255,.84);font-weight:600;}
     .tutorial-actions{display:flex;align-items:center;gap:10px;margin-top:14px;}
     .tutorial-btn{flex:1;border:none;border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b1020;font-size:13px;font-weight:950;font-family:inherit;box-shadow:0 10px 28px rgba(250,204,21,.22);}
     .tutorial-ghost{border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:900;font-family:inherit;padding:10px;}
@@ -1074,11 +1074,11 @@
     let tutorialStep=0;
     const TUTORIAL_STEPS=[
       {target:'#userHeaderId',title:'Tu cuenta conectada',text:'Cuando envíes tu ID de 1xBet al bot, Nexus AI sincroniza las señales con tu cuenta. Aquí verás tu ID y sabrás que la app está lista para trabajar contigo.',action:'home'},
-      {target:'#firstGameCard',title:'Elige el juego correcto',text:'Selecciona el juego donde quieres entrar. Nexus AI analiza patrones, actividad y probabilidad para preparar el mejor momento de señal.',action:'home'},
+      {target:'#gamesGrid',title:'Elige el juego correcto',text:'Selecciona cualquiera de estos juegos. Nexus AI analiza cada modo y prepara el mejor momento de señal para tu elección.',action:'home'},
       {target:'#sBtn,#nxB',title:'Pide una señal nueva',text:'Cuando estés listo, toca “Obtener señal”. El motor IA calcula el valor exacto para el juego seleccionado y lo actualiza en segundos.',action:'game'},
       {target:'#gBox,.stepbox',title:'Usa el valor en 1xBet',text:'Aquí aparece tu señal: coeficiente, zona, celdas o paso. Abre el mismo juego en 1xBet y usa este valor en tu cuenta con calma y disciplina.',action:'signal'}
     ];
-    function tutorialEls(){return{ov:document.getElementById('tutorialOverlay'),sp:document.getElementById('tutorialSpotlight'),tt:document.getElementById('tutorialTitle'),tx:document.getElementById('tutorialText'),nb:document.getElementById('tutorialNextBtn'),pg:document.getElementById('tutorialProgress')}}
+    function tutorialEls(){return{ov:document.getElementById('tutorialOverlay'),sp:document.getElementById('tutorialSpotlight'),card:document.getElementById('tutorialCard'),tt:document.getElementById('tutorialTitle'),tx:document.getElementById('tutorialText'),nb:document.getElementById('tutorialNextBtn'),pg:document.getElementById('tutorialProgress')}}
     function prepareTutorialStep(step){
       try{
         if(step.action==='home'){renderHome();}
@@ -1092,6 +1092,28 @@
       }catch(e){console.warn('[tutorial prepare]',e);}
     }
     function findTutorialTarget(sel){for(const s of String(sel||'').split(',')){const el=document.querySelector(s.trim());if(el)return el;}return null;}
+    function placeTutorialCard(e,spot){
+      const card=e.card;if(!card)return;
+      const gap=12,safeTop=12,safeBottom=84;
+      const vw=window.innerWidth,vh=window.innerHeight;
+      card.style.width=Math.min(448,Math.max(280,vw-32))+'px';
+      card.style.left=Math.max(16,Math.round((vw-card.offsetWidth)/2))+'px';
+      card.style.top='12px';
+      card.style.bottom='auto';
+      const ch=card.offsetHeight||220;
+      const roomAbove=spot.top-safeTop-gap;
+      const roomBelow=vh-spot.bottom-safeBottom-gap;
+      let top;
+      if(roomBelow>=ch){
+        top=spot.bottom+gap;
+      }else if(roomAbove>=ch){
+        top=spot.top-gap-ch;
+      }else{
+        top=roomBelow>=roomAbove?spot.bottom+gap:spot.top-gap-ch;
+        top=Math.max(safeTop,Math.min(top,vh-safeBottom-ch));
+      }
+      card.style.top=Math.round(top)+'px';
+    }
     function placeTutorial(){
       const e=tutorialEls(),step=TUTORIAL_STEPS[tutorialStep];if(!e.ov||!step)return;
       prepareTutorialStep(step);
@@ -1103,6 +1125,7 @@
         e.sp.style.borderRadius=(target.classList&&target.classList.contains('tg-id'))?'999px':'18px';
         e.tt.textContent=step.title;e.tx.textContent=step.text;e.pg.textContent=(tutorialStep+1)+'/'+TUTORIAL_STEPS.length;
         e.nb.textContent=tutorialStep===0?'Empezar':(tutorialStep===TUTORIAL_STEPS.length-1?'Comenzar':'Siguiente');
+        requestAnimationFrame(()=>placeTutorialCard(e,{top,left,right,bottom}));
       });
     }
     function startTutorial(force){
@@ -1134,7 +1157,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260625-onboarding-visual-fix';
+    const APP_VERSION='20260625-onboarding-text-position-fix';
     (function cacheBust(){
       try{
         const lk='nexus_latcpp_ver';
