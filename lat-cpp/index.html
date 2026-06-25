@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Señales</title>
-  <!-- latcpp-20260625-games-ui-top100-fix -->
+  <!-- latcpp-20260625-top100-malay-parity -->
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -359,7 +359,7 @@
 
     <!-- TOP PLAYERS TAB -->
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub" id="topSub">Ranking semanal — mayores ganadores de la semana</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub" id="topSub">Weekly ranking — biggest winners of the week</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -670,8 +670,8 @@
     let lang=geo().lang||'en'; S.set('aslang',lang);
     function T(){try{return STR[lang]||STR.en;}catch(e){return {};}}
     const UI_STR={
-      en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',tabSignals:'Señales',tabTop:'Top 100'},
-      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Mejores jugadores',topSub:'Ranking semanal — mayores ganadores de la semana',tabSignals:'Señales',tabTop:'Top 100'},
+      en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',tabSignals:'Señales',tabTop:'Top 100'},
+      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',tabSignals:'Señales',tabTop:'Top 100'},
       uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',tabSignals:'Señales',tabTop:'Top 100'},
       az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',tabSignals:'Señales',tabTop:'Top 100'}
     };
@@ -966,7 +966,7 @@
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
     function genTop(){
       const ws=getWeekSeed();
-      const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
+      const baseNames=[...new Set(((NAME_POOLS.en&&NAME_POOLS.en.length)?NAME_POOLS.en:(REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names])).map(x=>String(x).trim()).filter(Boolean))];
       while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
@@ -987,7 +987,7 @@
       return p;
     }
     function renderTop(){return renderTopPlayers();}
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`${T().weekOf||'📅 Week of'} ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     function getHelpData(){return {
@@ -1045,7 +1045,7 @@
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260625-games-ui-top100-fix';
+    const APP_VERSION='20260625-top100-malay-parity';
     (function cacheBust(){
       try{
         const lk='nexus_latcpp_ver';
