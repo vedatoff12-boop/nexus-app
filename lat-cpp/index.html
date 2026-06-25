@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Señales</title>
-  <!-- latcpp-20260625-top100-no-player100 -->
+  <!-- latcpp-20260625-winner-marquee-social-usd -->
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -411,7 +411,8 @@
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
-        const LATAM_NAMES=["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana","Fernanda","Alejandro","Natalia","Sebastián","Isabella"];
+        const LATAM_SOCIAL_HANDLES=["@crash_mateo","@sofi.bet","@luisito_win","@valepicks","@panama_cash","@tico_profit","@aviator_pa","@cami_xbet","@jetx_javi","@mines_ana","@diego_rush","@lucia.bet","@santi_signal","@fer_cashout","@crisplays","@paola_777","@andresx","@nati_gana","@renata.bet","@chino_pa","@mari_pick","@sebas_ia","@alejo_win","@gabi_cash","@martu.bet","@carlosfx","@laura_plays","@daniel_777","@nico_cash","@isa_signal","@brayan.pa","@migue_x","@rodrigo.bet","@vale777","@tavo_cash","@marce_win","@kevin_pa","@yosoymines","@aviator_lu","@jetxpro","@cashout.cr","@apuesta_pa","@winner_py","@bet_latam","@signal_24","@goldplayer","@profit_now","@retiro_ya","@xbet_queen","@crashking","@minesboy","@chickenroad","@balloon_cash","@penaltywin","@user777","@latin_win","@betzone.pa","@cashflow_ia","@verde_win","@zona_gold","@max_signal","@playmaker_777","@ia_profit","@meta_cash","@winroom","@retiros_latam","@betdaily","@bonus_hunter","@mister_cash","@queen_signal","@panama777","@tico_gana","@py_profit","@cr_gamer","@vip_signal","@rush777","@moneyline_pa","@smart_bet","@cashpilot","@lucky_latam"];
+    const LATAM_NAMES=LATAM_SOCIAL_HANDLES;
     const GEO_CONFIG = {
       cr: { name:"Costa Rica", flag:"🇨🇷", lang:"es", currency:"CRC", sym:"₡", bronze:1500, gold:5000, profitRange:[55000,190000],
         link:"https://sp1nwin.com/fpdPFF", promo:"777CR777",
@@ -680,20 +681,25 @@
     }
 
     // MARQUEE
+    function winnerAmountUsd(seed){
+      const r=sRnd(seed*19+5);
+      // Most wins feel normal ($50-$980); rare spikes reach $1000-$1500.
+      if(r>0.93) return rndInt(1000,1500);
+      return rndInt(50,980);
+    }
     function buildMarquee(){
       const c=document.getElementById("marqueeText");
       const source=[...new Set(((geo().names&&geo().names.length)?geo().names:REAL_NAME_POOL).map(x=>String(x).trim()).filter(Boolean))];
-      const nowBucket=Math.floor(Date.now()/15000);
+      const nowBucket=Math.floor(Date.now()/12000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
-      const pick=rotated.slice(0,16);
-      const verbMap={es:['ganó','cobró','retiró','obtuvo'],uz:['yutdi','oldi','chiqardi','yig\'di'],az:['qazandı','aldı','çıxardı','götürdü'],en:['won','cashed','withdrew','earned']};
-      const verbs=verbMap[lang]||verbMap.en;
+      const pick=rotated.slice(0,18);
+      const verbMap={es:['ganó','cobró','retiró','levantó'],uz:['yutdi','oldi','chiqardi',"yig'di"],az:['qazandı','aldı','çıxardı','götürdü'],en:['won','cashed','withdrew','earned']};
+      const verbs=verbMap[lang]||verbMap.es;
       let h="";
       pick.forEach((name,i)=>{
-        const sym=profitSym();
-        const amt=currentGeo?rndInt(geo().profitRange[0],geo().profitRange[1]*2):rndInt(50,500);
+        const amt=winnerAmountUsd(nowBucket+i*11);
         const verb=verbs[(nowBucket+i)%verbs.length];
-        h+=`${name} ${verb} <span>${sym}${amt.toLocaleString()}</span>`;
+        h+=`${name} ${verb} <span>$${amt.toLocaleString()}</span>`;
         if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       });
       c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
@@ -996,26 +1002,28 @@
       nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">Esa fue tu señal gratis. Recarga tu cuenta 1xBet y envía la captura al bot para desbloquear señales ILIMITADAS 👇</div></div>`;nxB.disabled=false;nxB.textContent='💰 Recarga en 1xBet';nxB.style.opacity='1';nxB.onclick=openRegLink;return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'Límite del servidor IA alcanzado'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'Los servidores IA están bajo carga alta.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Mayor depósito = más recursos del servidor.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Paso ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
     }
 
-    // TOP PLAYERS - weekly seed, multinational, $10k descending
+    // TOP PLAYERS - weekly seed, social handles, $50-$1500 descending
     function sRnd(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
     function genTop(){
       const ws=getWeekSeed();
-      const baseNames=[...new Set(((NAME_POOLS.en&&NAME_POOLS.en.length)?NAME_POOLS.en:(REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names])).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
+      const baseNames=[...new Set(((geo().names&&geo().names.length)?geo().names:LATAM_SOCIAL_HANDLES).map(x=>String(x).trim()).filter(Boolean))];
+      while(baseNames.length<100){baseNames.push(`@user${String(baseNames.length+1).padStart(3,'0')}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
-      const ordered=baseNames.slice(0,100);
+      const ordered=baseNames.map((name,i)=>({name,score:sRnd(ws+i*29)})).sort((a,b)=>a.score-b.score).map(x=>x.name).slice(0,100);
       const p=[];
-      let prevAmt=10500;
+      let prevAmt=1501;
       for(let i=0;i<100;i++){
         const r2=sRnd(ws+i*17+7),r3=sRnd(ws+i*23+11);
         const nm=ordered[i];
         const gm=gn[Math.floor(r2*gn.length)];
-        const base=10200*Math.pow(0.952,i);
-        const jitter=(r3-0.5)*base*0.15;
-        let am=Math.round(base+jitter);
-        am=Math.min(am,prevAmt-Math.floor(r3*30+10));
-        am=Math.max(am,50);
+        let am;
+        if(i<3){am=Math.round(1250-r3*180-i*65);}
+        else if(r3>0.96){am=rndInt(1000,1500);}
+        else{am=Math.round(980*Math.pow(0.972,i)+(r3*70));}
+        am=Math.min(1500,Math.max(50,am));
+        am=Math.min(am,prevAmt-1);
+        if(am<50) am=50;
         prevAmt=am;
         p.push({rk:i+1,nm,gm,am});
       }
@@ -1150,14 +1158,14 @@
       appStarted=true;
       try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||DEFAULT_GEO).toUpperCase(),lang:geo().lang});}catch(e){}
       lang=geo().lang||'en';S.set('aslang',lang);
-      applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
+      applyStatic();buildMarquee();setInterval(buildMarquee,12000);updProfit();updOnline();updGeoSwitch();
       // Start on signals tab
       switchTab('signals');
       setTimeout(()=>startTutorial(false),650);
     }
 
     // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260625-onboarding-text-position-fix';
+    const APP_VERSION='20260625-winner-marquee-social-usd';
     (function cacheBust(){
       try{
         const lk='nexus_latcpp_ver';
