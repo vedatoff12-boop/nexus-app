@@ -44,20 +44,10 @@
 <body>
   <div class="app-shell">
     <div class="app-body">
-      <div id="tabChat" class="tab-content">
-        <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="tg-id" id="chatTgId">TG: preview</div></div>
-          <div style="text-align:center;margin-bottom:4px"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase"><span>✦</span><span>NexusAI Yordam · MVP</span></div><div style="font-size:20px;font-weight:900;color:#fff">YORDAM</div></div>
-        </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">💬</div><div class="chat-welcome-title">Jahon chempionati bashoratlariga kirish kerakmi?</div><div class="chat-welcome-text">Bu yerga yozing — NexusAI ro'yxatdan o'tish va kirishda yordam beradi 👇</div></div></div></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="mockAttach()">📎</button><textarea class="chat-input" id="chatInput" placeholder="NexusAI Yordamga savol bering..." rows="1" maxlength="500"></textarea><button class="chat-send" onclick="sendChatMessage()">➤</button></div>
-      </div>
-
       <div id="tabMatches" class="tab-content active"><div class="screen" id="matchesScreen"></div></div>
       <div id="tabInfo" class="tab-content"><div class="screen" id="infoScreen"></div></div>
     </div>
     <div class="tab-bar">
-      <button class="tab-item" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Suhbat</span></button>
       <button class="tab-item active" onclick="switchTab('matches')" id="btnMatches"><span class="tab-icon">⚽</span><span class="tab-label">O'yinlar</span></button>
       <button class="tab-item" onclick="switchTab('info')" id="btnInfo"><span class="tab-icon">ℹ️</span><span class="tab-label">Ma'lumot</span></button>
     </div>
@@ -89,11 +79,11 @@
   const STADIUM_BY_NAME=Object.fromEntries(INFO_ESTADIOS.map(s=>[s.fifa_name,s]));
   const VENUE_TZ={"Atlanta Stadium":"America/New_York","Boston Stadium":"America/New_York","Dallas Stadium":"America/Chicago","Houston Stadium":"America/Chicago","Kansas City Stadium":"America/Chicago","Los Angeles Stadium":"America/Los_Angeles","Miami Stadium":"America/New_York","New York/New Jersey Stadium":"America/New_York","Philadelphia Stadium":"America/New_York","San Francisco Bay Area Stadium":"America/Los_Angeles","Seattle Stadium":"America/Los_Angeles","Toronto Stadium":"America/Toronto","BC Place Vancouver":"America/Vancouver","Guadalajara Stadium":"America/Mexico_City","Mexico City Stadium":"America/Mexico_City","Monterrey Stadium":"America/Monterrey"};
   const MARKET_META={"1X2":{label:"O'yin natijasi",icon:"🎯"},"Total":{label:"Jami gollar",icon:"🥅"},"BTTS":{label:"Ikkala jamoa gol uradi",icon:"⚽"},"First goal":{label:"Birinchi gol",icon:"⚽"},"Corners":{label:"Burchaklar",icon:"🚩"},"Handicap":{label:"Xavfsiz garov (durang qaytariladi)",icon:"🛡️"},"Team total":{label:"Jamoa gollari",icon:"🥅"},"Exact score":{label:"Aniq hisob (faqat qiziqish)",icon:"🎲"}};
-  let accessGranted=new URLSearchParams(location.search).get('access')==='1';
+  let accessGranted=false;
   let currentPredictionId=null;
   const tg=window.Telegram?Telegram.WebApp:null; try{tg&&tg.ready();tg&&tg.expand();}catch(e){}
   let tgUserId='preview'; try{ if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user) tgUserId=tg.initDataUnsafe.user.id; }catch(e){}
-  document.getElementById('chatTgId').textContent='TG: '+tgUserId+' · '+CONFIG.geo.toUpperCase();
+  const chatTgIdEl=document.getElementById('chatTgId'); if(chatTgIdEl)chatTgIdEl.textContent='TG: '+tgUserId+' · '+CONFIG.geo.toUpperCase();
 
   async function refreshAccessState(){
     const uid=String(tgUserId||'');
@@ -113,7 +103,7 @@
   function appTimeZone(){return 'Asia/Tashkent'}
   function fmtLocal(iso,opts){const d=new Date(iso);return new Intl.DateTimeFormat(appLocale(),Object.assign({weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short',timeZone:appTimeZone()},opts||{})).format(d)}
   function fmtShort(iso){return new Intl.DateTimeFormat(appLocale(),{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short',timeZone:appTimeZone()}).format(new Date(iso))}
-  function switchTab(name){if(name==='partidos')name='matches'; ['chat','matches','info'].forEach(x=>{const tab=document.getElementById('tab'+cap(x));const btn=document.getElementById('btn'+cap(x));if(tab)tab.classList.toggle('active',x===name);if(btn)btn.classList.toggle('active',x===name)}); if(name==='info') renderInfo(); if(name==='chat') loadChatHistory(); }
+  function switchTab(name){if(name==='partidos')name='matches'; if(name==='chat')name='matches'; ['matches','info'].forEach(x=>{const tab=document.getElementById('tab'+cap(x));const btn=document.getElementById('btn'+cap(x));if(tab)tab.classList.toggle('active',x===name);if(btn)btn.classList.toggle('active',x===name)}); if(name==='info') renderInfo(); }
   function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
   function openReg(){try{tg&&tg.openLink(CONFIG.link)}catch(e){location.href=CONFIG.link}}
   function showMatches(){currentPredictionId=null;renderMatches()}
@@ -170,7 +160,7 @@
   }
   function marketTile(x,i){const market=x.market||'';const meta=MARKET_META[market]||{label:market||'Bozor',icon:'✦'};const label=x.label||meta.label||market||'Bozor';return `<div class="market ${i<4?'primary':''}"><div class="market-icon">${meta.icon}</div><div class="market-title">${escapeHtml(label)}</div><div class="market-pick">${escapeHtml(x.pick||'—')}</div><div class="market-note">${escapeHtml(x.note||'')}</div></div>`}
   function fullPrediction(p){const cleanMarkets=(p.markets||[]).filter(x=>x&&x.pick);const blocks=(p.blocks||[]).filter(b=>b&&b.title&&Array.isArray(b.items));return `<div class="markets-grid">${cleanMarkets.map(marketTile).join('')}</div><div style="margin-top:14px">${blocks.map(b=>`<details><summary>${escapeHtml(b.title)}</summary><div class="detail-body"><ul>${b.items.map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul></div></details>`).join('')}</div>`}
-  function lockedPrediction(p){return `<div class="locked-wrap"><div class="lock-icon">🔒</div><div class="lock-title">Premium tahlil yopiq</div><div class="lock-copy">${escapeHtml(p.teaser||'Bepul ko\'rib chiqishingiz mumkin. To\'liq bozorlar va tahlil botda kirish orqali ochiladi.')}</div><button class="reg-btn" onclick="switchTab('chat')">💬 Botdan kirish oling</button></div>`}
+  function lockedPrediction(p){return `<div class="locked-wrap"><div class="lock-icon">🔒</div><div class="lock-title">Premium tahlil yopiq</div><div class="lock-copy">${escapeHtml(p.teaser||'Bepul ko\'rib chiqishingiz mumkin. To\'liq bozorlar va tahlil botda kirish orqali ochiladi.')}</div><button class="reg-btn" onclick="try{window.Telegram&&Telegram.WebApp&&Telegram.WebApp.close()}catch(e){}">💬 Botda kirish oling</button></div>`}
 
   function fmtVenueLocal(iso,stadium){return new Intl.DateTimeFormat(appLocale(),{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short',timeZone:appTimeZone()}).format(new Date(iso))}
   function fmtNum(n){return new Intl.NumberFormat(appLocale()).format(n)}
@@ -195,7 +185,7 @@
   async function loadChatHistory(){if(chatLD)return; chatLD=true; try{const cached=localStorage.getItem(APP_NS+':chat'); if(cached){const arr=JSON.parse(cached); if(Array.isArray(arr)&&arr.length){chatH=arr; renderChat();}}}catch(e){} const uid=String(tgUserId||''); if(!uid||uid==='preview'){renderChat();return;} const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),10000); try{const r=await fetch(CONFIG.chatHistoryUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:CONFIG.geo,lang:CONFIG.lang,source:'miniapp'}),signal:controller.signal}); clearTimeout(timeout); if(!r.ok)throw new Error('history_http_'+r.status); const d=await r.json(); if(Array.isArray(d.messages)){chatH=d.messages.map(m=>({role:m.role==='user'?'user':'bot',text:m.content||m.text||'',time:m.time||''})); try{localStorage.setItem(APP_NS+':chat',JSON.stringify(chatH.slice(-40)))}catch(e){} } renderChat();}catch(e){clearTimeout(timeout); renderChat();}}
   async function sendChatMessage(){if(chatLock)return; const inp=document.getElementById('chatInput'); const text=inp.value.trim(); if(!text)return; chatLock=true; addMsg(text,'user'); inp.value=''; const t=document.createElement('div'); t.className='msg typing'; t.id='typing'; t.textContent='NexusAI yozmoqda...'; document.getElementById('chatMessages').appendChild(t); let reply='Aloqa xatosi. Xabarni qayta yuboring.'; try{const uid=String(tgUserId||'preview'); const firstName=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.first_name)||'User'; const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),30000); const r=await fetch(CONFIG.chatUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,message:text,first_name:firstName,geo:CONFIG.geo,lang:CONFIG.lang,source:'miniapp'}),signal:controller.signal}); clearTimeout(timeout); const raw=await r.text(); let d={}; try{d=raw?JSON.parse(raw):{}}catch(e){d={reply:raw}} if(!r.ok)throw new Error('chat_http_'+r.status); reply=d.reply||d.message||d.text||reply;}catch(e){if(e&&e.name==='AbortError')reply="Javob vaqti tugadi. Qayta urinib ko'ring.";} document.getElementById('typing')?.remove(); addMsg(reply,'bot'); chatLock=false;}
   function mockAttach(){addMsg('Bu yerda rasm yuklash hali ulanmagan. Kirish uchun asosiy bot suhbatidan foydalaning.','bot')}
-  document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
+  const chatInputEl=document.getElementById('chatInput'); if(chatInputEl)chatInputEl.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMessage();}});
   renderMatches();
   refreshAccessState();
 </script>
