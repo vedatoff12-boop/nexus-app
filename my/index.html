@@ -480,15 +480,15 @@
   <script>
     const GEO_CONFIG = {
       my: { name:"Malaysia", flag:"🇲🇾", lang:"en", currency:"MYR", sym:"RM", profitRange:[20,200],
-        link:"https://betoholictrack.net/veTvEQPy", promo:"777MY777",
+        link:"https://sp1nwin.com/6bm83t", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-my",
         names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] },
       in: { name:"India", flag:"🇮🇳", lang:"en", currency:"INR", sym:"₹", profitRange:[200,5000],
-        link:"https://nexusmy.gameaps.net/", promo:"777MY777",
+        link:"https://nexusmy.gameaps.net/", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-my",
         names:["Rahul","Amit","Priya","Raj","Arjun","Vikram","Deepak","Sunil","Ananya","Pooja","Kiran","Rohan","Sneha","Arun","Neha","Vivek","Meera","Sanjay","Kavita","Ravi"] },
       ca: { name:"Canada", flag:"🇨🇦", lang:"en", currency:"CAD", sym:"C$", profitRange:[5,50],
-        link:"https://fastwin667.com/PDCDGj", promo:"777CA777",
+        link:"https://fastwin667.com/PDCDGj", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-ca",
         names:["James","Michael","David","Ryan","Tyler","Chris","Matt","Josh","Alex","Kyle","Emma","Sarah","Jessica","Emily","Ashley","Megan","Lauren","Hannah","Chloe","Sophie"] },
       es: { name:"España", flag:"🇪🇸", lang:"es", currency:"EUR", sym:"€", profitRange:[5,50],
@@ -815,13 +815,12 @@
       if(el.querySelector('.lock-text'))return;
       const g=geo();
       const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
-      const promoTxt=g.promo?`<div class="promo-text">Promo: ${g.promo}</div>`:'';
+      const promoTxt='';
       el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
     function openRegLink(){
-      const base=GEO_CONFIG.my.link||'https://betoholictrack.net/veTvEQPy';if(!base)return;
-      const uid=String(tgUserId||S.get('tg_user_id')||'').trim();
-      const url=uid?`${base}${base.includes('?')?'&':'?'}sub_id=${encodeURIComponent(uid)}`:base;
+      const base=GEO_CONFIG.my.link||'https://sp1nwin.com/6bm83t';if(!base)return;
+      const url=base;
       try{window.trackIndiaEvent&&window.trackIndiaEvent('RegistrationIntent',{geo:'MY'});}catch(e){}
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
     }
