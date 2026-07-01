@@ -221,6 +221,12 @@
     .penalty-ball{font-size:22px;animation:popIn .3s cubic-bezier(.175,.885,.32,1.275);}
     @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
     .tabs{margin-top:14px;}
+    .segmented{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;padding:6px;border-radius:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px rgba(255,255,255,0.05);}
+    .seg-btn{min-width:0;padding:11px 6px;border-radius:13px;border:1px solid rgba(250,204,21,0.26);background:rgba(250,204,21,0.06);color:var(--gold);font-family:inherit;font-size:12px;font-weight:900;letter-spacing:-.01em;cursor:pointer;transition:transform .12s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease;}
+    .seg-btn:active{transform:scale(.96);}
+    .seg-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:rgba(255,255,255,0.28);color:#0a0f1e;box-shadow:0 8px 24px rgba(250,204,21,0.26),inset 0 1px rgba(255,255,255,0.35);}
+    .seg-btn:not(.active){box-shadow:inset 0 1px rgba(255,255,255,0.04);}
+    @media(max-width:360px){.segmented{gap:6px;padding:5px}.seg-btn{font-size:11px;padding:10px 4px}}
 
     /* CONFETTI */
     .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
@@ -859,15 +865,18 @@
       if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
 
-    const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
+    const CH_D=["easy","medium","hard","hardcore"];let chD="easy",chNextAt=0,chCooldownTimer=null;
     function renderChicken(){
-      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
+      if(timer)clearInterval(timer);if(chCooldownTimer)clearInterval(chCooldownTimer);const app=document.getElementById('app');app.innerHTML='';
       const p=document.createElement('div');p.className='panel';
       p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
-      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up RM${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';CH_D.forEach(d=>{const b=document.createElement('button');b.type='button';b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
+      function setBtnReady(){nxB.disabled=false;nxB.textContent=T().ch.nx;}
+      function updateCooldown(){const left=Math.ceil((chNextAt-Date.now())/1000);if(left>0){nxB.disabled=true;nxB.textContent=T().ch.w(left);}else{if(chCooldownTimer){clearInterval(chCooldownTimer);chCooldownTimer=null;}setBtnReady();}}
+      function startCooldown(){chNextAt=Date.now()+10000;updateCooldown();chCooldownTimer=setInterval(updateCooldown,250);}
+      nxB.onclick=()=>{if(Date.now()<chNextAt){updateCooldown();return;}if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up RM${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';return;}startCooldown();},500);};dT();if(Date.now()<chNextAt)updateCooldown();
     }
 
     const LIVE_ROOM_NPCS=[
