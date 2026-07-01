@@ -4,11 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
   <title>NexusAI Señales</title>
-  <!-- latcpp-20260625-winner-marquee-top100-restored -->
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
-  <meta http-equiv="Pragma" content="no-cache"/>
-  <meta http-equiv="Expires" content="0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#080c18;--bg2:#0d1324;--bg3:#111827;
@@ -21,16 +18,12 @@
       --safeT:env(safe-area-inset-top,0px);--safeB:env(safe-area-inset-bottom,0px);
     }
     *{box-sizing:border-box;margin:0;padding:0;}
-    html{min-height:100%;height:auto;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;}
+    html,body{height:100%;overflow-x:hidden;}
     body{
-      min-height:100%;height:auto;overflow-x:hidden;overflow-y:visible;
       font-family:'Outfit',system-ui,-apple-system,sans-serif;
       color:var(--text);
       background:var(--bg);
       -webkit-tap-highlight-color:transparent;
-      -webkit-overflow-scrolling:touch;
-      touch-action:pan-y;
-      overscroll-behavior-y:auto;
     }
     body.rtl{direction:rtl;}
 
@@ -40,12 +33,11 @@
 
     /* MAIN WRAPPER */
     .app-wrap{
-      max-width:480px;margin:0 auto;min-height:0;overflow:visible;
-      padding:calc(12px + var(--safeT)) 16px calc(320px + var(--safeB));
+      max-width:480px;margin:0 auto;height:100%;overflow-y:auto;
+      padding:calc(12px + var(--safeT)) 16px calc(120px + var(--safeB));
       position:relative;
       -webkit-overflow-scrolling:touch;
-      overscroll-behavior-y:auto;
-      touch-action:pan-y;
+      overscroll-behavior:contain;
     }
 
     /* TOP BAR */
@@ -57,7 +49,7 @@
     .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:livePulse 2s infinite;}
     @keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--green);}50%{opacity:.5;box-shadow:0 0 3px var(--green);}}
     .live-text{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;}
-    .online-count{font-size:11px;color:var(--muted);font-weight:700;}
+    .online-count{font-size:11px;color:var(--muted);font-weight:600;}
     .top-right{display:flex;align-items:center;gap:8px;}
     .tg-id{font-size:11px;font-weight:700;color:var(--blue);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.15);padding:3px 10px;border-radius:var(--pill);}.self-reset-btn{display:none;align-items:center;justify-content:center;height:28px;padding:0 10px;border-radius:999px;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.12);color:#ff8a8a;font-size:11px;font-weight:800;cursor:pointer;gap:6px}.self-reset-btn:disabled{opacity:.6;cursor:default}
 
@@ -124,7 +116,7 @@
     .vip-next-tier{font-size:12px;font-weight:700;color:var(--gold);}
     .vip-progress{height:6px;border-radius:3px;background:rgba(255,255,255,0.08);margin-top:4px;overflow:hidden;}
     .vip-progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width 0.6s ease;}
-    .vip-progress-text{display:flex;justify-content:space-between;margin-top:4px;font-size:9px;color:var(--muted);font-weight:700;}
+    .vip-progress-text{display:flex;justify-content:space-between;margin-top:4px;font-size:9px;color:var(--muted);font-weight:600;}
 
     /* GAMES GRID */
     .games-title{font-size:15px;font-weight:800;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;}
@@ -151,7 +143,7 @@
     .game-top{display:flex;align-items:center;gap:10px;}
     .game-icon{font-size:28px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);flex-shrink:0;}
     .game-name{font-size:15px;font-weight:800;color:#fff;line-height:1.1;}
-    .game-desc{font-size:10px;color:var(--muted2);font-weight:700;margin-top:2px;}
+    .game-desc{font-size:10px;color:var(--muted2);font-weight:600;margin-top:2px;}
     .game-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
     .game-wr{
       display:flex;align-items:center;gap:4px;
@@ -169,10 +161,27 @@
     .lock-text{color:var(--red);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
     .lock-msg{color:var(--muted);font-size:10px;margin-top:4px;line-height:1.3;}
 
+
+    /* GAME CAROUSEL */
+    .game-carousel-shell{position:relative;border-radius:28px;padding:14px 12px 18px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--stroke);box-shadow:0 20px 70px rgba(0,0,0,.35);overflow:hidden;touch-action:pan-y;}
+    .game-carousel-shell:before{content:"";position:absolute;inset:-42% -35% auto;height:260px;background:radial-gradient(circle,rgba(var(--accent-rgb),.22),transparent 62%);pointer-events:none;transition:.25s;}
+    .game-stage{min-height:390px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;z-index:2;user-select:none;}
+    .carousel-game-name{font-size:31px;line-height:1.03;font-weight:1000;letter-spacing:-.04em;margin-bottom:8px;color:#fff;text-shadow:0 10px 45px rgba(var(--accent-rgb),.42);}
+    .game-provider{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;}
+    .logo-oval{width:min(318px,84vw);height:178px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);background:radial-gradient(circle at 50% 42%,rgba(var(--accent-rgb),.22),rgba(255,255,255,.045) 58%,rgba(0,0,0,.2));box-shadow:inset 0 1px rgba(255,255,255,.2),0 22px 70px rgba(var(--accent-rgb),.25);display:grid;place-items:center;position:relative;overflow:hidden;isolation:isolate;}
+    .logo-oval:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.23) 100%),linear-gradient(180deg,rgba(255,255,255,.16),transparent 32%,rgba(0,0,0,.12));z-index:2;pointer-events:none;}
+    .logo-oval:after{content:"";position:absolute;inset:9px;border-radius:inherit;border:1px solid rgba(255,255,255,.12);z-index:3;pointer-events:none;}
+    .game-art{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:var(--img-pos,50% 50%);transform:scale(var(--img-scale,1));transform-origin:center;filter:saturate(1.08) contrast(1.04);z-index:1;}
+    .game-art-aviator{object-fit:contain;object-position:50% 50%;padding:8px 0;background:linear-gradient(180deg,#f5f5f5 0%,#111 54%,#050505 100%);--img-scale:1;}
+    .game-art-chicken{object-fit:contain;object-position:50% 50%;padding:22px 12px;background:radial-gradient(ellipse at center,#fff 0%,#fff 55%,#fff6e7 100%);filter:saturate(1.12) contrast(1.06) drop-shadow(0 14px 20px rgba(0,0,0,.35));}
+    .game-art-jetx{--img-pos:50% 49%;--img-scale:1.02}.game-art-mines{--img-pos:50% 50%;--img-scale:1.02}.game-art-penalty{--img-pos:50% 52%;--img-scale:1.02}.game-art-balloon{--img-pos:50% 52%;--img-scale:1.01}
+    .carousel-game-desc{max-width:258px;margin:18px auto 0;padding:0 8px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.35}.carousel-precisión{margin-top:10px;color:var(--gold);font-size:12px;font-weight:950}
+    .nav-btn{position:absolute;top:238px;translate:0 -50%;z-index:5;width:38px;height:58px;border-radius:999px;border:1px solid var(--stroke);background:rgba(8,12,24,.58);backdrop-filter:blur(10px);color:#fff;font-size:26px;display:grid;place-items:center;cursor:pointer}.nav-btn.prev{left:10px}.nav-btn.next{right:10px}.nav-btn:active,.carousel-cta:active{scale:.97}
+    .carousel-dots{display:flex;justify-content:center;gap:7px;margin-top:12px}.carousel-dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.22);transition:.2s}.carousel-dot.active{width:24px;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 18px rgba(246,198,74,.45)}
+    .carousel-cta{width:100%;margin-top:16px;border:0;border-radius:18px;padding:16px 18px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:1000;font-size:15px;box-shadow:0 16px 42px rgba(246,198,74,.24);cursor:pointer}.carousel-hint{display:flex;justify-content:center;gap:9px;color:var(--muted);font-size:12px;font-weight:800;margin-top:12px}
+    .slide-out-left{animation:outL .18s ease both}.slide-in-right{animation:inR .2s ease both}.slide-out-right{animation:outR .18s ease both}.slide-in-left{animation:inL .2s ease both}@keyframes outL{to{opacity:0;transform:translateX(-35px) scale(.98)}}@keyframes inR{from{opacity:0;transform:translateX(35px) scale(.98)}}@keyframes outR{to{opacity:0;transform:translateX(35px) scale(.98)}}@keyframes inL{from{opacity:0;transform:translateX(-35px) scale(.98)}}
     /* GAME DETAIL PANEL */
     .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(13,19,36,0.8);padding:16px;backdrop-filter:blur(8px);}
-    .panel.game-detail{margin-bottom:calc(180px + var(--safeB));scroll-margin-bottom:calc(130px + var(--safeB));}
-    .panel.game-detail .btnrow{position:relative;z-index:2;width:100%;background:transparent;padding:0;margin-top:16px;}
     .backrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
     .back{border:1px solid var(--stroke);background:rgba(255,255,255,0.04);color:var(--muted);padding:8px 14px;border-radius:var(--pill);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
     .p-title{font-size:22px;font-weight:900;color:#fff;}
@@ -183,7 +192,7 @@
     .btn.primary{color:#0a0f1e;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 6px 20px var(--gold-glow);}
     .btn[disabled]{opacity:0.4;cursor:not-allowed;background:#1e293b;color:var(--muted);box-shadow:none;}
     .stepbox{margin-top:14px;border-radius:16px;border:1px solid var(--stroke);background:rgba(255,255,255,0.02);padding:20px;text-align:center;}
-    .stepnum{font-size:clamp(38px,12vw,52px);font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);line-height:1.05;}
+    .stepnum{font-size:52px;font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);}
     .steplabel{color:var(--muted2);font-weight:800;letter-spacing:1.5px;font-size:11px;text-transform:uppercase;margin-top:4px;}
     .stepnote{margin-top:10px;color:var(--muted);font-size:12px;}
 
@@ -203,8 +212,8 @@
     .cd-wrap .prog{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1s linear;}
     .cd-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:17px;font-weight:900;color:var(--gold);}
 
-    /* MINES & goal game */
-    .mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:min(280px,82vw);margin:16px auto;}
+    /* MINES & PENALTY */
+    .mines-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:280px;margin:16px auto;}
     .mines-cell{aspect-ratio:1;background:rgba(255,255,255,0.06);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--stroke);}
     .mines-cell.active{background:var(--gold);box-shadow:0 0 12px var(--gold-glow);border-color:#fff;animation:popIn .3s ease;}
     .penalty-wrapper{width:100%;max-width:300px;height:180px;margin:16px auto;border:3px solid rgba(255,255,255,0.2);border-bottom:none;background:rgba(0,0,0,0.15);display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(3,1fr);border-radius:8px 8px 0 0;}
@@ -212,9 +221,12 @@
     .penalty-ball{font-size:22px;animation:popIn .3s cubic-bezier(.175,.885,.32,1.275);}
     @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
     .tabs{margin-top:14px;}
-    .segmented{display:flex;align-items:stretch;gap:6px;width:100%;max-width:100%;overflow:hidden;padding:3px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid var(--stroke2);}
-    .seg-btn{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center;white-space:nowrap;padding:9px 4px;border-radius:11px;border:1px solid transparent;background:rgba(255,255,255,0.035);color:var(--muted);font-family:inherit;font-size:11px;font-weight:900;line-height:1;cursor:pointer;}
-    .seg-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;border-color:rgba(255,255,255,0.35);box-shadow:0 6px 18px var(--gold-glow);}
+    .segmented{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;padding:6px;border-radius:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px rgba(255,255,255,0.05);}
+    .seg-btn{min-width:0;padding:11px 6px;border-radius:13px;border:1px solid rgba(250,204,21,0.26);background:rgba(250,204,21,0.06);color:var(--gold);font-family:inherit;font-size:12px;font-weight:900;letter-spacing:-.01em;cursor:pointer;transition:transform .12s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease;}
+    .seg-btn:active{transform:scale(.96);}
+    .seg-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:rgba(255,255,255,0.28);color:#0a0f1e;box-shadow:0 8px 24px rgba(250,204,21,0.26),inset 0 1px rgba(255,255,255,0.35);}
+    .seg-btn:not(.active){box-shadow:inset 0 1px rgba(255,255,255,0.04);}
+    @media(max-width:360px){.segmented{gap:6px;padding:5px}.seg-btn{font-size:11px;padding:10px 4px}}
 
     /* CONFETTI */
     .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
@@ -223,7 +235,7 @@
 
     /* MARQUEE */
     .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
-    .marquee-inner{display:inline-block;animation:mqScroll 120s linear infinite;font-size:11px;font-weight:700;color:var(--muted);will-change:transform;}
+    .marquee-inner{display:inline-block;animation:mqScroll 120s linear infinite;font-size:11px;font-weight:600;color:var(--muted);will-change:transform;}
     .marquee-inner span{color:var(--gold);font-weight:800;}
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -249,15 +261,45 @@
     .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
 
     /* APP SHELL + TAB BAR */
-    .app-shell{position:relative;min-height:100vh;min-height:100dvh;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:block;overflow:visible;}
-    .app-body{position:relative;overflow:visible;padding-bottom:calc(64px + var(--safeB));}
-    .tab-bar{position:fixed;left:50%;right:auto;bottom:0;transform:translateX(-50%);max-width:480px;width:100%;height:calc(60px + var(--safeB));padding-bottom:var(--safeB);background:#060a14;border-top:1px solid rgba(250,204,21,0.18);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;z-index:5000;box-shadow:0 -8px 30px rgba(0,0,0,0.65);}
-    .tab-item{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 4px;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:transparent;font-family:inherit;-webkit-tap-highlight-color:transparent;}
-    .tab-item.active{color:var(--gold);background:rgba(250,204,21,0.06);}
+    .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100dvh;}
+    .app-body{flex:1;min-height:0;position:relative;overflow:hidden;}
+    .tab-bar{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);flex-shrink:0;}
+    .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 0;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;}
+    .tab-item.active{color:var(--gold);}
     .tab-item .tab-icon{font-size:20px;line-height:1;}
-    .tab-item .tab-label{font-size:10px;font-weight:800;text-transform:none;letter-spacing:.1px;white-space:nowrap;}
-    .tab-content{display:none;min-height:0;}
+    .tab-item .tab-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .tab-content{display:none;height:100%;}
     .tab-content.active{display:block;}
+
+    /* CHAT — stable fullscreen mobile layout */
+    #tabChat{height:100%;background:var(--bg);display:none;grid-template-rows:auto minmax(0,1fr) auto auto;overflow:hidden;position:relative;}
+    #tabChat.active{display:grid !important;}
+    .chat-header{padding:calc(8px + var(--safeT)) 16px 4px;flex-shrink:0;background:var(--bg);}
+    .chat-box{min-height:0;height:100%;overflow:hidden;display:flex;flex-direction:column;padding:0 16px 0;}
+    .chat-msgs{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch;min-height:0;max-height:100%;overscroll-behavior:contain;}
+    .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;word-wrap:break-word;animation:msgIn .3s ease;}
+    @keyframes msgIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+    .msg.bot{align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid var(--stroke);color:var(--text);border-bottom-left-radius:4px;}
+    .msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:600;border-bottom-right-radius:4px;}
+    .msg.typing{align-self:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--stroke);color:var(--muted);font-style:italic;}
+    .msg-time{font-size:9px;color:var(--muted2);margin-top:3px;}
+    .chat-input-row{display:flex;gap:8px;padding:8px 16px 8px;border-top:1px solid var(--stroke);align-items:flex-end;flex-shrink:0;background:var(--bg);}
+    .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:16px;line-height:1.25;outline:none;font-family:inherit;resize:none;height:42px;min-height:42px;max-height:42px;overflow-y:auto;-webkit-text-size-adjust:100%;}
+    .chat-input::placeholder{color:var(--muted2);}
+    .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,0.1);}
+    .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
+    .chat-send:active{transform:scale(0.9);}
+    .chat-send:disabled{opacity:0.3;}
+    .chat-attach{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);color:var(--muted);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-family:inherit;}
+    .chat-attach:active{transform:scale(0.9);background:rgba(255,255,255,0.1);}
+    .chat-img-preview{position:relative;max-width:180px;margin:4px 0;border-radius:12px;overflow:hidden;}
+    .chat-img-preview img{width:100%;display:block;border-radius:12px;}
+    .chat-img-remove{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .msg img{max-width:100%;border-radius:10px;margin-top:4px;}
+    .chat-welcome{text-align:center;padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .chat-welcome-icon{font-size:44px;}
+    .chat-welcome-title{font-size:18px;font-weight:900;color:#fff;}
+    .chat-welcome-text{font-size:13px;color:var(--muted);line-height:1.5;max-width:260px;}
 
     /* HELP TOOLTIP */
     .help-icon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--muted);font-size:9px;font-weight:800;cursor:pointer;margin-left:4px;flex-shrink:0;vertical-align:middle;line-height:1;}
@@ -289,25 +331,43 @@
     .top-rank{width:26px;font-size:12px;font-weight:800;color:var(--muted2);text-align:center;flex-shrink:0;}
     .top-row:nth-child(-n+3) .top-rank{color:var(--gold);}
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .top-game{font-size:10px;color:var(--muted2);font-weight:700;width:56px;text-align:center;}
+    .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
-
-
-    /* FIRST-TIME ONBOARDING */
-    .tutorial-overlay{position:fixed;inset:0;background:transparent;z-index:9000;display:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
-    .tutorial-overlay.active{display:block;}
-    .tutorial-skip-top{position:fixed;top:calc(12px + var(--safeT));left:14px;right:auto;z-index:9004;border:1px solid rgba(255,255,255,.18);background:rgba(15,23,42,.82);color:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;font-family:inherit;box-shadow:0 10px 30px rgba(0,0,0,.28);}
-    .tutorial-spotlight{position:fixed;z-index:9002;border:2px solid var(--gold);border-radius:18px;box-shadow:0 0 0 9999px rgba(2,6,23,.42),0 0 24px rgba(250,204,21,.72),inset 0 0 10px rgba(250,204,21,.10);pointer-events:none;transition:all .25s ease;background:rgba(250,204,21,.025);}
-    .tutorial-card{position:fixed;left:16px;right:auto;top:auto;bottom:auto;z-index:9003;width:calc(100vw - 32px);max-width:448px;margin:0;padding:14px;border-radius:20px;background:linear-gradient(145deg,rgba(15,23,42,.98),rgba(9,13,25,.98));border:1px solid rgba(250,204,21,.28);box-shadow:0 22px 70px rgba(0,0,0,.72);color:#fff;transition:top .22s ease,left .22s ease;}
-    .tutorial-kicker{font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-    .tutorial-title{font-size:17px;font-weight:950;line-height:1.15;margin-bottom:7px;}
-    .tutorial-text{font-size:12px;line-height:1.42;color:rgba(255,255,255,.84);font-weight:600;}
-    .tutorial-actions{display:flex;align-items:center;gap:10px;margin-top:14px;}
-    .tutorial-btn{flex:1;border:none;border-radius:14px;padding:12px 14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b1020;font-size:13px;font-weight:950;font-family:inherit;box-shadow:0 10px 28px rgba(250,204,21,.22);}
-    .tutorial-ghost{border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:900;font-family:inherit;padding:10px;}
-    .tutorial-progress{font-size:11px;color:var(--muted);font-weight:800;min-width:36px;text-align:right;}
-    .tutorial-replay{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;border:1px solid rgba(250,204,21,.22);background:rgba(250,204,21,.08);color:var(--gold);font-size:13px;font-weight:900;cursor:pointer;font-family:inherit;}
-    body.tutorial-open{overflow:hidden;}
+    /* ── Live Room ── */
+    .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
+    .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
+    .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
+    .live-room-feed{flex:1;overflow-y:auto;padding:8px 10px 4px;display:flex;flex-direction:column;gap:0;min-height:0;}
+    .live-room-feed::-webkit-scrollbar{width:3px;}
+    .live-room-feed::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px;}
+    .room-msg{padding:2px 0;line-height:1.4;}
+    .room-msg.user{background:rgba(250,204,21,0.04);border-radius:6px;padding:2px 6px;}
+    .room-inline{display:inline;}
+    .room-name{font-weight:800;font-size:12.5px;margin-right:2px;}
+    .room-name.c1{color:#64b5f6;} .room-name.c2{color:#ce93d8;} .room-name.c3{color:#81c784;} .room-name.c4{color:#ffb74d;} .room-name.c5{color:#ef9a9a;} .room-name.c6{color:#80cbc4;}
+    .room-badge{font-size:11px;margin-right:3px;vertical-align:middle;}
+    .room-text{display:inline;font-size:12.5px;color:rgba(255,255,255,0.82);word-break:break-word;}
+    .room-time{display:inline;font-size:10px;color:rgba(255,255,255,0.22);margin-left:6px;white-space:nowrap;}
+    .room-reply{font-size:10.5px;color:rgba(255,255,255,0.35);margin:0 0 1px 2px;font-style:italic;}
+    .room-day-sep{display:none;}
+    .room-reactions{display:inline-flex;gap:4px;margin-left:6px;vertical-align:middle;}
+    .room-reaction{display:inline-flex;align-items:center;gap:2px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1px 5px;font-size:10px;line-height:1;cursor:default;}
+    .room-reaction .rcount{color:rgba(255,255,255,0.4);font-size:9px;font-weight:700;}
+    .room-typing{padding:4px 12px 6px;font-size:11px;color:rgba(255,255,255,0.35);min-height:18px;}
+    .room-typing .dots{display:inline-block;letter-spacing:2px;}
+    .room-typing .dots span{animation:typingDot 1.4s infinite;opacity:0.3;}
+    .room-typing .dots span:nth-child(2){animation-delay:0.2s;}
+    .room-typing .dots span:nth-child(3){animation-delay:0.4s;}
+    @keyframes typingDot{0%,60%,100%{opacity:0.3}30%{opacity:1}}
+    .room-composer{border-top:1.5px solid rgba(250,204,21,0.25);background:rgba(0,0,0,0.25);border-radius:0 0 16px 16px;padding:0;}
+    .room-lock{padding:14px 16px;text-align:center;}
+    .room-lock-input{width:100%;padding:12px 16px;border-radius:0 0 14px 14px;border:none;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.25);font-size:13px;font-family:inherit;outline:none;cursor:not-allowed;}
+    .room-lock-hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px;}
+    .room-input-row{display:flex;align-items:center;gap:8px;padding:10px 12px;}
+    .room-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);border-radius:12px;padding:10px 14px;color:#fff;font-size:13px;resize:none;height:40px;font-family:inherit;outline:none;}
+    .room-input:focus{border-color:rgba(250,204,21,0.3);}
+    .room-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .room-send:disabled{opacity:0.3;}
   </style>
 
   <script>
@@ -318,14 +378,14 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '706690828634853');
     fbq('track', 'PageView');
-    window.trackBDEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
+    window.trackLatCppEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
   </script>
 
 </head>
 <body>
   <div id="geoScreen">
-    <div class="geo-title">🌍 Elige tu país</div>
-    <div class="geo-sub">Selecciona tu país para empezar</div>
+    <div class="geo-title">🌍 Selecciona tu país</div>
+    <div class="geo-sub">Elige tu país para empezar</div>
     <div class="geo-grid" id="geoGrid"></div>
   </div>
   <div id="splash" style="display:none !important;"><div class="splash-text" id="splashName"></div></div>
@@ -333,18 +393,27 @@
 
 
 
-  <!-- CHAT TAB - outside app-wrap, fixed fullscreen -->
+  <!-- CHAT TAB — outside app-wrap, fixed fullscreen -->
   <div class="app-shell">
     <div class="app-body">
+      <div id="tabChat" class="tab-content">
+        <div class="chat-header">
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">En vivo</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reiniciar</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">Soporte NexusAI · Limitado</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SOPORTE</div></div>
+        </div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">¿Quieres desbloquear las señales IA?</div><div class="chat-welcome-text">Escribe abajo para saber cómo activar tu acceso 👇</div></div></div></div>
+        <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Pregunta a Soporte NexusAI..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+      </div>
+
       <div class="app-wrap">
     <!-- SIGNALS TAB -->
-    <div id="tabSignaux" class="tab-content active">
+    <div id="tabSignals" class="tab-content">
       <div class="top-bar">
         <div class="top-left"><div class="live-dot"></div><span class="live-text">En vivo</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reiniciar</button>
-          <button class="tutorial-replay" id="tutorialReplayBtn" onclick="startTutorial(true)" aria-label="Cómo funciona">?</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
-          <div class="lang-drop" style="display:none !important"></div>
+          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
       </div>
 
@@ -353,22 +422,22 @@
           <div class="vip-badge">
             <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronce</div>
+              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
               <div class="vip-badge-acc" id="vipAcc2">85% PRECISIÓN</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
-            <div class="vip-next-label" id="vipNextLabel">SIGUIENTE NIVEL</div>
-            <div class="vip-next-tier" id="vipNextTier">🥇 Oro</div>
+            <div class="vip-next-label">SIGUIENTE NIVEL</div>
+            <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">0 / 0</span><span id="vipProgressHint">Deposita más para desbloquear el siguiente nivel ⬆</span></div>
-        <div id="vipSignauxLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 señales disponibles hoy</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">$0 / $10</span><span id="vipProgressHint">Recarga más para subir de nivel ⬆</span></div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 señales disponibles hoy</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)" id="streakLabel">día de racha</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">días de racha</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -376,8 +445,27 @@
     </div>
 
     <!-- TOP PLAYERS TAB -->
+    <div id="tabLiveRoom" class="tab-content">
+      <div class="live-room">
+        <div class="live-room-label">Sala en vivo</div>
+        <div class="live-room-shell">
+          <div class="live-room-feed" id="liveRoomFeed"></div>
+          <div class="room-typing" id="roomTyping"></div>
+          <div class="room-composer">
+            <div class="room-lock" id="liveRoomLock">
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Alcanza Gold para desbloquear el chat">
+              <div class="room-lock-hint">Mira la sala ahora · los miembros Gold pueden escribir</div>
+            </div>
+            <div class="room-input-row" id="liveRoomComposer" style="display:none;">
+              <textarea class="room-input" id="liveRoomInput" placeholder="Escribe un mensaje..." maxlength="280"></textarea>
+              <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub" id="topSub">Weekly ranking — biggest winners of the week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Top 100</div><div class="top-header-sub">Ranking semanal — mayores ganadores de la semana</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -387,134 +475,71 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item active" onclick="switchTab('signals')" id="btnSignaux"><span class="tab-icon">🎯</span><span class="tab-label">Señales</span></button>
+      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
+      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Señales</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Sala en vivo</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
-    </div>
-  </div>
-
-
-
-  <div class="tutorial-overlay" id="tutorialOverlay" aria-hidden="true">
-    <button class="tutorial-skip-top" onclick="skipTutorial()">Omitir</button>
-    <div class="tutorial-spotlight" id="tutorialSpotlight"></div>
-    <div class="tutorial-card" id="tutorialCard">
-      <div class="tutorial-kicker" id="tutorialKicker">Nexus AI · 20 segundos</div>
-      <div class="tutorial-title" id="tutorialTitle">Cómo funciona</div>
-      <div class="tutorial-text" id="tutorialText"></div>
-      <div class="tutorial-actions">
-        <button class="tutorial-ghost" onclick="skipTutorial()">Omitir</button>
-        <button class="tutorial-btn" id="tutorialNextBtn" onclick="nextTutorialStep()">Empezar</button>
-        <div class="tutorial-progress" id="tutorialProgress">1/4</div>
-      </div>
     </div>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
-        const LATAM_SOCIAL_HANDLES=["@crash_mateo","@sofi.bet","@luisito_win","@valepicks","@panama_cash","@tico_profit","@aviator_pa","@cami_xbet","@jetx_javi","@mines_ana","@diego_rush","@lucia.bet","@santi_signal","@fer_cashout","@crisplays","@paola_777","@andresx","@nati_gana","@renata.bet","@chino_pa","@mari_pick","@sebas_ia","@alejo_win","@gabi_cash","@martu.bet","@carlosfx","@laura_plays","@daniel_777","@nico_cash","@isa_signal","@brayan.pa","@migue_x","@rodrigo.bet","@vale777","@tavo_cash","@marce_win","@kevin_pa","@yosoymines","@aviator_lu","@jetxpro","@cashout.cr","@apuesta_pa","@winner_py","@bet_latam","@signal_24","@goldplayer","@profit_now","@retiro_ya","@xbet_queen","@crashking","@minesboy","@chickenroad","@balloon_cash","@penaltywin","@user777","@latin_win","@betzone.pa","@cashflow_ia","@verde_win","@zona_gold","@max_signal","@playmaker_777","@ia_profit","@meta_cash","@winroom","@retiros_latam","@betdaily","@bonus_hunter","@mister_cash","@queen_signal","@panama777","@tico_gana","@py_profit","@cr_gamer","@vip_signal","@rush777","@moneyline_pa","@smart_bet","@cashpilot","@lucky_latam"];
-    const LATAM_NAMES=LATAM_SOCIAL_HANDLES;
+    const APP_VERSION='20260701-my-donor-spanish-juan';
+    const LATAM_SOCIAL_HANDLES=["@crash_mateo","@sofi.bet","@luisito_win","@valepicks","@panama_cash","@tico_profit","@aviator_pa","@cami_xbet","@jetx_javi","@mines_ana","@diego_rush","@lucia.bet","@santi_signal","@fer_cashout","@crisplays","@paola_777","@andresx","@nati_gana","@renata.bet","@chino_pa","@mari_pick","@sebas_ia","@alejo_win","@gabi_cash","@martu.bet","@carlosfx","@laura_plays","@daniel_777","@nico_cash","@isa_signal","@brayan.pa","@migue_x","@rodrigo.bet","@vale777","@tavo_cash","@marce_win","@kevin_pa","@yosoymines","@aviator_lu","@jetxpro","@cashout.cr","@apuesta_pa","@winner_py","@bet_latam","@signal_24","@goldplayer","@profit_now","@retiro_ya","@xbet_queen","@crashking","@minesboy","@chickenroad","@balloon_cash","@penaltywin","@user777","@latin_win","@betzone.pa","@cashflow_ia","@verde_win","@zona_gold","@max_signal","@playmaker_777","@ia_profit","@meta_cash","@winroom","@retiros_latam","@betdaily","@bonus_hunter","@mister_cash","@queen_signal","@panama777","@tico_gana","@py_profit","@cr_gamer","@vip_signal","@rush777","@moneyline_pa","@smart_bet","@cashpilot","@lucky_latam"];
     const GEO_CONFIG = {
-      cr: { name:"Costa Rica", flag:"🇨🇷", lang:"es", currency:"CRC", sym:"₡", bronze:1500, gold:5000, profitRange:[55000,190000],
-        link:"https://sp1nwin.com/fpdPFF", promo:"777CR777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp",
-        names:LATAM_NAMES },
-      pa: { name:"Panamá", flag:"🇵🇦", lang:"es", currency:"USD", sym:"$", bronze:3, gold:10, profitRange:[120,420],
-        link:"https://sp1nwin.com/mHF1c6", promo:"777PA777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp",
-        names:LATAM_NAMES },
-      py: { name:"Paraguay", flag:"🇵🇾", lang:"es", currency:"PYG", sym:"₲", bronze:20000, gold:65000, profitRange:[730000,2560000],
-        link:"https://sp1nwin.com/PmxrDy", promo:"777PY777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp",
-        names:LATAM_NAMES },
-      co: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"$", bronze:10500, gold:35000, profitRange:[410000,1420000],
-        link:"https://sp1nwin.com/PwsM63", promo:"",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp",
-        names:LATAM_NAMES }
+      cr: { name:"Costa Rica", flag:"🇨🇷", lang:"es", currency:"CRC", sym:"₡", bronze:3, gold:10, bronzeText:"₡1,500", goldText:"₡5,000", profitRange:[55000,190000], link:"https://sp1nwin.com/fpdPFF", promo:"777CR777", webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp", names:LATAM_SOCIAL_HANDLES },
+      pa: { name:"Panamá", flag:"🇵🇦", lang:"es", currency:"USD", sym:"$", bronze:3, gold:10, bronzeText:"$3", goldText:"$10", profitRange:[120,420], link:"https://sp1nwin.com/mHF1c6", promo:"777PA777", webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp", names:LATAM_SOCIAL_HANDLES },
+      py: { name:"Paraguay", flag:"🇵🇾", lang:"es", currency:"PYG", sym:"₲", bronze:3, gold:10, bronzeText:"₲20,000", goldText:"₲65,000", profitRange:[730000,2560000], link:"https://sp1nwin.com/PmxrDy", promo:"777PY777", webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp", names:LATAM_SOCIAL_HANDLES },
+      co: { name:"Colombia", flag:"🇨🇴", lang:"es", currency:"COP", sym:"$", bronze:3, gold:10, bronzeText:"$10,500", goldText:"$35,000", profitRange:[410000,1420000], link:"https://sp1nwin.com/PwsM63", promo:"", webhook:"https://n8nnexusai.uk/webhook/check-access-lat-cpp", names:LATAM_SOCIAL_HANDLES }
     };
-    const NAME_POOLS={
-      es:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana","Fernanda","Alejandro","Natalia","Sebastián","Isabella"],
-      uz:["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥","hafizx"],
-      az:["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥","hafizx"],
-      en:["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥","hafizx"]
-    };
-    let REAL_NAME_POOL=NAME_POOLS.en;
+    const REAL_NAME_POOL=LATAM_SOCIAL_HANDLES;
+    const CHAT_WEBHOOK=''; // disabled: no approved LAT-CPP support chat endpoint
+    const CHAT_HISTORY_WEBHOOK=''; // disabled: no approved LAT-CPP support history endpoint
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=250)
+    let chatTier=1; // 1=Support, 2=Personal Analyst (Gold)
     let userTotalDeposit=0;
-    const APP_NS='nexuslatcpp'; const S={get(k){try{return localStorage.getItem(APP_NS+':'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem(APP_NS+':'+k,v)}catch(e){}}};
-    function clearAppStorageNamespace(){try{const prefix=APP_NS+':';for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k&&k.indexOf(prefix)===0)localStorage.removeItem(k);}}catch(e){}}
-    (function handleEmergencyReset(){try{const u=new URL(window.location.href);if(u.searchParams.get('reset')==='1'){clearAppStorageNamespace();['nexus_latcpp_reloaded','nexus_latcpp_url_reloaded'].forEach(k=>{try{sessionStorage.removeItem(k);}catch(e){}});u.searchParams.delete('reset');history.replaceState({},'',u.toString());console.warn('[reset] scoped app storage cleared');}}catch(e){console.warn('[reset]',e);}})();
+    let latcppAccessState={tier:null,has_access:false,bronze_threshold_display:null,gold_threshold_display:null,total_deposit_usd_equivalent:0};
+    const APP_NS='nexuslatcpp'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
     const DEFAULT_GEO='cr';
     const requestedGeo=String(urlParams.get('geo')||'').toLowerCase();
     const savedGeo=String(S.get('user_geo')||'').toLowerCase();
-    let currentGeo=String(requestedGeo||savedGeo||'').toLowerCase();
-    if(!GEO_CONFIG[currentGeo]) currentGeo='';
-    if(currentGeo) S.set('user_geo',currentGeo);
+    let currentGeo=GEO_CONFIG[requestedGeo]?requestedGeo:(GEO_CONFIG[savedGeo]?savedGeo:DEFAULT_GEO);
+    S.set('user_geo',currentGeo);
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG[DEFAULT_GEO];}
-    REAL_NAME_POOL=geo().names||NAME_POOLS[geo().lang]||NAME_POOLS.en;
+    function thresholdText(kind){const g=geo(); if(kind==='gold')return latcppAccessState.gold_threshold_display||g.goldText||'$10'; return latcppAccessState.bronze_threshold_display||g.bronzeText||'$3';}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-lat-cpp';
-    const LATCPP_USD_TIERS={bronze:3,gold:10};
-    let latcppAccessState={tier:null,has_access:false,display_currency:null,deposit_usd_equivalent:0,total_deposit_usd_equivalent:0,deposit_amount_original:0,total_deposit_original:0,bronze_threshold_display:null,gold_threshold_display:null,source:'fallback'};
-    function normTier(v){v=String(v||'').trim().toLowerCase();if(v==='gold')return'Gold';if(v==='bronze')return'Bronze';return'Unranked';}
-    function tierIdxFromState(st){const t=normTier(st&&st.tier);if(t==='Gold')return 2;if(t==='Bronze')return 1;if(st&&(st.has_access===true||st.allowed===true))return 1;return 0;}
-    function moneyText(v,c){const n=Number(v||0);const cur=c||geo().currency;const amt=Number.isFinite(n)?n.toLocaleString('en-US'):0;if(cur==='USD')return `$${amt}`;const sym=(cur===geo().currency&&geo().sym)?geo().sym:({CRC:'₡',PYG:'₲',COP:'$'}[cur]||'');return sym?`${sym}${amt}`:`${amt} ${cur}`;}
-    function thresholdText(kind){const st=latcppAccessState||{};const key=kind==='gold'?'gold_threshold_display':'bronze_threshold_display';if(st[key])return String(st[key]);const g=geo();return moneyText(kind==='gold'?g.gold:g.bronze,g.currency);}
-    function applyGeoChrome(){ const g=geo(); document.title=`NexusAI ${g.flag}`; document.documentElement.lang=g.lang||'en'; const badge=document.getElementById('langBtn'); if(badge) badge.textContent=(g.lang||'en').toUpperCase(); const h1=document.querySelector('.hero-title'); if(h1) h1.textContent='NEXUS'; const sub=document.querySelector('.hero-sub'); if(sub) sub.textContent=`${g.name} · acceso ${platformName()}`; const vip=document.getElementById('vipProgressLeft'); if(vip && !String(vip.textContent||'').includes(g.currency)) vip.textContent=`${moneyText(0,g.currency)} / ${moneyText(g.bronze,g.currency)}`; }
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
-    const tg=window.Telegram?Telegram.WebApp:null;
-    // Telegram WebApp init: ready FIRST, then expand. Wrapped to never throw.
-    try{tg&&tg.ready();}catch(e){console.warn('[tg] ready failed',e);}
-    try{tg&&tg.expand();}catch(e){console.warn('[tg] expand failed',e);}
-    // Disable vertical swipe close (iOS Telegram bug that freezes WebView interactions)
-    try{tg&&tg.disableVerticalSwipes&&tg.disableVerticalSwipes();}catch(e){}
-    try{tg&&tg.enableClosingConfirmation&&tg.enableClosingConfirmation();}catch(e){}
-    // Fix Telegram WebView viewport height — robust against early-init 0-height
-    function fixVH(){
-      try{
-        const tgH=(tg&&tg.viewportStableHeight)||(tg&&tg.viewportHeight)||0;
-        const winH=window.innerHeight||0;
-        const docH=document.documentElement.clientHeight||0;
-        const vh=Math.max(tgH,winH,docH,window.screen&&window.screen.height||0,400);
-        const shell=document.querySelector('.app-shell');
-        if(shell){shell.style.height='auto';shell.style.minHeight='100dvh';}
-      }catch(e){console.warn('[fixVH]',e);}
-    }
-    fixVH();
-    window.addEventListener('resize',fixVH);
-    window.addEventListener('orientationchange',fixVH);
-    // Telegram viewport events — guaranteed correct height after expand finishes
-    try{tg&&tg.onEvent&&tg.onEvent('viewportChanged',fixVH);}catch(e){}
-    // Belt-and-suspenders: re-run fixVH a few times during boot to catch late expand
-    [100,300,800,1500,3000].forEach(d=>setTimeout(fixVH,d));
-    // Global error trap so a single throw can't freeze the whole UI
-    window.addEventListener('error',function(ev){console.warn('[global error]',ev.message,ev.filename,ev.lineno);});
-    window.addEventListener('unhandledrejection',function(ev){console.warn('[unhandled promise]',ev.reason);});
+    const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
-    let userName="User",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;}}
+    let userName="Guest",tgUserId=null;
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
     const SELF_RESET_WEBHOOK='https://n8nnexusai.uk/webhook/miniapp-reset-self-v1';
     function canUseSelfReset(){return String(tgUserId||S.get('tg_user_id')||'')===SELF_RESET_USER_ID;}
-    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?(T().resetting||'Reiniciando...'):'↺ Reiniciar';});}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
     async function runSelfReset(){
       if(!canUseSelfReset()) return;
-      const ok=window.confirm(T().resetConfirm||'¿Reiniciar completamente este embudo?');
+      const ok=window.confirm('Full reset for this funnel? This will wipe chat, stage, VIP progress, deposit progress and local app state for your account only.');
       if(!ok) return;
       syncSelfResetButtons(true);
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
-        const data=await res.json().catch(()=>({ok:false}));
-        if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
-        try{clearAppStorageNamespace();}catch(e){}
-        alert(T().resetDone||'Reinicio completado.');
+        // Always clear local state first — server reset is best-effort
+        try{localStorage.clear();}catch(e){}
+        let serverOk=false;
+        try{
+          const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
+          const data=await res.json().catch(()=>({ok:false}));
+          serverOk=res.ok&&data.ok;
+        }catch(e){}
+        alert(serverOk?'Reset done. Funnel is back to fresh state.':'Local state cleared. Server had no data to reset.');
         window.location.href=window.location.pathname;
       }catch(e){
-        alert((T().resetFailed||'Error al reiniciar')+': '+(e&&e.message?e.message:'unknown'));
+        alert('Reset failed: '+(e&&e.message?e.message:'unknown'));
         syncSelfResetButtons(false);
       }
     }
@@ -532,16 +557,16 @@
       });
     }
     function selectGeo(code){
-      currentGeo=String(code||DEFAULT_GEO).toLowerCase();S.set('user_geo',currentGeo);
+      currentGeo=code;S.set('user_geo',code);
       savedIdKey=`saved_player_id_${code}`;
-      lang=geo().lang||'en';S.set('aslang',lang);
+      lang=geo().lang||'es';S.set('aslang',lang);REAL_NAME_POOL=geo().names||LATAM_SOCIAL_HANDLES;
       const nextUrl=new URL(window.location.href);nextUrl.searchParams.set('geo',code);history.replaceState({},'',nextUrl);
       document.getElementById('geoScreen').classList.remove('open');
       initApp();
     }
-    function showGeoSelector(){ const el=document.getElementById('geoScreen'); if(el) el.classList.add('open'); }
+    function showGeoSelector(){ document.getElementById('geoScreen').classList.add('open'); }
 
-    // ONLINE - smooth ±1-5
+    // ONLINE — smooth ±1-5
     let onlineVal=Math.floor(240+Math.random()*60);
     function updOnline(){
       const delta=Math.floor(Math.random()*5)+1;
@@ -575,80 +600,62 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Sin rango',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposita para activar'},
-      {name:'Bronce',icon:'🥉',dep:()=>LATCPP_USD_TIERS.bronze,sigs:5,acc:90,desc:'5 señales/día, 90% precisión'},
-      {name:'Oro',icon:'🥇',dep:()=>LATCPP_USD_TIERS.gold,sigs:0,acc:95,desc:'Señales ilimitadas, 95% precisión + analista IA personal'}
+      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
+      {name:'Bronze',icon:'🥉',dep:3,sigs:5,acc:90,desc:'5 señales/día, 90% precisión'},
+      {name:'Gold',icon:'🥇',dep:10,sigs:0,acc:95,desc:'Señales ilimitadas, 95% precisión + Analista IA personal'}
     ];
-    function getVipTierIdx(){
-      if(latcppAccessState&&latcppAccessState.source==='backend') return tierIdxFromState(latcppAccessState);
-      const dep=Number(S.get('totalDep')||'0');
-      for(let i=VIP_TIERS.length-1;i>=0;i--){const req=typeof VIP_TIERS[i].dep==='function'?VIP_TIERS[i].dep():VIP_TIERS[i].dep;if(dep>=req)return i;}
-      return 0;
-    }
-    function getDailySignaux(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
+    function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
+    function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
     function addDailySignal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
     function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
-    function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignaux()>=tier.sigs;}
-    function getVipTier(){ const t=VIP_TIERS[getVipTierIdx()]||VIP_TIERS[0]; return {...t, dep: (typeof t.dep==='function'?t.dep():t.dep)}; }
-    function hasDepositAccess(data){
-      const st=data||latcppAccessState||{};
-      return st.has_access===true || String(st.stage||'').toUpperCase()==='ACCESS';
-    }
-    function freeSignalKey(){return `freeSignalUsed:${String(tgUserId||S.get('tg_user_id')||'anon')}`;}
-    function isFullAccess(){return hasDepositAccess(latcppAccessState);}
-    function isFreeSignalUsed(){return S.get(freeSignalKey())==='1';}
-    function setFreeSignalUsed(v){S.set(freeSignalKey(),v?'1':'0');}
-    function isLimitedLocked(){return !isFullAccess() && isFreeSignalUsed();}
-    function freeSignalNotice(){return 'Esa fue tu señal gratis 🎁 Pon tu depósito y manda el screenshot al bot para tener acceso completo 👇';}
-    function platformName(){return currentGeo==='co'?'TOP-X':'1xBet';}
-    function lockedSignalNotice(){return `Recarga tu cuenta ${platformName()} para desbloquear las señales 🔒`;}
-    function openGameFromCard(k,el,ld){
-      if(el&&ld&&el.contains(ld))el.removeChild(ld);
-      if(k==="chicken")renderChicken();else renderGame(k);
-    }
+    function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignals()>=tier.sigs;}
+    function getVipTier(){return VIP_TIERS[getVipTierIdx()];}
     function updVIP(){
-      const idx=getVipTierIdx();const tier=VIP_TIERS[idx]||VIP_TIERS[0];
-      const st=latcppAccessState||{};
-      const depUsd=Number(st.total_deposit_usd_equivalent??st.deposit_usd_equivalent??S.get('totalDep')??0);
-      const displayCurrency=st.display_currency||geo().currency;
-      const displayTotal=Number(st.total_deposit_original??st.deposit_amount_original??0);
-      const displayAmount=displayTotal>0?moneyText(displayTotal,displayCurrency):moneyText(0,geo().currency);
+      const dep=parseInt(S.get('totalDep')||'0');
+      const idx=getVipTierIdx();const tier=VIP_TIERS[idx];
+      // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=idx===0?('Deposita para desbloquear Bronce'):(tier.acc+'% PRECISIÓN');
+      document.getElementById('vipAcc2').textContent=dep===0?`Recarga ${thresholdText('bronze')} para activar Bronze`:(tier.acc+'% PRECISIÓN');
+      // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
       const left=document.getElementById('vipProgressLeft');
       const hint=document.getElementById('vipProgressHint');
       const nt=document.getElementById('vipNextTier');
-      const used=getDailySignaux();const limit=tier.sigs;
-      const sigEl=document.getElementById('vipSignauxLeft');
+      // Signals remaining
+      const usadas=getDailySignals();const limit=tier.sigs;
+      const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(idx===0){sigEl.textContent='❔ Deposita para desbloquear Bronce';}
+        if(dep===0){sigEl.textContent=`❔ Recarga ${thresholdText('bronze')} para activar Bronze`;}
         else if(limit===0){sigEl.textContent='♾️ Señales ilimitadas hoy';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} señales disponibles hoy`:'🔒 Las señales se reinician mañana';}
+        else{const rem=Math.max(0,limit-usadas);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} señales disponibles hoy`:'🔒 Las señales se renuevan mañana';}
       }
-      if(idx===0){
+      if(dep===0){
         nw.style.display='';
-        nt.textContent='🥉 Bronce';
-        fill.style.width=Math.min(100,Math.max(0,(depUsd/LATCPP_USD_TIERS.bronze)*100))+'%';
-        left.textContent=`${displayAmount} / ${thresholdText('bronze')}`;
-        hint.textContent='Deposita para activar Bronce';
+        nt.textContent='🥉 Bronze';
+        fill.style.width='0%';
+        left.textContent=`Desbloquea Bronze desde ${thresholdText('bronze')}`;
+        hint.textContent=`Recarga ${thresholdText('bronze')} para activar Bronze`;
       }
-      else if(idx===1){
+      else if(idx<VIP_TIERS.length-1){
+        const next=VIP_TIERS[idx+1];
         nw.style.display='';
-        nt.textContent='🥇 Oro';
-        fill.style.width=Math.min(100,Math.max(0,((depUsd-LATCPP_USD_TIERS.bronze)/(LATCPP_USD_TIERS.gold-LATCPP_USD_TIERS.bronze))*100))+'%';
-        left.textContent=`${displayAmount} / ${thresholdText('gold')}`;
-        const remainUsd=Math.max(0,LATCPP_USD_TIERS.gold-depUsd);
-        hint.textContent=remainUsd>0?`Faltan $${remainUsd.toFixed(2)} para Oro — desbloquea más ⬆`:'Oro listo';
+        nt.textContent=next.icon+' '+next.name;
+        const prev=tier.dep;const target=next.dep;
+        const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
+        fill.style.width=pct+'%';
+        const remain=target-dep;
+        left.textContent='$'+dep.toLocaleString()+' / '+thresholdText(next.name==='Gold'?'gold':'bronze');
+        hint.textContent='$'+remain.toLocaleString()+' para '+next.name+' — ilimitado + Analista IA ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='ORO · NIVEL MÁXIMO';
-        hint.textContent=T().vipMaxHint||'Señales ilimitadas + analista IA personal 🥇';
+        left.textContent='GOLD · NIVEL MÁXIMO';
+        hint.textContent='Señales ilimitadas + Analista IA personal 🥇';
       }
-      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)'};
+      // Card border color by tier
+      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
     }
     updVIP();
@@ -662,49 +669,25 @@
 
     // TAB
     let curTab='signals';
-    function switchTab(t){
-      if(t==='liveRoom'||t==='live'||t==='liveroom') t='signals';
-      if(t!=='top') t='signals';
-      curTab=t;
-      document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
-      document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));
-      const mq=document.getElementById('marqueeBar');
-      const appWrap=document.querySelector('.app-wrap');
-      if(t==='signals'){
-        document.getElementById('tabSignaux').classList.add('active');
-        document.getElementById('btnSignaux').classList.add('active');
-        if(appWrap)appWrap.style.display='block';
-        if(mq)mq.style.display='';
-        renderHome();
-      }else{
-        document.getElementById('tabTop').classList.add('active');
-        document.getElementById('btnTop').classList.add('active');
-        if(appWrap)appWrap.style.display='block';
-        if(mq)mq.style.display='none';
-        renderTopPlayers();
-      }
-    }
+    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
+    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
+    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';renderHome();}
+    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
 
     // MARQUEE
-    function winnerAmountUsd(seed){
-      const r=sRnd(seed*19+5);
-      // Most wins feel normal ($50-$980); rare spikes reach $1000-$1500.
-      if(r>0.93) return rndInt(1000,1500);
-      return rndInt(50,980);
-    }
     function buildMarquee(){
       const c=document.getElementById("marqueeText");
-      const source=[...new Set(((geo().names&&geo().names.length)?geo().names:REAL_NAME_POOL).map(x=>String(x).trim()).filter(Boolean))];
-      const nowBucket=Math.floor(Date.now()/12000);
+      const source=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:geo().names).map(x=>String(x).trim()).filter(Boolean))];
+      const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
-      const pick=rotated.slice(0,18);
-      const verbMap={es:['ganó','cobró','retiró','levantó'],uz:['yutdi','oldi','chiqardi',"yig'di"],az:['qazandı','aldı','çıxardı','götürdü'],en:['won','cashed','withdrew','earned']};
-      const verbs=verbMap[lang]||verbMap.es;
+      const pick=rotated.slice(0,16);
+      const verbs=['won','cashed out','hit','withdrew'];
       let h="";
       pick.forEach((name,i)=>{
-        const amt=winnerAmountUsd(nowBucket+i*11);
+        const amt=rndInt(50,500);
         const verb=verbs[(nowBucket+i)%verbs.length];
-        h+=`${name} ${verb} <span>$${amt.toLocaleString()}</span>`;
+        h+=`${name} ${verb} <span>USD ${amt.toLocaleString()}</span>`;
         if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
       });
       c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;
@@ -712,63 +695,36 @@
     }
 
     // LANGS
-    const LANGS=[{id:'en',l:'EN'},{id:'es',l:'ES'},{id:'uz',l:'UZ'},{id:'az',l:'AZ'}];
-    let lang=geo().lang||'en'; S.set('aslang',lang);
-    function T(){try{return STR[lang]||STR.en;}catch(e){return {};}}
-    const UI_STR={
-      en:{chatHeaderSub:'NexusAI Support',chatHeaderTitle:'SUPPORT',chatWelcomeTitle:'NexusAI Support',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',tabSignals:'Señales',tabTop:'Top 100'},
-      es:{chatHeaderSub:'Soporte NexusAI',chatHeaderTitle:'SOPORTE',chatWelcomeTitle:'Soporte NexusAI',chatWelcomeText:'Envía un mensaje abajo para empezar 👇',topTitle:'🏆 Top Players',topSub:'Weekly leaderboard — top winners this week',tabSignals:'Señales',tabTop:'Top 100'},
-      uz:{chatHeaderSub:'NexusAI Yordam',chatHeaderTitle:'YORDAM',chatWelcomeTitle:'NexusAI Yordam',chatWelcomeText:'Boshlash uchun pastga xabar yozing 👇',topTitle:'🏆 Eng yaxshi o‘yinchilar',topSub:'Haftalik reyting — haftaning eng katta yutuqlari',tabSignals:'Señales',tabTop:'Top 100'},
-      az:{chatHeaderSub:'NexusAI Dəstək',chatHeaderTitle:'DƏSTƏK',chatWelcomeTitle:'NexusAI Dəstək',chatWelcomeText:'Başlamaq üçün aşağıya mesaj yaz 👇',topTitle:'🏆 Ən yaxşı oyunçular',topSub:'Həftəlik reytinq — həftənin ən böyük qalibləri',tabSignals:'Señales',tabTop:'Top 100'}
-    };
-
-    function toggleLangMenu(){}
-    function setLang(id){}
-    function buildLangMenu(){}
-    document.addEventListener('click',e=>{});
+    const LANGS=[{id:"es",l:"ES"}];
+    let lang='es'; S.set('aslang','es');
+    function T(){return STR[lang]||STR.en;}
+    function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
+    function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
+    function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
+    document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Choose a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete activation in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"ID synced.",s2:"Choose a game.",s4:"Prediction.",s5:"Tap the button."},
-        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Find the right zone"},mines:{n:"Mines",d:"Avoid the bombs"},balloon:{n:"Balloon",d:"Cash out before it pops"}},
-        ch:{t:"Chicken Road",s:"Choose difficulty.",nx:"NEXT",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Updated every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updated at <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Max 10x.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updated at <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Aim for the right zone.",b:"GET SIGNAL",l:"TARGET",u:(t)=>`Updated at <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Safe cells marked.",b:"GET SIGNAL",l:"SAFE CELLS",u:(t)=>`Updated at <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Cash out before it pops.",b:"GET SIGNAL",l:"CASH OUT",u:(t)=>`Updated at <strong>${t}</strong>`},
-        play:"Play",limit:"AI server limit reached",limitSub:"AI servers are under heavy load.",limitDeposit:"Higher deposit = more server resources for your account = more signals + better accuracy.",limitBtn:"Server limit",limitReached:"Limit reached",register:"Register →",typing:"NexusAI typing...",errGeneric:"Sorry, something went wrong. Try again.",errTimeout:"Response timed out. Try again.",weekOf:"📅 Week of",recentSig:"Recent signals",chatWelcomeTitle:"NexusAI Support",chatWelcomeText:"I can help with the app and activation. Personal AI analyst unlocks at Gold tier.",chatAnalystTitle:"NexusAI AI Analyst",chatAnalystText:"Account active. I'm your personal AI analyst. Let's maximize profits together.",vipMaxHint:"Unlimited signals + personal AI analyst 🥇",justNow:"just now",minsAgo:(m)=>`${m} min ago`,hrsAgo:(h)=>`${h}h ago`,daysAgo:(d)=>`${d}d ago`,resetConfirm:"Full reset of this funnel? This will erase chat, stage, VIP progress, deposit progress and local app state for your account only.",resetDone:"Reset complete. Funnel returned to initial state.",resetFailed:"Reset failed",resetting:"Resetting..."},
-      uz:{cg:"O'yin tanlang:",back:"Menyu",lt:"KIRISH YOPIQ",lm:"⛔️ Kirish uchun botda faollashtirishni yakunlang.",skip:"O'TKAZISH",wait:"Kuting",tut:{s1:"ID sinxronlandi.",s2:"O'yin tanlang.",s4:"Bashorat.",s5:"Tugmani bosing."},
-        g:{aviator:{n:"Aviator",d:"Crash o'yini"},jetx:{n:"JetX",d:"SmartSoft crash"},chicken:{n:"Chicken Road",d:"Xavf darajalari"},penalty:{n:"Penalty",d:"To'g'ri zonani toping"},mines:{n:"Mines",d:"Bombalardan qoching"},balloon:{n:"Balloon",d:"Portlashdan oldin oling"}},
-        ch:{t:"Chicken Road",s:"Qiyinlikni tanlang.",nx:"KEYINGI",w:(s)=>`Kuting ${s}s`,tb:{easy:"Oson",medium:"O'rta",hard:"Qiyin",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Har daqiqa yangilanadi.",b:"SIGNAL OLISH",l:"KOEFFITSIENT",u:(t)=>`Yangilandi <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Maks 10x.",b:"SIGNAL OLISH",l:"KOEFFITSIENT",u:(t)=>`Yangilandi <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"To'g'ri zonaga nishon oling.",b:"SIGNAL OLISH",l:"NISHON",u:(t)=>`Yangilandi <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Xavfsiz kataklar belgilangan.",b:"SIGNAL OLISH",l:"XAVFSIZ",u:(t)=>`Yangilandi <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Portlashdan oldin oling.",b:"SIGNAL OLISH",l:"OLISH",u:(t)=>`Yangilandi <strong>${t}</strong>`},
-        play:"O'ynash",limit:"AI server limiti tugadi",limitSub:"AI serverlari yuqori yuklanishda.",limitDeposit:"Kattaroq depozit = ko'proq server resurslari = ko'proq signallar + yuqori aniqlik.",limitBtn:"Server limiti",limitReached:"Limit tugadi",register:"Ro'yxatdan o'tish →",typing:"NexusAI yozmoqda...",errGeneric:"Kechirasiz, xatolik yuz berdi. Qayta urinib ko'ring.",errTimeout:"Javob vaqti tugadi. Qayta urinib ko'ring.",weekOf:"📅 Hafta",recentSig:"So'nggi signallar",chatWelcomeTitle:"NexusAI Qo'llab-quvvatlash",chatWelcomeText:"Ilova va faollashtirish bo'yicha yordam bera olaman. Shaxsiy AI tahlilchi Gold darajada ochiladi.",chatAnalystTitle:"NexusAI AI Tahlilchi",chatAnalystText:"Hisob faol. Men sizning shaxsiy AI tahlilchingizman. Foydani birga maksimallashtramiz.",vipMaxHint:"Cheksiz signallar + shaxsiy AI tahlilchi 🥇",justNow:"hozir",minsAgo:(m)=>`${m} daq oldin`,hrsAgo:(h)=>`${h} soat oldin`,daysAgo:(d)=>`${d} kun oldin`,resetConfirm:"Bu funnelni to'liq qayta tiklaysizmi?",resetDone:"Qayta tiklash tugadi.",resetFailed:"Qayta tiklash muvaffaqiyatsiz",resetting:"Tiklanmoqda..."},
-      az:{cg:"Oyun seçin:",back:"Menyu",lt:"GİRİŞ BAĞLI",lm:"⛔️ Girişi açmaq üçün botda aktivasiyanı tamamlayın.",skip:"KEÇ",wait:"Gözləyin",tut:{s1:"ID sinxronlaşdı.",s2:"Oyun seçin.",s4:"Proqnoz.",s5:"Düyməni basın."},
-        g:{aviator:{n:"Aviator",d:"Crash oyunu"},jetx:{n:"JetX",d:"SmartSoft crash"},chicken:{n:"Chicken Road",d:"Risk səviyyələri"},penalty:{n:"Penalty",d:"Doğru zonanı tapın"},mines:{n:"Mines",d:"Bombalardan qaçın"},balloon:{n:"Balloon",d:"Partlamadan öncə alın"}},
-        ch:{t:"Chicken Road",s:"Çətinliyi seçin.",nx:"NÖVBƏTİ",w:(s)=>`Gözləyin ${s}s`,tb:{easy:"Asan",medium:"Orta",hard:"Çətin",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Hər dəqiqə yenilənir.",b:"SİQNAL AL",l:"ƏMSal",u:(t)=>`Yeniləndi <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Maks 10x.",b:"SİQNAL AL",l:"ƏMSAL",u:(t)=>`Yeniləndi <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Doğru zonaya nişan alın.",b:"SİQNAL AL",l:"HƏDƏF",u:(t)=>`Yeniləndi <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Təhlükəsiz xanalar işarələnib.",b:"SİQNAL AL",l:"TƏHLÜKƏSİZ",u:(t)=>`Yeniləndi <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Partlamadan öncə alın.",b:"SİQNAL AL",l:"ALMAQ",u:(t)=>`Yeniləndi <strong>${t}</strong>`},
-        play:"Oyna",limit:"AI server limiti bitdi",limitSub:"AI serverləri yüksək yüklənmə altındadır.",limitDeposit:"Daha çox depozit = daha çox server resursu = daha çox siqnal + daha yüksək dəqiqlik.",limitBtn:"Server limiti",limitReached:"Limit bitdi",register:"Qeydiyyat →",typing:"NexusAI yazır...",errGeneric:"Bağışlayın, xəta baş verdi. Yenidən cəhd edin.",errTimeout:"Cavab vaxtı bitdi. Yenidən cəhd edin.",weekOf:"📅 Həftə",recentSig:"Son siqnallar",chatWelcomeTitle:"NexusAI Dəstək",chatWelcomeText:"Tətbiq və aktivasiya ilə kömək edə bilərəm. Şəxsi AI analitik Gold səviyyəsində açılır.",chatAnalystTitle:"NexusAI AI Analitik",chatAnalystText:"Hesab aktivdir. Mən sizin şəxsi AI analitikinizyəm. Gəliri birlikdə maksimallaşdıraq.",vipMaxHint:"Limitsiz siqnallar + şəxsi AI analitik 🥇",justNow:"indicə",minsAgo:(m)=>`${m} dəq əvvəl`,hrsAgo:(h)=>`${h} saat əvvəl`,daysAgo:(d)=>`${d} gün əvvəl`,resetConfirm:"Bu funeli tam sıfırlayırsınız?",resetDone:"Sıfırlama tamamlandı.",resetFailed:"Sıfırlama uğursuz oldu",resetting:"Sıfırlanır..."},
+      en:{cg:"Select a game:",back:"Menu",lt:"ACCESO BLOQUEADO",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
+        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
+        ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"Refreshes every minute.",b:"OBTENER SEÑAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
+        jx:{t:"JetX",s:"Max 10x.",b:"OBTENER SEÑAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
+        pe:{t:"Penalty",s:"Aim for target.",b:"OBTENER SEÑAL",l:"TARGET",u:(t)=>`Updates at <strong>${t}</strong>`},
+        mi:{t:"Mines",s:"Safe spots marked.",b:"OBTENER SEÑAL",l:"SAFE SPOTS",u:(t)=>`Updates at <strong>${t}</strong>`},
+        ba:{t:"Balloon",s:"Cash out before pop.",b:"OBTENER SEÑAL",l:"CASH OUT",u:(t)=>`Updates at <strong>${t}</strong>`}},
       ru:{cg:"Выберите игру:",back:"Меню",lt:"ДОСТУП ЗАКРЫТ",lm:"⛔️ Отправьте ID боту.",skip:"ПРОПУСТИТЬ",wait:"Ждите",tut:{s1:"ID синхронизирован.",s2:"Выберите игру.",s4:"Прогноз.",s5:"Нажмите кнопку."},
-        g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
+        g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
         ch:{t:"Chicken Road",s:"Выберите сложность.",nx:"ДАЛЕЕ",w:(s)=>`Ждите ${s}с`,tb:{easy:"Лёгкий",medium:"Средний",hard:"Сложный",hardcore:"Хардкор"}},
         av:{t:"Aviator",s:"Каждую минуту.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
         jx:{t:"JetX",s:"Макс 10x.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
         pe:{t:"Penalty",s:"Бей в зону.",b:"ПОЛУЧИТЬ",l:"ЗОНА",u:(t)=>`Обновится в <strong>${t}</strong>`},
         mi:{t:"Mines",s:"Безопасные клетки.",b:"ПОЛУЧИТЬ",l:"ЯЧЕЙКИ",u:(t)=>`Обновится в <strong>${t}</strong>`},
         ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}},
-      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Completa la activación en el bot para desbloquear el acceso.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles de riesgo"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Evita las minas"},balloon:{n:"Balloon",d:"Retira antes de explotar"}},ch:{t:"Chicken Road",s:"Elige la dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Media",hard:"Difícil",hardcore:"Extrema"},step:"PASO",stepPrefix:"Paso"},av:{t:"Aviator",s:"Se actualiza cada minuto.",b:"OBTENER SEÑAL",l:"COEFICIENTE",u:(t)=>`Actualizado a las <strong>${t}</strong>`},jx:{t:"JetX",s:"Máx. 10x.",b:"OBTENER SEÑAL",l:"COEFICIENTE",u:(t)=>`Actualizado a las <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta a la zona correcta.",b:"OBTENER SEÑAL",l:"ZONA",u:(t)=>`Actualizado a las <strong>${t}</strong>`},mi:{t:"Mines",s:"Celdas seguras marcadas.",b:"OBTENER SEÑAL",l:"CELDAS SEGURAS",u:(t)=>`Actualizado a las <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira antes de que explote.",b:"OBTENER SEÑAL",l:"RETIRAR",u:(t)=>`Actualizado a las <strong>${t}</strong>`},
-        play:"Jugar",limit:"Límite del servidor IA alcanzado",limitSub:"Los servidores IA están bajo carga alta.",limitDeposit:"Mayor depósito = más recursos del servidor = más señales + mejor precisión.",limitBtn:"Límite del servidor",limitReached:"Límite alcanzado",register:"Registrarse →",typing:"NexusAI escribiendo...",errGeneric:"Lo siento, algo salió mal. Inténtalo de nuevo.",errTimeout:"Tiempo de respuesta agotado. Inténtalo de nuevo.",weekOf:"📅 Semana del",recentSig:"Señales recientes",chatWelcomeTitle:"Soporte NexusAI",chatWelcomeText:"Puedo ayudarte con la app y la activación. El analista IA personal se desbloquea en el nivel Oro.",chatAnalystTitle:"Analista IA NexusAI",chatAnalystText:"Cuenta activa. Soy tu analista IA personal. Maximicemos las ganancias juntos.",vipMaxHint:"Señales ilimitadas + analista IA personal 🥇",justNow:"ahora",minsAgo:(m)=>`hace ${m} min`,hrsAgo:(h)=>`hace ${h}h`,daysAgo:(d)=>`hace ${d}d`,resetConfirm:"¿Reiniciar completamente este embudo?",resetDone:"Reinicio completado.",resetFailed:"Error al reiniciar",resetting:"Reiniciando..."},
-      pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
-      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Zona correcta"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
+      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Enviar ID al bot.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Evita minas"},balloon:{n:"Balloon",d:"Infla y gana"}},ch:{t:"Chicken Road",s:"Dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Medio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta.",b:"OBTENER",l:"ZONA",u:(t)=>`Actualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTENER",l:"CELDAS",u:(t)=>`Actualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira.",b:"OBTENER",l:"RETIRAR",u:(t)=>`Actualiza <strong>${t}</strong>`}},
+      pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
+      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
       it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Livelli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
-      mn:{cg:"Сонгох:",back:"Цэс",lt:"ХААГДЛАА",lm:"⛔️ ID илгээнэ.",skip:"АЛГАСАХ",wait:"Хүлээнэ",tut:{s1:"ID синхрон.",s2:"Тоглоом сонгох.",s4:"Таамаглал.",s5:"Дарна уу."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"Crash SmartSoft"},chicken:{n:"Chicken Road",d:"Эрсдэл"},penalty:{n:"Penalty",d:"Гоол"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Хүлээнэ ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
+      mn:{cg:"Сонгох:",back:"Цэс",lt:"ХААГДЛАА",lm:"⛔️ ID илгээнэ.",skip:"АЛГАСАХ",wait:"Хүлээнэ",tut:{s1:"ID синхрон.",s2:"Тоглоом сонгох.",s4:"Таамаглал.",s5:"Дарна уу."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Эрсдэл"},penalty:{n:"Penalty",d:"Гоол"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Хүлээнэ ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
     };
 
     // UTILS
@@ -779,165 +735,93 @@
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">${T().recentSig||'Señales recientes'}</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Señales recientes</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
+    const GAME_ORDER=["aviator","chicken","jetx","mines","penalty","balloon"];
+    const GAME_PROVIDERS={aviator:"Spribe",chicken:"InOut Games",jetx:"SmartSoft Gaming",mines:"Originals",penalty:"Evoplay",balloon:"SmartSoft Gaming"};
+    const GAME_ACCENTS={aviator:"239,68,68",chicken:"251,146,60",jetx:"245,158,11",mines:"59,130,246",penalty:"34,197,94",balloon:"168,85,247"};
+    let gameCarouselIndex=0,gameTouchX=0,gameTouchY=0;
+    function gameArt(k,name){return `<img class="game-art game-art-${k}" src="../assets/games/${k}.jpg" alt="${name}">`;}
     function renderHome(){
       if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
       const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
-      const grid=document.createElement('div');grid.className='games-grid';grid.id='gamesGrid';
-      ["aviator","jetx","mines","penalty","balloon","chicken"].forEach((k,i)=>{
-        const g=T().g[k],wr=WIN_RATES[k]||88;
-        const c=document.createElement('div');c.className='game-card';c.dataset.game=k;if(i===0)c.id='firstGameCard';
-        c.onclick=()=>handleGameClick(k,c);
-        c.style.position='relative';
-        c.innerHTML=`<div class="game-top"><div class="game-icon">${ICONS[k]}</div><div><div class="game-name">${g.n}</div><div class="game-desc">${g.d}</div></div></div><div class="game-bottom"><div class="game-play">${T().play||'Jugar'}</div></div>`;
-        grid.appendChild(c);
-      });
-      app.appendChild(h);app.appendChild(grid);
-      updateLockedState();
+      const shell=document.createElement('section');shell.className='game-carousel-shell';shell.id='gamesGrid';shell.setAttribute('aria-label','Game carousel');
+      shell.innerHTML='<button class="nav-btn prev" id="gamePrev" aria-label="Juego anterior">‹</button><button class="nav-btn next" id="gameNext" aria-label="Juego siguiente">›</button><div class="game-stage" id="gameStage"></div><div class="carousel-dots" id="gameDots"></div><button class="carousel-cta" id="openGameSignal">Abrir señal</button><div class="carousel-hint">← desliza →</div>';
+      app.appendChild(h);app.appendChild(shell);
+      function renderCarousel(dir=0){
+        const k=GAME_ORDER[gameCarouselIndex],g=T().g[k],wr=WIN_RATES[k]||90,stage=document.getElementById('gameStage'),dots=document.getElementById('gameDots');
+        shell.style.setProperty('--accent-rgb',GAME_ACCENTS[k]||'246,198,74');
+        stage.className='game-stage '+(dir>0?'slide-in-right':dir<0?'slide-in-left':'');stage.dataset.game=k;stage.id='gameStage';
+        stage.innerHTML=`<div id="${gameCarouselIndex===0?'firstGameCard':''}" class="carousel-game-name">${g.n}</div><div class="game-provider">${GAME_PROVIDERS[k]||''}</div><div class="logo-oval">${gameArt(k,g.n)}</div><div class="carousel-game-desc">${g.d}</div><div class="carousel-precisión">Precisión ${wr}%</div>`;
+        dots.innerHTML=GAME_ORDER.map((_,i)=>`<span class="carousel-dot ${i===gameCarouselIndex?'active':''}"></span>`).join('');
+        document.getElementById('openGameSignal').onclick=()=>handleGameClick(k,stage);
+      }
+      function go(step){if(!step)return;gameCarouselIndex=(gameCarouselIndex+step+GAME_ORDER.length)%GAME_ORDER.length;const stage=document.getElementById('gameStage')||document.getElementById('firstGameCard');if(stage)stage.className='game-stage '+(step>0?'slide-out-left':'slide-out-right');setTimeout(()=>renderCarousel(step),120)}
+      document.getElementById('gamePrev').onclick=()=>go(-1);document.getElementById('gameNext').onclick=()=>go(1);
+      shell.addEventListener('touchstart',e=>{gameTouchX=e.touches[0].clientX;gameTouchY=e.touches[0].clientY},{passive:true});
+      shell.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-gameTouchX,dy=e.changedTouches[0].clientY-gameTouchY;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?1:-1)},{passive:true});
+      renderCarousel();
     }
-    function updateLockedState(){
-      try{
-        const locked=isLimitedLocked();
-        const btn=document.getElementById('sBtn')||document.getElementById('nxB');
-        if(btn&&locked){btn.disabled=false;btn.textContent=`💰 Recarga en ${platformName()}`;btn.style.opacity='1';btn.onclick=openRegLink;}
-      }catch(e){console.warn('[updateLockedState]',e);}
-    }
-    let accessRefreshPromise=null;
     async function refreshAccessState(){
-      if(accessRefreshPromise) return accessRefreshPromise;
-      accessRefreshPromise=(async()=>{
-        const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
-        const controller=new AbortController();
-        const timeout=setTimeout(()=>controller.abort(),9000);
-        try{
-          const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,tg_user_id:uid,geo:currentGeo}),signal:controller.signal});
-          const d=await r.json();
+      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
+      try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
+      const d=await r.json();
 
-          if(d && (d.geo||d.country)){
-            const nextGeo=String(d.geo||d.country||'').toLowerCase();
-            if(nextGeo && GEO_CONFIG[nextGeo] && nextGeo!==currentGeo){
-              currentGeo=nextGeo;
-              S.set('user_geo', currentGeo);
-            }
-          }
-
-          latcppAccessState={
-            source:'backend',
-            user_id:d.user_id||uid,
-            geo:String(d.geo||d.country||currentGeo).toLowerCase(),
-            tier:normTier(d.tier),
-            has_access:!!(d.has_access||d.allowed),
-            display_currency:d.display_currency||geo().currency,
-            deposit_amount_original:Number(d.deposit_amount_original??d.deposit_amount??0),
-            deposit_currency_original:d.deposit_currency_original||d.currency||geo().currency,
-            deposit_usd_equivalent:Number(d.deposit_usd_equivalent??0),
-            total_deposit_original:Number(d.total_deposit_original??d.total_deposit??0),
-            total_deposit_usd_equivalent:Number(d.total_deposit_usd_equivalent??d.deposit_usd_equivalent??d.total_deposit??0),
-            bronze_threshold_display:d.bronze_threshold_display||moneyText(geo().bronze,geo().currency),
-            gold_threshold_display:d.gold_threshold_display||moneyText(geo().gold,geo().currency),
-            bronze_usd:Number(d.bronze_usd||LATCPP_USD_TIERS.bronze),
-            gold_usd:Number(d.gold_usd||LATCPP_USD_TIERS.gold),
-            stage:String(d.stage||'')
-          };
-
-          userTotalDeposit=latcppAccessState.total_deposit_usd_equivalent||latcppAccessState.deposit_usd_equivalent||0;
-          S.set('totalDep', String(userTotalDeposit));
-          if(d.player_id){ S.set(savedIdKey, String(d.player_id)); }
-
-          if(hasDepositAccess(latcppAccessState)){
-            accessMode='full';
-            S.set('accessGranted','1');
-          }else{
-            accessMode='limited';
-            S.set('accessGranted','0');
-          }
-
-          chatTier=getVipTierIdx()>=2?2:1;
-          updVIP();
-          try{ render(); }catch(e){}
-          try{ renderTop(); }catch(e){}
-          try{ updateLockedState(); }catch(e){}
-
-        }catch(e){console.warn('[refreshAccessState]',e&&e.message?e.message:e);}finally{clearTimeout(timeout);}
-      })();
-      try{return await accessRefreshPromise;}finally{accessRefreshPromise=null;}
+      if(d){latcppAccessState=Object.assign(latcppAccessState,d);}
+      const depVal=Number(d.total_deposit_usd_equivalent||d.total_deposit||0);
+      if(depVal>0){userTotalDeposit=depVal;S.set('totalDep',String(depVal));updVIP();}
+      if(d.allowed||d.has_access){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
+      chatTier=(userTotalDeposit>=10)?2:1;
+      updateChatHeader();}catch(e){}
+    }
+    function updateChatHeader(){
+      const sub=document.getElementById('chatHeaderSub');
+      const title=document.getElementById('chatHeaderTitle');
+      if(chatTier===2){
+        if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
+        if(title)title.textContent='ANALISTA';
+        const hdr=document.querySelector('.chat-header');
+        if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
+      }else{
+        if(sub)sub.textContent='Soporte NexusAI';
+        if(title)title.textContent='SOPORTE';
+        const hdr=document.querySelector('.chat-header');
+        if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
+      }
     }
     function applyStatic(){
-      applyGeoChrome();
-      lang=geo().lang||'en'; S.set('aslang',lang);
-      REAL_NAME_POOL=geo().names||NAME_POOLS[lang]||NAME_POOLS.en;
-      const ui=UI_STR[lang]||UI_STR.en;
-      const setTxt=(id,v)=>{const el=document.getElementById(id); if(el && v!==undefined) el.textContent=v;};
-      setTxt('chatWelcomeTitle', ui.chatWelcomeTitle); setTxt('chatWelcomeText', ui.chatWelcomeText);
-      setTxt('topSub', ui.topSub);
-      const topTitle=document.querySelector('.top-header-title'); if(topTitle) topTitle.textContent=ui.topTitle;
-      const btnSig=document.querySelector('#btnSignaux .tab-label'); if(btnSig) btnSig.textContent=ui.tabSignals;
-      const btnTop=document.querySelector('#btnTop .tab-label'); if(btnTop) btnTop.textContent=ui.tabTop;
-      const langDrop=document.querySelector('.lang-drop'); if(langDrop) langDrop.style.display='none';
       renderHome();
-      // Access refresh is started once from bootApp; keep applyStatic synchronous/clickable.
+      buildLangMenu();
+      refreshAccessState().then(()=>{
+        if(curTab==='signals') renderHome();
+      }).catch(()=>{});
     }
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      if(isFullAccess()){openGameFromCard(k,el,ld);return;}
-      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
-      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
+      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
+      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(hasDepositAccess(d)){accessMode='full';S.set('accessGranted','1');openGameFromCard(k,el,ld);}
-      else{accessMode='limited';S.set('accessGranted','0');if(el.contains(ld))el.removeChild(ld);showLock(el,lockedSignalNotice());}}
-      catch(e){accessMode='limited';S.set('accessGranted','0');if(el.contains(ld))el.removeChild(ld);showLock(el,'No pude verificar el acceso ahora. Intenta otra vez o completa la activación en el bot.');}
+      if(d){latcppAccessState=Object.assign(latcppAccessState,d);}if((d.total_deposit_usd_equivalent||d.total_deposit)!==undefined&&Number(d.total_deposit_usd_equivalent||d.total_deposit)>0){S.set('totalDep',String(Number(d.total_deposit_usd_equivalent||d.total_deposit)));updVIP();}
+      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
+      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
-    function showLock(el,msg){
+    function showLock(el){
       if(el.querySelector('.lock-text'))return;
       const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">💰 Recargar mi cuenta</button>`:'';
-      const promoTxt=g.promo?`<div class="promo-text">Código promo: ${g.promo}</div>`:'';
-      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${msg||T().lm}</div>${regBtn}${promoTxt}</div>`;
-    }
-    function showInlineNotice(text){
-      try{const box=document.getElementById('gBox')||document.querySelector('.stepbox');if(!box)return;const n=document.createElement('div');n.style.cssText='margin-top:12px;padding:10px;border-radius:12px;border:1px solid rgba(250,204,21,0.25);background:rgba(250,204,21,0.08);color:#fff;font-size:12px;line-height:1.4;text-align:center';n.textContent=text;box.appendChild(n);}catch(e){}
-    }
-    function consumeLimitedFreeSignal(){
-      if(isFullAccess()) return false;
-      if(isFreeSignalUsed()){showInlineNotice(lockedSignalNotice());updateLockedState();return true;}
-      setFreeSignalUsed(true);
-      showInlineNotice(freeSignalNotice());
-      setTimeout(updateLockedState,0);
-      return false;
+      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Registrarme →</button>`:'';
+      const promoTxt='';
+      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
     }
     function openRegLink(){
-      const url=geo().link;if(!url)return;
-      try{window.trackBDEvent&&window.trackBDEvent('RegistrationIntent',{geo:String(currentGeo||DEFAULT_GEO).toUpperCase()});}catch(e){}
+      const base=geo().link||'';if(!base)return;
+      const url=base;
+      try{window.trackLatCppEvent&&window.trackLatCppEvent('RegistrationIntent',{geo:currentGeo});}catch(e){}
       if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
-    }
-
-    function keepPrimaryButtonAboveTab(){
-      try{
-        const btn=document.getElementById('sBtn')||document.getElementById('nxB');
-        const tab=document.querySelector('.tab-bar');
-        if(!btn||!tab)return;
-        requestAnimationFrame(()=>{
-          const br=btn.getBoundingClientRect();
-          const tr=tab.getBoundingClientRect();
-          const gap=tr.top-br.bottom;
-          if(gap<18){
-            const delta=18-gap;
-            const root=document.scrollingElement||document.documentElement;
-            const current=Math.max(window.pageYOffset||0,document.body.scrollTop||0,root.scrollTop||0);
-            const next=current+delta;
-            window.scrollTo({top:next,behavior:'smooth'});
-            root.scrollTop=next;
-            document.documentElement.scrollTop=next;
-            document.body.scrollTop=next;
-          }
-        });
-      }catch(e){}
     }
 
     function renderGame(k){
@@ -947,72 +831,239 @@
       let ch=`<div class="stepnum" id="cD">...</div><div class="steplabel">${td.l}</div>`;
       if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++)g+='<div class="mines-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
       else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++)g+='<div class="penalty-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
-      app.innerHTML=`<div class="panel game-detail"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipTier().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipTier().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
+      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipTier().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipTier().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
       const btn=document.getElementById('sBtn'),box=document.getElementById('gBox'),cdW=document.getElementById('cdW'),cdP=document.getElementById('cdP'),cdN=document.getElementById('cdN');
-      keepPrimaryButtonAboveTab();
       const circ=175.93;
       function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
       function checkLimit(){
-        if(!isFullAccess() && isFreeSignalUsed()){if(timer){clearInterval(timer);timer=null;}if(cdW)cdW.style.display='none';box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">Esa fue tu señal gratis. Recarga tu cuenta ${platformName()} y envía la captura al bot para desbloquear señales ILIMITADAS 👇</div></div>`;btn.disabled=false;btn.textContent=`💰 Recarga en ${platformName()}`;btn.style.opacity='1';btn.onclick=openRegLink;return true;}
-        if(isFullAccess() && isSignalLimitReached()){
+        if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'Límite del servidor IA alcanzado'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">${T().limitSub||'Los servidores IA están bajo carga alta.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">${T().limitDeposit||'Mayor depósito = más recursos del servidor.'}</div>${upgradeHint}</div>`;
-          btn.disabled=true;btn.textContent=T().limitBtn||'Límite del servidor';btn.style.opacity='0.3';return true;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} señales/día, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga $${need.toLocaleString()} para desbloquear ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor IA alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">Los servidores IA están procesando muchas señales.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} señales/día.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Más recarga = más recursos IA para tu cuenta<br>= más señales y mayor precisión.</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='Límite del servidor';btn.style.opacity='0.3';return true;
         }
         return false;
       }
       function showSig(){
         if(checkLimit())return;
-        const isFreeSig=!isFullAccess() && !isFreeSignalUsed();
-        let v;
-        if(isFreeSig && (k==='aviator'||k==='jetx'||k==='balloon')) v=(1.30+Math.random()*0.35).toFixed(2)+'x';
-        else if(isFreeSig && k==='mines'){v=[];while(v.length<8){const r=Math.floor(Math.random()*25);if(!v.includes(r))v.push(r);}}
-        else v=genVal(k);
-        try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
-        if(isFullAccess()) addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());
-        if(isFreeSig){let h=getSigHist(k);h.push(1);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));}else addSigHist(k);
-        addProfit(rndInt(5,25));
+        const v=genVal(k);try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
+        addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
         }
         else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++){const t=i===v;g+=`<div class="penalty-cell"><div class="${t?'penalty-ball':''}">${t?'⚽':''}</div></div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;}
-        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}consumeLimitedFreeSignal();updVIP();keepPrimaryButtonAboveTab();
+        const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist(k);if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();
       }
-      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);btn.onclick=()=>{
-        if(checkLimit())return;
-        setCd(k);
-        showSig();
-        if(!isFullAccess() && isFreeSignalUsed()){
-          // бесплатный сигнал только что показан — оставляем коэффициент в боксе,
-          // глушим cooldown-таймер и меняем ТОЛЬКО нижнюю кнопку на депозитную
-          if(timer){clearInterval(timer);timer=null;}
-          if(cdW)cdW.style.display='none';
-          btn.disabled=false;btn.textContent=`💰 Recarga en ${platformName()}`;btn.style.opacity='1';btn.onclick=openRegLink;
-        } else {
-          if(!checkLimit())uBtn();
-        }
-      };}
+      if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
 
-    const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
+    const CH_D=["easy","medium","hard","hardcore"];let chD="easy",chNextAt=0,chCooldownTimer=null;
     function renderChicken(){
-      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
-      const p=document.createElement('div');p.className='panel game-detail';
-      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">${T().ch.step||'PASO'}</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
-      app.appendChild(p);document.getElementById('bkB').onclick=renderHome;keepPrimaryButtonAboveTab();
+      if(timer)clearInterval(timer);if(chCooldownTimer)clearInterval(chCooldownTimer);const app=document.getElementById('app');app.innerHTML='';
+      const p=document.createElement('div');p.className='panel';
+      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
+      app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
-      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(!isFullAccess() && isFreeSignalUsed()){document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">🎁</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px;line-height:1.45">Esa fue tu señal gratis. Recarga tu cuenta ${platformName()} y envía la captura al bot para desbloquear señales ILIMITADAS 👇</div></div>`;nxB.disabled=false;nxB.textContent=`💰 Recarga en ${platformName()}`;nxB.style.opacity='1';nxB.onclick=openRegLink;return;}if(isFullAccess() && isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} - ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Add ${need.toLocaleString()} ${geo().currency} in the bot to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">${T().limit||'Límite del servidor IA alcanzado'}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${T().limitSub||'Los servidores IA están bajo carga alta.'}</div><div style="font-size:13px;color:var(--muted);margin-top:8px">${T().limitDeposit||'Mayor depósito = más recursos del servidor.'}</div>${uh}</div>`;nxB.disabled=true;nxB.textContent=T().limitBtn||'Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{if(isFullAccess()) addDailySignal();sN.textContent=`Paso ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');consumeLimitedFreeSignal();if(isFullAccess()&&isSignalLimitReached()){nxB.disabled=true;nxB.textContent=T().limitReached||'Limit reached';}},500);};dT();
+      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';CH_D.forEach(d=>{const b=document.createElement('button');b.type='button';b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
+      function setBtnReady(){nxB.disabled=false;nxB.textContent=T().ch.nx;}
+      function updateCooldown(){const left=Math.ceil((chNextAt-Date.now())/1000);if(left>0){nxB.disabled=true;nxB.textContent=T().ch.w(left);}else{if(chCooldownTimer){clearInterval(chCooldownTimer);chCooldownTimer=null;}setBtnReady();}}
+      function startCooldown(){chNextAt=Date.now()+10000;updateCooldown();chCooldownTimer=setInterval(updateCooldown,250);}
+      nxB.onclick=()=>{if(Date.now()<chNextAt){updateCooldown();return;}if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} señales/día, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Recarga $${need.toLocaleString()} para desbloquear ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">Límite del servidor IA alcanzado</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} señales/día usadas</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Más recarga = más recursos IA para tu cuenta</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Límite del servidor';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Límite alcanzado';return;}startCooldown();},500);};dT();if(Date.now()<chNextAt)updateCooldown();
     }
 
-    // TOP PLAYERS - weekly seed, social handles, $50-$1500 descending
+    const LIVE_ROOM_NPCS=[
+{name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Gold',lang:'en'},
+{name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Gold',lang:'en'},
+{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Gold',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
+{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},
+{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'infinityGod1',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},
+{name:'Ceo Dugem',badge:'Gold',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'Panjang',badge:'Gold',lang:'en'},
+{name:'Shionys',badge:'Gold',lang:'en'},{name:'Aaron',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Michael',badge:'Gold',lang:'en'},
+{name:'Ryan',badge:'Gold',lang:'en'},{name:'Shawn',badge:'Gold',lang:'en'},
+
+
+
+
+
+
+{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Gold',lang:'es'},
+{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Gold',lang:'es'},
+{name:'pablo.r',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},
+{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Gold',lang:'es'}
+];
+    const SEED_EN=[
+      '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
+      'bro 💀','insane','terbaik','same here','real','big W','AI cooked 🔥','who caught that??','gg room','that was fast',
+      'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
+      'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
+      'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
+      'room was dead then boom 💸','gold room moves fast','quiet then 3 straight W','late entry but still profit',
+      'lol i was sleeping and missed it 😭','woke up to profit','free money fr','told yall','called it','not bad at all'
+    ];
+    const SEED_KR=[
+      'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
+      '오늘 수익 괜찮다','어제보다 낫다','신호 정확했어','승률 괜찮네','balloon터짐 ㄹㅇ','봤지?',
+      '₩80k 달성 ㅋㅋ','오늘 하루 좋았다','mines 3연속 💰','진짜 미쳤다','이건 real','방금 gold 달성 🥇',
+      'crash 타이밍 좋았어','penalty 깔끔','chicken road ㅋㅋ','aviator 방금 터짐','nice','gg'
+    ];
+    const SEED_ES=[
+      'genial','otro día otro profit','la racha sigue 💪','primer día y ya profit','hoy ganamos',
+      'ese crash de 5.8x fue loco','esto pegó bien','ayer no pero hoy sí 🙌','mines limpió hoy 💰',
+      'dije que iba a pegar','ese fue gratis','balloon subió loco','penalty limpio','not bad','nice',
+      'JetX 3.2x acaba de pegar','crash timing mejorando','recién llegué y ya profit','gg','🔥','💰💰'
+    ];
+    let liveRoomFeed=[];
+    function liveRoomUnlocked(){return getVipTierIdx()>=1;}
+    function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
+    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
+    function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
+    function pickText(npc,seed){
+      const lang=npc.lang||'en';const r=sRng(seed);
+      if(lang==='kr'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_KR[Math.floor(sRng(seed+50)*SEED_KR.length)];}
+      if(lang==='es'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_ES[Math.floor(sRng(seed+50)*SEED_ES.length)];}
+      return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
+    }
+    const SLOT_SEC=8;
+    function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
+    const REPLY_EN=['nice','facts','same bro','real','gg','lol','fr fr','W','big W','no way 😂','true','yep','100%','agreed','this ^^'];
+    const REPLY_KR=['ㅋㅋㅋ','ㄹㅇ','나도','진짜','대박','ㅇㅇ','맞아','ㅋㅋ 인정','그거 맞음','ㅇㅈ'];
+    const REPLY_ES=['jaja','tal cual','real','eso','sí bro','facts','exacto','jajaja','100%','lo mismo'];
+    function pickReply(npc,seed){const lang=npc.lang||'en';const pool=lang==='kr'?REPLY_KR:lang==='es'?REPLY_ES:REPLY_EN;return pool[Math.floor(sRng(seed)*pool.length)];}
+    function msgForSlot(slot){
+      const npcIdx=Math.floor(sRng(slot*7+1)*LIVE_ROOM_NPCS.length);const npc=LIVE_ROOM_NPCS[npcIdx];
+      const ts=new Date(slot*SLOT_SEC*1000).toISOString();
+      const isReply=sRng(slot*13+5)<0.28;
+      if(isReply){const prevNpcIdx=Math.floor(sRng((slot-1)*7+1)*LIVE_ROOM_NPCS.length);const prevNpc=LIVE_ROOM_NPCS[prevNpcIdx];return {author:npc.name,badge:npc.badge,text:'@'+prevNpc.name+' '+pickReply(npc,slot*7+9),createdAt:ts,role:'npc',reactions:[]};}
+      return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
+    }
+    let lastSlot=0;
+    function seedLiveRoomLocal(){
+      const now=slotNow();
+      if(liveRoomFeed.length&&lastSlot===now)return;
+      if(!liveRoomFeed.length){for(let i=0;i<80;i++){liveRoomFeed.push(msgForSlot(now-80+1+i));}lastSlot=now;}
+      else if(now>lastSlot){for(let s=lastSlot+1;s<=now;s++){liveRoomFeed.push(msgForSlot(s));}if(liveRoomFeed.length>150)liveRoomFeed.splice(0,liveRoomFeed.length-150);lastSlot=now;}
+    }
+    function roomBadgeIcon(b){const x=(b||'').toLowerCase();if(x.includes('gold'))return '🥇';return '';}
+    function roomNameClass(name){const s=(name||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0)%6;return ['c1','c2','c3','c4','c5','c6'][s];}
+    function roomReplyTarget(text){const m=String(text||'').match(/^@([^\s,:!?]+)/);return m?m[1]:'';}
+    const ROOM_REACT_EMOJIS=['🔥','💰','😂','🎯','👀','🙌','😭','🤑','💎'];
+    function renderReactions(msg){if(!msg.reactions||!msg.reactions.length)return '';return '<span class="room-reactions">'+msg.reactions.map(r=>`<span class="room-reaction">${r.e}<span class="rcount">${r.c}</span></span>`).join('')+'</span>';}
+    let reactDripTimer=null;
+    function startReactDrip(){
+      if(reactDripTimer)return;
+      reactDripTimer=setInterval(()=>{if(!liveRoomFeed.length)return;const idx=Math.floor(Math.random()*liveRoomFeed.length);const m=liveRoomFeed[idx];if(m.role==='user')return;if(!m.reactions)m.reactions=[];const em=ROOM_REACT_EMOJIS[Math.floor(Math.random()*ROOM_REACT_EMOJIS.length)];const existing=m.reactions.find(r=>r.e===em);if(existing){existing.c++;}else{if(m.reactions.length>=3)return;m.reactions.push({e:em,c:1});}if(curTab==='liveRoom'){const feed=document.getElementById('liveRoomFeed');if(!feed)return;const el=feed.children[idx];if(!el)return;const old=el.querySelector('.room-reactions');if(old)old.remove();const html=renderReactions(m);if(html){const tmp=document.createElement('span');tmp.innerHTML=html;el.appendChild(tmp.firstChild);}}},3500);
+    }
+    let roomTickerStarted=false,roomTickerTimer=null,roomTypingTimer=null;
+    function startRoomTicker(){
+      if(roomTickerStarted)return;roomTickerStarted=true;startReactDrip();
+      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seedLiveRoomLocal();if(curTab==='liveRoom')renderLiveRoom(true);}},3000);
+    }
+    let roomRenderedCount=0;
+    function buildMsgEl(m){
+      const el=document.createElement('div');el.className='room-msg'+(m.role==='user'?' user':'');
+      const rt=roomReplyTarget(m.text);const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
+      const bi=roomBadgeIcon(m.badge);
+      el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
+      return el;
+    }
+    function renderLiveRoom(appendOnly){
+      seedLiveRoomLocal();const feed=document.getElementById('liveRoomFeed');if(!feed)return;
+      const lock=document.getElementById('liveRoomLock');const comp=document.getElementById('liveRoomComposer');
+      const unlocked=liveRoomUnlocked();lock.style.display=unlocked?'none':'block';comp.style.display=unlocked?'flex':'none';
+      if(!appendOnly||roomRenderedCount===0){feed.innerHTML='';roomRenderedCount=0;for(let i=0;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i]));}roomRenderedCount=liveRoomFeed.length;}
+      else{for(let i=roomRenderedCount;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i]));}roomRenderedCount=liveRoomFeed.length;}
+      feed.scrollTop=feed.scrollHeight;startRoomTicker();
+    }
+    async function sendLiveRoomMessage(){
+      if(!liveRoomUnlocked())return;const inp=document.getElementById('liveRoomInput');const txt=(inp.value||'').trim();if(!txt)return;
+      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,createdAt:new Date().toISOString(),role:'user',reactions:[]});inp.value='';renderLiveRoom(true);
+    }
+    document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();sendLiveRoomMessage();}});
+    // CHAT
+    let chatH=[],chatLD=false,chatSnd=false,chatImgB64=null;
+    function handleChatImage(input){
+      const file=input.files[0];if(!file)return;
+      const reader=new FileReader();
+      reader.onload=function(e){
+        chatImgB64=e.target.result; // data:image/...;base64,...
+        const prev=document.getElementById('chatImgPreview');
+        prev.style.display='block';
+        prev.innerHTML=`<div class="chat-img-preview"><img src="${chatImgB64}"><button class="chat-img-remove" onclick="removeChatImage()">✕</button></div>`;
+      };
+      reader.readAsDataURL(file);
+      input.value='';
+    }
+    function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
+    function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
+    function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
+    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">$${remain.toLocaleString()} para ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% precisión</span>${hint}</div>`;}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">Soporte NexusAI</div><div class="chat-welcome-text">Puedo ayudarte con la app y la activación. Analista IA personal unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    async function loadChatHistory(){
+      if(chatLD)return;
+      chatLD=true;
+      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      if(!CHAT_HISTORY_WEBHOOK)return;
+      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
+      try{
+        const controller=new AbortController();
+        const timer=setTimeout(()=>controller.abort(),10000);
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo}),signal:controller.signal});
+        clearTimeout(timer);
+        const d=await r.json();
+        if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
+          chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
+          try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+          renderChat();
+        }else{
+          renderChat();
+        }
+      }catch(e){
+        renderChat();
+      }
+    }
+
+    let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
+    async function sendChatMessage(){
+      if(_sendLock)return;
+      const now=Date.now();
+      const inp=document.getElementById('chatInput'),txt=inp.value.trim();
+      if(!txt&&!chatImgB64)return;
+      if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;
+      _sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
+      const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
+      chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
+      inp.value='';inp.style.height='auto';
+      const imgPayload=chatImgB64;removeChatImage();renderChat();
+      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI está escribiendo...';el.appendChild(tp);scrollChatBottom();
+      let botText='Algo salió mal. Inténtalo de nuevo.';
+      try{
+        const uid=String(tgUserId||S.get('tg_user_id')||'');
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'Usuario',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
+        if(imgPayload)body.image=imgPayload;
+        const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
+        if(!CHAT_WEBHOOK){botText='Soporte conectado en el bot. Para activar acceso, pulsa Registrarme y completa el proceso.';clearTimeout(timeout);}
+        else{const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
+        clearTimeout(timeout);
+        const d=await r.json();
+        if(d.reply)botText=d.reply;
+        else if(d.message)botText=d.message;
+        else if(d.text)botText=d.text;}
+      }catch(e){
+        if(e.name==='AbortError')botText='La respuesta tardó demasiado. Inténtalo de nuevo.';
+      }
+      document.getElementById('tpI')?.remove();
+      chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
+      try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
+      renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
+    }
+
+    // TOP PLAYERS — weekly seed, multinational, $10k descending
     function sRnd(s){let x=Math.sin(s)*10000;return x-Math.floor(x);}
     function getWeekSeed(){const d=new Date(),y=d.getFullYear(),jan1=new Date(y,0,1),days=Math.floor((d-jan1)/864e5),week=Math.ceil((days+jan1.getDay()+1)/7);return y*100+week;}
     function genTop(){
       const ws=getWeekSeed();
-      const baseNames=[...new Set(((NAME_POOLS.en&&NAME_POOLS.en.length)?NAME_POOLS.en:(REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names])).map(x=>String(x).trim()).filter(Boolean))];
+      const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
       while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
@@ -1032,18 +1083,17 @@
       }
       return p;
     }
-    function renderTop(){return renderTopPlayers();}
     function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
 
     // HELP TOOLTIPS
-    function getHelpData(){return {
-      streak:{title:'🔥 Racha diaria',text:{en:'Open the app every day to build your streak. Gold members get better accuracy with longer streaks.',es:'Abre la app cada día para mantener tu racha. Los miembros Oro obtienen mejor precisión con rachas más largas.',uz:'Har kuni ilovani oching. Gold a\'zolari uzun seriyada yuqori aniqlik oladi.',az:'Hər gün tətbiqi açın. Gold üzvləri daha uzun seriyada daha yüksək dəqiqlik alır.'}[lang]||'Open the app every day to build your streak.'},
-      vip:{title:'🏅 Nivel VIP',text:`Tu nivel de depósito define los recursos IA asignados a tu cuenta.\n\n🥉 Bronce (${moneyText(geo().bronze,geo().currency)}) — 5 señales/día, 90% precisión\n🥇 Oro (${moneyText(geo().gold,geo().currency)}) — señales ilimitadas, 95% precisión + analista IA personal 24/7\n\nLos miembros Oro tienen un analista IA dedicado para guiar cada sesión en tiempo real.\n\nMayor depósito → más recursos → mejores señales → mejores ganancias 🤝`},
-      profit:{title:'💰 Ganancia de hoy',text:{en:'Shows total profit from signals followed today. Resets at midnight.',es:'Muestra el beneficio total de las señales seguidas hoy. Se reinicia a medianoche.',uz:'Bugungi signallardan umumiy foyda. Yarim tunda qayta tiklanadi.',az:'Bu gün izlənən siqnallardan ümumi mənfəət. Gecə yarısı sıfırlanır.'}[lang]||'Shows total profit from signals followed today.'},
-      winrate:{title:'📊 Tasa de acierto',text:{en:'Historical accuracy of AI predictions for this game, based on thousands of rounds analyzed.',es:'Precisión histórica de las predicciones IA para este juego, basada en miles de rondas analizadas.',uz:'Ushbu o\'yin uchun AI bashoratlarining tarixiy aniqligi, minglab raundlar tahlili asosida.',az:'Bu oyun üçün AI proqnozlarının tarixi dəqiqliyi, minlərlə raund təhlili əsasında.'}[lang]||'Precisión histórica de las predicciones IA.'}
-    };}
+    const HELP_DATA={
+      streak:{title:'🔥 Racha diaria',text:'Abre la app cada día para aumentar tu racha. Los usuarios Gold reciben señales con mayor precisión.'},
+      vip:{title:'🏅 Nivel VIP',text:'Tu nivel de recarga determina los recursos IA asignados a tu cuenta.\n\n🥉 Bronze — 5 señales/día, 90% precisión\n🥇 Gold — señales ilimitadas, 95% precisión + Analista IA personal 24/7\n\nLos usuarios Gold reciben un analista IA dedicado en tiempo real.\n\nMás recarga → más recursos → mejores señales 🤝'},
+      profit:{title:'💰 Ganancia de hoy',text:'Muestra la ganancia total de las señales usadas hoy. Se reinicia cada día a medianoche.'},
+      winrate:{title:'📊 Precisión',text:'Precisión histórica de las predicciones IA para este juego, basada en miles de rondas analizadas.'}
+    };
     function showHelp(key){
-      const d=getHelpData()[key];if(!d)return;
+      const d=HELP_DATA[key];if(!d)return;
       const ov=document.createElement('div');ov.className='help-overlay';
       const tt=document.createElement('div');tt.className='help-tooltip';
       tt.innerHTML=`<div class="help-tooltip-title">${d.title}</div><div>${d.text}</div>`;
@@ -1052,7 +1102,7 @@
       ov.onclick=close;tt.onclick=close;
     }
 
-    // GEO SWITCH - update button with current flag
+    // GEO SWITCH — update button with current flag
     function updGeoSwitch(){
       const btn=document.getElementById('geoSwitchBtn');if(!btn)return;
       if(currentGeo){
@@ -1062,166 +1112,25 @@
       }
     }
 
-    async function hydrateGeoFromBackend(){
-      await refreshAccessState();
-      try{
-        const backendGeo=String((latcppAccessState&&latcppAccessState.geo)||'').toLowerCase();
-        if(GEO_CONFIG[backendGeo]){
-          currentGeo=backendGeo;
-          S.set('user_geo', currentGeo);
-          savedIdKey=`saved_player_id_${currentGeo}`;
-          lang=geo().lang||'en';
-          S.set('aslang', lang);
-          REAL_NAME_POOL=geo().names||NAME_POOLS[lang]||NAME_POOLS.en;
-          const nextUrl=new URL(window.location.href); nextUrl.searchParams.set('geo', currentGeo); history.replaceState({},'',nextUrl);
-        }
-      }catch(e){}
-    }
-
-
-
-    // FIRST-TIME ONBOARDING
-    const TUTORIAL_KEY='tutorial_seen_v1';
-    let tutorialStep=0;
-    const TUTORIAL_STEPS=[
-      {target:'#userHeaderId',title:'Tu cuenta conectada',text:'Cuando envíes tu ID de 1xBet al bot, Nexus AI sincroniza las señales con tu cuenta. Aquí verás tu ID y sabrás que la app está lista para trabajar contigo.',action:'home'},
-      {target:'#gamesGrid',title:'Elige el juego correcto',text:'Selecciona cualquiera de estos juegos. Nexus AI analiza cada modo y prepara el mejor momento de señal para tu elección.',action:'home'},
-      {target:'#sBtn,#nxB',title:'Pide una señal nueva',text:'Cuando estés listo, toca “Obtener señal”. El motor IA calcula el valor exacto para el juego seleccionado y lo actualiza en segundos.',action:'game'},
-      {target:'#gBox,.stepbox',title:'Usa el valor en 1xBet',text:'Aquí aparece tu señal: coeficiente, zona, celdas o paso. Abre el mismo juego en 1xBet y usa este valor en tu cuenta con calma y disciplina.',action:'signal'}
-    ];
-    function tutorialEls(){return{ov:document.getElementById('tutorialOverlay'),sp:document.getElementById('tutorialSpotlight'),card:document.getElementById('tutorialCard'),tt:document.getElementById('tutorialTitle'),tx:document.getElementById('tutorialText'),nb:document.getElementById('tutorialNextBtn'),pg:document.getElementById('tutorialProgress')}}
-    function prepareTutorialStep(step){
-      try{
-        if(step.action==='home'){renderHome();}
-        if(step.action==='game'||step.action==='signal'){
-          if(!document.querySelector('.game-detail')) renderGame('aviator');
-          if(step.action==='signal'){
-            const box=document.getElementById('gBox')||document.querySelector('.stepbox');
-            if(box&&!box.dataset.tutorialPreview){box.dataset.tutorialPreview='1';box.innerHTML='<div class="stepnum">1.74x</div><div class="steplabel">COEFICIENTE</div><div class="stepnote">Ejemplo de señal IA</div>';}
-          }
-        }
-      }catch(e){console.warn('[tutorial prepare]',e);}
-    }
-    function findTutorialTarget(sel){for(const s of String(sel||'').split(',')){const el=document.querySelector(s.trim());if(el)return el;}return null;}
-    function placeTutorialCard(e,spot){
-      const card=e.card;if(!card)return;
-      const gap=12,safeTop=12,safeBottom=84;
-      const vw=window.innerWidth,vh=window.innerHeight;
-      card.style.width=Math.min(448,Math.max(280,vw-32))+'px';
-      card.style.left=Math.max(16,Math.round((vw-card.offsetWidth)/2))+'px';
-      card.style.top='12px';
-      card.style.bottom='auto';
-      const ch=card.offsetHeight||220;
-      const roomAbove=spot.top-safeTop-gap;
-      const roomBelow=vh-spot.bottom-safeBottom-gap;
-      let top;
-      if(roomBelow>=ch){
-        top=spot.bottom+gap;
-      }else if(roomAbove>=ch){
-        top=spot.top-gap-ch;
-      }else{
-        top=roomBelow>=roomAbove?spot.bottom+gap:spot.top-gap-ch;
-        top=Math.max(safeTop,Math.min(top,vh-safeBottom-ch));
-      }
-      card.style.top=Math.round(top)+'px';
-    }
-    function placeTutorial(){
-      const e=tutorialEls(),step=TUTORIAL_STEPS[tutorialStep];if(!e.ov||!step)return;
-      prepareTutorialStep(step);
-      requestAnimationFrame(()=>{
-        const target=findTutorialTarget(step.target)||document.querySelector('.app-shell')||document.body;
-        const r=target.getBoundingClientRect(),pad=8;
-        const top=Math.max(8,r.top-pad),left=Math.max(8,r.left-pad),right=Math.min(window.innerWidth-8,r.right+pad),bottom=Math.min(window.innerHeight-8,r.bottom+pad);
-        e.sp.style.top=top+'px';e.sp.style.left=left+'px';e.sp.style.width=Math.max(40,right-left)+'px';e.sp.style.height=Math.max(32,bottom-top)+'px';
-        e.sp.style.borderRadius=(target.classList&&target.classList.contains('tg-id'))?'999px':'18px';
-        e.tt.textContent=step.title;e.tx.textContent=step.text;e.pg.textContent=(tutorialStep+1)+'/'+TUTORIAL_STEPS.length;
-        e.nb.textContent=tutorialStep===0?'Empezar':(tutorialStep===TUTORIAL_STEPS.length-1?'Comenzar':'Siguiente');
-        requestAnimationFrame(()=>placeTutorialCard(e,{top,left,right,bottom}));
-      });
-    }
-    function startTutorial(force){
-      if(!force&&S.get(TUTORIAL_KEY)==='1')return;
-      tutorialStep=0;const e=tutorialEls();if(!e.ov)return;
-      e.ov.classList.add('active');e.ov.setAttribute('aria-hidden','false');document.body.classList.add('tutorial-open');placeTutorial();
-    }
-    function nextTutorialStep(){
-      if(tutorialStep>=TUTORIAL_STEPS.length-1){skipTutorial();return;}
-      tutorialStep++;placeTutorial();
-    }
-    function skipTutorial(){
-      S.set(TUTORIAL_KEY,'1');const e=tutorialEls();if(e.ov){e.ov.classList.remove('active');e.ov.setAttribute('aria-hidden','true');}
-      document.body.classList.remove('tutorial-open');try{renderHome();}catch(err){}
-    }
-    window.addEventListener('resize',()=>{const e=tutorialEls();if(e.ov&&e.ov.classList.contains('active'))placeTutorial();});
-
     // APP INIT after geo is known
-    let appStarted=false;
     function initApp(){
-      if(appStarted) return;
-      appStarted=true;
-      try{window.trackBDEvent&&window.trackBDEvent('MiniAppOpen',{geo:String(currentGeo||DEFAULT_GEO).toUpperCase(),lang:geo().lang});}catch(e){}
-      lang=geo().lang||'en';S.set('aslang',lang);
-      applyStatic();buildMarquee();setInterval(buildMarquee,12000);updProfit();updOnline();updGeoSwitch();
-      // Start on signals tab
+      try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:currentGeo||'lat-cpp',lang:'es'});}catch(e){}
+      lang='es';S.set('aslang','es');
+      applyStatic();
+      updProfit();
+      updOnline();
+      updGeoSwitch();
+      // Start on signals tab to avoid Telegram WebView crashes on first chat/history render
       switchTab('signals');
-      setTimeout(()=>startTutorial(false),650);
+      // Defer non-critical UI work until the first screen is already visible
+      setTimeout(()=>{try{buildMarquee();}catch(e){}},0);
+      setTimeout(()=>{try{loadChatHistory();}catch(e){}},50);
     }
 
-    // CACHE-BUST: passive marker only. Never force reload before boot in Telegram WebView.
-    const APP_VERSION='20260625-winner-marquee-top100-restored';
-    (function cacheBust(){
-      try{
-        const lk='nexus_latcpp_ver';
-        const currentUrl=new URL(window.location.href);
-        const urlVersion=currentUrl.searchParams.get('v');
-        if(urlVersion!==APP_VERSION){
-          currentUrl.searchParams.set('v',APP_VERSION);
-          history.replaceState({},'',currentUrl.toString());
-        }
-        S.set(lk,APP_VERSION);
-      }catch(e){console.warn('[cacheBust]',e);}
-    })();
-
-    function bootFailsafeRender(){
-      try{lang=geo().lang||'es';S.set('aslang',lang);}catch(e){}
-      try{applyGeoChrome();}catch(e){}
-      try{renderHome();}catch(e){}
-      try{switchTab('signals');}catch(e){}
-      try{updateChatHeader();}catch(e){}
-    }
-    // INIT — robust boot, never blocks on async work
-    let _bootStarted=false;
-    function bootApp(){
-      if(_bootStarted) return;
-      _bootStarted=true;
-      try{buildGeoSelector();}catch(e){console.warn('[bootApp] buildGeoSelector failed',e);}
-      if(!currentGeo && Object.keys(GEO_CONFIG).length>1){
-        showGeoSelector();
-        try{fixVH();}catch(e){}
-        return;
-      }
-      // Init synchronously — UI is visible immediately after this returns
-      try{initApp();}catch(e){console.warn('[bootApp] initApp failed',e);bootFailsafeRender();}
-      // Always force viewport fix again after init
-      try{fixVH();}catch(e){}
-      // Background hydration — never blocks UI, errors swallowed
-      Promise.resolve().then(()=>{
-        return hydrateGeoFromBackend();
-      }).then(()=>{
-        try{applyGeoChrome();}catch(e){}
-        try{applyStatic();}catch(e){}
-        try{updGeoSwitch();}catch(e){}
-        // hydrateGeoFromBackend already performs the single access refresh.
-      }).catch(e=>{console.warn('[bootApp] hydrate failed',e);});
-    }
-    if(document.readyState==='loading'){
-      document.addEventListener('DOMContentLoaded', bootApp, {once:true});
-    }else{
-      bootApp();
-    }
-    // Failsafe: if something blocks DOMContentLoaded, run anyway after 1.2s
-    setTimeout(bootApp, 1200);
-    setTimeout(()=>{try{if(!appStarted&&currentGeo)bootFailsafeRender();}catch(e){}}, 1800);
+    // INIT
+    window.onload=function(){
+      initApp();
+    };
   </script>
 </body>
 </html>
