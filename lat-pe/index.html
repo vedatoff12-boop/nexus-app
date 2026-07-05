@@ -395,7 +395,7 @@
         const GEO_CONFIG = {
       pe: { name:"Perú", flag:"🇵🇪", lang:"es", currency:"PEN", sym:"PEN ", bronze:14, gold:35, profitRange:[320,880],
         link:"https://sp1nwin.com/p5b1Xk", promo:"777PE777",
-        webhook:"https://n8nnexusai.uk/webhook/check-access-lat-pe",
+        webhook:"https://n8nnexusai.uk/webhook/check-access-lat-pe-mateo",
         names:["Carlos","Javier","Luis","Diego","Andrés","Mateo","Santiago","Valeria","Camila","Sofía","Daniela","Mariana","Paola","Lucía","Gabriela","Renata","Martina","José","Miguel","Ana"] }
     };
     const NAME_POOLS={
@@ -416,7 +416,7 @@
     if(!GEO_CONFIG[currentGeo]) currentGeo='pe'; S.set('user_geo',currentGeo);
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.pe;}
     REAL_NAME_POOL=NAME_POOLS[geo().lang]||NAME_POOLS.en;
-    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-lat-pe';
+    const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-lat-pe-mateo';
     const LATPE_USD_TIERS={bronze:4,gold:10};
     let latpeAccessState={tier:null,has_access:false,display_currency:null,deposit_usd_equivalent:0,total_deposit_usd_equivalent:0,deposit_amount_original:0,total_deposit_original:0,bronze_threshold_display:null,gold_threshold_display:null,source:'fallback'};
     function normTier(v){v=String(v||'').trim().toLowerCase();if(v==='gold')return'Gold';if(v==='bronze')return'Bronze';return'Unranked';}
