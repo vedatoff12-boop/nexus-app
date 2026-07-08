@@ -470,8 +470,8 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
+      <button class="tab-item" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
+      <button class="tab-item active" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
       <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
@@ -1102,10 +1102,8 @@
       try{window.trackIndiaEvent&&window.trackIndiaEvent('MiniAppOpen',{geo:'IN',lang:'en'});}catch(e){}
       lang='en';S.set('aslang','en');
       applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
-      // Start on chat tab
-      switchTab('chat');
-      // Load chat history
-      loadChatHistory();
+      // Start on Signals tab. Chat history loads only when the user opens Chat.
+      switchTab('signals');
     }
 
     // INIT
