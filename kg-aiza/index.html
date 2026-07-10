@@ -486,7 +486,7 @@
         webhook:"https://n8nnexusai.uk/webhook/check-access-kg-aiza",
         names:["Айбек","Нурбек","Бакыт","Эрлан","Тимур","Руслан","Азат","Данияр","Эмил","Адилет","Самат","Канат","Азамат","Нурсултан","Марат","Айсулуу","Нуриза","Айдана","Жанара","Гүлнур","Салтанат","Мээрим","Алина","Асел","Назира"] }
     };
-    const REAL_NAME_POOL=["Айбек", "Нурбек", "Бакыт", "Эрлан", "Тимур", "Руслан", "Азат", "Данияр", "Эмил", "Адилет", "Самат", "Канат", "Азамат", "Нурсултан", "Марат", "Улан", "Бекзат", "Арсен", "Санжар", "Алмаз", "Эрмек", "Бексултан", "Дастан", "Илим", "Аскар", "Айсулуу", "Нуриза", "Айдана", "Жанара", "Гүлнур", "Салтанат", "Мээрим", "Алина", "Асел", "Назира", "Динара", "Алия", "Элнура", "Бегайым", "Сезим", "Арууке", "Малика", "Жибек", "Айпери", "Каныкей", "Нурайым", "Акылай", "Перизат", "Гүлжан", "Адинай"];
+    const REAL_NAME_POOL=["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"];
     const CHAT_WEBHOOK=''; // KG Aiza: Mini App chat disabled until backend is approved; bot AI handles Kyrgyz dialog
     const CHAT_HISTORY_WEBHOOK=''; // KG Aiza: history disabled with guarded fetch
     let accessMode='limited';
@@ -1000,7 +1000,7 @@
     function genTop(){
       const ws=getWeekSeed();
       const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Оюнчу${baseNames.length+1}`);}
+      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
