@@ -654,10 +654,10 @@
     // TAB
     let curTab='signals';
     function switchTab(t){if(t==='chat'&&!CHAT_WEBHOOK)t='signals';curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
-    if(t==='chat'){document.getElementById('tabЧат').classList.add('active');document.getElementById('btnЧат').classList.add('active');mq.style.display='none';loadЧатHistory();setTimeout(scrollЧатBottom,100);}
-    else if(t==='signals'){document.getElementById('tabСигналдар').classList.add('active');document.getElementById('btnСигналдар').classList.add('active');mq.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabЖандууRoom').classList.add('active');document.getElementById('btnЖандууRoom').classList.add('active');mq.style.display='none';renderЖандууRoom();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
+    if(t==='chat'){document.getElementById('tabЧат').classList.add('active');document.getElementById('btnЧат').classList.add('active');mq.style.visibility='hidden';mq.style.pointerEvents='none';loadЧатHistory();setTimeout(scrollЧатBottom,100);}
+    else if(t==='signals'){document.getElementById('tabСигналдар').classList.add('active');document.getElementById('btnСигналдар').classList.add('active');mq.style.visibility='visible';mq.style.pointerEvents='';renderHome();}
+    else if(t==='liveRoom'){document.getElementById('tabЖандууRoom').classList.add('active');document.getElementById('btnЖандууRoom').classList.add('active');mq.style.visibility='hidden';mq.style.pointerEvents='none';renderЖандууRoom();}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.visibility='hidden';mq.style.pointerEvents='none';renderTopPlayers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -1019,7 +1019,7 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('ky-KG',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Апта: ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">сом ${p[i].am.toLocaleString('ru-RU')}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+сом ${x.am.toLocaleString('ru-RU')}</div></div>`).join('');}
+    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('ky-KG',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Апта: ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString('en-US')}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString('en-US')}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     const HELP_DATA={
