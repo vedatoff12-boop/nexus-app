@@ -454,7 +454,7 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">₺0 / ₺1.000</span><span id="vipProgressHint">Yükseltmek için daha fazla yatır ⬆</span></div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">₺0 / ₺750</span><span id="vipProgressHint">Yükseltmek için daha fazla yatır ⬆</span></div>
         <div id="vipSinyallerLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 bugün kalan sinyal</div>
       </div>
 
@@ -517,7 +517,7 @@
     const CHAT_WEBHOOK='';
     const CHAT_HISTORY_WEBHOOK='';
     let accessMode='sınırlı';
-    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (Gold >= 2000 TRY)
+    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (Gold >= 1500 TRY)
     let userTotalYatırım=0;
     const APP_NS='nexustrwc'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -612,8 +612,8 @@
     // VIP
     const VIP_TIERS=[
       {name:'Başlangıç',icon:'❔',dep:0,sigs:0,acc:0,desc:'Yatırım to activate'},
-      {name:'Bronz',icon:'🥉',dep:1000,sigs:5,acc:90,desc:'Günde 5 sinyal, %90 doğruluk'},
-      {name:'Gold',icon:'🥇',dep:2000,sigs:0,acc:95,desc:'Sınırsız sinyal, %95 doğruluk + Kişisel AI Analisti'}
+      {name:'Bronz',icon:'🥉',dep:750,sigs:5,acc:90,desc:'Günde 5 sinyal, %90 doğruluk'},
+      {name:'Gold',icon:'🥇',dep:1500,sigs:0,acc:95,desc:'Sınırsız sinyal, %95 doğruluk + Kişisel AI Analisti'}
     ];
     function getVipSeviyeIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySinyaller(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigBugün','0');}return parseInt(S.get('sigBugün')||'0');}
@@ -627,7 +627,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipSeviye2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Bronze için ₺1.000 bakiye gönder':(tier.acc+'% ACCURACY');
+      document.getElementById('vipAcc2').textContent=dep===0?'Bronze için ₺750 bakiye gönder':(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -638,7 +638,7 @@
       const used=getDailySinyaller();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSinyallerLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Bronze için ₺1.000 Melbet bakiyesi gerekli';}
+        if(dep===0){sigEl.textContent='❔ Bronze için ₺750 Melbet bakiyesi gerekli';}
         else if(limit===0){sigEl.textContent='♾️ Unsınırlı signals today';}
         else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} bugün kalan sinyal`:'🔒 Sinyaller refresh tomorrow';}
       }
@@ -646,7 +646,7 @@
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent='₺0 / ₺1.000 Bronze';
+        left.textContent='₺0 / ₺750 Bronze';
         hint.textContent='Melbet bakiye görüntüsünü bota gönder';
       }
       else if(idx<VIP_TIERS.length-1){
@@ -837,7 +837,7 @@
       app.innerHTML='';
       if(!slotSignalsUnlocked()){
         const g=T().g[k];
-        app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${T().slot.sub}</div><div class="stepbox"><div class="lock-icon" style="font-size:44px;margin-bottom:10px">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg" style="max-width:290px;margin:10px auto 0;font-size:13px;line-height:1.55">${T().lm}</div><div class="slot-lock-sell"><div style="font-size:13px;font-weight:900;color:#fff">🥉 Bronze — ₺1.000</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Günlük 5 slot sinyali</div><div style="font-size:13px;font-weight:900;color:#fff;margin-top:12px">🥇 Gold — ₺2.000</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Sınırsız slot sinyali</div></div></div></div>`;
+        app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${T().slot.sub}</div><div class="stepbox"><div class="lock-icon" style="font-size:44px;margin-bottom:10px">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg" style="max-width:290px;margin:10px auto 0;font-size:13px;line-height:1.55">${T().lm}</div><div class="slot-lock-sell"><div style="font-size:13px;font-weight:900;color:#fff">🥉 Bronze — ₺750</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Günlük 5 slot sinyali</div><div style="font-size:13px;font-weight:900;color:#fff;margin-top:12px">🥇 Gold — ₺1.500</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Sınırsız slot sinyali</div></div></div></div>`;
         return;
       }
       const copy=T().slot;const g=T().g[k];
@@ -877,7 +877,7 @@
       const tier=String(d.access_tier||d.tier||'none').toLowerCase();
       const bronze=(tier==='bronze'||tier==='gold'||d.bronze_unlocked===true||d.access_granted===true||d.allowed===true);
       const gold=(tier==='gold'||d.gold_unlocked===true);
-      const total=Number(d.total_deposit!==undefined?d.total_deposit:(gold?2000:(bronze?1000:0)))||0;
+      const total=Number(d.total_deposit!==undefined?d.total_deposit:(gold?1500:(bronze?750:0)))||0;
       return Object.assign({},d,{access_tier:tier,bronze_unlocked:bronze,gold_unlocked:gold,access_granted:bronze,deposit_verified:bronze,allowed:bronze,total_deposit:total});
     }
     async function refreshAccessState(){
@@ -921,7 +921,7 @@
     }
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
-      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon" style="font-size:38px">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg" style="max-width:270px;font-size:12px;line-height:1.5">${T().lm}</div><div style="margin-top:9px;color:var(--gold);font-size:11px;font-weight:900">Bronze ₺1.000 · Gold ₺2.000</div></div>`;
+      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon" style="font-size:38px">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg" style="max-width:270px;font-size:12px;line-height:1.5">${T().lm}</div><div style="margin-top:9px;color:var(--gold);font-size:11px;font-weight:900">Bronze ₺750 · Gold ₺1.500</div></div>`;
     }
 
     function renderGame(k){
@@ -1178,7 +1178,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Günlük Seri',text:'Serini büyütmek için uygulamayı her gün aç. Gold üyeler, seri uzadıkça daha güçlü sinyal doğruluğu alır.'},
-      vip:{title:'🏅 VIP Seviye',text:'Melbet bakiye seviyen, hesabına ayrılan AI sunucu gücünü belirler.\n\n🥉 Bronze (₺1.000) — Günde 5 sinyal, %90 doğruluk\n🥇 Gold (₺2.000) — Sınırsız sinyal, %95 doğruluk + 7/24 Kişisel AI Analist\n\nErişim için Melbet bakiye ekran görüntüsünü bota gönder. Bot doğrulamadan sonra seviyeni açar.\n\nDaha yüksek bakiye → daha fazla kaynak → daha güçlü sinyaller 🤝'},
+      vip:{title:'🏅 VIP Seviye',text:'Melbet bakiye seviyen, hesabına ayrılan AI sunucu gücünü belirler.\n\n🥉 Bronze (₺750) — Günde 5 sinyal, %90 doğruluk\n🥇 Gold (₺1.500) — Sınırsız sinyal, %95 doğruluk + 7/24 Kişisel AI Analist\n\nErişim için Melbet bakiye ekran görüntüsünü bota gönder. Bot doğrulamadan sonra seviyeni açar.\n\nDaha yüksek bakiye → daha fazla kaynak → daha güçlü sinyaller 🤝'},
       profit:{title:'💰 Bugün\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       winrate:{title:'📊 Kazanma Oranı',text:'Bu oyun için AI tahminlerinin geçmiş doğruluk oranı. Binlerce analiz edilmiş tura dayanır.'}
     };
