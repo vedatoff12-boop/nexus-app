@@ -420,20 +420,20 @@
       <div class="vip-card" id="vipCard" onclick="showHelp('vip')" style="margin-top:8px;">
         <div class="vip-top">
           <div class="vip-badge">
-            <div class="vip-badge-icon" id="vipIcon2">🥉</div>
+            <div class="vip-badge-icon" id="vipIcon2">❔</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% ACCURACY</div>
+              <div class="vip-badge-tier" id="vipTier2">Unranked</div>
+              <div class="vip-badge-acc" id="vipAcc2">Deposit RM50 to activate Bronze</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
             <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥇 Gold</div>
+            <div class="vip-next-tier" id="vipNextTier">🥉 Bronze</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">RM0 / RM80</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">RM50 to unlock Bronze</span><span id="vipProgressHint">Deposit RM50 to activate Bronze</span></div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">❔ Deposit RM50 to activate Bronze</div>
       </div>
 
       <div class="meta-bar">
@@ -501,6 +501,9 @@
     let currentGeo='my'; S.set('user_geo','my');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-myr-topics';
+    // Access is backend-authoritative. Never trust a VIP tier cached by an earlier session.
+    S.set('totalDep','0');
+    S.set('accessGranted','0');
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
@@ -763,7 +766,10 @@
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
 
-      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
+      const checkedDeposit=Number(d.total_deposit||0);
+      userTotalDeposit=Number.isFinite(checkedDeposit)&&checkedDeposit>0?checkedDeposit:0;
+      S.set('totalDep',String(userTotalDeposit));
+      updVIP();
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
       chatTier=(userTotalDeposit>=80)?2:1;
       updateChatHeader();}catch(e){}
@@ -797,7 +803,7 @@
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
+      if(d.total_deposit!==undefined){const checkedDeposit=Number(d.total_deposit||0);userTotalDeposit=Number.isFinite(checkedDeposit)&&checkedDeposit>0?checkedDeposit:0;S.set('totalDep',String(userTotalDeposit));updVIP();}
       if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
       else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
