@@ -8,10 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#080c18;--bg2:#0d1324;--bg3:#111827;
-      --stroke:rgba(255,255,255,0.06);--stroke2:rgba(255,255,255,0.1);
-      --text:#eef2ff;--muted:#7c85a3;--muted2:#4b5270;
-      --gold:#facc15;--gold2:#eab308;--gold-glow:rgba(250,204,21,0.35);
+      --bg:#0c1626;--bg2:#12203a;--bg3:#16263f;
+      --stroke:rgba(255,255,255,0.07);--stroke2:rgba(255,255,255,0.12);
+      --text:#eef4ff;--muted:#8496b5;--muted2:#55688c;
+      --gold:#f2a93b;--gold2:#e0902a;--gold-glow:rgba(242,169,59,0.35);
       --green:#22c55e;--green-glow:rgba(34,197,94,0.3);
       --red:#ef4444;--blue:#3b82f6;
       --r1:24px;--r2:16px;--pill:999px;
@@ -60,7 +60,7 @@
     .lang-menu{position:absolute;top:110%;right:0;background:var(--bg3);border:1px solid var(--stroke2);border-radius:12px;padding:4px;z-index:500;display:none;min-width:80px;box-shadow:0 12px 40px rgba(0,0,0,0.6);}
     .lang-menu.open{display:block;}
     .lang-opt{display:block;width:100%;padding:6px 12px;background:none;border:none;color:var(--muted);font-weight:700;font-size:12px;text-align:left;cursor:pointer;border-radius:8px;font-family:inherit;}
-    .lang-opt:hover,.lang-opt.active{background:rgba(250,204,21,0.1);color:var(--gold);}
+    .lang-opt:hover,.lang-opt.active{background:rgba(242,169,59,0.1);color:var(--gold);}
 
     /* MARKET CLOSED PLACEHOLDER — copy will be localized in step 2 */
     .market-closed{display:none;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px;padding:10px 12px;border-radius:12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);}
@@ -75,20 +75,22 @@
     .pair-switcher::-webkit-scrollbar{display:none;}
     .pair-btn{flex:0 0 auto;min-height:34px;padding:7px 11px;border-radius:10px;border:1px solid var(--stroke2);background:rgba(255,255,255,.04);color:var(--muted);font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;transition:background .18s,border-color .18s,color .18s,transform .12s;}
     .pair-btn:active{transform:scale(.96);}
-    .pair-btn.active{color:#0a0f1e;background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:rgba(250,204,21,.75);box-shadow:0 4px 16px rgba(250,204,21,.16);}
-    .tv-chart-frame{position:relative;width:100%;max-width:100%;height:clamp(300px,56dvh,520px);min-height:0;overflow:hidden;border:1px solid var(--stroke2);border-radius:16px;background:#0b0f1a;isolation:isolate;touch-action:pan-y pinch-zoom;overscroll-behavior:contain;}
+    .pair-btn.active{color:var(--bg);background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:rgba(242,169,59,.75);box-shadow:0 4px 16px rgba(242,169,59,.16);}
+    .tv-chart-frame{position:relative;width:100%;max-width:100%;height:clamp(300px,56dvh,520px);min-height:0;overflow:hidden;border:1px solid var(--stroke2);border-radius:16px;background:var(--bg);isolation:isolate;touch-action:pan-y pinch-zoom;overscroll-behavior:contain;}
     .tv-widget-target,.tv-widget-target>div,.tv-widget-target iframe{width:100%!important;height:100%!important;max-width:100%!important;min-width:0!important;border:0!important;display:block!important;touch-action:pan-y pinch-zoom;}
-    .tv-loader,.tv-fallback{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:24px;text-align:center;background:linear-gradient(145deg,#0d1324,#080c18);}
+    .tv-loader,.tv-fallback{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:24px;text-align:center;background:linear-gradient(145deg,var(--bg2),var(--bg));}
     .tv-loader[hidden],.tv-fallback[hidden]{display:none!important;}
     .tv-spinner{width:30px;height:30px;border-radius:50%;border:3px solid rgba(255,255,255,.08);border-top-color:var(--gold);animation:tvSpin .8s linear infinite;}
     @keyframes tvSpin{to{transform:rotate(360deg)}}
     .tv-state-title{font-size:13px;font-weight:900;color:#fff;}
     .tv-state-text{max-width:260px;font-size:11px;line-height:1.45;color:var(--muted);}
-    .tv-retry{padding:8px 14px;border:1px solid rgba(250,204,21,.35);border-radius:10px;background:rgba(250,204,21,.1);color:var(--gold);font-family:inherit;font-size:11px;font-weight:900;cursor:pointer;}
+    .tv-retry{padding:8px 14px;border:1px solid rgba(242,169,59,.35);border-radius:10px;background:rgba(242,169,59,.1);color:var(--gold);font-family:inherit;font-size:11px;font-weight:900;cursor:pointer;}
     @media(max-width:380px){
       .pair-btn{padding:7px 9px;font-size:10px;}
       .tv-chart-frame{height:clamp(280px,52dvh,440px);border-radius:14px;}
     }
+
+    .last-post{display:none;width:100%;margin:0 0 12px}.last-post.show{display:block}.last-post-card{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;width:100%;padding:10px;border:1px solid var(--stroke2);border-radius:16px;background:linear-gradient(145deg,var(--bg2),var(--bg3));color:var(--text);text-align:left;font-family:inherit;cursor:pointer;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.18)}.last-post-card.no-photo{grid-template-columns:minmax(0,1fr)}.last-post-photo{width:92px;height:92px;object-fit:cover;border-radius:12px;background:var(--bg);border:1px solid var(--stroke)}.last-post-card.no-photo .last-post-photo{display:none}.last-post-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:5px}.last-post-eyebrow{font-size:10px;font-weight:900;letter-spacing:.9px;text-transform:uppercase;color:var(--gold)}.last-post-channel{font-size:12px;font-weight:800;color:var(--text)}.last-post-text{font-size:11px;line-height:1.42;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}.last-post-cta{font-size:10px;font-weight:800;color:var(--gold2)}@media(max-width:380px){.last-post-card{grid-template-columns:78px minmax(0,1fr);gap:9px}.last-post-photo{width:78px;height:78px}}
 
     /* HERO PROFIT */
     .hero{
@@ -128,11 +130,11 @@
     /* VIP CARD */
     .vip-card{
       margin:0 16px 12px;padding:12px 16px;border-radius:14px;
-      background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,215,0,0.02));
-      border:1px solid rgba(255,215,0,0.2);position:relative;overflow:hidden;
+      background:linear-gradient(135deg,rgba(242,169,59,0.08),rgba(242,169,59,0.02));
+      border:1px solid rgba(242,169,59,0.2);position:relative;overflow:hidden;
     }
     .vip-card::before{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;
-      background:radial-gradient(circle,rgba(255,215,0,0.15),transparent);border-radius:50%;}
+      background:radial-gradient(circle,rgba(242,169,59,0.15),transparent);border-radius:50%;}
     .vip-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
     .vip-badge{display:flex;align-items:center;gap:8px;}
     .vip-badge-icon{font-size:28px;}
@@ -184,13 +186,13 @@
     .game-play::after{content:'▶';font-size:8px;}
 
     /* LOCKED */
-    .locked-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,12,24,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(6px);text-align:center;padding:10px;border-radius:var(--r2);}
+    .locked-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:color-mix(in srgb,var(--bg) 92%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(6px);text-align:center;padding:10px;border-radius:var(--r2);}
     .lock-icon{font-size:28px;margin-bottom:6px;}
     .lock-text{color:var(--red);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
     .lock-msg{color:var(--muted);font-size:10px;margin-top:4px;line-height:1.3;}
 
     /* GAME DETAIL PANEL */
-    .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(13,19,36,0.8);padding:16px;backdrop-filter:blur(8px);}
+    .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:color-mix(in srgb,var(--bg2) 80%,transparent);padding:16px;backdrop-filter:blur(8px);}
     .backrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
     .back{border:1px solid var(--stroke);background:rgba(255,255,255,0.04);color:var(--muted);padding:8px 14px;border-radius:var(--pill);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
     .p-title{font-size:22px;font-weight:900;color:#fff;}
@@ -198,7 +200,7 @@
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
     .btn{flex:1;min-width:140px;padding:14px;border-radius:14px;border:none;background:rgba(255,255,255,0.06);color:#fff;font-weight:800;cursor:pointer;font-size:14px;font-family:inherit;transition:transform .1s;}
     .btn:active{transform:scale(0.97);}
-    .btn.primary{color:#0a0f1e;background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 6px 20px var(--gold-glow);}
+    .btn.primary{color:var(--bg);background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 6px 20px var(--gold-glow);}
     .btn[disabled]{opacity:0.4;cursor:not-allowed;background:#1e293b;color:var(--muted);box-shadow:none;}
     .stepbox{margin-top:14px;border-radius:16px;border:1px solid var(--stroke);background:rgba(255,255,255,0.02);padding:20px;text-align:center;}
     .stepnum{font-size:52px;font-weight:900;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);}
@@ -237,7 +239,7 @@
     @keyframes cFall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
     /* MARQUEE */
-    .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
+    .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(242,169,59,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
     .marquee-inner{display:inline-block;animation:mqScroll 120s linear infinite;font-size:11px;font-weight:600;color:var(--muted);will-change:transform;}
     .marquee-inner span{color:var(--gold);font-weight:800;}
     @keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -255,18 +257,18 @@
     .geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:320px;}
     .geo-btn{display:flex;align-items:center;gap:10px;padding:16px;border-radius:16px;background:rgba(255,255,255,0.04);border:1px solid var(--stroke2);cursor:pointer;transition:all .2s;font-family:inherit;}
     .geo-btn:active{transform:scale(0.96);}
-    .geo-btn:hover{border-color:var(--gold);background:rgba(250,204,21,0.06);}
+    .geo-btn:hover{border-color:var(--gold);background:rgba(242,169,59,0.06);}
     .geo-flag{font-size:28px;}
     .geo-name{font-size:14px;font-weight:700;color:#fff;}
 
     /* REGISTER BUTTON in lock overlay */
-    .reg-btn{margin-top:8px;padding:8px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;}
+    .reg-btn{margin-top:8px;padding:8px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;}
     .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
 
     /* APP SHELL + TAB BAR */
     .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100dvh;}
     .app-body{flex:1;min-height:0;position:relative;overflow:hidden;}
-    .tab-bar{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:56px;background:#060a14;border-top:1px solid rgba(250,204,21,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);flex-shrink:0;}
+    .tab-bar{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:56px;background:var(--bg2);border-top:1px solid rgba(242,169,59,0.15);display:flex;align-items:center;justify-content:center;z-index:300;box-shadow:0 -8px 30px rgba(0,0,0,0.5);flex-shrink:0;}
     .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 0;cursor:pointer;color:var(--muted2);transition:all .2s;border:none;background:none;font-family:inherit;-webkit-tap-highlight-color:transparent;}
     .tab-item.active{color:var(--gold);}
     .tab-item .tab-icon{font-size:20px;line-height:1;}
@@ -283,14 +285,14 @@
     .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;word-wrap:break-word;animation:msgIn .3s ease;}
     @keyframes msgIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
     .msg.bot{align-self:flex-start;background:rgba(255,255,255,0.06);border:1px solid var(--stroke);color:var(--text);border-bottom-left-radius:4px;}
-    .msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:600;border-bottom-right-radius:4px;}
+    .msg.user{align-self:flex-end;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);font-weight:600;border-bottom-right-radius:4px;}
     .msg.typing{align-self:flex-start;background:rgba(255,255,255,0.04);border:1px solid var(--stroke);color:var(--muted);font-style:italic;}
     .msg-time{font-size:9px;color:var(--muted2);margin-top:3px;}
     .chat-input-row{display:flex;gap:8px;padding:8px 16px 8px;border-top:1px solid var(--stroke);align-items:flex-end;flex-shrink:0;background:var(--bg);}
     .chat-input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--stroke2);border-radius:20px;padding:10px 16px;color:#fff;font-size:16px;line-height:1.25;outline:none;font-family:inherit;resize:none;height:42px;min-height:42px;max-height:42px;overflow-y:auto;-webkit-text-size-adjust:100%;}
     .chat-input::placeholder{color:var(--muted2);}
-    .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,0.1);}
-    .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
+    .chat-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(242,169,59,0.1);}
+    .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .1s;font-family:inherit;}
     .chat-send:active{transform:scale(0.9);}
     .chat-send:disabled{opacity:0.3;}
     .chat-attach{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);color:var(--muted);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-family:inherit;}
@@ -319,11 +321,11 @@
     .top-header{text-align:center;padding:10px 0 16px;}
     .top-header-title{font-size:22px;font-weight:900;color:#fff;}
     .top-header-sub{font-size:11px;color:var(--muted);margin-top:4px;}
-    .top-header-date{display:inline-block;margin-top:8px;padding:4px 14px;border-radius:99px;background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.15);color:var(--gold);font-size:11px;font-weight:700;}
+    .top-header-date{display:inline-block;margin-top:8px;padding:4px 14px;border-radius:99px;background:rgba(242,169,59,0.08);border:1px solid rgba(242,169,59,0.15);color:var(--gold);font-size:11px;font-weight:700;}
     .top-podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:16px 0 20px;}
     .podium-item{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;}
     .podium-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--stroke);}
-    .podium-item:nth-child(2) .podium-avatar{width:58px;height:58px;font-size:22px;border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow);background:rgba(250,204,21,0.1);}
+    .podium-item:nth-child(2) .podium-avatar{width:58px;height:58px;font-size:22px;border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow);background:rgba(242,169,59,0.1);}
     .podium-item:nth-child(1) .podium-avatar{background:rgba(192,192,192,0.08);border-color:#aaa;}
     .podium-item:nth-child(3) .podium-avatar{background:rgba(205,127,50,0.08);border-color:#cd7f32;}
     .podium-name{font-size:11px;font-weight:700;color:#fff;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -339,12 +341,12 @@
     /* ── Live Room ── */
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
-    .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
+    .live-room-shell{border:1.5px solid rgba(242,169,59,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
     .live-room-feed{flex:1;overflow-y:auto;padding:8px 10px 4px;display:flex;flex-direction:column;gap:0;min-height:0;}
     .live-room-feed::-webkit-scrollbar{width:3px;}
     .live-room-feed::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px;}
     .room-msg{padding:2px 0;line-height:1.4;}
-    .room-msg.user{background:rgba(250,204,21,0.04);border-radius:6px;padding:2px 6px;}
+    .room-msg.user{background:rgba(242,169,59,0.04);border-radius:6px;padding:2px 6px;}
     .room-inline{display:inline;}
     .room-name{font-weight:800;font-size:12.5px;margin-right:2px;}
     .room-name.c1{color:#64b5f6;} .room-name.c2{color:#ce93d8;} .room-name.c3{color:#81c784;} .room-name.c4{color:#ffb74d;} .room-name.c5{color:#ef9a9a;} .room-name.c6{color:#80cbc4;}
@@ -362,14 +364,14 @@
     .room-typing .dots span:nth-child(2){animation-delay:0.2s;}
     .room-typing .dots span:nth-child(3){animation-delay:0.4s;}
     @keyframes typingDot{0%,60%,100%{opacity:0.3}30%{opacity:1}}
-    .room-composer{border-top:1.5px solid rgba(250,204,21,0.25);background:rgba(0,0,0,0.25);border-radius:0 0 16px 16px;padding:0;}
+    .room-composer{border-top:1.5px solid rgba(242,169,59,0.25);background:rgba(0,0,0,0.25);border-radius:0 0 16px 16px;padding:0;}
     .room-lock{padding:14px 16px;text-align:center;}
     .room-lock-input{width:100%;padding:12px 16px;border-radius:0 0 14px 14px;border:none;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.25);font-size:13px;font-family:inherit;outline:none;cursor:not-allowed;}
     .room-lock-hint{font-size:11px;color:rgba(255,255,255,0.3);margin-top:6px;}
     .room-input-row{display:flex;align-items:center;gap:8px;padding:10px 12px;}
     .room-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);border-radius:12px;padding:10px 14px;color:#fff;font-size:13px;resize:none;height:40px;font-family:inherit;outline:none;}
-    .room-input:focus{border-color:rgba(250,204,21,0.3);}
-    .room-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:#0a0f1e;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .room-input:focus{border-color:rgba(242,169,59,0.3);}
+    .room-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:var(--bg);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .room-send:disabled{opacity:0.3;}
   </style>
 
@@ -402,7 +404,7 @@
       <div id="tabChat" class="tab-content">
         <div class="chat-header">
           <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
         </div>
         <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
@@ -420,8 +422,10 @@
         </div>
       </div>
 
+      <section class="last-post" id="lastPostBlock" aria-label="Акыркы канал посту"><button class="last-post-card" id="lastPostCard" type="button" onclick="openLastPostChannel()"><img class="last-post-photo" id="lastPostPhoto" alt="Канал постунун сүрөтү" loading="lazy"><span class="last-post-copy"><span class="last-post-eyebrow">Акыркы пост</span><span class="last-post-channel" id="lastPostChannel"></span><span class="last-post-text" id="lastPostText"></span><span class="last-post-cta">Жабык каналга өтүү →</span></span></button></section>
+
       <div class="market-closed" id="marketClosedBanner" role="status" aria-live="polite">
-        <div><div class="market-closed-title">Рынок закрыт</div><div class="market-closed-sub">До открытия</div></div>
+        <div><div class="market-closed-title">Базар жабык</div><div class="market-closed-sub">Ачылышына чейин</div></div>
         <div class="market-closed-timer" id="marketClosedTimer">--:--:--</div>
       </div>
 
@@ -431,13 +435,13 @@
           <div class="tv-widget-target" id="tvChartTarget"></div>
           <div class="tv-loader" id="tvChartLoader">
             <div class="tv-spinner" aria-hidden="true"></div>
-            <div class="tv-state-title">Загрузка графика…</div>
-            <div class="tv-state-text">Подключаем котировки TradingView</div>
+            <div class="tv-state-title">График жүктөлүүдө…</div>
+            <div class="tv-state-text">TradingView котировкалары туташууда</div>
           </div>
           <div class="tv-fallback" id="tvChartFallback" hidden>
-            <div class="tv-state-title">График временно недоступен</div>
-            <div class="tv-state-text">Проверьте интернет-соединение и попробуйте ещё раз.</div>
-            <button class="tv-retry" type="button" onclick="retryTradingViewChart()">Повторить</button>
+            <div class="tv-state-title">График убактылуу жеткиликсиз</div>
+            <div class="tv-state-text">Интернет байланышын текшерип, кайра аракет кылыңыз.</div>
+            <button class="tv-retry" type="button" onclick="retryTradingViewChart()">Кайра аракет</button>
           </div>
         </div>
       </section>
@@ -445,10 +449,10 @@
       <div class="vip-card" id="vipCard" onclick="showHelp('vip')" style="margin-top:8px;">
         <div class="vip-top">
           <div class="vip-badge">
-            <div class="vip-badge-icon" id="vipIcon2">🥉</div>
+            <div class="vip-badge-icon" id="vipIcon2">❔</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% ACCURACY</div>
+              <div class="vip-badge-tier" id="vipTier2">Unranked</div>
+              <div class="vip-badge-acc" id="vipAcc2">1 АКЫСЫЗ СИГНАЛ</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
@@ -457,12 +461,12 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">0 сом / 80 сом</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 signals left today</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">0 сом / 850 сом</span><span id="vipProgressHint">Deposit more to upgrade ⬆</span></div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 1 акысыз сигнал жеткиликтүү</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">күн катар</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -472,17 +476,17 @@
     <!-- TOP PLAYERS TAB -->
     <div id="tabLiveRoom" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Live Room</div>
+        <div class="live-room-label">Жандуу бөлмө</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold tier to unlock chat">
-              <div class="room-lock-hint">Watch the room now · Gold members can join the conversation</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Чатты ачуу үчүн Gold деңгээлине жетиңиз">
+              <div class="room-lock-hint">Бөлмөнү азыр көрүңүз · Gold мүчөлөрү сүйлөшүүгө кошулат</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
+              <textarea class="room-input" id="liveRoomInput" placeholder="Билдирүү жазыңыз..." maxlength="280"></textarea>
               <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
             </div>
           </div>
@@ -490,7 +494,7 @@
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 Топ оюнчулар</div><div class="top-header-sub" id="topSourceLabel">Апталык рейтинг</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -500,10 +504,10 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
-      <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
+      <button class="tab-item active" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">Чат</span></button>
+      <button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Сигналдар</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Бөлмө</span></button>
+      <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Топ 100</span></button>
     </div>
   </div>
 
@@ -566,8 +570,16 @@
     const REAL_NAME_POOL=["Айбек","Нурбек","Бакыт","Эрлан","Тимур","Руслан","Азат","Данияр","Эмил","Адилет","Самат","Канат","Азамат","Нурсултан","Марат","Айсулуу","Нуриза","Айдана","Жанара","Гүлнур","Салтанат","Мээрим","Алина","Асел","Назира"];
     const CHAT_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-bokg-chat';
     const CHAT_HISTORY_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-bokg-history';
+    const LAST_POST_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-bokg-lastpost';
+    const TOP100_WEBHOOK='https://n8nnexusai.uk/webhook/nexusai-bokg-top100';
+    const LAST_POST_CHANNEL='https://t.me/+6ofVmcwm02piMjMy';const LAST_POST_TIMEOUT_MS=8000;let currentLastPost=null;
+    function validLastPost(p){return !!(p&&typeof p==='object'&&(String(p.text||'').trim()||String(p.photo_url||'').trim()));}
+    function renderLastPost(p){const b=document.getElementById('lastPostBlock'),c=document.getElementById('lastPostCard'),ph=document.getElementById('lastPostPhoto'),ch=document.getElementById('lastPostChannel'),tx=document.getElementById('lastPostText');if(!b||!c||!ph||!ch||!tx||!validLastPost(p)){b?.classList.remove('show');return false;}currentLastPost=p;ch.textContent=String(p.channel_name||'BO-KG жабык каналы');tx.textContent=String(p.text||'');const im=String(p.photo_url||'').trim();c.classList.toggle('no-photo',!im);if(im)ph.src=im;else ph.removeAttribute('src');b.classList.add('show');return true;}
+    function openLastPostChannel(){const u=String(currentLastPost?.link||LAST_POST_CHANNEL);try{if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else if(tg&&tg.openLink)tg.openLink(u);else window.open(u,'_blank');}catch(e){window.open(u,'_blank');}}
+    async function loadLastPost(){let cached=false;try{cached=renderLastPost(JSON.parse(S.get('lastpost')||'null'));}catch(e){}const c=new AbortController(),t=setTimeout(()=>c.abort(),LAST_POST_TIMEOUT_MS);try{const r=await fetch(LAST_POST_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',signal:c.signal}),d=await r.json(),p=d&&d.post;if(r.ok&&d.ok&&validLastPost(p)){S.set('lastpost',JSON.stringify(p));renderLastPost(p);}else if(!cached)document.getElementById('lastPostBlock')?.classList.remove('show');}catch(e){if(!cached)document.getElementById('lastPostBlock')?.classList.remove('show');}finally{clearTimeout(t);}}
+
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80)
+    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=2000)
     let userTotalDeposit=0;
     const APP_NS='nexusbokg'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -787,16 +799,12 @@
     const curStreak=updStreak();
 
     // VIP
-    const VIP_TIERS=[
-      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:80,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
-    ];
+    const VIP_TIERS=[{name:'Unranked',icon:'❔',dep:0,sigs:1,unlimited:false,acc:0,desc:'Бир жолку акысыз сигнал'},{name:'Bronze',icon:'🥉',dep:850,sigs:5,unlimited:false,acc:90,desc:'Күнүнө 5 сигнал, тактык 90%'},{name:'Gold',icon:'🥇',dep:2000,sigs:0,unlimited:true,acc:95,desc:'Чексиз сигналдар, тактык 95% + Жеке AI аналитик'}];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
-    function addDailySignal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
-    function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
-    function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignals()>=tier.sigs;}
+    function addDailySignal(){if(getVipTierIdx()===0)S.set('freeSignalUsed','1');const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
+    function getDailyLimit(){const tier=getVipTier();return tier.unlimited?Infinity:tier.sigs;}
+    function isSignalLimitReached(){const tier=getVipTier();if(tier.unlimited)return false;if(getVipTierIdx()===0)return S.get('freeSignalUsed')==='1';return getDailySignals()>=tier.sigs;}
     function getVipTier(){return VIP_TIERS[getVipTierIdx()];}
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
@@ -804,7 +812,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Deposit 50 сом to activate Bronze':(tier.acc+'% ACCURACY');
+      document.getElementById('vipAcc2').textContent=dep===0?(S.get('freeSignalUsed')==='1'?'АКЫСЫЗ СИГНАЛ КОЛДОНУЛДУ':'1 АКЫСЫЗ СИГНАЛ'):(tier.acc+'% ACCURACY');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -815,16 +823,16 @@
       const used=getDailySignals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Deposit 50 сом to activate Bronze';}
-        else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Signals refresh tomorrow';}
+        if(dep===0){sigEl.textContent=S.get('freeSignalUsed')==='1'?'🔒 Акысыз сигнал колдонулду':'⚡ 1 акысыз сигнал жеткиликтүү';}
+        else if(tier.unlimited){sigEl.textContent='♾️ Бүгүн сигналдар чексиз';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ Бүгүн ${rem}/${limit} сигнал калды`:'🔒 Сигналдар эртең жаңыланат';}
       }
       if(dep===0){
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent='50 сом to unlock Bronze';
-        hint.textContent='Deposit 50 сом to activate Bronze';
+        left.textContent='850 сом — Bronze ачылат';
+        hint.textContent='Bronze үчүн 850 сом депозит';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -843,7 +851,7 @@
         hint.textContent='Unlimited signals + Personal AI Analyst 🥇';
       }
       // Card border color by tier
-      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
+      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(242,169,59,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(242,169,59,0.5)'};
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
     }
     updVIP();
@@ -853,7 +861,7 @@
     function playSfx(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.type='sine';o.frequency.setValueAtTime(800,actx.currentTime);o.frequency.setValueAtTime(1200,actx.currentTime+0.1);g.gain.setValueAtTime(0.2,actx.currentTime);g.gain.exponentialRampToValueAtTime(0.01,actx.currentTime+0.3);o.start();o.stop(actx.currentTime+0.3);}catch(e){}}
 
     // CONFETTI
-    function fireConfetti(){const box=document.getElementById('confettiBox'),cols=['#facc15','#22c55e','#3b82f6','#ef4444','#a855f7','#ec4899'];for(let i=0;i<35;i++){const p=document.createElement('div');p.className='confetti-p';p.style.left=Math.random()*100+'%';p.style.background=cols[Math.floor(Math.random()*cols.length)];p.style.animationDelay=Math.random()*.5+'s';p.style.animationDuration=(2+Math.random()*2)+'s';p.style.borderRadius=Math.random()>.5?'50%':'2px';p.style.width=(5+Math.random()*7)+'px';p.style.height=(5+Math.random()*7)+'px';box.appendChild(p);setTimeout(()=>p.remove(),4000);}}
+    function fireConfetti(){const box=document.getElementById('confettiBox'),cols=['#f2a93b','#22c55e','#3b82f6','#ef4444','#a855f7','#ec4899'];for(let i=0;i<35;i++){const p=document.createElement('div');p.className='confetti-p';p.style.left=Math.random()*100+'%';p.style.background=cols[Math.floor(Math.random()*cols.length)];p.style.animationDelay=Math.random()*.5+'s';p.style.animationDuration=(2+Math.random()*2)+'s';p.style.borderRadius=Math.random()>.5?'50%':'2px';p.style.width=(5+Math.random()*7)+'px';p.style.height=(5+Math.random()*7)+'px';box.appendChild(p);setTimeout(()=>p.remove(),4000);}}
 
     // TAB
     let curTab='signals';
@@ -888,21 +896,14 @@
     const savedLang=S.get('aslang');
     let lang=LANGS.some(x=>x.id===savedLang)?savedLang:'ky';
     if(!savedLang)S.set('aslang',lang);
-    function T(){return STR[lang]||STR.en;}
+    function T(){return STR[lang]||STR.ky;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
     function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
-        g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
-        ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
-        av:{t:"Aviator",s:"Refreshes every minute.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        jx:{t:"JetX",s:"Max 10x.",b:"GET SIGNAL",l:"COEFFICIENT",u:(t)=>`Updates at <strong>${t}</strong>`},
-        pe:{t:"Penalty",s:"Aim for target.",b:"GET SIGNAL",l:"TARGET",u:(t)=>`Updates at <strong>${t}</strong>`},
-        mi:{t:"Mines",s:"Safe spots marked.",b:"GET SIGNAL",l:"SAFE SPOTS",u:(t)=>`Updates at <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Cash out before pop.",b:"GET SIGNAL",l:"CASH OUT",u:(t)=>`Updates at <strong>${t}</strong>`}},
+      ky:{cg:"Оюнду тандаңыз:",back:"Меню",lt:"КИРҮҮ ЖАБЫК",lm:"⛔️ Кирүүнү ачуу үчүн боттогу каттоону бүтүрүңүз.",skip:"ӨТКӨРҮҮ",wait:"Күтүңүз",tut:{s1:"",s2:"",s4:"",s5:""},g:{aviator:{n:"Aviator",d:"Crash оюну"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Тобокелдик деңгээлдери"},penalty:{n:"Penalty",d:"Дарбазага сокку"},mines:{n:"Mines",d:"Миналардан качыңыз"},balloon:{n:"Balloon",d:"Көбүртүп, өз убагында алыңыз"}},ch:{t:"Chicken Road",s:"Кыйынчылыкты тандаңыз.",nx:"КИЙИНКИ КАДАМ",w:(s)=>`${s}с күтүңүз`,tb:{easy:"Жеңил",medium:"Орточо",hard:"Кыйын",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Ар мүнөт сайын жаңыланат.",b:"СИГНАЛ АЛУУ",l:"КОЭФФИЦИЕНТ",u:(t)=>`<strong>${t}</strong> жаңыланат`},jx:{t:"JetX",s:"Максимум 10x.",b:"СИГНАЛ АЛУУ",l:"КОЭФФИЦИЕНТ",u:(t)=>`<strong>${t}</strong> жаңыланат`},pe:{t:"Penalty",s:"Максаттуу зонаны тандаңыз.",b:"СИГНАЛ АЛУУ",l:"ЗОНА",u:(t)=>`<strong>${t}</strong> жаңыланат`},mi:{t:"Mines",s:"Коопсуз уячалар белгиленет.",b:"СИГНАЛ АЛУУ",l:"КООПСУЗ УЯЧАЛАР",u:(t)=>`<strong>${t}</strong> жаңыланат`},ba:{t:"Balloon",s:"Жарылганга чейин алыңыз.",b:"СИГНАЛ АЛУУ",l:"АЛУУ ЧЕГИ",u:(t)=>`<strong>${t}</strong> жаңыланат`}},
       ru:{cg:"Выберите игру:",back:"Меню",lt:"ДОСТУП ЗАКРЫТ",lm:"⛔️ Отправьте ID боту.",skip:"ПРОПУСТИТЬ",wait:"Ждите",tut:{s1:"ID синхронизирован.",s2:"Выберите игру.",s4:"Прогноз.",s5:"Нажмите кнопку."},
         g:{aviator:{n:"Aviator",d:"Crash игра"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Уровни риска"},penalty:{n:"Penalty",d:"Забей гол"},mines:{n:"Mines",d:"Обмани поле"},balloon:{n:"Balloon",d:"Надувай и забирай"}},
         ch:{t:"Chicken Road",s:"Выберите сложность.",nx:"ДАЛЕЕ",w:(s)=>`Ждите ${s}с`,tb:{easy:"Лёгкий",medium:"Средний",hard:"Сложный",hardcore:"Хардкор"}},
@@ -910,12 +911,7 @@
         jx:{t:"JetX",s:"Макс 10x.",b:"ПОЛУЧИТЬ",l:"КОЭФФ.",u:(t)=>`Обновится в <strong>${t}</strong>`},
         pe:{t:"Penalty",s:"Бей в зону.",b:"ПОЛУЧИТЬ",l:"ЗОНА",u:(t)=>`Обновится в <strong>${t}</strong>`},
         mi:{t:"Mines",s:"Безопасные клетки.",b:"ПОЛУЧИТЬ",l:"ЯЧЕЙКИ",u:(t)=>`Обновится в <strong>${t}</strong>`},
-        ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}},
-      es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Enviar ID al bot.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Evita minas"},balloon:{n:"Balloon",d:"Infla y gana"}},ch:{t:"Chicken Road",s:"Dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Medio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta.",b:"OBTENER",l:"ZONA",u:(t)=>`Actualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTENER",l:"CELDAS",u:(t)=>`Actualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira.",b:"OBTENER",l:"RETIRAR",u:(t)=>`Actualiza <strong>${t}</strong>`}},
-      pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
-      id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
-      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Livelli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
-      mn:{cg:"Сонгох:",back:"Цэс",lt:"ХААГДЛАА",lm:"⛔️ ID илгээнэ.",skip:"АЛГАСАХ",wait:"Хүлээнэ",tut:{s1:"ID синхрон.",s2:"Тоглоом сонгох.",s4:"Таамаглал.",s5:"Дарна уу."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Эрсдэл"},penalty:{n:"Penalty",d:"Гоол"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Хүлээнэ ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
+        ba:{t:"Balloon",s:"Забирай до взрыва.",b:"ПОЛУЧИТЬ",l:"ЗАБРАТЬ",u:(t)=>`Обновится в <strong>${t}</strong>`}}
     };
 
     // UTILS
@@ -949,9 +945,9 @@
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
 
-      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
+      if(d.total_deposit!==undefined){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));updVIP();}
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
-      chatTier=(userTotalDeposit>=80)?2:1;
+      chatTier=(userTotalDeposit>=2000)?2:1;
       updateChatHeader();}catch(e){}
     }
     function updateChatHeader(){
@@ -961,7 +957,7 @@
         if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
         if(title)title.textContent='ANALYST';
         const hdr=document.querySelector('.chat-header');
-        if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
+        if(hdr){hdr.style.borderBottom='1px solid rgba(242,169,59,0.3)';hdr.style.background='linear-gradient(180deg,rgba(242,169,59,0.06),var(--bg))';}
       }else{
         if(sub)sub.textContent='NexusAI Support';
         if(title)title.textContent='SUPPORT';
@@ -983,8 +979,8 @@
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
       const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      if(d.total_deposit!==undefined){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));updVIP();}
+      if(d.allowed||(getVipTierIdx()===0&&!isSignalLimitReached())){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
       else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
@@ -1016,7 +1012,7 @@
         if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ${need.toLocaleString()} сом in chat to unlock ⬆</div></div>`;}
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(242,169,59,0.08);border-radius:10px;border:1px solid rgba(242,169,59,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ${need.toLocaleString()} сом in chat to unlock ⬆</div></div>`;}
           box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better accuracy.</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent='Server limit';btn.style.opacity='0.3';return true;
         }
@@ -1043,7 +1039,7 @@
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ${need.toLocaleString()} сом to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
+      nxB.onclick=()=>{if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(242,169,59,0.08);border-radius:10px;border:1px solid rgba(242,169,59,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up ${need.toLocaleString()} сом to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
@@ -1051,44 +1047,17 @@
       {name:'Айсулуу',badge:'Gold',lang:'ky'},{name:'Мээрим',badge:'Gold',lang:'ky'},{name:'Данияр',badge:'Gold',lang:'ky'},{name:'Асел',badge:'Gold',lang:'ky'},
       {name:'Адилет',badge:'Gold',lang:'ky'},{name:'Жанара',badge:'Gold',lang:'ky'},{name:'Самат',badge:'Gold',lang:'ky'},{name:'Гүлнур',badge:'Gold',lang:'ky'}
     ];
-    const SEED_EN=[
-      '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
-      'bro 💀','insane','terbaik','same here','real','big W','AI cooked 🔥','who caught that??','gg room','that was fast',
-      'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
-      'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
-      'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
-      'room was dead then boom 💸','gold room moves fast','quiet then 3 straight W','late entry but still profit',
-      'lol i was sleeping and missed it 😭','woke up to profit','free money fr','told yall','called it','not bad at all'
-    ];
-    const SEED_KR=[
-      'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
-      '오늘 수익 괜찮다','어제보다 낫다','신호 정확했어','승률 괜찮네','balloon터짐 ㄹㅇ','봤지?',
-      '₩80k 달성 ㅋㅋ','오늘 하루 좋았다','mines 3연속 💰','진짜 미쳤다','이건 real','방금 gold 달성 🥇',
-      'crash 타이밍 좋았어','penalty 깔끔','chicken road ㅋㅋ','aviator 방금 터짐','nice','gg'
-    ];
-    const SEED_ES=[
-      'genial','otro día otro profit','la racha sigue 💪','primer día y ya profit','hoy ganamos',
-      'ese crash de 5.8x fue loco','esto pegó bien','ayer no pero hoy sí 🙌','mines limpió hoy 💰',
-      'dije que iba a pegar','ese fue gratis','balloon subió loco','penalty limpio','not bad','nice',
-      'JetX 3.2x acaba de pegar','crash timing mejorando','recién llegué y ya profit','gg','🔥','💰💰'
-    ];
+    const SEED_KY=['🔥🔥','сонун','так чыкты','таза сигнал','дагы бир утуш','бүгүн жакшы күн','EUR/USD сонун болду','GBP/USD сигналын ким алды?','USD/JPY так келди','AUD/USD дагы плюс','USDCAD күтүлгөндөй','үчүнчү утуш катарынан 💰','Gold бөлмө күчтүү экен','кеч кирдим, бирок плюс алдым','биринчи өтпөй калды, экинчиси жапты','жакшы иш','AI бүгүн күчтүү','аз болсо да пайда','мен да алдым','көрдүңөрбү?','🥇','💰💰','ийгилик баарыңа'];
     let liveRoomFeed=[];
     function liveRoomUnlocked(){return getVipTierIdx()>=1;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
     function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
     function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
-    function pickText(npc,seed){
-      const lang=npc.lang||'en';const r=sRng(seed);
-      if(lang==='kr'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_KR[Math.floor(sRng(seed+50)*SEED_KR.length)];}
-      if(lang==='es'){return r<0.3?SEED_EN[Math.floor(sRng(seed+99)*SEED_EN.length)]:SEED_ES[Math.floor(sRng(seed+50)*SEED_ES.length)];}
-      return SEED_EN[Math.floor(sRng(seed+50)*SEED_EN.length)];
-    }
+    function pickText(npc,seed){return SEED_KY[Math.floor(sRng(seed+50)*SEED_KY.length)];}
     const SLOT_SEC=8;
     function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
-    const REPLY_EN=['nice','facts','same bro','real','gg','lol','fr fr','W','big W','no way 😂','true','yep','100%','agreed','this ^^'];
-    const REPLY_KR=['ㅋㅋㅋ','ㄹㅇ','나도','진짜','대박','ㅇㅇ','맞아','ㅋㅋ 인정','그거 맞음','ㅇㅈ'];
-    const REPLY_ES=['jaja','tal cual','real','eso','sí bro','facts','exacto','jajaja','100%','lo mismo'];
-    function pickReply(npc,seed){const lang=npc.lang||'en';const pool=lang==='kr'?REPLY_KR:lang==='es'?REPLY_ES:REPLY_EN;return pool[Math.floor(sRng(seed)*pool.length)];}
+    const REPLY_KY=['сонун','туура','мен да','так эле','ооба','🔥','күчтүү','100%','макул','ушул да','жакшы болду'];
+    function pickReply(npc,seed){return REPLY_KY[Math.floor(sRng(seed)*REPLY_KY.length)];}
     function msgForSlot(slot){
       const npcIdx=Math.floor(sRng(slot*7+1)*LIVE_ROOM_NPCS.length);const npc=LIVE_ROOM_NPCS[npcIdx];
       const ts=new Date(slot*SLOT_SEC*1000).toISOString();
@@ -1156,8 +1125,8 @@
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${remain.toLocaleString()} сом to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${remain.toLocaleString()} сом to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(242,169,59,0.06);border-radius:10px;border:1px solid rgba(242,169,59,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
+    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
@@ -1241,12 +1210,17 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    let topPlayersCache=null,topPlayersLoading=false,topPlayersSource='fallback';
+    function escTop(v){const x=document.createElement('div');x.textContent=String(v??'');return x.innerHTML;}
+    function drawTopPlayers(players,source='fallback'){const d=new Date(),ds=d.toLocaleDateString('ky-KG',{month:'short',day:'numeric',year:'numeric'}),p=(players&&players.length?players:genTop()).slice(0,100),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];document.getElementById('topDate').textContent=`📅 ${ds} аптасы`;const se=document.getElementById('topSourceLabel');if(se)se.textContent=source==='live'?'Жандуу апталык рейтинг':'Локалдык резервдик рейтинг';pd.innerHTML=od.filter(i=>p[i]).map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${escTop(p[i].nm)}</div><div class="podium-amount">${Number(p[i].am||0).toLocaleString()} сом</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${escTop(x.nm)}</div><div class="top-game">${escTop(x.gm)}</div><div class="top-amount">+${Number(x.am||0).toLocaleString()} сом</div></div>`).join('');}
+    function renderTopPlayers(){drawTopPlayers(topPlayersCache||genTop(),topPlayersSource);if(!topPlayersLoading)loadTopPlayers();}
+    async function loadTopPlayers(){topPlayersLoading=true;const c=new AbortController(),t=setTimeout(()=>c.abort(),8000);try{const r=await fetch(TOP100_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',signal:c.signal}),d=await r.json();if(r.ok&&d.ok&&Array.isArray(d.players)&&d.players.length){topPlayersCache=d.players.slice(0,100).map((p,i)=>({rk:Number(p.rank)||i+1,nm:String(p.name||`Trader ${i+1}`),gm:String(p.game||''),am:Math.max(0,Number(p.amount)||0)}));topPlayersSource=d.source==='synthetic_fallback'?'fallback':'live';if(curTab==='top')drawTopPlayers(topPlayersCache,topPlayersSource);}}catch(e){}finally{clearTimeout(t);topPlayersLoading=false;}}
+
 
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. Gold members get enhanced signal accuracy with longer streaks.'},
-      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (50 сом) — 5 signals/day, 90% accuracy\n🥇 Gold (80 сом) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
+      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (850 сом) — 5 signals/day, 90% accuracy\n🥇 Gold (2000 сом) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
       profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
       winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
     };
@@ -1285,6 +1259,7 @@
       // Defer non-critical UI work until the first screen is already visible
       setTimeout(()=>{try{buildMarquee();}catch(e){}},0);
       setTimeout(()=>{try{loadChatHistory();}catch(e){}},50);
+      setTimeout(()=>{try{loadLastPost();}catch(e){}},0);
     }
 
     // INIT
