@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
-  <title>NexusAI Signals</title>
+  <title>NexusAI Sinyaller</title>
   <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate,max-age=0"/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -138,7 +138,7 @@
     .game-card[data-game="mines"]{background:linear-gradient(145deg,rgba(59,130,246,0.12),rgba(15,23,42,0.8));border-color:rgba(59,130,246,0.15);}
     .game-card[data-game="penalty"]{background:linear-gradient(145deg,rgba(34,197,94,0.12),rgba(15,23,42,0.8));border-color:rgba(34,197,94,0.15);}
     .game-card[data-game="balloon"]{background:linear-gradient(145deg,rgba(168,85,247,0.12),rgba(15,23,42,0.8));border-color:rgba(168,85,247,0.15);}
-    .game-card[data-game="chicken"]{background:linear-gradient(145deg,rgba(251,146,60,0.12),rgba(15,23,42,0.8));border-color:rgba(251,146,60,0.15);}
+    .game-card[data-game="chicken"]{background:linear-gradient(145deg,rgba(251,146,60,0.12),rgba(15,23,42,0.8));border-color:rgba(251,146,60,0.15);}    .game-card[data-game="sweet"]{background:linear-gradient(145deg,rgba(236,72,153,0.24),rgba(124,58,237,0.16),rgba(15,23,42,0.88));border-color:rgba(244,114,182,0.34);box-shadow:0 10px 30px rgba(236,72,153,0.12);}    .game-card[data-game="gates"]{background:linear-gradient(145deg,rgba(250,204,21,0.24),rgba(59,130,246,0.14),rgba(15,23,42,0.88));border-color:rgba(250,204,21,0.34);box-shadow:0 10px 30px rgba(250,204,21,0.12);}    .game-card[data-game="sugar"]{background:linear-gradient(145deg,rgba(244,114,182,0.2),rgba(45,212,191,0.14),rgba(15,23,42,0.88));border-color:rgba(45,212,191,0.28);box-shadow:0 10px 30px rgba(45,212,191,0.12);}    .signal-switcher{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px;}    .signal-switcher .seg-btn{height:48px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:15px;font-weight:900;letter-spacing:.2px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);}    .signal-switcher .seg-btn.active{color:#0a0f1e;transform:translateY(-1px);}    .signal-switcher .seg-btn:first-child.active{background:linear-gradient(135deg,#fb7185,#ef4444);box-shadow:0 10px 24px rgba(239,68,68,0.28);}    .signal-switcher .seg-btn:last-child.active{background:linear-gradient(135deg,#facc15,#eab308);box-shadow:0 10px 24px rgba(250,204,21,0.26);}    .slot-analyzing{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 4px;}    .slot-wave{display:flex;align-items:flex-end;justify-content:center;gap:6px;height:34px;}    .slot-wave span{width:8px;border-radius:999px;background:linear-gradient(180deg,var(--gold),#f59e0b);animation:slotPulse 1s ease-in-out infinite;}    .slot-wave span:nth-child(1){height:12px;animation-delay:0s}.slot-wave span:nth-child(2){height:24px;animation-delay:.15s}.slot-wave span:nth-child(3){height:18px;animation-delay:.3s}.slot-wave span:nth-child(4){height:28px;animation-delay:.45s}.slot-wave span:nth-child(5){height:14px;animation-delay:.6s}    @keyframes slotPulse{0%,100%{transform:scaleY(.55);opacity:.45}50%{transform:scaleY(1.15);opacity:1}}    .slot-status-line{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);}    .slot-status-line span{color:var(--muted);font-size:12px;}    .slot-status-line strong{color:#fff;font-size:13px;}    .slot-sell{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(250,204,21,0.12),rgba(255,255,255,0.03));border:1px solid rgba(250,204,21,0.14);box-shadow:0 14px 34px rgba(0,0,0,0.22);}    .slot-sell::before{content:'';position:absolute;inset:-30% auto auto -10%;width:180px;height:180px;background:radial-gradient(circle,rgba(250,204,21,0.16),transparent 65%);pointer-events:none;}    .slot-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.18);font-size:11px;font-weight:900;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;}    .slot-hero{display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.08);}    .slot-hero-icon{width:72px;height:72px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 12px 24px rgba(0,0,0,0.24);}    .slot-hero-enter{box-shadow:0 0 24px rgba(34,197,94,0.18);}    .slot-hero-wait{box-shadow:0 0 24px rgba(250,204,21,0.18);}    .slot-mini-pill{display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:800;background:rgba(255,255,255,0.05);color:#dbe3f4;border:1px solid rgba(255,255,255,0.06);}    .slot-lock-sell{margin-top:10px;padding:12px;border-radius:14px;background:linear-gradient(145deg,rgba(250,204,21,0.1),rgba(255,255,255,0.03));border:1px solid rgba(250,204,21,0.16);text-align:left;}
 
     .game-top{display:flex;align-items:center;gap:10px;}
     .game-icon{font-size:28px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--stroke2);flex-shrink:0;}
@@ -161,25 +161,34 @@
     .lock-text{color:var(--red);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
     .lock-msg{color:var(--muted);font-size:10px;margin-top:4px;line-height:1.3;}
 
-
-    /* GAME CAROUSEL */
-    .game-carousel-shell{position:relative;border-radius:28px;padding:14px 12px 18px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--stroke);box-shadow:0 20px 70px rgba(0,0,0,.35);overflow:hidden;touch-action:pan-y;}
-    .game-carousel-shell:before{content:"";position:absolute;inset:-42% -35% auto;height:260px;background:radial-gradient(circle,rgba(var(--accent-rgb),.22),transparent 62%);pointer-events:none;transition:.25s;}
-    .game-stage{min-height:390px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;z-index:2;user-select:none;}
-    .carousel-game-name{font-size:31px;line-height:1.03;font-weight:1000;letter-spacing:-.04em;margin-bottom:8px;color:#fff;text-shadow:0 10px 45px rgba(var(--accent-rgb),.42);}
-    .game-provider{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;}
-    .logo-oval{width:min(318px,84vw);height:178px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.45);background:radial-gradient(circle at 50% 42%,rgba(var(--accent-rgb),.22),rgba(255,255,255,.045) 58%,rgba(0,0,0,.2));box-shadow:inset 0 1px rgba(255,255,255,.2),0 22px 70px rgba(var(--accent-rgb),.25);display:grid;place-items:center;position:relative;overflow:hidden;isolation:isolate;}
-    .logo-oval:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.23) 100%),linear-gradient(180deg,rgba(255,255,255,.16),transparent 32%,rgba(0,0,0,.12));z-index:2;pointer-events:none;}
-    .logo-oval:after{content:"";position:absolute;inset:9px;border-radius:inherit;border:1px solid rgba(255,255,255,.12);z-index:3;pointer-events:none;}
-    .game-art{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:var(--img-pos,50% 50%);transform:scale(var(--img-scale,1));transform-origin:center;filter:saturate(1.08) contrast(1.04);z-index:1;}
-    .game-art-aviator{object-fit:contain;object-position:50% 50%;padding:8px 0;background:linear-gradient(180deg,#f5f5f5 0%,#111 54%,#050505 100%);--img-scale:1;}
-    .game-art-chicken{object-fit:contain;object-position:50% 50%;padding:22px 12px;background:radial-gradient(ellipse at center,#fff 0%,#fff 55%,#fff6e7 100%);filter:saturate(1.12) contrast(1.06) drop-shadow(0 14px 20px rgba(0,0,0,.35));}
-    .game-art-jetx{--img-pos:50% 49%;--img-scale:1.02}.game-art-mines{--img-pos:50% 50%;--img-scale:1.02}.game-art-penalty{--img-pos:50% 52%;--img-scale:1.02}.game-art-balloon{--img-pos:50% 52%;--img-scale:1.01}
-    .carousel-game-desc{max-width:258px;margin:18px auto 0;padding:0 8px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.35}.carousel-accuracy{margin-top:10px;color:var(--gold);font-size:12px;font-weight:950}
-    .nav-btn{position:absolute;top:238px;translate:0 -50%;z-index:5;width:38px;height:58px;border-radius:999px;border:1px solid var(--stroke);background:rgba(8,12,24,.58);backdrop-filter:blur(10px);color:#fff;font-size:26px;display:grid;place-items:center;cursor:pointer}.nav-btn.prev{left:10px}.nav-btn.next{right:10px}.nav-btn:active,.carousel-cta:active{scale:.97}
-    .carousel-dots{display:flex;justify-content:center;gap:7px;margin-top:12px}.carousel-dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.22);transition:.2s}.carousel-dot.active{width:24px;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 18px rgba(246,198,74,.45)}
-    .carousel-cta{width:100%;margin-top:16px;border:0;border-radius:18px;padding:16px 18px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:1000;font-size:15px;box-shadow:0 16px 42px rgba(246,198,74,.24);cursor:pointer}.carousel-hint{display:flex;justify-content:center;gap:9px;color:var(--muted);font-size:12px;font-weight:800;margin-top:12px}
+    /* CRASH / SLOT GAME CAROUSEL */
+    .signal-switcher{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px;padding:7px;border-radius:22px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px rgba(255,255,255,.05),0 16px 44px rgba(0,0,0,.24)}
+    .signal-switcher .seg-btn{min-height:58px;border-radius:17px;font-size:12px;font-weight:950;letter-spacing:.035em;line-height:1.18;padding:10px 8px;color:#cbd5e1;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09)}
+    .signal-switcher .seg-btn.active{color:#07101e;transform:translateY(-1px)}
+    .signal-switcher .seg-btn:first-child.active{background:linear-gradient(135deg,#fb7185,#ef4444);box-shadow:0 12px 30px rgba(239,68,68,.3),inset 0 1px rgba(255,255,255,.4)}
+    .signal-switcher .seg-btn:last-child.active{background:linear-gradient(135deg,#fde047,#eab308);box-shadow:0 12px 30px rgba(250,204,21,.27),inset 0 1px rgba(255,255,255,.45)}
+    .mode-helper{text-align:center;color:var(--muted);font-size:11px;font-weight:750;margin:-4px 0 12px}
+    .game-carousel-shell{position:relative;border-radius:28px;padding:14px 12px 18px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border:1px solid var(--stroke);box-shadow:0 20px 70px rgba(0,0,0,.35);overflow:hidden;touch-action:pan-y;--accent-rgb:246,198,74}
+    .game-carousel-shell:before{content:"";position:absolute;inset:-42% -35% auto;height:270px;background:radial-gradient(circle,rgba(var(--accent-rgb),.24),transparent 62%);pointer-events:none;transition:.25s}
+    .game-stage{min-height:372px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;z-index:2;user-select:none;border-radius:24px}
+    .carousel-game-name{font-size:29px;line-height:1.04;font-weight:1000;letter-spacing:-.035em;margin-bottom:7px;color:#fff;text-shadow:0 10px 45px rgba(var(--accent-rgb),.42)}
+    .game-provider{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-bottom:17px}
+    .logo-oval{width:min(318px,82vw);height:178px;border-radius:999px;border:1px solid rgba(var(--accent-rgb),.5);background:radial-gradient(circle at 50% 42%,rgba(var(--accent-rgb),.22),rgba(255,255,255,.045) 58%,rgba(0,0,0,.2));box-shadow:inset 0 1px rgba(255,255,255,.2),0 22px 70px rgba(var(--accent-rgb),.27);position:relative;overflow:hidden;isolation:isolate}
+    .logo-oval:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.25) 100%),linear-gradient(180deg,rgba(255,255,255,.15),transparent 32%,rgba(0,0,0,.13));z-index:2;pointer-events:none}
+    .logo-oval:after{content:"";position:absolute;inset:9px;border-radius:inherit;border:1px solid rgba(255,255,255,.13);z-index:3;pointer-events:none}
+    .game-art{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:var(--img-pos,50% 50%);transform:scale(var(--img-scale,1));transform-origin:center;filter:saturate(1.08) contrast(1.04);z-index:1}
+    .game-art-aviator{object-fit:contain;padding:8px 0;background:linear-gradient(180deg,#f5f5f5 0%,#111 54%,#050505 100%)}
+    .game-art-chicken{object-fit:contain;padding:22px 12px;background:radial-gradient(ellipse at center,#fff 0%,#fff 55%,#fff6e7 100%);filter:saturate(1.12) contrast(1.06) drop-shadow(0 14px 20px rgba(0,0,0,.35))}
+    .game-art-jetx{--img-pos:50% 49%;--img-scale:1.02}.game-art-mines{--img-scale:1.02}.game-art-penalty{--img-pos:50% 52%;--img-scale:1.02}.game-art-balloon{--img-pos:50% 52%;--img-scale:1.01}
+    .game-art-sweet{object-fit:contain;padding:8px;background:#fff;--img-scale:1.02}.game-art-gates{--img-pos:50% 50%;--img-scale:1.02}.game-art-sugar{object-fit:contain;padding:6px;background:linear-gradient(135deg,#fff,#f5e9ff);--img-scale:1.02}
+    .carousel-game-desc{max-width:270px;margin:16px auto 0;padding:0 8px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.35}
+    .carousel-mode-pill{margin-top:9px;padding:5px 10px;border-radius:999px;color:var(--gold);background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.18);font-size:10px;font-weight:950;letter-spacing:.08em}
+    .nav-btn{position:absolute;top:240px;translate:0 -50%;z-index:5;width:40px;height:60px;border-radius:999px;border:1px solid var(--stroke);background:rgba(8,12,24,.66);backdrop-filter:blur(10px);color:#fff;font-size:27px;display:grid;place-items:center;cursor:pointer}.nav-btn.prev{left:9px}.nav-btn.next{right:9px}.nav-btn:active,.carousel-cta:active{scale:.97}
+    .carousel-dots{display:flex;justify-content:center;gap:7px;margin-top:11px}.carousel-dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.22);transition:.2s}.carousel-dot.active{width:24px;background:linear-gradient(90deg,var(--gold),var(--gold2));box-shadow:0 0 18px rgba(246,198,74,.45)}
+    .carousel-cta{width:100%;margin-top:15px;border:0;border-radius:18px;padding:16px 18px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#07101e;font-weight:1000;font-size:15px;box-shadow:0 16px 42px rgba(246,198,74,.24);cursor:pointer}.carousel-hint{text-align:center;color:var(--muted);font-size:11px;font-weight:800;margin-top:11px}
     .slide-out-left{animation:outL .18s ease both}.slide-in-right{animation:inR .2s ease both}.slide-out-right{animation:outR .18s ease both}.slide-in-left{animation:inL .2s ease both}@keyframes outL{to{opacity:0;transform:translateX(-35px) scale(.98)}}@keyframes inR{from{opacity:0;transform:translateX(35px) scale(.98)}}@keyframes outR{to{opacity:0;transform:translateX(35px) scale(.98)}}@keyframes inL{from{opacity:0;transform:translateX(-35px) scale(.98)}}
+    @media(max-width:360px){.signal-switcher .seg-btn{font-size:11px;min-height:54px}.game-stage{min-height:350px}.logo-oval{height:160px}.nav-btn{top:226px}}
+
     /* GAME DETAIL PANEL */
     .panel{margin-top:12px;border-radius:var(--r2);border:1px solid var(--stroke);background:rgba(13,19,36,0.8);padding:16px;backdrop-filter:blur(8px);}
     .backrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
@@ -221,12 +230,25 @@
     .penalty-ball{font-size:22px;animation:popIn .3s cubic-bezier(.175,.885,.32,1.275);}
     @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
     .tabs{margin-top:14px;}
-    .segmented{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;padding:6px;border-radius:18px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);box-shadow:inset 0 1px rgba(255,255,255,0.05);}
-    .seg-btn{min-width:0;padding:11px 6px;border-radius:13px;border:1px solid rgba(250,204,21,0.26);background:rgba(250,204,21,0.06);color:var(--gold);font-family:inherit;font-size:12px;font-weight:900;letter-spacing:-.01em;cursor:pointer;transition:transform .12s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease,color .18s ease;}
-    .seg-btn:active{transform:scale(.96);}
-    .seg-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:rgba(255,255,255,0.28);color:#0a0f1e;box-shadow:0 8px 24px rgba(250,204,21,0.26),inset 0 1px rgba(255,255,255,0.35);}
-    .seg-btn:not(.active){box-shadow:inset 0 1px rgba(255,255,255,0.04);}
-    @media(max-width:360px){.segmented{gap:6px;padding:5px}.seg-btn{font-size:11px;padding:10px 4px}}
+    .segmented{
+      display:flex;align-items:stretch;gap:6px;width:100%;max-width:100%;
+      padding:5px;border-radius:18px;background:rgba(255,255,255,0.035);
+      border:1px solid rgba(250,204,21,0.16);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .seg-btn{
+      flex:1 1 0;min-width:0;padding:10px 6px;border-radius:13px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02));
+      color:var(--muted);font-family:inherit;font-size:11px;font-weight:800;
+      line-height:1.15;white-space:normal;text-align:center;cursor:pointer;
+      transition:transform .12s ease,background .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease;
+    }
+    .seg-btn:active{transform:scale(.97);}
+    .seg-btn.active{
+      color:#0a0f1e;border-color:rgba(255,255,255,0.35);
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      box-shadow:0 8px 24px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,0.35);
+    }
 
     /* CONFETTI */
     .confetti-box{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9000;overflow:hidden;}
@@ -272,8 +294,8 @@
     .tab-content.active{display:block;}
 
     /* CHAT — stable fullscreen mobile layout */
-    #tabChat{height:100%;background:var(--bg);display:none;grid-template-rows:auto minmax(0,1fr) auto auto;overflow:hidden;position:relative;}
-    #tabChat.active{display:grid !important;}
+    #tabSohbet{height:100%;background:var(--bg);display:none;grid-template-rows:auto minmax(0,1fr) auto auto;overflow:hidden;position:relative;}
+    #tabSohbet.active{display:grid !important;}
     .chat-header{padding:calc(8px + var(--safeT)) 16px 4px;flex-shrink:0;background:var(--bg);}
     .chat-box{min-height:0;height:100%;overflow:hidden;display:flex;flex-direction:column;padding:0 16px 0;}
     .chat-msgs{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-direction:column;gap:8px;-webkit-overflow-scrolling:touch;min-height:0;max-height:100%;overscroll-behavior:contain;}
@@ -333,7 +355,7 @@
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-game{font-size:10px;color:var(--muted2);font-weight:600;width:56px;text-align:center;}
     .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}
-    /* ── Live Room ── */
+    /* ── Canlı Room ── */
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
     .live-room-shell{border:1.5px solid rgba(250,204,21,0.25);border-radius:16px;background:rgba(0,0,0,0.2);display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0;}
@@ -378,14 +400,14 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1454897729062712');
     fbq('track', 'PageView');
-    window.trackMalaysiaEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
+    window.trackTurkeyEvent=function(name,params){try{fbq('trackCustom', name, params||{});}catch(e){}}
   </script>
 
 </head>
 <body>
   <div id="geoScreen">
-    <div class="geo-title">🌍 Select Your Country</div>
-    <div class="geo-sub">Choose to get started</div>
+    <div class="geo-title">🌍 Ülkenizi Seçin</div>
+    <div class="geo-sub">Başlamak için seçin</div>
     <div class="geo-grid" id="geoGrid"></div>
   </div>
   <div id="splash" style="display:none !important;"><div class="splash-text" id="splashName"></div></div>
@@ -396,48 +418,48 @@
   <!-- CHAT TAB — outside app-wrap, fixed fullscreen -->
   <div class="app-shell">
     <div class="app-body">
-      <div id="tabChat" class="tab-content">
+      <div id="tabSohbet" class="tab-content">
         <div class="chat-header">
-          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnChat" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
-          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Support · Limited</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">SUPPORT</div></div>
+          <div class="top-bar" style="padding:8px 0 8px;"><div class="top-left"><div class="live-dot"></div><span class="live-text">Canlı</span></div><div style="display:flex;align-items:center;gap:8px;"><button class="self-reset-btn" id="selfResetBtnSohbet" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="chatTgId">TG: ...</div></div></div>
+          <div style="text-align:center;margin-bottom:4px;"><div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;" id="chatHeaderRow"><span id="chatHeaderIcon" style="display:inline-flex;align-items:center;justify-content:center;line-height:0"><svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></span><span id="chatHeaderSub">NexusAI Destek · Sınırlı</span></div><div style="font-size:20px;font-weight:900;color:#fff;" id="chatHeaderTitle">DESTEK</div></div>
         </div>
-        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">Want to unlock AI Signals?</div><div class="chat-welcome-text">Type a message below to learn how to get access 👇</div></div></div></div>
+        <div class="chat-box"><div class="chat-msgs" id="chatMessages"><div class="chat-welcome"><div class="chat-welcome-icon">🔒</div><div class="chat-welcome-title">AI Sinyalleri açmak mı istiyorsun?</div><div class="chat-welcome-text">Erişimi nasıl açacağını öğrenmek için aşağıya mesaj yaz 👇</div></div></div></div>
         <div id="chatImgPreview" style="display:none;padding:0 16px;"></div>
-        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleChatImage(this)"><textarea class="chat-input" id="chatInput" placeholder="Ask NexusAI Support..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">➤</button></div>
+        <div class="chat-input-row"><button class="chat-attach" onclick="document.getElementById('chatFileInput').click()">📎</button><input type="file" id="chatFileInput" accept="image/*" style="display:none" onchange="handleSohbetImage(this)"><textarea class="chat-input" id="chatInput" placeholder="NexusAI Desteğe yaz..." rows="1" maxlength="500"></textarea><button class="chat-send" id="chatGönderBtn" onclick="sendSohbetMessage()">➤</button></div>
       </div>
 
       <div class="app-wrap">
     <!-- SIGNALS TAB -->
-    <div id="tabSignals" class="tab-content">
+    <div id="tabSinyaller" class="tab-content">
       <div class="top-bar">
-        <div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span><span class="online-count" id="onlineCount">• 247</span></div>
+        <div class="top-left"><div class="live-dot"></div><span class="live-text">Canlı</span><span class="online-count" id="onlineCount">• 247</span></div>
         <div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button>
           <div class="tg-id" id="userHeaderId">TG: ...</div>
-          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">EN</button><div class="lang-menu" id="langMenu"></div></div>
+          <div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">TR</button><div class="lang-menu" id="langMenu"></div></div>
         </div>
       </div>
 
       <div class="vip-card" id="vipCard" onclick="showHelp('vip')" style="margin-top:8px;">
         <div class="vip-top">
           <div class="vip-badge">
-            <div class="vip-badge-icon" id="vipIcon2">❔</div>
+            <div class="vip-badge-icon" id="vipIcon2">🥉</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Unranked</div>
-              <div class="vip-badge-acc" id="vipAcc2">Deposit RM50 to activate Bronze</div>
+              <div class="vip-badge-tier" id="vipSeviye2">Bronze</div>
+              <div class="vip-badge-acc" id="vipAcc2">85% DOĞRULUK</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
-            <div class="vip-next-label">NEXT TIER</div>
-            <div class="vip-next-tier" id="vipNextTier">🥉 Bronze</div>
+            <div class="vip-next-label">SONRAKİ SEVİYE</div>
+            <div class="vip-next-tier" id="vipNextSeviye">🥇 Gold</div>
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">RM50 to unlock Bronze</span><span id="vipProgressHint">Deposit RM50 to activate Bronze</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">❔ Deposit RM50 to activate Bronze</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">₺0 / ₺500</span><span id="vipProgressHint">Yükseltmek için daha fazla yatır ⬆</span></div>
+        <div id="vipSinyallerLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 3/3 bugün kalan sinyal</div>
       </div>
 
       <div class="meta-bar">
-        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">day streak</span></div>
+        <div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">gün serisi</span></div>
         <div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div>
       </div>
 
@@ -445,27 +467,27 @@
     </div>
 
     <!-- TOP PLAYERS TAB -->
-    <div id="tabLiveRoom" class="tab-content">
+    <div id="tabCanlıRoom" class="tab-content">
       <div class="live-room">
-        <div class="live-room-label">Live Room</div>
+        <div class="live-room-label">Canlı Oda</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
           <div class="room-composer">
             <div class="room-lock" id="liveRoomLock">
-              <input type="text" class="room-lock-input" disabled placeholder="🔒 Reach Gold tier to unlock chat">
-              <div class="room-lock-hint">Watch the room now · Gold members can join the conversation</div>
+              <input type="text" class="room-lock-input" disabled placeholder="🔒 Sohbete katılmak için Gold seviyesine ulaşın">
+              <div class="room-lock-hint">Odayı şimdi izleyin · Gold üyeler sohbete katılabilir</div>
             </div>
             <div class="room-input-row" id="liveRoomComposer" style="display:none;">
-              <textarea class="room-input" id="liveRoomInput" placeholder="Write a message..." maxlength="280"></textarea>
-              <button class="room-send" id="liveRoomSend" onclick="sendLiveRoomMessage()">➤</button>
+              <textarea class="room-input" id="liveRoomInput" placeholder="Mesaj yazın..." maxlength="280"></textarea>
+              <button class="room-send" id="liveRoomGönder" onclick="sendCanlıRoomMessage()">➤</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div id="tabTop" class="tab-content">
-      <div class="top-header"><div class="top-header-title">🏆 Top Players</div><div class="top-header-sub">Weekly leaderboard — top winners this week</div><div class="top-header-date" id="topDate"></div></div>
+      <div class="top-header"><div class="top-header-title">🏆 En İyi Oyuncular</div><div class="top-header-sub">Haftalık sıralama — bu haftanın en çok kazananları</div><div class="top-header-date" id="topDate"></div></div>
       <div class="top-podium" id="topPodium"></div>
       <div class="top-list" id="topList"></div>
     </div>
@@ -475,9 +497,9 @@
     </div>
 
     <div class="tab-bar">
-      <button class="tab-item" onclick="switchTab('chat')" id="btnChat" style="display:none" aria-hidden="true" disabled><span class="tab-icon">💬</span><span class="tab-label">Chat</span></button>
-      <button class="tab-item active" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">Signals</span></button>
-      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">Live Room</span></button>
+      <button class="tab-item" onclick="switchTab('chat')" id="btnSohbet" style="display:none" aria-hidden="true" disabled><span class="tab-icon">💬</span><span class="tab-label">Sohbet</span></button>
+      <button class="tab-item active" onclick="switchTab('signals')" id="btnSinyaller"><span class="tab-icon">🎯</span><span class="tab-label">Sinyaller</span></button>
+      <button class="tab-item" onclick="switchTab('liveRoom')" id="btnCanlıRoom"><span class="tab-icon">🌐</span><span class="tab-label">Canlı Oda</span></button>
       <button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">Top 100</span></button>
     </div>
   </div>
@@ -485,23 +507,24 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     const GEO_CONFIG = {
-      my: { name:"Malaysia", flag:"🇲🇾", lang:"en", currency:"MYR", sym:"RM", profitRange:[20,200],
-        link:"https://sp1nwin.com/Qzsphp", promo:"",
+      tr: { name:"Türkiye", flag:"🇹🇷", lang:"tr", currency:"TRY", sym:"₺", profitRange:[2000,6000],
+        link:"", promo:"",
         webhook:"https://n8nnexusai.uk/webhook/check-access-myr-topics",
-        names:["Aiman","Hafiz","Faiz","Izzat","Syafiq","Danish","Aqil","Haziq","Amirul","Farhan","Nurul","Aisyah","Fatin","Nadia","Ain","Siti","Liyana","Atikah","Hana","Mira"] }
+        names:["Emir","Mert","Kerem","Arda","Burak","Eren","Can","Kaan","Yiğit","Berk","Elif","Zeynep","Ece","Derya","Selin","Ceren","Ayşe","Deniz","Melis","İrem"] }
     };
-    const REAL_NAME_POOL=["amirul","Cikgu","Danial H.","syah_",".","Izzat","Wei Jie","fadhil","nina.","bossku","Aiman","Zul","jason tan","karthik","pija 🌸","Shafiq","Alex L.","botak","nizam 🚀","Pravin","atikah","..","xiao","H.Z.","on x on","amira","tan","Raj","mamat","w.k.","lepak","syahir","fiza","Iwan","alif","ali99","dinesh","asyraf","zack","naufal","Chong","ekin","wkwkwk","shiva","M.","fikri","farhan","lim","din","mat_","K.","adam","siti","ahmad.","user404","rayyan 💸","anak mak","izwan","taufiq","bryan","Z","arif","najwa","yusof","vishnu","0.0","aqil","_","ng","daniel","mizi","khairul","nadia","s.","kevin","zarith","apis","L","wan","cheng","ziq","b a y","hari","m. haikal","nurul","aisyah","123","megat","r","kumar","sham ✨","zhi","alan","m.","johan","luqman","ez_","._.","Along 🔥"];
-    const CHAT_WEBHOOK=''; // Disabled: support stays in @nexusaimyr_bot Telegram topics.
+    const REAL_NAME_POOL=["emir","mert.k","Kerem","arda_","burak","Eren","Can","kaan34","Yiğit","Berk","Elif","zeynep","Ece","derya","Selin","Ceren","Ayşe","Deniz","melis","İrem","ozan","tolga","serkan","hakan","umut","gökhan","onur","barış","esra","damla","buse","gamze","seda","pelin","ece99","istanbullu","ankara06","izmirli","trabzonlu","user404","M.","K.","ali","veli","cem","özge","naz","aslı","doğan","sarp","efe","derin","ipek","nisa","enes","furkan","batuhan","yusuf","enes34","murat","ahmet","mehmet","sema","elifx","denizli","aylin","şule","ilayda","doruk","alp","selim","sinan","eray","kaan","özkan","emre","mustafa","özlem","hatice","nur","eda","cerenx","leyla","sinem","tuba","canan","berna","damla_","gizem","dilan","serra","beril","irem_","aleyna","yağmur","elif.","arda1907","mert1903","emir1905"];
+    // TRWC: no support chat backend yet
+    const CHAT_WEBHOOK='';
     const CHAT_HISTORY_WEBHOOK='';
-    let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (total_deposit>=80)
-    let userTotalDeposit=0;
-    const APP_NS='nexusmyr_topics'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
+    let accessMode='sınırlı';
+    let chatSeviye=1; // 1=Destek, 2=Kişisel AI Analist (Gold >= 1000 TRY)
+    let userTotalYatırım=0;
+    const APP_NS='nexusmyr_topics_tr'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
-    let currentGeo='my'; S.set('user_geo','my');
-    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.my;}
+    let currentGeo='tr'; S.set('user_geo','tr');
+    function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.tr;}
     const CHECKER_URL='https://n8nnexusai.uk/webhook/check-access-myr-topics';
-    // Access is backend-authoritative. Never trust a VIP tier cached by an earlier session.
+    // Access is backend-authoritative; never trust a tier cached by an earlier session.
     S.set('totalDep','0');
     S.set('accessGranted','0');
 
@@ -513,9 +536,9 @@
     if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
 
     const SELF_RESET_USER_ID='930309275';
-    const SELF_RESET_WEBHOOK=''; // Disabled for isolated MYR Topics clone.
+    const SELF_RESET_WEBHOOK=''; // Disabled for isolated @nexusaimyr_bot Topics CRM.
     function canUseSelfReset(){return false;}
-    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnChat'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
+    function syncSelfResetButtons(isBusy=false){['selfResetBtnMain','selfResetBtnSohbet'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=canUseSelfReset()?'inline-flex':'none';el.disabled=!!isBusy;el.textContent=isBusy?'Resetting...':'↺ Reset';});}
     async function runSelfReset(){
       if(!canUseSelfReset()) return;
       const ok=window.confirm('Full reset for this funnel? This will wipe chat, stage, VIP progress, deposit progress and local app state for your account only.');
@@ -523,15 +546,11 @@
       syncSelfResetButtons(true);
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        // Always clear local state first — server reset is best-effort
+        const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
+        const data=await res.json().catch(()=>({ok:false}));
+        if(!res.ok||!data.ok) throw new Error(data.error||('http_'+res.status));
         try{localStorage.clear();}catch(e){}
-        let serverOk=false;
-        try{
-          const res=await fetch(SELF_RESET_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,geo:currentGeo})});
-          const data=await res.json().catch(()=>({ok:false}));
-          serverOk=res.ok&&data.ok;
-        }catch(e){}
-        alert(serverOk?'Reset done. Funnel is back to fresh state.':'Local state cleared. Server had no data to reset.');
+        alert('Reset done. Funnel is back to fresh state.');
         window.location.href=window.location.pathname;
       }catch(e){
         alert('Reset failed: '+(e&&e.message?e.message:'unknown'));
@@ -595,43 +614,43 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Deposit to activate'},
-      {name:'Bronze',icon:'🥉',dep:50,sigs:5,acc:90,desc:'5 signals/day, 90% accuracy'},
-      {name:'Gold',icon:'🥇',dep:80,sigs:0,acc:95,desc:'Unlimited signals, 95% accuracy + Personal AI Analyst'}
+      {name:'Başlangıç',icon:'❔',dep:0,sigs:0,acc:0,desc:'Erişim için operatör onayı gerekli'},
+      {name:'Bronz',icon:'🥉',dep:500,sigs:5,acc:90,desc:'Günde 5 sinyal, %90 doğruluk'},
+      {name:'Gold',icon:'🥇',dep:1000,sigs:0,acc:95,desc:'Sınırsız sinyal, %95 doğruluk + Kişisel AI Analisti'}
     ];
-    function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
-    function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
-    function addDailySignal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
-    function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
-    function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignals()>=tier.sigs;}
-    function getVipTier(){return VIP_TIERS[getVipTierIdx()];}
+    function getVipSeviyeIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
+    function getDailySinyaller(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigBugün','0');}return parseInt(S.get('sigBugün')||'0');}
+    function addDailySinyal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigBugün','0');}const c=parseInt(S.get('sigBugün')||'0')+1;S.set('sigBugün',c.toString());return c;}
+    function getDailyLimit(){const tier=getVipSeviye();return tier.sigs||999;}
+    function isSinyalLimitReached(){const tier=getVipSeviye();if(tier.sigs===0)return false;return getDailySinyaller()>=tier.sigs;}
+    function getVipSeviye(){return VIP_TIERS[getVipSeviyeIdx()];}
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
-      const idx=getVipTierIdx();const tier=VIP_TIERS[idx];
+      const idx=getVipSeviyeIdx();const tier=VIP_TIERS[idx];
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
-      document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Deposit RM50 to activate Bronze':(tier.acc+'% ACCURACY');
+      document.getElementById('vipSeviye2').textContent=tier.name;
+      document.getElementById('vipAcc2').textContent=dep===0?'Bronze erişimi için operatör onayı · ₺500':(tier.acc+'% DOĞRULUK');
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
       const left=document.getElementById('vipProgressLeft');
       const hint=document.getElementById('vipProgressHint');
-      const nt=document.getElementById('vipNextTier');
-      // Signals remaining
-      const used=getDailySignals();const limit=tier.sigs;
-      const sigEl=document.getElementById('vipSignalsLeft');
+      const nt=document.getElementById('vipNextSeviye');
+      // Sinyaller remaining
+      const used=getDailySinyaller();const limit=tier.sigs;
+      const sigEl=document.getElementById('vipSinyallerLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Deposit RM50 to activate Bronze';}
-        else if(limit===0){sigEl.textContent='♾️ Unlimited signals today';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} signals left today`:'🔒 Signals refresh tomorrow';}
+        if(dep===0){sigEl.textContent='❔ Bronze erişimi için operatör onayı gerekli · ₺500';}
+        else if(limit===0){sigEl.textContent='♾️ Bugün sınırsız sinyal';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} bugün kalan sinyal`:'🔒 Sinyaller yarın yenilenir';}
       }
       if(dep===0){
         nw.style.display='';
         nt.textContent='🥉 Bronze';
         fill.style.width='0%';
-        left.textContent='RM50 to unlock Bronze';
-        hint.textContent='Deposit RM50 to activate Bronze';
+        left.textContent='₺0 / ₺500 Bronze';
+        hint.textContent='Erişim için botta operatör onayı alın';
       }
       else if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
@@ -641,13 +660,13 @@
         const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
         fill.style.width=pct+'%';
         const remain=target-dep;
-        left.textContent='RM'+dep.toLocaleString()+' / RM'+target.toLocaleString();
-        hint.textContent='RM'+remain.toLocaleString()+' to '+next.name+' — Unlimited + AI Analyst ⬆';
+        left.textContent='₺'+dep.toLocaleString()+' / ₺'+target.toLocaleString();
+        hint.textContent=next.name+' için ₺'+remain.toLocaleString()+' kaldı — Sınırsız + AI Analist ⬆';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='GOLD · MAX TIER';
-        hint.textContent='Unlimited signals + Personal AI Analyst 🥇';
+        left.textContent='GOLD · EN YÜKSEK SEVİYE';
+        hint.textContent='Sınırsız sinyal + Kişisel AI Analist 🥇';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
@@ -664,12 +683,12 @@
 
     // TAB
     let curTab='signals';
-    const CHAT_ENABLED=false; // Malaysia Topics: chat remains in Telegram forum topics.
+    const CHAT_ENABLED=false; // TRWC: Chat tab hidden; do not call chat webhooks from frontend.
     function switchTab(t){if(t==='chat'&&!CHAT_ENABLED)t='signals';curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');
-    if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}
-    else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';renderHome();}
-    else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}
-    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
+    if(t==='chat'){document.getElementById('tabSohbet').classList.add('active');document.getElementById('btnSohbet').classList.add('active');mq.style.display='none';loadSohbetGeçmiş();setTimeout(scrollSohbetBottom,100);}
+    else if(t==='signals'){document.getElementById('tabSinyaller').classList.add('active');document.getElementById('btnSinyaller').classList.add('active');mq.style.display='';renderHome();}
+    else if(t==='liveRoom'){document.getElementById('tabCanlıRoom').classList.add('active');document.getElementById('btnCanlıRoom').classList.add('active');mq.style.display='none';renderCanlıRoom();}
+    else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopOynaers();}}
 
     // MARQUEE
     function buildMarquee(){
@@ -678,7 +697,7 @@
       const nowBucket=Math.floor(Date.now()/15000);
       const rotated=source.map((name,i)=>({name,score:((i*37)+nowBucket*13)%997})).sort((a,b)=>a.score-b.score).map(x=>x.name);
       const pick=rotated.slice(0,16);
-      const verbs=['won','cashed out','hit','withdrew'];
+      const verbs=['kazandı','nakde çevirdi','vurdu','çekti'];
       let h="";
       pick.forEach((name,i)=>{
         const sym=profitSym();
@@ -692,15 +711,25 @@
     }
 
     // LANGS
-    const LANGS=[{id:"en",l:"EN"}];
-    let lang='en'; S.set('aslang','en');
-    function T(){return STR[lang]||STR.en;}
+    const LANGS=[{id:"tr",l:"TR"}];
+    let lang='tr'; S.set('aslang','tr');
+    function T(){return STR[lang]||STR.tr||STR.en;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
     function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
     function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
+      tr:{cg:"Oyun kategorisini seç",back:"Menü",lt:"ERİŞİM KİLİTLİ",lm:"Erişim için bot sohbetinde operatör onayı alın. Operatör seviyenizi açacaktır.",skip:"GEÇ",wait:"Bekle",tut:{s1:"",s2:"",s4:"",s5:""},
+        tabs:{crash:"🚀 CRASH OYUNLARI",slot:"🎰 SLOT OYUNLARI"},
+        slot:{title:"Slot Sinyalleri",sub:"Oyunu seç, sinyali al ve 30 saniyelik analizi bekle.",cta:"SİNYAL AL",loadingTitle:"Oyun analiz ediliyor...",loadingSub:"Yeni sinyal hazırlanıyor",readyIn:(s)=>`Yaklaşık ${s} sn içinde hazır`,signal:"Sinyal",bonus:"Bonus Şansı",spins:"Döndürülecek Spin",risk:"Risk",tip:"Tavsiye",enter:"GİR",wait:"BEKLE",enterSub:"Oyuna şimdi giriş yapabilirsin",waitSub:"Şimdilik giriş yapma, yeni sinyali bekle"},
+        g:{aviator:{n:"Aviator",d:"AI destekli crash katsayı sinyalleri"},jetx:{n:"JetX",d:"Hızlı crash giriş ve çıkış sinyalleri"},chicken:{n:"Chicken Road",d:"Risk seviyesine göre adım sinyalleri"},penalty:{n:"Penalty",d:"Hedef bölge için AI tahmini"},mines:{n:"Mines",d:"Güvenli kutular için AI analizi"},balloon:{n:"Balloon",d:"Doğru çekim zamanı sinyalleri"},sweet:{n:"Sweet Bonanza",d:"Tatlı kombinasyonlar için slot stratejisi"},gates:{n:"Gates of Olympus",d:"Zeus çarpanları için slot stratejisi"},sugar:{n:"Sugar Rush",d:"Şeker zincirleri için slot stratejisi"}},
+        ch:{t:"Chicken Road",s:"Zorluk seçin.",nx:"SONRAKİ ADIM",w:(s)=>`Bekle ${s} sn`,tb:{easy:"Kolay",medium:"Orta",hard:"Zor",hardcore:"Hardcore"}},
+        av:{t:"Aviator",s:"Her dakika yenilenir.",b:"SİNYAL AL",l:"KATSAYI",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        jx:{t:"JetX",s:"Maksimum 10x.",b:"SİNYAL AL",l:"KATSAYI",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        pe:{t:"Penalty",s:"Hedef bölgeyi seç.",b:"SİNYAL AL",l:"HEDEF",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        mi:{t:"Mines",s:"Güvenli kutular işaretli.",b:"SİNYAL AL",l:"GÜVENLİ KUTULAR",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`},
+        ba:{t:"Balloon",s:"Patlamadan önce çek.",b:"SİNYAL AL",l:"ÇEKİM",u:(t)=>`<strong>${t}</strong> saatinde güncellenir`}},
       en:{cg:"Select a game:",back:"Menu",lt:"ACCESS LOCKED",lm:"⛔️ Complete setup in the bot to unlock access.",skip:"SKIP",wait:"Wait",tut:{s1:"",s2:"",s4:"",s5:""},
         g:{aviator:{n:"Aviator",d:"Crash game"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Risk levels"},penalty:{n:"Penalty",d:"Hit the goal"},mines:{n:"Mines",d:"Avoid bombs"},balloon:{n:"Balloon",d:"Pump & cash out"}},
         ch:{t:"Chicken Road",s:"Pick difficulty.",nx:"NEXT STEP",w:(s)=>`Wait ${s}s`,tb:{easy:"Easy",medium:"Medium",hard:"Hard",hardcore:"Hardcore"}},
@@ -720,7 +749,7 @@
       es:{cg:"Elige un juego:",back:"Menú",lt:"BLOQUEADO",lm:"⛔️ Enviar ID al bot.",skip:"OMITIR",wait:"Espera",tut:{s1:"ID sincronizado.",s2:"Elige juego.",s4:"Predicción.",s5:"Haz clic."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Niveles"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Evita minas"},balloon:{n:"Balloon",d:"Infla y gana"}},ch:{t:"Chicken Road",s:"Dificultad.",nx:"SIGUIENTE",w:(s)=>`Espera ${s}s`,tb:{easy:"Fácil",medium:"Medio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTENER",l:"COEF.",u:(t)=>`Actualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Apunta.",b:"OBTENER",l:"ZONA",u:(t)=>`Actualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTENER",l:"CELDAS",u:(t)=>`Actualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retira.",b:"OBTENER",l:"RETIRAR",u:(t)=>`Actualiza <strong>${t}</strong>`}},
       pt:{cg:"Escolha:",back:"Menu",lt:"BLOQUEADO",lm:"⛔️ Envie ID ao bot.",skip:"PULAR",wait:"Aguarde",tut:{s1:"ID sincronizado.",s2:"Escolha jogo.",s4:"Previsão.",s5:"Clique."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risco"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bombas"},balloon:{n:"Balloon",d:"Infle e ganhe"}},ch:{t:"Chicken Road",s:"Dificuldade.",nx:"PRÓXIMO",w:(s)=>`Aguarde ${s}s`,tb:{easy:"Fácil",medium:"Médio",hard:"Difícil",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Cada minuto.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OBTER",l:"COEF.",u:(t)=>`Atualiza <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mire.",b:"OBTER",l:"ALVO",u:(t)=>`Atualiza <strong>${t}</strong>`},mi:{t:"Mines",s:"Seguros.",b:"OBTER",l:"CÉLULAS",u:(t)=>`Atualiza <strong>${t}</strong>`},ba:{t:"Balloon",s:"Retire.",b:"OBTER",l:"RETIRAR",u:(t)=>`Atualiza <strong>${t}</strong>`}},
       id:{cg:"Pilih:",back:"Menu",lt:"DIBLOKIR",lm:"⛔️ Kirim ID ke Bot.",skip:"LEWATI",wait:"Tunggu",tut:{s1:"ID disinkronkan.",s2:"Pilih permainan.",s4:"Prediksi.",s5:"Klik tombol."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Risiko"},penalty:{n:"Penalty",d:"Gol"},mines:{n:"Mines",d:"Bom"},balloon:{n:"Balloon",d:"Pompa dan ambil"}},ch:{t:"Chicken Road",s:"Kesulitan.",nx:"LANJUT",w:(s)=>`Tunggu ${s}s`,tb:{easy:"Mudah",medium:"Sedang",hard:"Sulit",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Setiap menit.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},jx:{t:"JetX",s:"Maks 10x.",b:"DAPATKAN",l:"KOEF.",u:(t)=>`Update <strong>${t}</strong>`},pe:{t:"Penalty",s:"Bidik.",b:"DAPATKAN",l:"TARGET",u:(t)=>`Update <strong>${t}</strong>`},mi:{t:"Mines",s:"Aman.",b:"DAPATKAN",l:"SEL",u:(t)=>`Update <strong>${t}</strong>`},ba:{t:"Balloon",s:"Tarik.",b:"DAPATKAN",l:"TARIK",u:(t)=>`Update <strong>${t}</strong>`}},
-      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Livelli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
+      it:{cg:"Scegli un gioco:",back:"Menu",lt:"ACCESSO BLOCCATO",lm:"⛔️ Registrati e invia l'ID al Bot.",skip:"SALTA",wait:"Attendi",tut:{s1:"ID sincronizzato.",s2:"Scegli un gioco.",s4:"Previsione.",s5:"Clicca per il segnale."},g:{aviator:{n:"Aviator",d:"Gioco Crash"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Canlılli di rischio"},penalty:{n:"Penalty",d:"Segna il gol"},mines:{n:"Mines",d:"Evita le bombe"},balloon:{n:"Balloon",d:"Gonfia e incassa"}},ch:{t:"Chicken Road",s:"Scegli la difficoltà.",nx:"AVANTI",w:(s)=>`Attendi ${s}s`,tb:{easy:"Facile",medium:"Medio",hard:"Difficile",hardcore:"Hardcore"}},av:{t:"Aviator",s:"Ogni minuto.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},jx:{t:"JetX",s:"Max 10x.",b:"OTTIENI",l:"COEFF.",u:(t)=>`Aggiorna <strong>${t}</strong>`},pe:{t:"Penalty",s:"Mira alla zona.",b:"OTTIENI",l:"ZONA",u:(t)=>`Aggiorna <strong>${t}</strong>`},mi:{t:"Mines",s:"Celle sicure.",b:"OTTIENI",l:"CELLE",u:(t)=>`Aggiorna <strong>${t}</strong>`},ba:{t:"Balloon",s:"Incassa prima.",b:"OTTIENI",l:"INCASSA",u:(t)=>`Aggiorna <strong>${t}</strong>`}},
       mn:{cg:"Сонгох:",back:"Цэс",lt:"ХААГДЛАА",lm:"⛔️ ID илгээнэ.",skip:"АЛГАСАХ",wait:"Хүлээнэ",tut:{s1:"ID синхрон.",s2:"Тоглоом сонгох.",s4:"Таамаглал.",s5:"Дарна уу."},g:{aviator:{n:"Aviator",d:"Crash"},jetx:{n:"JetX",d:"SmartSoft"},chicken:{n:"Chicken Road",d:"Эрсдэл"},penalty:{n:"Penalty",d:"Гоол"},mines:{n:"Mines",d:"Бөмбөг"},balloon:{n:"Balloon",d:"Үлээж ав"}},ch:{t:"Chicken Road",s:"Хүндрэл.",nx:"ДАРАА",w:(s)=>`Хүлээнэ ${s}с`,tb:{easy:"Хялбар",medium:"Дунд",hard:"Хэцүү",hardcore:"Хардкор"}},av:{t:"Aviator",s:"Минут тутам.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},jx:{t:"JetX",s:"Макс 10x.",b:"ДОХИО",l:"КОЭФФ.",u:(t)=>`<strong>${t}</strong>`},pe:{t:"Penalty",s:"Зорилт.",b:"ДОХИО",l:"ЗОРИЛТ",u:(t)=>`<strong>${t}</strong>`},mi:{t:"Mines",s:"Аюулгүй.",b:"ДОХИО",l:"НҮД",u:(t)=>`<strong>${t}</strong>`},ba:{t:"Balloon",s:"Авах.",b:"ДОХИО",l:"АВАХ",u:(t)=>`<strong>${t}</strong>`}}
     };
 
@@ -728,98 +757,174 @@
     function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
     function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
     function getCd(k){return Math.max(0,Math.ceil((parseInt(S.get(`cd_${k}`)||'0')-Date.now())/1000));}
-    function setCd(k){S.set(`cd_${k}`,Date.now()+30000);}
+    function setCd(k){S.set(`cd_${k}`,Date.now()+10000);}
     function genVal(k){if(k==='jetx'){let v=Math.random()<.85?1.1+Math.random()*1.9:3+Math.random()*7;return Math.min(v,10).toFixed(2)+"x";}if(k==='aviator'){let v=Math.random()<.88?1.1+Math.random()*6:8+Math.random()*20;return v.toFixed(2)+"x";}if(k==='balloon'){let v=Math.random()<.88?1.1+Math.random()*2:3+Math.random()*10;return v.toFixed(2)+"x";}if(k==='mines'){let s=[];while(s.length<4){const r=Math.floor(Math.random()*25);if(!s.includes(r))s.push(r);}return s;}if(k==='penalty')return Math.floor(Math.random()*15);return "2.00x";}
     function getSigHist(k){try{return JSON.parse(S.get(`sh_${k}`)||'[]')}catch(e){return[];}}
     function addSigHist(k){let h=getSigHist(k);h.push(Math.random()<(WIN_RATES[k]/100)?1:0);if(h.length>10)h=h.slice(-10);S.set(`sh_${k}`,JSON.stringify(h));return h;}
-    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Signals</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
+    function renderSigHist(k){const h=getSigHist(k);if(!h.length)return '';return `<div class="sig-history"><div class="sig-history-title">Recent Sinyaller</div><div class="sig-history-row">${h.map(w=>`<div class="sig-dot ${w?'win':'lose'}">${w?'✓':'✗'}</div>`).join('')}</div></div>`;}
 
     // SIGNALS
     let timer=null;
-    const GAME_ORDER=["aviator","chicken","jetx","mines","penalty","balloon"];
-    const GAME_PROVIDERS={aviator:"Spribe",chicken:"InOut Games",jetx:"SmartSoft Gaming",mines:"Originals",penalty:"Evoplay",balloon:"SmartSoft Gaming"};
-    const GAME_ACCENTS={aviator:"239,68,68",chicken:"251,146,60",jetx:"245,158,11",mines:"59,130,246",penalty:"34,197,94",balloon:"168,85,247"};
-    let gameCarouselIndex=0,gameTouchX=0,gameTouchY=0;
-    function gameArt(k,name){return `<img class="game-art game-art-${k}" src="assets/games/${k}.jpg" alt="${name}">`;}
+    let signalMode='crash';
+    const CRASH_GAMES=['aviator','jetx','mines','penalty','balloon','chicken'];
+    const SLOT_GAMES=['sweet','gates','sugar'];
+    const SLOT_ICONS={sweet:'🍭',gates:'⚡',sugar:'🍬'};
+    const GAME_PROVIDER={aviator:'SPRIBE',jetx:'SMARTSOFT',mines:'MINES',penalty:'EVOPLAY',balloon:'SMARTSOFT',chicken:'INOUT GAMES',sweet:'PRAGMATIC PLAY',gates:'PRAGMATIC PLAY',sugar:'PRAGMATIC PLAY'};
+    const GAME_ACCENT={aviator:'239,68,68',jetx:'249,115,22',mines:'59,130,246',penalty:'34,197,94',balloon:'168,85,247',chicken:'251,146,60',sweet:'236,72,153',gates:'250,204,21',sugar:'45,212,191'};
+    const GAME_ART={aviator:'../assets/games/aviator.jpg',jetx:'../assets/games/jetx.jpg',mines:'../assets/games/mines.jpg',penalty:'../assets/games/penalty.jpg',balloon:'../assets/games/balloon.jpg',chicken:'../assets/games/chicken.jpg',sweet:'../assets/games/sweet.jpg',gates:'../assets/games/gates.jpg',sugar:'../assets/games/sugar.jpg'};
+    const carouselIndex={crash:0,slot:0};
+    const SLOT_STRATEGY_PRESETS={
+      sweet:[
+        {risk:'Orta',steps:['4 TL — 20 çevir','6 TL — 15 çevir','8 TL — 12 çevir','4 TL — 16 çevir'],tip:'Tur bitince oyundan çık, tekrar giriş yap ve yeni strateji al.'},
+        {risk:'Düşük',steps:['4 TL — 18 çevir','6 TL — 14 çevir','4 TL — 18 çevir'],tip:'Seri tamamlanınca oyunu yenileyip bir sonraki plana geç.'},
+        {risk:'Yüksek',steps:['6 TL — 15 çevir','8 TL — 12 çevir','10 TL — 10 çevir','8 TL — 12 çevir','6 TL — 14 çevir'],tip:'Tüm adımlar bitince oyundan çık ve yeni strateji bekle.'}
+      ],
+      gates:[
+        {risk:'Orta',steps:['6 TL — 14 çevir','8 TL — 12 çevir','10 TL — 10 çevir','6 TL — 14 çevir'],tip:'Tur bitince oyundan çık, tekrar giriş yap ve yeni strateji al.'},
+        {risk:'Yüksek',steps:['8 TL — 12 çevir','10 TL — 10 çevir','12 TL — 8 çevir','8 TL — 12 çevir'],tip:'Bu seri bittiğinde oyunu kapatıp tekrar giriş yap.'},
+        {risk:'Orta',steps:['4 TL — 16 çevir','6 TL — 14 çevir','8 TL — 12 çevir','10 TL — 10 çevir','4 TL — 16 çevir'],tip:'Son adımdan sonra yeni strateji için yeniden giriş yap.'}
+      ],
+      sugar:[
+        {risk:'Orta',steps:['4 TL — 18 çevir','8 TL — 15 çevir','6 TL — 20 çevir','4 TL — 14 çevir'],tip:'Hepsini bitirdikten sonra oyundan çık ve tekrar giriş yap.'},
+        {risk:'Orta',steps:['6 TL — 16 çevir','8 TL — 12 çevir','10 TL — 10 çevir','6 TL — 14 çevir'],tip:'Seri tamamlanınca oyunu yenile ve yeni strateji al.'},
+        {risk:'Yüksek',steps:['4 TL — 15 çevir','6 TL — 15 çevir','8 TL — 12 çevir','10 TL — 10 çevir','4 TL — 12 çevir'],tip:'Bütün adımlar bitince oyundan çık ve sıradaki plana geç.'}
+      ]
+    };
+    function slotSignalsUnlocked(){return getVipSeviyeIdx()>=1;}
+    function pickSlotSignal(k){
+      const pool=SLOT_STRATEGY_PRESETS[k] || SLOT_STRATEGY_PRESETS.sugar;
+      const item=pool[Math.floor(Math.random()*pool.length)];
+      return {...item, stepCount:item.steps.length};
+    }
     function renderHome(){
-      if(timer)clearInterval(timer);const app=document.getElementById("app");app.innerHTML='';
+      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const h=document.createElement('div');h.className='games-title';h.textContent=T().cg;
-      const shell=document.createElement('section');shell.className='game-carousel-shell';shell.id='gamesGrid';shell.setAttribute('aria-label','Game carousel');
-      shell.innerHTML='<button class="nav-btn prev" id="gamePrev" aria-label="Previous game">‹</button><button class="nav-btn next" id="gameNext" aria-label="Next game">›</button><div class="game-stage" id="gameStage"></div><div class="carousel-dots" id="gameDots"></div><button class="carousel-cta" id="openGameSignal">Open Signal</button><div class="carousel-hint">← swipe →</div>';
-      app.appendChild(h);app.appendChild(shell);
-      function renderCarousel(dir=0){
-        const k=GAME_ORDER[gameCarouselIndex],g=T().g[k],wr=WIN_RATES[k]||90,stage=document.getElementById('gameStage'),dots=document.getElementById('gameDots');
-        shell.style.setProperty('--accent-rgb',GAME_ACCENTS[k]||'246,198,74');
-        stage.className='game-stage '+(dir>0?'slide-in-right':dir<0?'slide-in-left':'');stage.dataset.game=k;stage.id='gameStage';
-        stage.innerHTML=`<div id="${gameCarouselIndex===0?'firstGameCard':''}" class="carousel-game-name">${g.n}</div><div class="game-provider">${GAME_PROVIDERS[k]||''}</div><div class="logo-oval">${gameArt(k,g.n)}</div><div class="carousel-game-desc">${g.d}</div><div class="carousel-accuracy">Win rate ${wr}%</div>`;
-        dots.innerHTML=GAME_ORDER.map((_,i)=>`<span class="carousel-dot ${i===gameCarouselIndex?'active':''}"></span>`).join('');
-        document.getElementById('openGameSignal').onclick=()=>handleGameClick(k,stage);
+      const switcher=document.createElement('div');switcher.className='signal-switcher';switcher.innerHTML=`<button class="seg-btn${signalMode==='crash'?' active':''}" id="modeCrash">${T().tabs.crash}</button><button class="seg-btn${signalMode==='slot'?' active':''}" id="modeSlot">${T().tabs.slot}</button>`;
+      const helper=document.createElement('div');helper.className='mode-helper';helper.textContent=signalMode==='slot'?'3 popüler slot · AI stratejileri':'6 crash oyunu · AI sinyalleri';
+      const shell=document.createElement('div');shell.className='game-carousel-shell';shell.id='gameCarousel';
+      shell.innerHTML='<button class="nav-btn prev" id="carouselPrev" aria-label="Önceki oyun">‹</button><div class="game-stage" id="gameStage"></div><button class="nav-btn next" id="carouselNext" aria-label="Sonraki oyun">›</button><div class="carousel-dots" id="carouselDots"></div><button class="carousel-cta" id="carouselCta">SİNYALİ AÇ</button><div class="carousel-hint">← Kaydır veya okları kullan →</div>';
+      app.append(h,switcher,helper,shell);
+      document.getElementById('modeCrash').onclick=()=>{signalMode='crash';renderHome();};
+      document.getElementById('modeSlot').onclick=()=>{signalMode='slot';renderHome();};
+      let touchStartX=0;
+      shell.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].clientX;},{passive:true});
+      shell.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchStartX;if(Math.abs(dx)>42)moveGame(dx<0?1:-1);},{passive:true});
+      document.getElementById('carouselPrev').onclick=e=>{e.stopPropagation();moveGame(-1);};
+      document.getElementById('carouselNext').onclick=e=>{e.stopPropagation();moveGame(1);};
+      document.getElementById('carouselCta').onclick=()=>openCarouselGame();
+      paintCarousel(0);
+    }
+    function currentGameList(){return signalMode==='slot'?SLOT_GAMES:CRASH_GAMES;}
+    function currentCarouselGame(){const games=currentGameList();return games[carouselIndex[signalMode]%games.length];}
+    function moveGame(dir){
+      const games=currentGameList(),stage=document.getElementById('gameStage');if(!stage)return;
+      stage.className='game-stage '+(dir>0?'slide-out-left':'slide-out-right');
+      setTimeout(()=>{carouselIndex[signalMode]=(carouselIndex[signalMode]+dir+games.length)%games.length;paintCarousel(dir);},160);
+    }
+    function paintCarousel(dir){
+      const games=currentGameList(),idx=carouselIndex[signalMode]%games.length,k=games[idx],g=T().g[k];
+      const shell=document.getElementById('gameCarousel'),stage=document.getElementById('gameStage'),dots=document.getElementById('carouselDots');if(!shell||!stage||!dots)return;
+      shell.style.setProperty('--accent-rgb',GAME_ACCENT[k]||'246,198,74');
+      stage.className='game-stage '+(dir>0?'slide-in-right':dir<0?'slide-in-left':'');
+      stage.innerHTML=`<div class="carousel-game-name">${g.n}</div><div class="game-provider">${GAME_PROVIDER[k]||'NEXUSAI GAME'}</div><div class="logo-oval"><img class="game-art game-art-${k}" src="${GAME_ART[k]}" alt="${g.n}" draggable="false"></div><div class="carousel-game-desc">${g.d}</div><div class="carousel-mode-pill">${signalMode==='slot'?'AI SLOT STRATEJİSİ':'AI CRASH SİNYALİ'}</div>`;
+      dots.innerHTML=games.map((_,i)=>`<span class="carousel-dot${i===idx?' active':''}"></span>`).join('');
+      const cta=document.getElementById('carouselCta');if(cta)cta.textContent=signalMode==='slot'?'SLOT SİNYALİNİ AÇ':'CRASH SİNYALİNİ AÇ';
+    }
+    function openCarouselGame(){
+      const k=currentCarouselGame(),stage=document.getElementById('gameStage');
+      if(signalMode==='slot')renderSlotGame(k);else if(stage)handleGameClick(k,stage);
+    }
+    function renderSlotGame(k){
+      if(timer)clearInterval(timer);
+      const app=document.getElementById('app');
+      app.innerHTML='';
+      if(!slotSignalsUnlocked()){
+        const g=T().g[k];
+        app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${T().slot.sub}</div><div class="stepbox"><div class="lock-icon" style="font-size:44px;margin-bottom:10px">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg" style="max-width:290px;margin:10px auto 0;font-size:13px;line-height:1.55">${T().lm}</div><div class="slot-lock-sell"><div style="font-size:13px;font-weight:900;color:#fff">🥉 Bronze — ₺750</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Günlük 5 slot sinyali</div><div style="font-size:13px;font-weight:900;color:#fff;margin-top:12px">🥇 Gold — ₺1.500</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Sınırsız slot sinyali</div></div></div></div>`;
+        return;
       }
-      function go(step){if(!step)return;gameCarouselIndex=(gameCarouselIndex+step+GAME_ORDER.length)%GAME_ORDER.length;const stage=document.getElementById('gameStage')||document.getElementById('firstGameCard');if(stage)stage.className='game-stage '+(step>0?'slide-out-left':'slide-out-right');setTimeout(()=>renderCarousel(step),120)}
-      document.getElementById('gamePrev').onclick=()=>go(-1);document.getElementById('gameNext').onclick=()=>go(1);
-      shell.addEventListener('touchstart',e=>{gameTouchX=e.touches[0].clientX;gameTouchY=e.touches[0].clientY},{passive:true});
-      shell.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-gameTouchX,dy=e.changedTouches[0].clientY-gameTouchY;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)go(dx<0?1:-1)},{passive:true});
-      renderCarousel();
+      const copy=T().slot;const g=T().g[k];
+      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto" class="slot-mini-pill">${getVipSeviye().icon} ${getVipSeviye().name}</div></div><h3 class="p-title">${g.n}</h3><div class="p-sub">${copy.sub}</div><div class="stepbox slot-sell" id="slotBox"><div style="text-align:center;padding:10px 6px"><div class="slot-badge">AI SLOT SIGNAL</div><div style="font-size:42px;margin-top:10px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:10px">${copy.title}</div><div style="font-size:12px;color:var(--muted);margin-top:8px">${copy.loadingSub}</div></div></div><div class="btnrow"><button class="btn primary" id="slotBtn">${copy.cta}</button></div></div>`;
+      const btn=document.getElementById('slotBtn'),box=document.getElementById('slotBox');
+      function updateSlotBtn(){
+        const left=getCd('slot_'+k);
+        if(left>0){btn.disabled=true;btn.textContent=copy.loadingTitle;}else{btn.disabled=false;btn.textContent=copy.cta;}
+      }
+      function checkSlotLimit(){
+        if(isSinyalLimitReached()){
+          const tier=getVipSeviye();const idx=getVipSeviyeIdx();
+          let upgradeHint='';
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} sinyal/gün, %${next.acc} doğruluk</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Açmak için sohbette ₺${need.toLocaleString()} ekle ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Sunucu Limiti Doldu</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">AI sunucuları şu anda slot sinyallerini işlerken yoğun yük altında.<br>${tier.icon} ${tier.name} hesaplar günde ${tier.sigs} slot sinyali alır.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Günlük limitin doldu.<br>Sınırsız slot sinyali için Gold'a yükselt.</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='Sunucu limiti';btn.style.opacity='0.3';return true;
+        }
+        btn.style.opacity='';
+        return false;
+      }
+      function renderSlotSignalCard(sig){
+        const tier=getVipSeviye();
+        const stepsHtml=sig.steps.map((step,idx)=>`<div class="slot-status-line"><span>${idx+1}. Adım</span><strong>${step}</strong></div>`).join('');
+        box.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px"><div class="slot-hero"><div class="slot-badge">${tier.icon} ${tier.name} · ${tier.sigs===0?'Sınırsız':'Günlük '+tier.sigs+' strateji'}</div><div class="slot-hero-icon slot-hero-enter">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:24px;font-weight:900;color:#fff;margin-top:4px">AKTİF SLOT STRATEJİSİ</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Hazır plan aktif · ${sig.stepCount} adım</div></div><div style="display:grid;gap:8px"><div class="slot-status-line"><span>Risk</span><strong>${sig.risk}</strong></div><div class="slot-status-line"><span>Toplam Adım</span><strong>${sig.stepCount}</strong></div></div><div style="display:grid;gap:8px;margin-top:2px">${stepsHtml}</div><div style="margin-top:2px;padding:10px;border-radius:12px;background:rgba(255,255,255,0.05);font-size:13px;line-height:1.5;color:#fff"><span style="color:var(--muted)">Tur bitince:</span> ${sig.tip}</div></div>`;
+      }
+      if(!checkSlotLimit()){updateSlotBtn();timer=setInterval(updateSlotBtn,1000);}
+      btn.onclick=()=>{
+        if(checkSlotLimit())return;
+        setCd('slot_'+k);updateSlotBtn();
+        box.innerHTML=`<div class="slot-analyzing"><div style="font-size:42px">${SLOT_ICONS[k]||'🎰'}</div><div style="font-size:15px;font-weight:800;color:#fff">${copy.loadingTitle}</div><div class="slot-wave"><span></span><span></span><span></span><span></span><span></span></div><div style="font-size:12px;color:var(--muted)">${copy.loadingSub}</div><div style="font-size:12px;color:var(--gold)">${copy.readyIn(10)}</div></div>`;
+        try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}
+        setTimeout(()=>{addDailySinyal();renderSlotSignalCard(pickSlotSignal(k));playSfx();updVIP();if(!checkSlotLimit())updateSlotBtn();},10000);
+      };
+    }
+    function normalizeTrwcAccess(d){
+      d=d||{};
+      const tier=String(d.access_tier||d.tier||'none').toLowerCase();
+      const bronze=(tier==='bronze'||tier==='gold'||d.bronze_unlocked===true||d.access_granted===true||d.allowed===true);
+      const gold=(tier==='gold'||d.gold_unlocked===true);
+      const total=Number(d.total_deposit!==undefined?d.total_deposit:(gold?1000:(bronze?500:0)))||0;
+      return Object.assign({},d,{access_tier:tier,bronze_unlocked:bronze,gold_unlocked:gold,access_granted:bronze,deposit_verified:bronze,allowed:bronze,total_deposit:total});
     }
     async function refreshAccessState(){
-      const uid=tgUserId||S.get('tg_user_id');if(!uid)return;
+      const uid=tgUserId||S.get('tg_user_id');if(!uid){updateSohbetHeader();return;}
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
-      const d=await r.json();
-
-      const checkedDeposit=Number(d.total_deposit||0);
-      userTotalDeposit=Number.isFinite(checkedDeposit)&&checkedDeposit>0?checkedDeposit:0;
-      S.set('totalDep',String(userTotalDeposit));
-      updVIP();
-      if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
-      chatTier=(userTotalDeposit>=80)?2:1;
-      updateChatHeader();}catch(e){}
+      const d=normalizeTrwcAccess(await r.json());
+      if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
+      userTotalYatırım=d.total_deposit||0;S.set('totalDep',String(userTotalYatırım));updVIP();
+      if(d.allowed){accessMode='full';S.set('accessGranted','1');}
+      else{accessMode='sınırlı';S.set('accessGranted','0');}
+      chatSeviye=d.gold_unlocked?2:1;
+      updateSohbetHeader();}catch(e){updateSohbetHeader();}
     }
-    function updateChatHeader(){
+    function updateSohbetHeader(){
       const sub=document.getElementById('chatHeaderSub');
       const title=document.getElementById('chatHeaderTitle');
-      if(chatTier===2){
-        if(sub)sub.textContent='NexusAI Personal Analyst \u00b7 24/7';
+      if(chatSeviye===2){
+        if(sub)sub.textContent='NexusAI Kişisel AI Analist \u00b7 24/7';
         if(title)title.textContent='ANALYST';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='1px solid rgba(250,204,21,0.3)';hdr.style.background='linear-gradient(180deg,rgba(250,204,21,0.06),var(--bg))';}
       }else{
-        if(sub)sub.textContent='NexusAI Support';
-        if(title)title.textContent='SUPPORT';
+        if(sub)sub.textContent='NexusAI Destek';
+        if(title)title.textContent='DESTEK';
         const hdr=document.querySelector('.chat-header');
         if(hdr){hdr.style.borderBottom='';hdr.style.background='';}
       }
     }
-    function applyStatic(){
-      renderHome();
-      buildLangMenu();
-      refreshAccessState().then(()=>{
-        if(curTab==='signals') renderHome();
-      }).catch(()=>{});
-    }
+    function applyStatic(){renderHome();buildLangMenu();refreshAccessState().then(()=>renderHome());}
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
       try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
       const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
-      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
+      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=normalizeTrwcAccess(await r.json());
       if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined){const checkedDeposit=Number(d.total_deposit||0);userTotalDeposit=Number.isFinite(checkedDeposit)&&checkedDeposit>0?checkedDeposit:0;S.set('totalDep',String(userTotalDeposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
-      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
+      userTotalYatırım=d.total_deposit||0;S.set('totalDep',String(userTotalYatırım));updVIP();
+      if(d.allowed){accessMode='full';S.set('accessGranted','1');chatSeviye=d.gold_unlocked?2:1;updateSohbetHeader();if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
+      else{accessMode='sınırlı';S.set('accessGranted','0');chatSeviye=1;updateSohbetHeader();if(el.contains(ld))el.removeChild(ld);showLock(el);}}
       catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
     }
     function showLock(el){
       if(el.querySelector('.lock-text'))return;
-      const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Register Now →</button>`:'';
-      const promoTxt='';
-      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
-    }
-    function openRegLink(){
-      const base=GEO_CONFIG.my.link||'https://sp1nwin.com/Qzsphp';if(!base)return;
-      const url=base;
-      try{window.trackMalaysiaEvent&&window.trackMalaysiaEvent('RegistrationIntent',{geo:'MY'});}catch(e){}
-      if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
+      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon" style="font-size:38px">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg" style="max-width:270px;font-size:12px;line-height:1.5">${T().lm}</div><div style="margin-top:9px;color:var(--gold);font-size:11px;font-weight:900">Bronze ₺500 · Gold ₺1.000</div></div>`;
     }
 
     function renderGame(k){
@@ -829,24 +934,24 @@
       let ch=`<div class="stepnum" id="cD">...</div><div class="steplabel">${td.l}</div>`;
       if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++)g+='<div class="mines-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
       else if(k==='penalty'){let g='<div class="penalty-wrapper">';for(let i=0;i<15;i++)g+='<div class="penalty-cell"></div>';g+='</div>';ch=g+`<div class="steplabel">${td.l}</div>`;}
-      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipTier().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipTier().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
+      app.innerHTML=`<div class="panel"><div class="backrow"><button class="back" onclick="renderHome()">← ${T().back}</button><div style="margin-left:auto;display:flex;align-items:center;gap:4px"><span class="vip-badge-icon" style="font-size:14px">${getVipSeviye().icon}</span><span style="font-size:12px;font-weight:800;color:var(--gold)">${getVipSeviye().acc}%</span></div></div><h3 class="p-title">${td.t}</h3><div class="p-sub">${td.s}</div><div class="stepbox" id="gBox">${ch}<div class="stepnote">${td.u(hhmm(new Date()))}</div></div><div class="cd-wrap" id="cdW" style="display:none"><svg width="64" height="64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="prog" id="cdP" cx="32" cy="32" r="28" stroke-dasharray="175.93" stroke-dashoffset="0"/></svg><div class="cd-num" id="cdN">30</div></div><div class="btnrow"><button class="btn primary" id="sBtn">${td.b}</button></div>${renderSigHist(k)}</div>`;
       const btn=document.getElementById('sBtn'),box=document.getElementById('gBox'),cdW=document.getElementById('cdW'),cdP=document.getElementById('cdP'),cdN=document.getElementById('cdN');
       const circ=175.93;
       function uBtn(){const l=getCd(k);if(l>0){btn.disabled=true;btn.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/30);cdN.textContent=l;}else{btn.disabled=false;btn.textContent=td.b;cdW.style.display='none';}}
       function checkLimit(){
-        if(isSignalLimitReached()){
-          const tier=getVipTier();const idx=getVipTierIdx();
+        if(isSinyalLimitReached()){
+          const tier=getVipSeviye();const idx=getVipSeviyeIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up RM${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}
-          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">The AI servers are heavily loaded processing signals.<br>${tier.icon} ${tier.name} accounts get ${tier.sigs} signals/day.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Higher deposits = more server resources allocated<br>to your account = more signals + better accuracy.</div>${upgradeHint}</div>`;
-          btn.disabled=true;btn.textContent='Server limit';btn.style.opacity='0.3';return true;
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} sinyal/gün, %${next.acc} doğruluk</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Açmak için sohbette ₺${need.toLocaleString()} ekle ⬆</div></div>`;}
+          box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Sunucu Limiti Doldu</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">AI sunucuları şu anda sinyalleri işlerken yoğun yük altında.<br>${tier.icon} ${tier.name} hesaplar günde ${tier.sigs} sinyal alır.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Daha yüksek depozito = hesabına daha fazla sunucu kaynağı<br>= daha fazla sinyal + daha iyi doğruluk.</div>${upgradeHint}</div>`;
+          btn.disabled=true;btn.textContent='Sunucu limiti';btn.style.opacity='0.3';return true;
         }
         return false;
       }
       function showSig(){
         if(checkLimit())return;
         const v=genVal(k);try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();
-        addDailySignal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
+        addDailySinyal();const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist(k);addProfit(rndInt(5,25));
         if(k==='aviator'||k==='jetx'||k==='balloon'){box.innerHTML=`<div class="stepnum" id="cD">${v}</div><div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;if(parseFloat(v)>=5)fireConfetti();}
         else if(k==='mines'){let g='<div class="mines-grid">';for(let i=0;i<25;i++){const s=v.includes(i);g+=`<div class="mines-cell${s?' active':''}">${s?'⭐️':''}</div>`;}g+='</div>';box.innerHTML=g+`<div class="steplabel">${td.l}</div><div class="stepnote">${td.u(hhmm(new Date()))}</div>`;
         }
@@ -856,48 +961,34 @@
       if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}btn.onclick=()=>{if(checkLimit())return;setCd(k);showSig();if(!checkLimit())uBtn();};
     }
 
-    const CH_D=["easy","medium","hard","hardcore"];let chD="easy",chNextAt=0,chCooldownTimer=null;
+    const CH_D=["easy","medium","hard","hardcore"];let chD="easy";
     function renderChicken(){
-      if(timer)clearInterval(timer);if(chCooldownTimer)clearInterval(chCooldownTimer);const app=document.getElementById('app');app.innerHTML='';
+      if(timer)clearInterval(timer);const app=document.getElementById('app');app.innerHTML='';
       const p=document.createElement('div');p.className='panel';
-      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">STEP</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
+      p.innerHTML=`<div class="backrow"><button class="back" id="bkB">← ${T().back}</button></div><h3 class="p-title">${T().ch.t}</h3><div class="p-sub">${T().ch.s}</div><div class="tabs" id="tabs"></div><div class="stepbox"><div class="stepnum" id="sN">-</div><div class="steplabel">ADIM</div></div><div class="btnrow"><button class="btn primary" id="nxB">${T().ch.nx}</button></div>`;
       app.appendChild(p);document.getElementById('bkB').onclick=renderHome;
       const tabs=document.getElementById('tabs'),sN=document.getElementById('sN'),nxB=document.getElementById('nxB');
-      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';CH_D.forEach(d=>{const b=document.createElement('button');b.type='button';b.textContent=T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
-      function setBtnReady(){nxB.disabled=false;nxB.textContent=T().ch.nx;}
-      function updateCooldown(){const left=Math.ceil((chNextAt-Date.now())/1000);if(left>0){nxB.disabled=true;nxB.textContent=T().ch.w(left);}else{if(chCooldownTimer){clearInterval(chCooldownTimer);chCooldownTimer=null;}setBtnReady();}}
-      function startCooldown(){chNextAt=Date.now()+10000;updateCooldown();chCooldownTimer=setInterval(updateCooldown,250);}
-      nxB.onclick=()=>{if(Date.now()<chNextAt){updateCooldown();return;}if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} signals/day, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Top up RM${need.toLocaleString()} in chat to unlock ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Server Limit Reached</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — ${tier.sigs} signals/day used</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Higher deposit = more server resources for your account</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Server limit';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySignal();sN.textContent=`Step ${rndInt(1,6)}`;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSignalLimitReached()){nxB.disabled=true;nxB.textContent='Limit reached';return;}startCooldown();},500);};dT();if(Date.now()<chNextAt)updateCooldown();
+      function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.className='segmented';bar.style.margin='0';bar.style.maxWidth='100%';const trLabels={easy:'🟢 Kolay',medium:'🟡 Orta',hard:'🟠 Zor',hardcore:'🔴 Hardcore'};CH_D.forEach(d=>{const b=document.createElement('button');b.textContent=trLabels[d]||T().ch.tb[d];b.className='seg-btn'+(d===chD?' active':'');b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
+      nxB.onclick=()=>{if(isSinyalLimitReached()){const tier=getVipSeviye();const idx=getVipSeviyeIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} sinyal/gün, %${next.acc} doğruluk</div><div style="font-size:11px;color:var(--gold);margin-top:4px">Açmak için sohbette ₺${need.toLocaleString()} ekle ⬆</div></div>`;}document.querySelector('.stepbox').innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI Sunucu Limiti Doldu</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — günlük ${tier.sigs} sinyal hakkı kullanıldı</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Daha yüksek depozito = hesabın için daha fazla sunucu kaynağı</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Sunucu limiti';return;}nxB.disabled=true;sN.textContent='...';try{navigator.vibrate&&navigator.vibrate(50);}catch(e){}setTimeout(()=>{addDailySinyal();sN.textContent=`Adım ${rndInt(1,6)}`;nxB.disabled=false;playSfx();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');if(isSinyalLimitReached()){nxB.disabled=true;nxB.textContent='Limit doldu';}},500);};dT();
     }
 
     const LIVE_ROOM_NPCS=[
-{name:'Audrey',badge:'Gold',lang:'en'},{name:'Khatri',badge:'Gold',lang:'en'},{name:'Mila',badge:'Gold',lang:'en'},{name:'HidayahSG',badge:'Gold',lang:'en'},
-{name:'BennVibe777',badge:'Gold',lang:'en'},{name:'FahmiNoor',badge:'Gold',lang:'en'},{name:'Krish',badge:'Gold',lang:'en'},{name:'Nikhil',badge:'Gold',lang:'en'},
-{name:'BlackShoper',badge:'Gold',lang:'en'},{name:'IMRAN',badge:'Gold',lang:'en'},{name:'Sukbir',badge:'Gold',lang:'en'},{name:'Viduranga',badge:'Gold',lang:'en'},
-{name:'Mr Rabbit',badge:'Gold',lang:'en'},{name:'nickyap93',badge:'Gold',lang:'en'},{name:'MR_Black',badge:'Gold',lang:'en'},{name:'money4life10',badge:'Gold',lang:'en'},
-{name:'Pinokiolah',badge:'Gold',lang:'en'},{name:'infinityGod1',badge:'Gold',lang:'en'},{name:'scarletphantom96',badge:'Gold',lang:'en'},{name:'Dex_9',badge:'Gold',lang:'en'},
-{name:'Ceo Dugem',badge:'Gold',lang:'en'},{name:'Flintzjr',badge:'Gold',lang:'en'},{name:'ozan1290',badge:'Gold',lang:'en'},{name:'Panjang',badge:'Gold',lang:'en'},
-{name:'Shionys',badge:'Gold',lang:'en'},{name:'Aaron',badge:'Gold',lang:'en'},{name:'Ravi',badge:'Gold',lang:'en'},{name:'Michael',badge:'Gold',lang:'en'},
-{name:'Ryan',badge:'Gold',lang:'en'},{name:'Shawn',badge:'Gold',lang:'en'},
-
-
-
-
-
-
-{name:'Esmeralda',badge:'Gold',lang:'es'},{name:'Antorxz',badge:'Gold',lang:'es'},{name:'carlos_m',badge:'Gold',lang:'es'},{name:'lucía🔥',badge:'Gold',lang:'es'},
-{name:'mateo',badge:'Gold',lang:'es'},{name:'elena_',badge:'Gold',lang:'es'},{name:'diego🎯',badge:'Gold',lang:'es'},{name:'sofía',badge:'Gold',lang:'es'},
-{name:'pablo.r',badge:'Gold',lang:'es'},{name:'valentina',badge:'Gold',lang:'es'},{name:'javi_',badge:'Gold',lang:'es'},{name:'sergio',badge:'Gold',lang:'es'},
-{name:'daniela',badge:'Gold',lang:'es'},{name:'nico',badge:'Gold',lang:'es'},{name:'martín',badge:'Gold',lang:'es'},{name:'alejandro',badge:'Gold',lang:'es'}
+{name:'Emir34',badge:'Gold',lang:'tr'},{name:'Mert1903',badge:'Gold',lang:'tr'},{name:'Kerem',badge:'Gold',lang:'tr'},{name:'Arda1907',badge:'Gold',lang:'tr'},
+{name:'Burak',badge:'Gold',lang:'tr'},{name:'Eren',badge:'Gold',lang:'tr'},{name:'Kaan06',badge:'Gold',lang:'tr'},{name:'Yiğit',badge:'Gold',lang:'tr'},
+{name:'Berk',badge:'Gold',lang:'tr'},{name:'Ozan',badge:'Gold',lang:'tr'},{name:'Tolga',badge:'Gold',lang:'tr'},{name:'Umut',badge:'Gold',lang:'tr'},
+{name:'Elif',badge:'Gold',lang:'tr'},{name:'Zeynep',badge:'Gold',lang:'tr'},{name:'Ece',badge:'Gold',lang:'tr'},{name:'Derya',badge:'Gold',lang:'tr'},
+{name:'Selin',badge:'Gold',lang:'tr'},{name:'Ceren',badge:'Gold',lang:'tr'},{name:'Deniz',badge:'Gold',lang:'tr'},{name:'İrem',badge:'Gold',lang:'tr'},
+{name:'Murat',badge:'Gold',lang:'tr'},{name:'Emre',badge:'Gold',lang:'tr'},{name:'Ahmet',badge:'Gold',lang:'tr'},{name:'Mehmet',badge:'Gold',lang:'tr'},
+{name:'Sarp',badge:'Gold',lang:'tr'},{name:'Efe',badge:'Gold',lang:'tr'},{name:'Aylin',badge:'Gold',lang:'tr'},{name:'Yağmur',badge:'Gold',lang:'tr'},
+{name:'Gökhan',badge:'Gold',lang:'tr'},{name:'Onur',badge:'Gold',lang:'tr'}
 ];
     const SEED_EN=[
-      '💰💰','gg','nice','lol same','clean','🔥','gg bro','niceee','yooo','ez','lets go','bruh','😭😭','W','lfg','no way','facts',
-      'bro 💀','insane','terbaik','same here','real','big W','AI cooked 🔥','who caught that??','gg room','that was fast',
-      'mines 3 row straight 💰','aviator 2.1x just hit','chicken road again lol','penalty was clean','balloon went crazy',
-      'that 6x was insane','crash timing improving fr','just hit gold 🥇','3 wins back to back',
-      'small win but ill take it','not my best day but ok','covered my depo at least','first one missed next one saved me',
-      'room was dead then boom 💸','gold room moves fast','quiet then 3 straight W','late entry but still profit',
-      'lol i was sleeping and missed it 😭','woke up to profit','free money fr','told yall','called it','not bad at all'
+      '💰💰','harika','temiz sinyal','🔥','aldım','çok iyi','tam zamanında','mükemmel','devam','kolaydı',
+      'bu sinyali kim aldı?','oda çok hızlı','Mines üst üste 3 kazanç 💰','Aviator 2.1x geldi','Chicken Road yine verdi',
+      'Penalty temizdi','Balloon çok yükseldi','6x inanılmazdı','Crash zamanlaması çok iyi','Gold oldum 🥇',
+      'üst üste 3 kazanç','küçük ama güzel kazanç','bugün iyi gidiyor','ilkini kaçırdım ama ikincisi kurtardı',
+      'sessizlikten sonra patladı 💸','Gold oda çok hızlı','geç girdim ama yine kârdayım','uyurken kaçırmışım 😭',
+      'kârla uyandım','bedava para gibi','demiştim','hiç fena değil','sinyal tuttu 🎯','bugün seri güzel'
     ];
     const SEED_KR=[
       'ㅋㅋㅋ','대박','나도','ㅋㅋ 진짜','balloon 4.6x 잡음','JetX 3.2x 터짐 ㅋㅋ','누가 2.4x 탔어?',
@@ -912,9 +1003,9 @@
       'JetX 3.2x acaba de pegar','crash timing mejorando','recién llegué y ya profit','gg','🔥','💰💰'
     ];
     let liveRoomFeed=[];
-    function liveRoomUnlocked(){return getVipTierIdx()>=1;}
+    function liveRoomAçıldı(){return getVipSeviyeIdx()>=1;}
     function randomOf(arr){return arr[Math.floor(Math.random()*arr.length)];}
-    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'just now';if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const dd=Math.floor(h/24);return dd+'d ago';}
+    function roomRelTime(ts){const d=new Date(ts||Date.now());const diff=Math.max(0,Date.now()-d.getTime());const m=Math.floor(diff/60000);if(m<1)return 'şimdi';if(m<60)return m+' dk önce';const h=Math.floor(m/60);if(h<24)return h+' sa önce';const dd=Math.floor(h/24);return dd+' gün önce';}
     function sRng(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x);}
     function pickText(npc,seed){
       const lang=npc.lang||'en';const r=sRng(seed);
@@ -924,7 +1015,7 @@
     }
     const SLOT_SEC=8;
     function slotNow(){return Math.floor(Date.now()/(SLOT_SEC*1000));}
-    const REPLY_EN=['nice','facts','same bro','real','gg','lol','fr fr','W','big W','no way 😂','true','yep','100%','agreed','this ^^'];
+    const REPLY_EN=['aynen','kesinlikle','bende de aynı','gerçekten','harika','çok iyi','katılıyorum','kazanç','büyük kazanç','inanılmaz 😂','doğru','evet','%100','tam isabet','işte bu'];
     const REPLY_KR=['ㅋㅋㅋ','ㄹㅇ','나도','진짜','대박','ㅇㅇ','맞아','ㅋㅋ 인정','그거 맞음','ㅇㅈ'];
     const REPLY_ES=['jaja','tal cual','real','eso','sí bro','facts','exacto','jajaja','100%','lo mismo'];
     function pickReply(npc,seed){const lang=npc.lang||'en';const pool=lang==='kr'?REPLY_KR:lang==='es'?REPLY_ES:REPLY_EN;return pool[Math.floor(sRng(seed)*pool.length)];}
@@ -936,7 +1027,7 @@
       return {author:npc.name,badge:npc.badge,text:pickText(npc,slot*7+2),createdAt:ts,role:'npc',reactions:[]};
     }
     let lastSlot=0;
-    function seedLiveRoomLocal(){
+    function seedCanlıRoomLocal(){
       const now=slotNow();
       if(liveRoomFeed.length&&lastSlot===now)return;
       if(!liveRoomFeed.length){for(let i=0;i<80;i++){liveRoomFeed.push(msgForSlot(now-80+1+i));}lastSlot=now;}
@@ -955,92 +1046,83 @@
     let roomTickerStarted=false,roomTickerTimer=null,roomTypingTimer=null;
     function startRoomTicker(){
       if(roomTickerStarted)return;roomTickerStarted=true;startReactDrip();
-      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} typing<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seedLiveRoomLocal();if(curTab==='liveRoom')renderLiveRoom(true);}},3000);
+      roomTickerTimer=setInterval(()=>{const now=slotNow();if(now>lastSlot){const nextMsg=msgForSlot(now);const tyEl=document.getElementById('roomTyping');if(tyEl&&curTab==='liveRoom'){tyEl.innerHTML=`${nextMsg.author} yazıyor<span class="dots"><span>.</span><span>.</span><span>.</span></span>`;if(roomTypingTimer)clearTimeout(roomTypingTimer);roomTypingTimer=setTimeout(()=>{tyEl.innerHTML='';},2000);}seedCanlıRoomLocal();if(curTab==='liveRoom')renderCanlıRoom(true);}},3000);
     }
     let roomRenderedCount=0;
     function buildMsgEl(m){
       const el=document.createElement('div');el.className='room-msg'+(m.role==='user'?' user':'');
       const rt=roomReplyTarget(m.text);const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
       const bi=roomBadgeIcon(m.badge);
-      el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
+      el.innerHTML=`${rt?`<div class="room-reply">↳ ${rt} kullanıcısına yanıt</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
       return el;
     }
-    function renderLiveRoom(appendOnly){
-      seedLiveRoomLocal();const feed=document.getElementById('liveRoomFeed');if(!feed)return;
+    function renderCanlıRoom(appendOnly){
+      seedCanlıRoomLocal();const feed=document.getElementById('liveRoomFeed');if(!feed)return;
       const lock=document.getElementById('liveRoomLock');const comp=document.getElementById('liveRoomComposer');
-      const unlocked=liveRoomUnlocked();lock.style.display=unlocked?'none':'block';comp.style.display=unlocked?'flex':'none';
+      const unlocked=liveRoomAçıldı();lock.style.display=unlocked?'none':'block';comp.style.display=unlocked?'flex':'none';
       if(!appendOnly||roomRenderedCount===0){feed.innerHTML='';roomRenderedCount=0;for(let i=0;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i]));}roomRenderedCount=liveRoomFeed.length;}
       else{for(let i=roomRenderedCount;i<liveRoomFeed.length;i++){feed.appendChild(buildMsgEl(liveRoomFeed[i]));}roomRenderedCount=liveRoomFeed.length;}
       feed.scrollTop=feed.scrollHeight;startRoomTicker();
     }
-    async function sendLiveRoomMessage(){
-      if(!liveRoomUnlocked())return;const inp=document.getElementById('liveRoomInput');const txt=(inp.value||'').trim();if(!txt)return;
-      liveRoomFeed.push({author:userName||'You',badge:getVipTier().name,text:txt,createdAt:new Date().toISOString(),role:'user',reactions:[]});inp.value='';renderLiveRoom(true);
+    async function sendCanlıRoomMessage(){
+      if(!liveRoomAçıldı())return;const inp=document.getElementById('liveRoomInput');const txt=(inp.value||'').trim();if(!txt)return;
+      liveRoomFeed.push({author:userName||'Sen',badge:getVipSeviye().name,text:txt,createdAt:new Date().toISOString(),role:'user',reactions:[]});inp.value='';renderCanlıRoom(true);
     }
-    document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();sendLiveRoomMessage();}});
+    document.addEventListener('keydown',function(e){if(curTab==='liveRoom'&&e.key==='Enter'&&!e.shiftKey&&document.activeElement&&document.activeElement.id==='liveRoomInput'){e.preventDefault();sendCanlıRoomMessage();}});
     // CHAT
     let chatH=[],chatLD=false,chatSnd=false,chatImgB64=null;
-    function handleChatImage(input){
-      if(!CHAT_ENABLED){if(input)input.value='';return;}
+    function handleSohbetImage(input){
       const file=input.files[0];if(!file)return;
       const reader=new FileReader();
       reader.onload=function(e){
         chatImgB64=e.target.result; // data:image/...;base64,...
         const prev=document.getElementById('chatImgPreview');
         prev.style.display='block';
-        prev.innerHTML=`<div class="chat-img-preview"><img src="${chatImgB64}"><button class="chat-img-remove" onclick="removeChatImage()">✕</button></div>`;
+        prev.innerHTML=`<div class="chat-img-preview"><img src="${chatImgB64}"><button class="chat-img-remove" onclick="removeSohbetImage()">✕</button></div>`;
       };
       reader.readAsDataURL(file);
       input.value='';
     }
-    function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
-    function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
+    function removeSohbetImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
+    function scrollSohbetBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
     function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
-    function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">RM${remain.toLocaleString()} to ${next.icon} ${next.name} (${next.acc}%)</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${tier.acc}% accuracy</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
-    async function loadChatHistory(){
-      if(!CHAT_ENABLED)return;
+    function chatVipBanner(){const tier=getVipSeviye();const idx=getVipSeviyeIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const remain=next.dep-dep;hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${next.icon} ${next.name} için ₺${remain.toLocaleString()} kaldı (%${next.acc})</div>`;}return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(255,215,0,0.06);border-radius:10px;border:1px solid rgba(255,215,0,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">%${tier.acc} doğruluk</span>${hint}</div>`;}
+    function renderSohbet(){const e=document.getElementById('chatMessages');if(!chatH.length){if(chatSeviye===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Kişisel AI Analist</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#facc15" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#facc15" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#facc15"/><line x1="20" y1="2" x2="20" y2="8" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#facc15" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Destek</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at Gold tier.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollSohbetBottom();}
+    async function loadSohbetGeçmiş(){
       if(chatLD)return;
       chatLD=true;
-      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
-      if(!CHAT_HISTORY_WEBHOOK)return;
-      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
+      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderSohbet();}}}catch(e){}
+      if(!CHAT_HISTORY_WEBHOOK){renderSohbet();chatLD=false;return;}
+      const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid){renderSohbet();chatLD=false;return;}
       try{
-        const controller=new AbortController();
-        const timer=setTimeout(()=>controller.abort(),10000);
-        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});
-        clearTimeout(timer);
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:AbortSignal.timeout(10000)});
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
           chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
           try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
-          renderChat();
-        }else{
-          renderChat();
         }
-      }catch(e){
-        renderChat();
-      }
+        renderSohbet();
+      }catch(e){renderSohbet();}
+      chatLD=false;
     }
 
-    let _lastSendTs=0,_lastSendTxt='',_sendLock=false;
-    async function sendChatMessage(){
-      if(!CHAT_ENABLED)return;
+    let _lastGönderTs=0,_lastGönderTxt='',_sendLock=false;
+    async function sendSohbetMessage(){
       if(_sendLock)return;
       const now=Date.now();
       const inp=document.getElementById('chatInput'),txt=inp.value.trim();
       if(!txt&&!chatImgB64)return;
-      if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;
-      _sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
+      if(txt===_lastGönderTxt&&now-_lastGönderTs<5000)return;
+      _sendLock=true;_lastGönderTs=now;_lastGönderTxt=txt;chatSnd=true;document.getElementById('chatGönderBtn').disabled=true;
       const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
       chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
       inp.value='';inp.style.height='auto';
-      const imgPayload=chatImgB64;removeChatImage();renderChat();
-      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI is typing...';el.appendChild(tp);scrollChatBottom();
+      const imgPayload=chatImgB64;removeSohbetImage();renderSohbet();
+      const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI yazıyor...';el.appendChild(tp);scrollSohbetBottom();
       let botText='Sorry, something went wrong. Please try again.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
+        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalYatırım,chat_tier:chatSeviye};
         if(imgPayload)body.image=imgPayload;
         const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
@@ -1055,7 +1137,7 @@
       document.getElementById('tpI')?.remove();
       chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
       try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
-      renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
+      renderSohbet();chatSnd=false;_sendLock=false;document.getElementById('chatGönderBtn').disabled=false;
     }
 
     // TOP PLAYERS — weekly seed, multinational, $10k descending
@@ -1064,7 +1146,7 @@
     function genTop(){
       const ws=getWeekSeed();
       const baseNames=[...new Set((REAL_NAME_POOL.length?REAL_NAME_POOL:[...geo().names]).map(x=>String(x).trim()).filter(Boolean))];
-      while(baseNames.length<100){baseNames.push(`Player${baseNames.length+1}`);}
+      while(baseNames.length<100){baseNames.push(`Oynaer${baseNames.length+1}`);}
       const gn=["Aviator","JetX","Mines","Chicken","Balloon","Penalty"];
       const ordered=baseNames.slice(0,100);
       const p=[];
@@ -1083,14 +1165,14 @@
       }
       return p;
     }
-    function renderTopPlayers(){const d=new Date(),ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 Week of ${ds}`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">$${p[i].am.toLocaleString()}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+$${x.am.toLocaleString()}</div></div>`).join('');}
+    function renderTopOynaers(){const d=new Date(),ds=d.toLocaleDateString('tr-TR',{month:'short',day:'numeric',year:'numeric'});document.getElementById('topDate').textContent=`📅 ${ds} haftası`;const p=genTop(),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];pd.innerHTML=od.map(i=>`<div class="podium-item"><div class="podium-avatar">${md[i]}</div><div class="podium-name">${p[i].nm}</div><div class="podium-amount">₺${p[i].am.toLocaleString('tr-TR')}</div></div>`).join('');document.getElementById('topList').innerHTML=p.map(x=>`<div class="top-row"><div class="top-rank">${x.rk<=3?['🥇','🥈','🥉'][x.rk-1]:'#'+x.rk}</div><div class="top-name">${x.nm}</div><div class="top-game">${x.gm}</div><div class="top-amount">+₺${x.am.toLocaleString('tr-TR')}</div></div>`).join('');}
 
     // HELP TOOLTIPS
     const HELP_DATA={
-      streak:{title:'🔥 Daily Streak',text:'Open the app daily to build your streak. Gold members get enhanced signal accuracy with longer streaks.'},
-      vip:{title:'🏅 VIP Tier',text:'Your deposit level determines AI server resources allocated to your account.\n\n🥉 Bronze (RM50) — 5 signals/day, 90% accuracy\n🥇 Gold (RM80) — Unlimited signals, 95% accuracy + Personal AI Analyst 24/7\n\nGold members get a dedicated AI analyst that guides every session in real-time.\n\nBigger deposit → more resources → better signals → bigger wins 🤝'},
-      profit:{title:'💰 Today\'s Profit',text:'Shows the total profit from all signals you followed today. This resets every day at midnight. Use more signals to grow your daily earnings!'},
-      winrate:{title:'📊 Win Rate',text:'Historical accuracy of AI predictions for this game. Based on thousands of analyzed rounds.'}
+      streak:{title:'🔥 Günlük Seri',text:'Serini büyütmek için uygulamayı her gün aç. Gold üyeler, seri uzadıkça daha güçlü sinyal doğruluğu alır.'},
+      vip:{title:'🏅 VIP Seviye',text:'Melbet bakiye seviyen, hesabına ayrılan AI sunucu gücünü belirler.\n\n🥉 Bronze (₺500) — Günde 5 sinyal, %90 doğruluk\n🥇 Gold (₺1.000) — Sınırsız sinyal, %95 doğruluk + 7/24 Kişisel AI Analist\n\nErişim için bot sohbetinde operatör onayı alın. Operatör seviyenizi açacaktır.\n\nDaha yüksek bakiye → daha fazla kaynak → daha güçlü sinyaller 🤝'},
+      profit:{title:'💰 Bugünün Kârı',text:'Bugün takip ettiğiniz tüm sinyallerden elde edilen toplam kârı gösterir. Her gün gece yarısı sıfırlanır. Günlük kazancınızı büyütmek için daha fazla sinyal kullanın!'},
+      winrate:{title:'📊 Kazanma Oranı',text:'Bu oyun için AI tahminlerinin geçmiş doğruluk oranı. Binlerce analiz edilmiş tura dayanır.'}
     };
     function showHelp(key){
       const d=HELP_DATA[key];if(!d)return;
@@ -1114,17 +1196,11 @@
 
     // APP INIT after geo is known
     function initApp(){
-      try{window.trackMalaysiaEvent&&window.trackMalaysiaEvent('MiniAppOpen',{geo:'MY',lang:'en'});}catch(e){}
-      lang='en';S.set('aslang','en');
-      applyStatic();
-      updProfit();
-      updOnline();
-      updGeoSwitch();
-      // Start on signals tab to avoid Telegram WebView crashes on first chat/history render
+      try{window.trackTurkeyEvent&&window.trackTurkeyEvent('MiniAppOpen',{geo:'TR',lang:'tr'});}catch(e){}
+      lang='tr';S.set('aslang','tr');
+      applyStatic();buildMarquee();updProfit();updOnline();updGeoSwitch();
+      // TRWC starts on signals; Chat tab is hidden and chat webhooks are not called from frontend.
       switchTab('signals');
-      // Defer non-critical UI work until the first screen is already visible
-      setTimeout(()=>{try{buildMarquee();}catch(e){}},0);
-      setTimeout(()=>{try{loadChatHistory();}catch(e){}},50);
     }
 
     // INIT
