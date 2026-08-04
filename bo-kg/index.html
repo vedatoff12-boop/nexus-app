@@ -255,7 +255,7 @@
     .top-row:nth-child(-n+3) .top-rank{color:var(--gold);}
     .top-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .top-pair{font-size:10px;color:var(--muted2);font-weight:700;width:58px;text-align:center;}
-    .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}.top-tier-badge{display:inline-flex;align-items:center;margin-left:5px;padding:1px 5px;border:1px solid currentColor;border-radius:999px;background:rgba(255,255,255,.04);font-size:8px;font-weight:900;letter-spacing:.4px;line-height:1.2;vertical-align:middle}.top-tier-badge.tier-bronze{color:#cd7f32}.top-tier-badge.tier-silver{color:#c0c0c0}.top-tier-badge.tier-gold{color:#f2a93b}.top-tier-badge.tier-emerald{color:#34d399}
+    .top-amount{font-size:13px;font-weight:900;color:var(--green);min-width:60px;text-align:right;}.top-tier-badge{display:inline-flex;align-items:center;margin-left:5px;padding:1px 5px;border:1px solid currentColor;border-radius:999px;background:rgba(255,255,255,.04);font-size:8px;font-weight:900;letter-spacing:.4px;line-height:1.2;vertical-align:middle}.top-tier-badge.tier-bronze{color:#cd7f32}.top-tier-badge.tier-silver{color:#c0c0c0}.top-tier-badge.tier-gold{color:#f2a93b}
     /* ── Live Room ── */
     .live-room{display:flex;flex-direction:column;height:100%;padding:0;}
     .live-room-label{font-size:17px;font-weight:900;color:#fff;padding:8px 0 6px;text-align:center;letter-spacing:0.3px;}
@@ -291,6 +291,104 @@
     .room-input:focus{border-color:rgba(242,169,59,0.3);}
     .room-send{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:var(--bg);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .room-send:disabled{opacity:0.3;}
+
+    /* BO-KG designer redesign — Menu + VIP, 2026-07-30 */
+    :root{
+      --bg:#000427;--bg2:#10103e;--bg3:#141449;
+      --stroke:rgba(182,184,239,.13);--stroke2:rgba(198,200,255,.25);
+      --text:#f8f7ff;--muted:#8c8eb2;--muted2:#62658d;
+      --gold:#3dd6b1;--gold2:#28ae91;--gold-glow:rgba(61,214,177,.26);
+      --green:#3dd6b1;--green-glow:rgba(61,214,177,.28);--blue:#8c8eb2;
+    }
+    body,.app-shell{background:#000427}
+    .app-shell{background:radial-gradient(110% 52% at 50% 7%,#35287d 0%,#241f6c 28%,#10103e 61%,#000427 100%)}
+    .app-body{background:transparent}
+    .app-wrap{padding:calc(14px + var(--safeT)) 10px 18px;background:transparent}
+    #tabMenu,#tabVip{min-height:100%;padding-bottom:8px}
+    .designer-menu,.vip-screen{display:flex;flex-direction:column;gap:0}
+    .designer-topbar{display:flex;align-items:center;justify-content:space-between;min-height:44px;margin:0 0 18px;padding:0 2px}
+    .designer-status-left,.designer-status-right{display:flex;align-items:center;gap:8px}
+    .live-pill{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 13px;border-radius:13px;background:#d52950;color:#fff;font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(213,41,80,.25)}
+    .live-pill svg{width:15px;height:15px}.live-sep{width:1px;height:18px;background:rgba(255,255,255,.42)}
+    .designer-id{padding:0!important;border:0!important;background:transparent!important;color:rgba(190,191,220,.42)!important;font-size:11px!important;font-weight:600!important;letter-spacing:.2px}
+    .designer-topbar .lang-btn{height:28px;padding:0 8px;border-color:rgba(255,255,255,.1);background:rgba(2,1,36,.42);color:#aaaed2;font-size:10px}
+    .designer-section{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid rgba(162,164,215,.16)}
+    .designer-section:last-child{border-bottom:0;margin-bottom:4px}
+    .designer-heading{margin:0 0 13px;color:#fff;font-size:24px;font-weight:500;line-height:1.12;letter-spacing:-.4px}
+    #tabMenu .last-post-list{margin:0;display:block}
+    #tabMenu .last-post{margin:0;display:block}
+    #tabMenu .last-post-card{position:relative;display:block;width:100%;height:222px;padding:0;border:1px solid rgba(191,194,247,.28);border-radius:18px;background:linear-gradient(140deg,#172951 0%,#071328 55%,#050720 100%);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.28),0 12px 28px rgba(0,0,0,.22)}
+    #tabMenu .last-post-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 23% 35%,rgba(61,214,177,.22),transparent 23%),linear-gradient(118deg,transparent 0 48%,rgba(89,72,185,.22) 49% 50%,transparent 51%);opacity:.85}
+    #tabMenu .last-post-photo{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;object-fit:cover;object-position:center 32%;filter:saturate(.82) contrast(1.06)}
+    #tabMenu .last-post-art{position:absolute;inset:0;display:block;overflow:hidden;background:radial-gradient(circle at 20% 18%,rgba(61,214,177,.18),transparent 32%),radial-gradient(circle at 82% 30%,rgba(105,82,225,.27),transparent 30%)}
+    #tabMenu .last-post-art svg{width:100%;height:100%;display:block;filter:drop-shadow(0 12px 22px rgba(0,0,0,.3))}
+    #tabMenu .last-post-copy{position:absolute;z-index:2;left:0;right:0;bottom:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px;padding:52px 12px 12px;background:linear-gradient(180deg,transparent,rgba(2,4,25,.92) 58%,#03061f)}
+    #tabMenu .last-post-eyebrow,#tabMenu .last-post-channel{display:none}
+    #tabMenu .last-post-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#fff;font-size:13px;font-weight:600;line-height:1.18;text-shadow:0 1px 5px #000}
+    #tabMenu .last-post-cta{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border-radius:999px;background:#3dd6b1;color:#1c5848;font-size:10px;font-weight:900;white-space:nowrap}
+    .stats-grid{display:grid;gap:10px}
+    .stat-card{min-height:124px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:17px 18px;border:1px solid rgba(187,190,246,.25);border-radius:16px;background:linear-gradient(145deg,rgba(5,6,47,.94),#010226);box-shadow:inset 0 1px rgba(255,255,255,.025)}
+    .stat-copy{max-width:240px;color:#f0eff9;font-size:13px;line-height:1.25;font-weight:500}
+    .stat-value{min-width:94px;text-align:right;font-size:66px;line-height:.9;font-weight:900;letter-spacing:-4px;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent}
+    .stat-value.aqua{background:linear-gradient(100deg,#35c5aa,#20696a)}.stat-value.gold{background:linear-gradient(100deg,#c68b3d,#643e2e)}.stat-value.green{background:linear-gradient(100deg,#35c985,#1e5e54)}
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .info-card{position:relative;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:12px;border:1px solid rgba(190,193,248,.23);border-radius:16px;background:radial-gradient(circle at 50% 10%,rgba(119,88,231,.58),transparent 42%),linear-gradient(155deg,#191151,#06072d 68%);box-shadow:inset 0 0 28px rgba(112,79,223,.22)}
+    .info-art{position:absolute;inset:0 0 48px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .info-title{position:absolute;z-index:2;top:17px;left:8px;right:8px;text-align:center;font-size:22px;line-height:.9;font-weight:900;text-transform:uppercase;text-shadow:0 0 16px currentColor}
+    .info-card.vip .info-title{color:#3dd6b1}.info-card.how .info-title{color:#f1bb65;font-size:19px;text-transform:none}
+    .info-btn{position:relative;z-index:3;align-self:center;min-height:36px;padding:0 15px;border:0;border-radius:999px;background:#3dd6b1;color:#1c5848;font-family:inherit;font-size:10px;font-weight:900;cursor:pointer}
+
+    .vip-screen{width:100%;max-width:378px;margin:0 auto}
+    .vip-screen-head{height:92px;display:flex;align-items:center;padding:0;border:0;margin:0}
+    .vip-back{display:none}
+    .vip-screen-title{margin:0;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro",sans-serif;font-size:40px;font-weight:800;line-height:1;letter-spacing:-1.55px}
+    .vip-levels{display:grid;gap:10px}
+    .vip-level-card{box-sizing:border-box;width:100%;aspect-ratio:378/134.89;display:grid;grid-template-columns:31.325% minmax(0,1fr);column-gap:5.398%;align-items:start;padding:3.175%;overflow:hidden;border:1px solid rgba(204,205,243,.21);border-radius:12px;background:rgba(8,9,55,.23);-webkit-backdrop-filter:blur(18px) saturate(135%);backdrop-filter:blur(18px) saturate(135%);box-shadow:inset 0 1px rgba(255,255,255,.035),0 4px 18px rgba(0,0,0,.2)}
+    .vip-level-card.current{border-color:rgba(204,205,243,.21);background:rgba(8,9,55,.23);box-shadow:inset 0 1px rgba(255,255,255,.035),0 4px 18px rgba(0,0,0,.2)}
+    .vip-gem-stage{position:relative;width:100%;aspect-ratio:1;overflow:hidden;border:0;border-radius:19.0097px;background:transparent}
+    .vip-gem-stage.empty{border-radius:14.3686px}
+    .vip-gem-art{display:block;width:100%;height:100%;object-fit:cover}
+
+    .vip-level-copy{min-width:0;height:100%;padding:0}
+    .vip-level-name{height:29px;margin:0;padding:0;border-bottom:1px solid rgba(190,193,246,.18);color:var(--tier-color);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro",sans-serif;font-size:24px;font-weight:700;line-height:1.2;letter-spacing:0;white-space:nowrap}
+    .vip-level-desc{margin:9px 0 0;color:#fff;font-family:"Roboto Flex",Roboto,Arial,sans-serif;font-size:11px;font-weight:400;line-height:1.2}
+    .help-tooltip{white-space:pre-line}
+    .tab-bar{width:calc(100% - 28px);height:70px;margin:0 14px calc(10px + var(--safeB));padding:5px 5px;background:#030116;border:1px solid rgba(182,185,238,.17);border-radius:24px;box-shadow:0 15px 34px rgba(0,0,0,.45);flex-shrink:0}
+    .tab-item{flex:1 1 25%;gap:4px;padding:5px 2px;color:#efedf9}
+    .tab-item.active{color:#3dd6b1}.tab-item .tab-icon{width:25px;height:25px;display:grid;place-items:center}.tab-item .tab-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.tab-item .tab-label{font-size:10px;font-weight:600;text-transform:none;letter-spacing:0;overflow:visible}
+    @media(max-width:380px){.designer-heading{font-size:22px}.stat-card{min-height:112px;padding:14px}.stat-copy{font-size:11.5px}.stat-value{min-width:78px;font-size:58px}.info-card{min-height:200px}.info-title{font-size:19px}.info-card.how .info-title{font-size:17px}.tab-item .tab-label{font-size:9px}}
+
+    /* Final Figma fidelity pass — exact mobile rhythm, neutral NexusAI identity */
+    .app-wrap{padding:calc(12px + var(--safeT)) 12px 22px}
+    .designer-topbar{min-height:40px;margin-bottom:17px;padding:0 1px}
+    .live-pill{height:35px;padding:0 12px;border-radius:12px;background:#d72a52;font-size:11px}
+    .designer-heading{margin-bottom:12px;font-size:23px;font-weight:500;letter-spacing:-.45px}
+    .designer-section{padding-bottom:17px;margin-bottom:17px}
+    #tabMenu .last-post-card{height:218px;border-radius:17px}
+    #tabMenu .last-post-card.fallback-photo::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 24% 30%,rgba(61,214,177,.24),transparent 24%),radial-gradient(circle at 76% 25%,rgba(124,94,243,.28),transparent 28%),linear-gradient(145deg,#15134a,#05082a 62%,#02041f);z-index:0}
+    #tabMenu .last-post-card.fallback-photo .last-post-copy{z-index:3}
+    .stats-grid{gap:9px}.stat-card{min-height:119px;padding:16px 17px;border-radius:15px}.stat-copy{font-size:12.5px}.stat-value{font-size:64px}
+    .info-grid{gap:9px}.info-card{min-height:216px;border-radius:15px}.info-title{top:16px}
+    .info-svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 16px 18px rgba(0,0,0,.35))}
+    .info-art{inset:43px 3px 47px}.info-btn{min-height:35px;min-width:112px}
+    .vip-screen-head{height:92px;padding:0}.vip-screen-title{font-size:40px}
+    .vip-levels{gap:10px}
+    .tab-bar{width:calc(100% - 24px);height:68px;margin:0 12px calc(9px + var(--safeB));border-radius:23px}
+    .tab-item .tab-label{font-size:9.5px}
+    .screen-topbar{margin-bottom:10px}.screen-topbar .designer-status-right{gap:7px}.screen-lang{height:27px;min-width:35px;padding:0 8px;border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(2,1,36,.42);color:#aaaed2;font:700 10px/1 'Outfit',sans-serif}
+    #tabSignals{height:100%;overflow-y:auto}.signals-screen{min-height:100%;display:flex;flex-direction:column}
+    #tabSignals .vip-card{display:none!important}
+    #tabSignals .tv-chart-section{margin-bottom:10px}
+    #tabSignals .pair-switcher{gap:6px;padding-bottom:8px}.pair-btn{min-height:33px;border-radius:9px;background:rgba(4,3,44,.72);border-color:rgba(188,190,242,.22)}
+    #tabSignals .tv-chart-frame{height:clamp(320px,58dvh,540px);border-radius:17px;background:#07072d}
+    #tabSignals .signal-window{padding:10px 0 0;margin:0;background:transparent;border:0;border-radius:0;box-shadow:none}
+    #tabSignals .signal-kicker{display:none}.signal-message{margin:3px auto 9px;min-height:18px}.signal-btn{min-height:51px;border-radius:14px;background:linear-gradient(135deg,#39d6b0,#28ad91);color:#082b27;box-shadow:0 9px 22px rgba(61,214,177,.22)}
+    #tabSignals .meta-bar{display:none}
+    .live-room{padding-top:0}.live-room-head{padding:0 0 8px}.live-room-label{text-align:left;padding:0;font-size:26px;letter-spacing:-.5px}.live-room-shell{border-color:rgba(190,193,246,.22);border-radius:17px;background:rgba(2,3,36,.58)}
+    .room-msg{padding:3px 0}.room-name{font-size:12px}.room-text{font-size:12px}.room-composer{border-color:rgba(190,193,246,.18)}
+    .top-screen-head{padding-bottom:8px}.top-header{padding:3px 0 13px}.top-header-title{font-size:25px}
+    @media(max-width:380px){.app-wrap{padding-left:10px;padding-right:10px}.designer-heading{font-size:21px}.stat-card{min-height:108px}.stat-value{font-size:55px}.info-card{min-height:195px}.vip-screen-head{height:88px}.vip-screen-title{font-size:37px}.vip-level-name{font-size:22px}.vip-level-desc{font-size:10.2px}.tab-bar{width:calc(100% - 20px);margin-left:10px;margin-right:10px}.tab-item .tab-label{font-size:8.7px}}
+    @media(max-width:340px){.vip-level-card{aspect-ratio:auto;min-height:124px}.vip-level-name{height:25px;font-size:20.5px}.vip-level-desc{margin-top:7px;font-size:9.8px}}
   </style>
 
   <script>
@@ -330,15 +428,26 @@
       </div>
 
       <div class="app-wrap">
-    <div id="tabMenu" class="tab-content"><div class="top-bar"><div class="top-left"><div class="live-dot"></div><span class="live-text">Live</span></div><div class="top-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button><div class="tg-id" id="userHeaderId">TG: ...</div><div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">KY</button><div class="lang-menu" id="langMenu"></div></div></div></div><div class="menu-header"><div class="menu-title">☰ МЕНЮ</div><div class="menu-sub">BO-KG сигналдары жана пайдалуу маалымат</div></div><div class="menu-list" id="menuList"></div><div class="last-post-eyebrow">Акыркы посттор</div><div class="last-post-list" id="lastPostList" aria-label="Акыркы канал посттору"></div></div>
-    <div id="tabSignals" class="tab-content active"><div class="vip-card" id="vipCard" onclick="showHelp('vip')"><div class="vip-top"><div class="vip-badge"><div class="vip-badge-icon" id="vipIcon2">❔</div><div class="vip-badge-info"><div class="vip-badge-tier" id="vipTier2">Unranked</div><div class="vip-badge-acc" id="vipAcc2">1 АКЫСЫЗ СИГНАЛ</div></div></div><div class="vip-next" id="vipNextWrap"><div class="vip-next-label">NEXT TIER</div><div class="vip-next-tier" id="vipNextTier">—</div></div></div><div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div><div class="vip-progress-text"><span id="vipProgressLeft">0 сом</span><span id="vipProgressHint">Кийинки деңгээл эсептелүүдө</span></div><div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 1 акысыз сигнал жеткиликтүү</div></div>
+    <div id="tabMenu" class="tab-content active">
+      <main class="designer-menu">
+        <div class="designer-topbar">
+          <div class="designer-status-left"><div class="live-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-1.7c0-1.8-1.5-3.3-3.3-3.3H7.3C5.5 15 4 16.5 4 18.3V20M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.2 4.2c1.6.4 2.8 1.8 2.8 3.5V20M16 4.3a3.5 3.5 0 0 1 0 6.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>live</span><span class="live-sep"></span><span id="onlineCount">284</span></div></div>
+          <div class="designer-status-right"><button class="self-reset-btn" id="selfResetBtnMain" onclick="runSelfReset()">↺ Reset</button><div class="tg-id designer-id" id="userHeaderId">ID:...</div><div class="lang-drop"><button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">KY</button><div class="lang-menu" id="langMenu"></div></div></div>
+        </div>
+        <section class="designer-section"><h2 class="designer-heading">Акыркы пост</h2><div class="last-post-list" id="lastPostList" aria-label="Акыркы канал посттору"></div></section>
+        <section class="designer-section"><h2 class="designer-heading">Бүгүнкү статистика</h2><div class="stats-grid"><article class="stat-card"><p class="stat-copy">Ушунча адам кошулуп, биздин сигналдардын жардамы менен өздөрүнүн алгачкы акчасын тапты</p><strong class="stat-value aqua" id="statJoined">72</strong></article><article class="stat-card"><p class="stat-copy">Сигналдар анализденди</p><strong class="stat-value gold" id="statAnalyzed">778</strong></article><article class="stat-card"><p class="stat-copy">Ийгиликтүү анализделгендер</p><strong class="stat-value green" id="statSuccessful">767</strong></article></div></section>
+        <section class="designer-section"><h2 class="designer-heading">Маанилүү маалыматтар</h2><div class="info-grid"><article class="info-card vip"><h3 class="info-title">VIP<br>ДЕҢГЭЭЛДЕРИ</h3><div class="info-art" aria-hidden="true"><svg class="info-svg" viewBox="0 0 180 150"><defs><linearGradient id="vipCardFace" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#393278"/><stop offset="1" stop-color="#10123d"/></linearGradient><linearGradient id="vipDiamond" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff8b7"/><stop offset=".48" stop-color="#edb635"/><stop offset="1" stop-color="#6c3d13"/></linearGradient></defs><g transform="translate(12 22) rotate(-10 48 58)"><rect x="7" y="8" width="76" height="103" rx="15" fill="url(#vipCardFace)" stroke="#6d6ca1" stroke-opacity=".45"/><path d="M22 31h46M22 83h46" stroke="#a8a5df" stroke-opacity=".18"/></g><g transform="translate(82 14) rotate(9 46 59)"><rect x="7" y="8" width="76" height="103" rx="15" fill="url(#vipCardFace)" stroke="#6d6ca1" stroke-opacity=".45"/><path d="M22 31h46M22 83h46" stroke="#a8a5df" stroke-opacity=".18"/></g><g><rect x="48" y="12" width="85" height="116" rx="17" fill="url(#vipCardFace)" stroke="#817fc1" stroke-opacity=".56"/><path d="M66 37h49M66 99h49" stroke="#bdb9f2" stroke-opacity=".2"/><path d="M91 42l25 26-25 29-25-29z" fill="url(#vipDiamond)" stroke="#fff6b2" stroke-opacity=".72"/><path d="M91 42v55M66 68h50M76 54l15 43 15-43" fill="none" stroke="#fff9ce" stroke-opacity=".48"/></g></svg></div><button class="info-btn" type="button" onclick="openVipScreen()">Маалыматка өтүү</button></article><article class="info-card how"><h3 class="info-title">Кантип иштейт?</h3><div class="info-art" aria-hidden="true"><svg class="info-svg" viewBox="0 0 180 150"><defs><linearGradient id="howCube" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4a3d88"/><stop offset="1" stop-color="#171640"/></linearGradient><linearGradient id="howGold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe49b"/><stop offset="1" stop-color="#d08c25"/></linearGradient></defs><rect x="43" y="19" width="95" height="108" rx="24" fill="url(#howCube)" stroke="#7770bd" stroke-opacity=".52" transform="rotate(-5 90 73)"/><path d="M53 46l36-20 39 17-36 20zM53 46v46l39 26V63M128 43v48l-36 27" fill="none" stroke="#aca7e2" stroke-opacity=".18"/><text x="91" y="100" text-anchor="middle" font-family="Outfit,Arial" font-size="82" font-weight="800" fill="url(#howGold)">?</text><g fill="#37306f" stroke="#8a83c7" stroke-opacity=".5"><rect x="4" y="26" width="44" height="28" rx="9"/><rect x="129" y="82" width="46" height="28" rx="9"/></g><g fill="#f4f1ff"><circle cx="17" cy="40" r="2"/><circle cx="26" cy="40" r="2"/><circle cx="35" cy="40" r="2"/><circle cx="142" cy="96" r="2"/><circle cx="151" cy="96" r="2"/><circle cx="160" cy="96" r="2"/></g></svg></div><button class="info-btn" type="button" onclick="openHowInfo()">Маалыматка өтүү</button></article></div></section>
+      </main>
+    </div>
+    <div id="tabVip" class="tab-content"><main class="vip-screen"><header class="vip-screen-head"><button class="vip-back" type="button" onclick="closeVipScreen()" aria-label="Артка">‹</button><h1 class="vip-screen-title">VIP деңгээлдери</h1></header><div class="vip-levels" id="vipLevels"></div></main></div>
+    <div id="tabSignals" class="tab-content"><main class="signals-screen"><div class="designer-topbar screen-topbar"><div class="designer-status-left"><div class="live-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-1.7c0-1.8-1.5-3.3-3.3-3.3H7.3C5.5 15 4 16.5 4 18.3V20M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.2 4.2c1.6.4 2.8 1.8 2.8 3.5V20M16 4.3a3.5 3.5 0 0 1 0 6.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>live</span><span class="live-sep"></span><span id="onlineCountSignals">284</span></div></div><div class="designer-status-right"><div class="tg-id designer-id" id="signalsUserId">ID:...</div><button class="screen-lang" id="signalsLangLabel" type="button" onclick="switchTab('menu')">KY</button></div></div><div class="vip-card" id="vipCard" onclick="showHelp('vip')"><div class="vip-top"><div class="vip-badge"><div class="vip-badge-icon" id="vipIcon2">❔</div><div class="vip-badge-info"><div class="vip-badge-tier" id="vipTier2">Unranked</div><div class="vip-badge-acc" id="vipAcc2">1 АКЫСЫЗ СИГНАЛ</div></div></div><div class="vip-next" id="vipNextWrap"><div class="vip-next-label">NEXT TIER</div><div class="vip-next-tier" id="vipNextTier">—</div></div></div><div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div><div class="vip-progress-text"><span id="vipProgressLeft">0 сом</span><span id="vipProgressHint">Кийинки деңгээл эсептелүүдө</span></div><div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 1 акысыз сигнал жеткиликтүү</div></div>
       <section class="tv-chart-section" aria-label="Forex chart"><div class="pair-switcher" id="pairSwitcher" role="tablist"></div><div class="market-closed" id="marketClosedBanner" role="status"><div><div class="market-closed-title">Базар жабык</div><div class="market-closed-sub">Ачылышына чейин</div></div><div class="market-closed-timer" id="marketClosedTimer">--:--:--</div></div><div class="tv-chart-frame" id="tvChartFrame" data-state="idle"><div class="tv-widget-target" id="tvChartTarget"></div><div class="tv-loader" id="tvChartLoader"><div class="tv-spinner"></div><div class="tv-state-title">График жүктөлүүдө…</div><div class="tv-state-text">TradingView котировкалары туташууда</div></div><div class="tv-fallback" id="tvChartFallback" hidden><div class="tv-state-title">График убактылуу жеткиликсиз</div><div class="tv-state-text">Интернет байланышын текшерип, кайра аракет кылыңыз.</div><button class="tv-retry" type="button" onclick="retryTradingViewChart()">Кайра аракет</button></div></div></section>
-      <section class="signal-window" id="signalWindow" data-state="ready" aria-live="polite"><div class="signal-kicker">AI · 5 МҮНӨТ</div><div class="signal-result" id="signalResult"><div class="signal-arrow" id="signalArrow">↑</div><div class="signal-direction" id="signalDirection">ЖОГОРУ</div><div class="signal-pair" id="signalPair">EUR/USD</div><div class="signal-confidence" id="signalConfidence"></div><div class="signal-timer" id="signalTimer">05:00</div></div><div class="signal-message" id="signalMessage">Тандалган жуп боюнча сигнал алуу үчүн басыңыз.</div><button class="signal-btn" id="signalButton" type="button" onclick="requestAiSignal()">Сигнал алуу</button></section><div class="meta-bar"><div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">күн катар</span></div><div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div></div></div>
+      <section class="signal-window" id="signalWindow" data-state="ready" aria-live="polite"><div class="signal-kicker">AI · 5 МҮНӨТ</div><div class="signal-result" id="signalResult"><div class="signal-arrow" id="signalArrow">↑</div><div class="signal-direction" id="signalDirection">ЖОГОРУ</div><div class="signal-pair" id="signalPair">EUR/USD</div><div class="signal-confidence" id="signalConfidence"></div><div class="signal-timer" id="signalTimer">05:00</div></div><div class="signal-message" id="signalMessage">Тандалган жуп боюнча сигнал алуу үчүн басыңыз.</div><button class="signal-btn" id="signalButton" type="button" onclick="requestAiSignal()">Сигнал алуу</button></section><div class="meta-bar"><div class="meta-pill"><span class="icon">🔥</span><span class="val" id="streakNum">1</span><span style="color:var(--muted)">күн катар</span></div><div class="meta-pill"><span class="icon">👥</span><span class="val" id="onlineCount2">247</span></div></div></main></div>
 
     <!-- TOP PLAYERS TAB -->
     <div id="tabLiveRoom" class="tab-content">
-      <div class="live-room">
-        <div class="live-room-label">Жандуу бөлмө</div>
+      <div class="live-room"><div class="designer-topbar screen-topbar live-room-head"><div class="designer-status-left"><div class="live-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-1.7c0-1.8-1.5-3.3-3.3-3.3H7.3C5.5 15 4 16.5 4 18.3V20M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>live</span><span class="live-sep"></span><span id="onlineCountRoom">284</span></div></div><div class="designer-status-right"><div class="tg-id designer-id" id="roomUserId">ID:...</div><span class="screen-lang" id="roomLangLabel">KY</span></div></div>
+        <div class="live-room-label">Жандуу чат</div>
         <div class="live-room-shell">
           <div class="live-room-feed" id="liveRoomFeed"></div>
           <div class="room-typing" id="roomTyping"></div>
@@ -365,7 +474,7 @@
       <div class="marquee-wrap" id="marqueeBar"><div class="marquee-inner" id="marqueeText"></div></div>
     </div>
 
-    <div class="tab-bar"><button class="tab-item" onclick="switchTab('menu')" id="btnMenu"><span class="tab-icon">☰</span><span class="tab-label">МЕНЮ</span></button><button class="tab-item" onclick="switchTab('chat')" id="btnChat"><span class="tab-icon">💬</span><span class="tab-label">ЧАТ</span></button><button class="tab-item active" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon">🎯</span><span class="tab-label">СИГНАЛДАР</span></button><button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon">🌐</span><span class="tab-label">БӨЛМӨ</span></button><button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon">🏆</span><span class="tab-label">ТОП 100</span></button></div>
+    <nav class="tab-bar" aria-label="Негизги меню"><button class="tab-item active" onclick="switchTab('menu')" id="btnMenu"><span class="tab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><span class="tab-label">Меню</span></button><button class="tab-item" onclick="switchTab('signals')" id="btnSignals"><span class="tab-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.5 5.5a9 9 0 0 0 0 13M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="tab-label">Сигналдар</span></button><button class="tab-item" onclick="switchTab('liveRoom')" id="btnLiveRoom"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M20 15a3 3 0 0 1-3 3H9l-5 3v-6a3 3 0 0 1-1-2.2V7a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3z"/><circle cx="8" cy="11" r=".7" fill="currentColor"/><circle cx="12" cy="11" r=".7" fill="currentColor"/><circle cx="16" cy="11" r=".7" fill="currentColor"/></svg></span><span class="tab-label">Жандуу чат</span></button><button class="tab-item" onclick="switchTab('top')" id="btnTop"><span class="tab-icon"><svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0zM12 12v5M8 21h8M9 17h6M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4"/><path d="m12 5 .7 1.4 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z"/></svg></span><span class="tab-label">ТОП - 100</span></button></nav>
   </div>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -434,13 +543,23 @@
     const SIGNAL_TIMEOUT_MS=8000;
     const MIN_SIGNAL_SLOT_REMAINING_MS=60000;
     const LAST_POST_CHANNEL='https://t.me/+6ofVmcwm02piMjMy';const LAST_POST_TIMEOUT_MS=8000;let currentLastPosts=[];
-    function validLastPost(p){return !!(p&&typeof p==='object'&&(String(p.text||'').trim()||String(p.photo_url||'').trim()));}
+    function neutralizeAlmaz(value){return String(value??'').replace(/\b(?:Алмаз|Almaz)\b/giu,'NexusAI');}
+    function escHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+    function safeExternalUrl(value){try{const raw=String(value||'').trim();if(!/^https:\/\//i.test(raw))return '';const parsed=new URL(raw);return parsed.protocol==='https:'?parsed.href:'';}catch(e){return '';}}
+    function validLastPost(p){if(!(p&&typeof p==='object'))return false;const text=String(p.text||'').trim();if(/(?:тесттик|\btest\b)/i.test(text))return false;return !!(text||String(p.photo_url||'').trim());}
     function openLastPostChannel(index=0){const p=currentLastPosts[index]||{};openExternal(String(p.link||LAST_POST_CHANNEL));}
-    function renderLastPosts(input){const list=document.getElementById('lastPostList');if(!list)return false;const posts=(Array.isArray(input)?input:[input]).filter(validLastPost).slice(0,10);list.innerHTML='';currentLastPosts=posts;posts.forEach((p,index)=>{const section=document.createElement('section');section.className='last-post show';const card=document.createElement('button');card.type='button';card.className='last-post-card';card.onclick=()=>openLastPostChannel(index);const image=String(p.photo_url||'').trim();if(image){const img=document.createElement('img');img.className='last-post-photo';img.alt='Канал постунун сүрөтү';img.loading='lazy';img.src=image;card.appendChild(img);}else card.classList.add('no-photo');const copy=document.createElement('span');copy.className='last-post-copy';[['last-post-eyebrow','Акыркы пост'],['last-post-channel',String(p.channel_name||'BO-KG жабык каналы')],['last-post-text',String(p.text||'')],['last-post-cta','Жабык каналга өтүү →']].forEach(([cls,value])=>{const el=document.createElement('span');el.className=cls;el.textContent=value;copy.appendChild(el);});card.appendChild(copy);section.appendChild(card);list.appendChild(section);});return posts.length>0;}
+    function renderLastPosts(input){
+      const list=document.getElementById('lastPostList');if(!list)return false;
+      const livePosts=(Array.isArray(input)?input:[input]).filter(validLastPost).slice(0,1);
+      const posts=livePosts.length?livePosts:[{text:'Күндүзгү сеанстын результаттары жабык каналда',channel_name:'BO-KG жабык каналы',link:LAST_POST_CHANNEL}];
+      list.innerHTML='';currentLastPosts=posts;
+      posts.forEach((p,index)=>{const section=document.createElement('section');section.className='last-post show';const card=document.createElement('button');card.type='button';card.className='last-post-card';card.onclick=()=>openLastPostChannel(index);const image=safeExternalUrl(p.photo_url);if(image){const img=document.createElement('img');img.className='last-post-photo';img.alt='Канал постунун сүрөтү';img.loading='lazy';img.referrerPolicy='no-referrer';img.src=image;card.appendChild(img);}else{card.classList.add('no-photo');const art=document.createElement('span');art.className='last-post-art';art.setAttribute('aria-hidden','true');art.innerHTML='<svg viewBox="0 0 390 222" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#28236f"/><stop offset="1" stop-color="#080c32"/></linearGradient><linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#3dd6b1"/><stop offset="1" stop-color="#8b75ff"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g opacity=".95"><rect x="34" y="23" width="322" height="142" rx="20" fill="url(#panel)" stroke="#7770be" stroke-opacity=".42"/><path d="M55 132h278M55 103h278M55 74h278M95 40v108M155 40v108M215 40v108M275 40v108" stroke="#b8b2ff" stroke-opacity=".08"/><path d="M55 125l42-29 35 12 46-50 38 22 43-31 74 20" fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/><circle cx="293" cy="69" r="7" fill="#3dd6b1" filter="url(#glow)"/><rect x="56" y="42" width="70" height="18" rx="9" fill="#3dd6b1" fill-opacity=".13"/><text x="68" y="55" fill="#7ce8cf" font-size="10" font-family="Arial" font-weight="700">NEXUS AI</text></g></svg>';card.appendChild(art);}const copy=document.createElement('span');copy.className='last-post-copy';[['last-post-eyebrow','Акыркы пост'],['last-post-channel',String(p.channel_name||'BO-KG жабык каналы')],['last-post-text',neutralizeAlmaz(String(p.text||'Күндүзгү сеанстын результаттары жабык каналда'))],['last-post-cta','Каналга өтүү']].forEach(([cls,value])=>{const el=document.createElement('span');el.className=cls;el.textContent=value;copy.appendChild(el);});card.appendChild(copy);section.appendChild(card);list.appendChild(section);});
+      return livePosts.length>0;
+    }
     async function loadLastPost(){let cached=false;try{cached=renderLastPosts(JSON.parse(S.get('lastposts')||S.get('lastpost')||'null'));}catch(e){}const c=new AbortController(),timer=setTimeout(()=>c.abort(),LAST_POST_TIMEOUT_MS);try{const r=await fetch(LAST_POST_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',signal:c.signal}),d=await r.json();const posts=Array.isArray(d&&d.posts)?d.posts:(d&&d.post?[d.post]:[]);if(r.ok&&d.ok&&posts.some(validLastPost)){S.set('lastposts',JSON.stringify(posts));renderLastPosts(posts);}else if(!cached)renderLastPosts([]);}catch(e){if(!cached)renderLastPosts([]);}finally{clearTimeout(timer);}}
 
     let accessMode='limited';
-    let chatTier=1; // 1=Support, 2=Personal Analyst (Изумруд tier)
+    let chatTier=1; // Access tier is kept for backend compatibility; UI identity stays neutral NexusAI.
     let userTotalDeposit=0;
     const APP_NS='nexusbokg'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}},del(k){try{localStorage.removeItem(`${APP_NS}:${k}`)}catch(e){}}};
     const urlParams=new URLSearchParams(window.location.search);
@@ -474,7 +593,7 @@
       row.innerHTML='';
       PAIRS.forEach(pair=>{
         const btn=document.createElement('button');
-        btn.type='button';btn.className='pair-btn';btn.dataset.pair=pair.id;btn.role='tab';btn.textContent=pair.title;
+        btn.type='button';btn.className='pair-btn';btn.dataset.pair=pair.id;btn.setAttribute('role','tab');btn.textContent=pair.title;
         btn.onclick=()=>switchTradingPair(pair.id);
         row.appendChild(btn);
       });
@@ -579,7 +698,8 @@
     const tg=window.Telegram?Telegram.WebApp:null;try{tg&&tg.ready();}catch(e){}try{tg&&tg.expand();}catch(e){}
     let savedIdKey=currentGeo?`saved_player_id_${currentGeo}`:'saved_player_id';
     let userName="Guest",tgUserId=null;
-    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`TG: ${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){userName=tg.initDataUnsafe.user.first_name||"User";tgUserId=tg.initDataUnsafe.user.id;S.set('tg_user_id',String(tgUserId));S.set('tg_user_name',userName);document.getElementById('userHeaderId').textContent=`ID:${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}else{const savedId=S.get('tg_user_id');if(savedId){tgUserId=parseInt(savedId);userName=S.get('tg_user_name')||'User';document.getElementById('userHeaderId').textContent=`ID:${tgUserId}`;document.getElementById('chatTgId').textContent=`TG: ${tgUserId}`;}}
+    function syncDesignerIdentity(){const value=tgUserId?`ID:${tgUserId}`:'ID:...';['userHeaderId','signalsUserId','roomUserId'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=value;});['signalsLangLabel','roomLangLabel'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=String(lang||'ky').toUpperCase();});}
     syncAttributionOnce().catch(()=>{});
 
     const SELF_RESET_USER_ID='930309275';
@@ -634,9 +754,7 @@
       onlineVal+=Math.random()>0.5?delta:-delta;
       if(onlineVal<180)onlineVal+=Math.floor(Math.random()*10)+5;
       if(onlineVal>420)onlineVal-=Math.floor(Math.random()*10)+5;
-      const onlinePrimary=document.getElementById('onlineCount'),onlineSecondary=document.getElementById('onlineCount2');
-      if(onlinePrimary)onlinePrimary.textContent='• '+onlineVal;
-      if(onlineSecondary)onlineSecondary.textContent=onlineVal;
+      ['onlineCount','onlineCount2','onlineCountSignals','onlineCountRoom'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=onlineVal;});
     }
     updOnline();setInterval(updOnline,4000);
 
@@ -685,8 +803,7 @@
       Object.freeze({key:'unranked',name:'Unranked',icon:'❔',threshold:0,dailyLimit:null,lifetimeLimit:1,unlimited:false,accuracy:null}),
       Object.freeze({key:'bronze',name:'Bronze',icon:'🥉',threshold:1000,dailyLimit:5,lifetimeLimit:null,unlimited:false,accuracy:90}),
       Object.freeze({key:'silver',name:'Silver',icon:'🥈',threshold:1500,dailyLimit:10,lifetimeLimit:null,unlimited:false,accuracy:92}),
-      Object.freeze({key:'gold',name:'Gold',icon:'🥇',threshold:2000,dailyLimit:15,lifetimeLimit:null,unlimited:false,accuracy:95}),
-      Object.freeze({key:'emerald',name:'Изумруд',icon:'💎',threshold:4000,dailyLimit:null,lifetimeLimit:null,unlimited:true,accuracy:97})
+      Object.freeze({key:'gold',name:'Gold',icon:'🥇',threshold:2000,dailyLimit:null,lifetimeLimit:null,unlimited:true,accuracy:97})
     ]);
     function getTierByKey(key){return BO_KG_TIERS.find(t=>t.key===key)||BO_KG_TIERS[0];}
     function tierSignalsText(tier){if(tier.unlimited)return 'чексиз сигнал';if(tier.lifetimeLimit)return `${tier.lifetimeLimit} сигнал lifetime`;return `күнүнө ${tier.dailyLimit} сигнал`;}
@@ -696,9 +813,28 @@
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=BO_KG_TIERS.length-1;i>=0;i--){if(dep>=BO_KG_TIERS[i].threshold)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
     function addDailySignal(){if(getVipTierIdx()===0)S.set('freeSignalUsed','1');const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
+    function syncServerQuota(quota){if(!quota||typeof quota!=='object')return false;const used=Math.max(0,Number(quota.used)||0);if(quota.scope==='lifetime'){if(used>=1||Number(quota.remaining)===0)S.set('freeSignalUsed','1');}else if(quota.scope==='daily'){S.set('sigDay',new Date().toDateString());S.set('sigToday',String(used));}return true;}
+    function serverQuotaMessage(data){const reason=String(data&&data.reason||'');if(reason==='quota_exhausted'){const q=data.quota||{};return q.scope==='lifetime'?'Акысыз lifetime сигнал колдонулду':'Бүгүнкү сигнал лимити бүттү';}if(reason==='unauthorized')return 'Mini App’ты Telegram боттон кайра ачыңыз';if(reason==='user_not_found')return 'Алгач Telegram ботто /start басыңыз';return 'сигнал убактылуу жеткиликсиз';}
     function getDailyLimit(){const tier=getVipTier();return tier.unlimited?Infinity:(tier.dailyLimit||tier.lifetimeLimit);}
     function isSignalLimitReached(){const tier=getVipTier();if(tier.unlimited)return false;if(tier.lifetimeLimit)return S.get('freeSignalUsed')==='1';return getDailySignals()>=tier.dailyLimit;}
     function getVipTier(){return BO_KG_TIERS[getVipTierIdx()];}
+    const VIP_LEVEL_UI=Object.freeze({
+      unranked:{title:'Бош деңгээл',color:'#ffffff',asset:'empty'},
+      bronze:{title:'Коло деңгээли',color:'#f6d0ab',asset:'bronze'},
+      silver:{title:'Күмүш деңгээл',color:'#ffffff',asset:'silver'},
+      gold:{title:'Алтын деңгээл',color:'#ffffff',asset:'gold'}
+    });
+    function tierDescription(tier){if(tier.lifetimeLimit)return 'Бул деңгээлде сизде болгону 1 сигнал гана болот';if(tier.unlimited)return 'Бул деңгээлде сизде чексиз сигнал болот';return `Бул деңгээлде сизде күнүнө болгону ${tier.dailyLimit} сигнал болот`;}
+    function tierRule(tier){if(tier.lifetimeLimit)return 'Сигнал lifetime форматында бир жолу берилет';if(tier.unlimited)return `Сигналдар чексиз. Точность ${tier.accuracy}%`;return `24 сааттан кийин лимит жаңыланып, кайрадан ${tier.dailyLimit} сигнал ала аласыз. Точность ${tier.accuracy}%`;}
+    function tierCardCopy(tier){if(tier.lifetimeLimit)return 'Бул деңгээлде сизде болгону 1 сигнал гана болот. Сигнал lifetime форматында бир жолу берилет жана кайра жаңыланбайт.';if(tier.unlimited)return `Бул деңгээлде сизде чексиз сигнал болот. Сигналдарды каалаган убакта ала аласыз. Точность ${tier.accuracy}%`;return `Бул деңгээлде сизде күнүнө болгону ${tier.dailyLimit} сигнал гана болот. 24 сааттан кийин лимит жаңыланып, сиз кайрадан ${tier.dailyLimit} сигнал ала аласыз. Точность ${tier.accuracy}%`;}
+    function renderVipLevels(){
+      const root=document.getElementById('vipLevels');if(!root)return;const active=getVipTierIdx();
+      root.innerHTML=BO_KG_TIERS.map((tier,index)=>{const ui=VIP_LEVEL_UI[tier.key];const stageClass=tier.key==='unranked'?' empty':'';const current=index===active;return `<article class="vip-level-card${current?' current':''}" data-tier="${tier.key}"${current?' aria-current="true"':''}><div class="vip-gem-stage${stageClass}"><img class="vip-gem-art" src="assets/vip/vip-${ui.asset}.png" alt="" aria-hidden="true" width="333" height="333"></div><div class="vip-level-copy"><h2 class="vip-level-name" style="--tier-color:${ui.color}">${ui.title}</h2><p class="vip-level-desc">${tierCardCopy(tier)}</p></div></article>`;}).join('');
+    }
+    function renderMenuStats(){let stats={joined:72,analyzed:778,successful:767};try{const saved=JSON.parse(S.get('menuStats')||'null');if(saved&&typeof saved==='object')stats={joined:Number(saved.joined)||stats.joined,analyzed:Number(saved.analyzed)||stats.analyzed,successful:Number(saved.successful)||stats.successful};}catch(e){}[['statJoined',stats.joined],['statAnalyzed',stats.analyzed],['statSuccessful',stats.successful]].forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=Number(value).toLocaleString();});}
+    function openVipScreen(){switchTab('vip');}
+    function closeVipScreen(){switchTab('menu');}
+    function openHowInfo(){showHelp('how');}
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
       const idx=getVipTierIdx();const tier=BO_KG_TIERS[idx];
@@ -733,8 +869,9 @@
         left.textContent=tier.icon+' '+tier.name+' · MAX TIER';
         hint.textContent=tierSignalsText(tier)+' · '+tier.accuracy+'% accuracy';
       }
-      const colors=['rgba(132,150,181,0.3)','rgba(205,127,50,0.45)','rgba(192,192,192,0.45)','rgba(242,169,59,0.5)','rgba(16,185,129,0.5)'];
+      const colors=['rgba(132,150,181,0.3)','rgba(205,127,50,0.45)','rgba(192,192,192,0.45)','rgba(242,169,59,0.5)'];
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
+      renderVipLevels();
     }
     updVIP();
 
@@ -746,8 +883,8 @@
     function fireConfetti(){const box=document.getElementById('confettiBox'),cols=['#f2a93b','#22c55e','#3b82f6','#ef4444','#a855f7','#ec4899'];for(let i=0;i<35;i++){const p=document.createElement('div');p.className='confetti-p';p.style.left=Math.random()*100+'%';p.style.background=cols[Math.floor(Math.random()*cols.length)];p.style.animationDelay=Math.random()*.5+'s';p.style.animationDuration=(2+Math.random()*2)+'s';p.style.borderRadius=Math.random()>.5?'50%':'2px';p.style.width=(5+Math.random()*7)+'px';p.style.height=(5+Math.random()*7)+'px';box.appendChild(p);setTimeout(()=>p.remove(),4000);}}
 
     // TAB
-    let curTab='signals';
-    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar');if(t==='menu'){document.getElementById('tabMenu').classList.add('active');document.getElementById('btnMenu').classList.add('active');mq.style.display='none';renderMenu();loadLastPost();}else if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat').classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';renderSignalWindow();}else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}}
+    let curTab='menu';
+    function switchTab(t){curTab=t;document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-item').forEach(e=>e.classList.remove('active'));const mq=document.getElementById('marqueeBar'),wrap=document.querySelector('.app-wrap');if(t==='menu'){document.getElementById('tabMenu').classList.add('active');document.getElementById('btnMenu').classList.add('active');mq.style.display='none';renderMenu();loadLastPost();}else if(t==='vip'){document.getElementById('tabVip').classList.add('active');document.getElementById('btnMenu').classList.add('active');mq.style.display='none';renderVipLevels();}else if(t==='chat'){document.getElementById('tabChat').classList.add('active');document.getElementById('btnChat')?.classList.add('active');mq.style.display='none';loadChatHistory();setTimeout(scrollChatBottom,100);}else if(t==='signals'){document.getElementById('tabSignals').classList.add('active');document.getElementById('btnSignals').classList.add('active');mq.style.display='';renderSignalWindow();}else if(t==='liveRoom'){document.getElementById('tabLiveRoom').classList.add('active');document.getElementById('btnLiveRoom').classList.add('active');mq.style.display='none';renderLiveRoom();}else{document.getElementById('tabTop').classList.add('active');document.getElementById('btnTop').classList.add('active');mq.style.display='none';renderTopPlayers();}if(wrap)wrap.scrollTop=0;}
 
     // MARQUEE
     function buildMarquee(){const c=document.getElementById('marqueeText'),source=[...new Set(REAL_NAME_POOL.map(x=>String(x).trim()).filter(Boolean))],bucket=Math.floor(Date.now()/15000),pairs=PAIRS.map(p=>p.title),pick=source.map((name,i)=>({name,score:((i*37)+bucket*13)%997})).sort((a,b)=>a.score-b.score).slice(0,16);let h='';pick.forEach((x,i)=>{const amount=rndInt(45,190),pair=pairs[(bucket+i)%pairs.length];h+=`${x.name} · ${pair} бүтүм жабылды <span>+${amount.toLocaleString()} сом</span>`;if(i<pick.length-1)h+='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';});c.innerHTML=h+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+h;c.style.animationDelay=`-${Date.now()%300000}ms`;}
@@ -759,23 +896,17 @@
     if(!savedLang)S.set('aslang',lang);
     function T(){return STR[lang]||STR.ky;}
     function toggleLangMenu(){document.getElementById('langMenu').classList.toggle('open');}
-    function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');applyStatic();}
+    function setLang(id){lang=id;S.set("aslang",lang);document.getElementById('langBtn').textContent=id.toUpperCase();document.getElementById('langMenu').classList.remove('open');syncDesignerIdentity();applyStatic();}
     function buildLangMenu(){const m=document.getElementById('langMenu');m.innerHTML='';LANGS.forEach(x=>{const b=document.createElement('button');b.className='lang-opt'+(x.id===lang?' active':'');b.textContent=x.l;b.onclick=()=>setLang(x.id);m.appendChild(b);});document.getElementById('langBtn').textContent=lang.toUpperCase();}
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={ky:{},ru:{}};
     function hhmm(d){return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;}
     function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
-    const MENU_ITEMS=[
-      {id:'how',icon:'📘',title:'Кантип иштейт',body:'1. Валюталык жупту тандаңыз.\n2. Графиктеги акыркы кыймылды караңыз.\n3. «Сигнал алуу» баскычын басыңыз.\n4. ЖОГОРУ же ТӨМӨН багыты 5 мүнөттүк слот үчүн берилет.'},
-      {id:'vip',icon:'🏅',title:'VIP деңгээлдер',body:tierEconomyText()},
-      {id:'channel',icon:'📣',title:'Каналга кошулуу',body:'Жабык каналдан жаңылыктарды жана сигнал түшүндүрмөлөрүн алыңыз.',url:LAST_POST_CHANNEL},
-      {id:'news',icon:'📰',title:'Жаңылыктар',body:'Бул бөлүмдө жакында BO-KG жаңылыктары чыгат.',reserved:true}
-    ];
-    function openExternal(url){try{if(tg&&String(url).startsWith('https://t.me/')&&tg.openTelegramLink)tg.openTelegramLink(url);else if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');}catch(e){window.open(url,'_blank');}}
-    function renderMenu(){const list=document.getElementById('menuList');if(!list)return;list.innerHTML='';MENU_ITEMS.forEach(item=>{const card=document.createElement(item.url?'button':'article');card.className='menu-card'+(item.url?' is-link':'')+(item.reserved?' menu-news':'');if(item.url){card.type='button';card.onclick=()=>openExternal(item.url);}const icon=document.createElement('span');icon.className='menu-card-icon';icon.textContent=item.icon;const copy=document.createElement('span'),title=document.createElement('span'),body=document.createElement('span');title.className='menu-card-title';title.textContent=item.title;body.className='menu-card-body';body.textContent=item.body;copy.append(title,body);card.append(icon,copy);if(item.url){const arrow=document.createElement('span');arrow.className='menu-card-arrow';arrow.textContent='→';card.appendChild(arrow);}list.appendChild(card);});}
-    async function refreshAccessState(){const uid=tgUserId||S.get('tg_user_id');if(!uid)return;try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});const d=await r.json();if(d.total_deposit!==undefined){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));updVIP();}if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}chatTier=userTotalDeposit>=getTierByKey('emerald').threshold?2:1;updateChatHeader();renderSignalWindow();}catch(e){}}
-    function updateChatHeader(){const sub=document.getElementById('chatHeaderSub'),title=document.getElementById('chatHeaderTitle'),hdr=document.querySelector('.chat-header');if(chatTier===2){if(sub)sub.textContent='NexusAI Personal Analyst · 24/7';if(title)title.textContent='ANALYST';if(hdr){hdr.style.borderBottom='1px solid rgba(242,169,59,0.3)';hdr.style.background='linear-gradient(180deg,rgba(242,169,59,0.06),var(--bg))';}}else{if(sub)sub.textContent='NexusAI Support';if(title)title.textContent='SUPPORT';if(hdr){hdr.style.borderBottom='';hdr.style.background='';}}}
+    function openExternal(url){const safe=safeExternalUrl(url);if(!safe)return false;try{if(tg&&safe.startsWith('https://t.me/')&&tg.openTelegramLink)tg.openTelegramLink(safe);else if(tg&&tg.openLink)tg.openLink(safe);else window.open(safe,'_blank','noopener,noreferrer');return true;}catch(e){window.open(safe,'_blank','noopener,noreferrer');return true;}}
+    function renderMenu(){renderMenuStats();renderVipLevels();}
+    async function refreshAccessState(){const uid=tgUserId||S.get('tg_user_id');if(!uid)return;try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({init_data:String(tg&&tg.initData||''),user_id:uid})});const d=await r.json();if(d.total_deposit!==undefined){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));updVIP();}if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}chatTier=userTotalDeposit>=getTierByKey('gold').threshold?2:1;updateChatHeader();renderSignalWindow();}catch(e){}}
+    function updateChatHeader(){const sub=document.getElementById('chatHeaderSub'),title=document.getElementById('chatHeaderTitle'),hdr=document.querySelector('.chat-header');if(sub)sub.textContent='NexusAI · 24/7';if(title)title.textContent='NEXUSAI';if(hdr){hdr.style.borderBottom='1px solid rgba(61,214,177,.2)';hdr.style.background='linear-gradient(180deg,rgba(61,214,177,.045),var(--bg))';}}
     function applyStatic(){buildLangMenu();renderMenu();renderSignalWindow();refreshAccessState().catch(()=>{});}
     let activeSignal=null,signalBusy=false,signalError='',signalUiTimer=null;
     function parseTimeMs(v){if(typeof v==='number')return v<1e12?v*1000:v;const n=Date.parse(String(v||''));return Number.isFinite(n)?n:0;}
@@ -785,13 +916,13 @@
     function restoreLastSignal(){try{const s=JSON.parse(S.get('lastsignal')||'null');if(s&&['up','down'].includes(s.direction)&&PAIRS.some(p=>p.id===s.pair)&&parseTimeMs(s.expires_at)>Date.now()){activeSignal=s;return;}S.del('lastsignal');}catch(e){S.del('lastsignal');}}
     function signalLimitMessage(){const next=BO_KG_TIERS[getVipTierIdx()+1];return next?`${next.threshold.toLocaleString()} сом депозит → ${next.icon} ${next.name}, ${tierSignalsText(next)}`:'';}
     function renderSignalWindow(){const box=document.getElementById('signalWindow'),btn=document.getElementById('signalButton'),msg=document.getElementById('signalMessage'),result=document.getElementById('signalResult');if(!box||!btn||!msg||!result)return;const now=Date.now();box.classList.remove('up','down','slot-wait');btn.classList.remove('gray','loading','slot-wait');result.classList.remove('show');if(activeSignal&&parseTimeMs(activeSignal.expires_at)<=now){activeSignal=null;S.del('lastsignal');}if(signalBusy){box.dataset.state='waiting';btn.disabled=true;btn.classList.add('loading');btn.textContent='Күтүңүз…';msg.textContent='Тандалган жуптун котировкалары талданууда.';return;}if(!isMarketOpen(new Date(now))){box.dataset.state='unavailable';btn.disabled=true;btn.classList.add('gray');btn.textContent='Базар жабык';msg.textContent='Форекс базары ачылганда сигналдар жеткиликтүү болот.';return;}if(activeSignal){const same=activeSignal.pair===selectedPairId;box.dataset.state=(now-Number(activeSignal.revealed_at||now)<2500)?'received':'cooldown';btn.disabled=true;btn.classList.add('gray');btn.textContent='Кийинки слот';if(same){const up=activeSignal.direction==='up';box.classList.add(up?'up':'down');result.classList.add('show');document.getElementById('signalArrow').textContent=up?'↑':'↓';document.getElementById('signalDirection').textContent=up?'ЖОГОРУ':'ТӨМӨН';document.getElementById('signalPair').textContent=(PAIRS.find(p=>p.id===activeSignal.pair)||{}).title||activeSignal.pair;document.getElementById('signalConfidence').textContent=`Ишеним: ${Math.max(0,Math.min(maxTierAccuracy(),Number(activeSignal.confidence)||0))}%`;document.getElementById('signalTimer').textContent=fmtCountdown(parseTimeMs(activeSignal.expires_at)-now);msg.textContent=getVipTierIdx()===0?'Сигнал ушул слоттун аягына чейин жарактуу. Кийинки слотко чейин күтүңүз.':'Сигнал ушул 5 мүнөттүк слотко жарактуу.';}else msg.textContent='Бул слотто сигнал алынды. Кийинки чекке чейин күтүңүз.';return;}if(isSignalLimitReached()){box.dataset.state='exhausted';btn.disabled=true;btn.classList.add('gray');btn.textContent='Лимит бүттү';msg.textContent=signalLimitMessage();return;}if(isSignalSlotGuardActive(now)){box.dataset.state='slot-wait';box.classList.add('slot-wait');btn.disabled=true;btn.classList.add('slot-wait');btn.textContent=`Жаңы слот ${fmtCountdown(signalSlotRemainingMs(now))}`;msg.textContent='Жаңы слот башталууда, күтүңүз. Лимитиңиз сакталат.';return;}box.dataset.state='ready';btn.disabled=false;btn.textContent='Сигнал алуу';msg.textContent=signalError||`${selectedPair().title} боюнча сигнал алуу үчүн басыңыз.`;}
-    async function requestAiSignal(){if(signalBusy||activeSignal||isSignalLimitReached()||!isMarketOpen())return;if(isSignalSlotGuardActive()){signalError='';renderSignalWindow();return;}const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid){signalError='Telegram колдонуучусу аныкталган жок';renderSignalWindow();return;}const requestedPair=selectedPairId;signalBusy=true;signalError='';renderSignalWindow();const c=new AbortController(),timeout=setTimeout(()=>c.abort(),SIGNAL_TIMEOUT_MS);try{const r=await fetch(SIGNAL_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,pair:requestedPair}),signal:c.signal});const d=await r.json(),s=d&&d.signal;const slot=parseTimeMs(s&&s.slot_start),expires=parseTimeMs(s&&s.expires_at);if(!r.ok||!d.ok||!s||!['up','down'].includes(s.direction)||s.pair!==requestedPair||!slot||expires-Date.now()<MIN_SIGNAL_SLOT_REMAINING_MS)throw new Error('invalid_signal');activeSignal={direction:s.direction,pair:s.pair,slot_start:s.slot_start,expires_at:s.expires_at,confidence:Math.max(70,Math.min(maxTierAccuracy(),Number(s.confidence)||70)),revealed_at:Date.now()};S.set('lastsignal',JSON.stringify(activeSignal));addDailySignal();S.set('tsig',String(parseInt(S.get('tsig')||'0')+1));updVIP();playSfx();}catch(e){signalError='сигнал убактылуу жеткиликсиз';}finally{clearTimeout(timeout);signalBusy=false;renderSignalWindow();}}
+    async function requestAiSignal(){if(signalBusy||activeSignal||isSignalLimitReached()||!isMarketOpen())return;if(isSignalSlotGuardActive()){signalError='';renderSignalWindow();return;}const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid){signalError='Telegram колдонуучусу аныкталган жок';renderSignalWindow();return;}const requestedPair=selectedPairId;let serverData=null;signalBusy=true;signalError='';renderSignalWindow();const c=new AbortController(),timeout=setTimeout(()=>c.abort(),SIGNAL_TIMEOUT_MS);try{const r=await fetch(SIGNAL_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({init_data:String(tg&&tg.initData||''),user_id:uid,pair:requestedPair}),signal:c.signal});serverData=await r.json();const d=serverData,s=d&&d.signal;if(!r.ok||!d.ok){syncServerQuota(d&&d.quota);throw new Error(String(d&&d.reason||'signal_failed'));}const slot=parseTimeMs(s&&s.slot_start),expires=parseTimeMs(s&&s.expires_at);if(!s||!['up','down'].includes(s.direction)||s.pair!==requestedPair||!slot||expires-Date.now()<MIN_SIGNAL_SLOT_REMAINING_MS)throw new Error('invalid_signal');activeSignal={direction:s.direction,pair:s.pair,slot_start:s.slot_start,expires_at:s.expires_at,confidence:Math.max(70,Math.min(maxTierAccuracy(),Number(s.confidence)||70)),revealed_at:Date.now()};S.set('lastsignal',JSON.stringify(activeSignal));if(!syncServerQuota(d.quota))addDailySignal();S.set('tsig',String(parseInt(S.get('tsig')||'0')+1));updVIP();playSfx();}catch(e){signalError=serverQuotaMessage(serverData);}finally{clearTimeout(timeout);signalBusy=false;renderSignalWindow();}}
     restoreLastSignal();signalUiTimer=setInterval(renderSignalWindow,1000);
 
     const LIVE_ROOM_NPCS=[
-      {name:'Айбек',badge:'Bronze',lang:'ky'},{name:'Нурбек',badge:'Silver',lang:'ky'},{name:'Бакыт',badge:'Gold',lang:'ky'},{name:'Эрлан',badge:'Изумруд',lang:'ky'},
-      {name:'Айсулуу',badge:'Silver',lang:'ky'},{name:'Мээрим',badge:'Gold',lang:'ky'},{name:'Данияр',badge:'Изумруд',lang:'ky'},{name:'Асел',badge:'Bronze',lang:'ky'},
-      {name:'Адилет',badge:'Gold',lang:'ky'},{name:'Жанара',badge:'Изумруд',lang:'ky'},{name:'Самат',badge:'Bronze',lang:'ky'},{name:'Гүлнур',badge:'Silver',lang:'ky'}
+      {name:'Айбек',badge:'Bronze',lang:'ky'},{name:'Нурбек',badge:'Silver',lang:'ky'},{name:'Бакыт',badge:'Gold',lang:'ky'},{name:'Эрлан',badge:'Gold',lang:'ky'},
+      {name:'Айсулуу',badge:'Silver',lang:'ky'},{name:'Мээрим',badge:'Gold',lang:'ky'},{name:'Данияр',badge:'Gold',lang:'ky'},{name:'Асел',badge:'Bronze',lang:'ky'},
+      {name:'Адилет',badge:'Gold',lang:'ky'},{name:'Жанара',badge:'Gold',lang:'ky'},{name:'Самат',badge:'Bronze',lang:'ky'},{name:'Гүлнур',badge:'Silver',lang:'ky'}
     ];
     const SEED_KY=['🔥🔥','сонун','так чыкты','таза сигнал','дагы бир утуш','бүгүн жакшы күн','EUR/USD сонун болду','GBP/USD сигналын ким алды?','USD/JPY так келди','AUD/USD дагы плюс','USDCAD күтүлгөндөй','үчүнчү утуш катарынан 💰','Bronze бөлмө күчтүү экен','кеч кирдим, бирок плюс алдым','биринчи өтпөй калды, экинчиси жапты','жакшы иш','AI бүгүн күчтүү','аз болсо да пайда','мен да алдым','көрдүңөрбү?','🥇','💰💰','ийгилик баарыңа'];
     let liveRoomFeed=[];
@@ -836,9 +967,9 @@
     let roomRenderedCount=0;
     function buildMsgEl(m){
       const el=document.createElement('div');el.className='room-msg'+(m.role==='user'?' user':'');
-      const rt=roomReplyTarget(m.text);const cleanText=rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text;
+      const rt=roomReplyTarget(neutralizeAlmaz(m.text));const cleanText=neutralizeAlmaz(rt?String(m.text).replace(new RegExp('^@'+rt+'\\s*'),''):m.text);
       const bi=roomBadgeIcon(m.badge);
-      el.innerHTML=`${rt?`<div class="room-reply">↳ replying to ${rt}</div>`:''}<span class="room-name ${roomNameClass(m.author)}">${m.author}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify((cleanText||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))}</span><span class="room-time">${roomRelTime(m.createdAt)}</span>${renderReactions(m)}`;
+      const safeAuthor=neutralizeAlmaz(m.author),safeRt=neutralizeAlmaz(rt);el.innerHTML=`${safeRt?`<div class="room-reply">↳ replying to ${escHtml(safeRt)}</div>`:''}<span class="room-name ${roomNameClass(safeAuthor)}">${escHtml(safeAuthor)}</span>${bi?`<span class="room-badge">${bi}</span>`:''}<span class="room-text">${linkify(cleanText||'')}</span><span class="room-time">${escHtml(roomRelTime(m.createdAt))}</span>${renderReactions(m)}`;
       return el;
     }
     function renderLiveRoom(appendOnly){
@@ -870,23 +1001,24 @@
     }
     function removeChatImage(){chatImgB64=null;document.getElementById('chatImgPreview').style.display='none';document.getElementById('chatImgPreview').innerHTML='';}
     function scrollChatBottom(){const e=document.getElementById('chatMessages');if(e)e.scrollTop=e.scrollHeight;}
-    function linkify(text){return text.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">$1</a>').replace(/\b(777[A-Z]{2}777)\b/g,'<span onclick="navigator.clipboard.writeText(\'$1\');this.style.background=\'#4fc3f7\';this.textContent=\'Copied!\';setTimeout(()=>{this.textContent=\'$1\';this.style.background=\'rgba(79,195,247,0.15)\'},1200)" style="background:rgba(79,195,247,0.15);color:#4fc3f7;padding:2px 8px;border-radius:6px;font-weight:700;font-family:monospace;cursor:pointer;display:inline-block;border:1px dashed rgba(79,195,247,0.4)">$1</span>');}
+    function linkify(text){const raw=String(text??''),re=/https?:\/\/[^\s<]+/gi;let out='',last=0,m;while((m=re.exec(raw))){out+=escHtml(raw.slice(last,m.index));const safe=safeExternalUrl(m[0]);out+=safe?`<a href="${escHtml(safe)}" target="_blank" rel="noopener noreferrer" style="color:#4fc3f7;text-decoration:underline;word-break:break-all">${escHtml(m[0])}</a>`:escHtml(m[0]);last=m.index+m[0].length;}return out+escHtml(raw.slice(last));}
+    function normalizeChatMessage(message){const m={...(message||{}),t:String(message&&message.t||'')};const legacy=m.t.match(/(?:<br>)?<img src="(data:image\/(?:png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+)">/i);if(legacy){m.image=legacy[1];m.t=m.t.replace(legacy[0],'');}return m;}
     function chatVipBanner(){const tier=getVipTier();const idx=getVipTierIdx();const dep=parseInt(S.get('totalDep')||'0');let hint='';if(idx<BO_KG_TIERS.length-1){const next=BO_KG_TIERS[idx+1];const remain=Math.max(0,next.threshold-dep);hint=`<div style="font-size:10px;color:var(--muted);margin-top:2px">${remain.toLocaleString()} сом → ${next.icon} ${next.name} (${next.accuracy===null?'—':next.accuracy+'%'})</div>`;}const accuracy=tier.accuracy===null?'—':tier.accuracy+'% accuracy';return `<div style="text-align:center;padding:8px;margin-bottom:4px;background:rgba(242,169,59,0.06);border-radius:10px;border:1px solid rgba(242,169,59,0.15)"><span style="font-size:18px">${tier.icon}</span> <span style="font-size:13px;font-weight:800;color:#fff">${tier.name}</span> <span style="font-size:11px;color:var(--gold);font-weight:700">${accuracy}</span>${hint}</div>`;}
-    function renderChat(){const e=document.getElementById('chatMessages');const analystTier=getTierByKey('emerald');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI Personal Analyst</div><div class="chat-welcome-text">Account active. I\'m your personal AI analyst. Let\'s maximize profits together.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">I can help with app questions and setup. Personal AI Analyst unlocks at '+analystTier.icon+' '+analystTier.name+' tier ('+analystTier.threshold.toLocaleString()+' сом).</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(m=>{const d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;const hasHtml=m.t.includes('<img');if(hasHtml){d.innerHTML=m.t+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else if(m.r==='bot'){d.innerHTML=linkify(m.t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'))+(m.tm?`<div class="msg-time">${m.tm}</div>`:'');}else{d.textContent=m.t;if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=m.tm;d.appendChild(tm);}}e.appendChild(d);});scrollChatBottom();}
+    function renderChat(){const e=document.getElementById('chatMessages');const analystTier=getTierByKey('gold');if(!chatH.length){if(chatTier===2){e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title" style="color:var(--gold)">NexusAI</div><div class="chat-welcome-text">NexusAI is ready. Ask a question or send a screenshot.</div></div>';}else{e.innerHTML='<div class="chat-welcome"><div class="chat-welcome-icon" style="display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#f2a93b" opacity="0.15"/><circle cx="20" cy="20" r="12" fill="#f2a93b" opacity="0.25"/><circle cx="20" cy="20" r="6" fill="#f2a93b"/><line x1="20" y1="2" x2="20" y2="8" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="32" x2="20" y2="38" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="2" y1="20" x2="8" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="20" x2="38" y2="20" stroke="#f2a93b" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="chat-welcome-title">NexusAI Support</div><div class="chat-welcome-text">NexusAI is ready. Ask a question or send a screenshot.</div></div>';}return;}e.innerHTML=chatVipBanner();chatH.forEach(raw=>{const m=normalizeChatMessage(raw),d=document.createElement('div');d.className=`msg ${m.r==='user'?'user':'bot'}`;if(m.r==='bot')d.innerHTML=linkify(m.t);else d.textContent=m.t;const image=String(m.image||'');if(/^data:image\/(?:png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/i.test(image)){const img=document.createElement('img');img.src=image;img.alt='Chat attachment';d.appendChild(img);}if(m.tm){const tm=document.createElement('div');tm.className='msg-time';tm.textContent=String(m.tm);d.appendChild(tm);}e.appendChild(d);});scrollChatBottom();}
     async function loadChatHistory(){
       if(chatLD)return;
       chatLD=true;
-      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr;renderChat();}}}catch(e){}
+      try{const raw=S.get('nexusaii_chat_in');if(raw){const arr=JSON.parse(raw);if(Array.isArray(arr)&&arr.length){chatH=arr.map(m=>normalizeChatMessage({...m,t:neutralizeAlmaz(m.t)}));renderChat();}}}catch(e){}
       if(!CHAT_HISTORY_WEBHOOK)return;
       const uid=String(tgUserId||S.get('tg_user_id')||'');if(!uid)return;
       try{
         const controller=new AbortController();
         const timer=setTimeout(()=>controller.abort(),10000);
-        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});
+        const r=await fetch(CHAT_HISTORY_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({init_data:String(tg&&tg.initData||''),user_id:uid}),signal:controller.signal});
         clearTimeout(timer);
         const d=await r.json();
         if(d.messages&&Array.isArray(d.messages)&&d.messages.length){
-          chatH=d.messages.map(m=>({r:m.role==='user'?'user':'bot',t:m.content||m.text||'',tm:m.time||''}));
+          chatH=d.messages.map(m=>normalizeChatMessage({r:m.role==='user'?'user':'bot',t:neutralizeAlmaz(m.content||m.text||''),tm:m.time||''}));
           try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
           renderChat();
         }else{
@@ -905,15 +1037,15 @@
       if(!txt&&!chatImgB64)return;
       if(txt===_lastSendTxt&&now-_lastSendTs<5000)return;
       _sendLock=true;_lastSendTs=now;_lastSendTxt=txt;chatSnd=true;document.getElementById('chatSendBtn').disabled=true;
-      const displayMsg=chatImgB64?`${txt?txt+'<br>':''}<img src="${chatImgB64}">`:(txt);
-      chatH.push({r:'user',t:displayMsg,tm:hhmm(new Date())});
+      const imgPayload=chatImgB64;
+      chatH.push({r:'user',t:txt,image:imgPayload||'',tm:hhmm(new Date())});
       inp.value='';inp.style.height='auto';
-      const imgPayload=chatImgB64;removeChatImage();renderChat();
+      removeChatImage();renderChat();
       const el=document.getElementById('chatMessages'),tp=document.createElement('div');tp.className='msg typing';tp.id='tpI';tp.textContent='NexusAI is typing...';el.appendChild(tp);scrollChatBottom();
       let botText='Sorry, something went wrong. Please try again.';
       try{
         const uid=String(tgUserId||S.get('tg_user_id')||'');
-        const body={user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
+        const body={init_data:String(tg&&tg.initData||''),user_id:uid,message:txt||'[image]',first_name:userName||'User',mode:accessMode,total_deposit:userTotalDeposit,chat_tier:chatTier};
         if(imgPayload)body.image=imgPayload;
         const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),30000);
         const r=await fetch(CHAT_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:controller.signal});
@@ -926,7 +1058,7 @@
         if(e.name==='AbortError')botText='Response timed out. Please try again.';
       }
       document.getElementById('tpI')?.remove();
-      chatH.push({r:'bot',t:botText,tm:hhmm(new Date())});
+      chatH.push({r:'bot',t:neutralizeAlmaz(botText),tm:hhmm(new Date())});
       try{S.set('nexusaii_chat_in',JSON.stringify(chatH.slice(-40)));}catch(e){}
       renderChat();chatSnd=false;_sendLock=false;document.getElementById('chatSendBtn').disabled=false;
     }
@@ -958,7 +1090,7 @@
     }
     let topPlayersCache=null,topPlayersLoading=false,topPlayersSource='fallback';
     function escTop(v){const x=document.createElement('div');x.textContent=String(v??'');return x.innerHTML;}
-    function topTierBadge(player){const key=String(player&&player.tier||'').trim().toLowerCase(),tier=BO_KG_TIERS.find(t=>t.key===key||t.name.toLowerCase()===key);if(!tier||tier.key==='unranked')return '';const labels={bronze:'BR',silver:'SL',gold:'GD',emerald:'EM'};return `<span class="top-tier-badge tier-${tier.key}" title="${escTop(tier.name)}">${labels[tier.key]}</span>`;}
+    function topTierBadge(player){const key=String(player&&player.tier||'').trim().toLowerCase(),tier=BO_KG_TIERS.find(t=>t.key===key||t.name.toLowerCase()===key);if(!tier||tier.key==='unranked')return '';const labels={bronze:'BR',silver:'SL',gold:'GD'};return `<span class="top-tier-badge tier-${tier.key}" title="${escTop(tier.name)}">${labels[tier.key]}</span>`;}
     function drawTopPlayers(players,source='fallback'){
       const d=new Date(),ds=d.toLocaleDateString('ky-KG',{month:'short',day:'numeric',year:'numeric'}),p=(players&&players.length?players:genTop()).slice(0,100),pd=document.getElementById('topPodium'),md=['🥇','🥈','🥉'],od=[1,0,2];
       document.getElementById('topDate').textContent=`📅 ${ds} аптасы`;
@@ -971,7 +1103,7 @@
 
 
     // HELP TOOLTIPS
-    const HELP_DATA={streak:{title:'🔥 Күн катары',text:'Колдонмону күн сайын ачып, активдүүлүк катарыңызды сактаңыз.'},vip:{title:'🏅 VIP деңгээл',text:tierEconomyText()}};
+    const HELP_DATA={streak:{title:'🔥 Күн катары',text:'Колдонмону күн сайын ачып, активдүүлүк катарыңызды сактаңыз.'},vip:{title:'🏅 VIP деңгээл',text:tierEconomyText()},how:{title:'Кантип иштейт?',text:'1. «Сигналдар» вкладкасын ачыңыз.\n2. Валюталык жупту тандаңыз.\n3. Графиктеги акыркы кыймылды караңыз.\n4. «Сигнал алуу» баскычын басыңыз.\n5. ЖОГОРУ же ТӨМӨН багыты 5 мүнөттүк слот үчүн берилет.'}};
     function showHelp(key){
       const d=HELP_DATA[key];if(!d)return;
       const ov=document.createElement('div');ov.className='help-overlay';
@@ -1002,11 +1134,11 @@
       updProfit();
       updOnline();
       updGeoSwitch();
-      // Start on signals tab to avoid Telegram WebView crashes on first chat/history render
-      switchTab('signals');
+      // Designer flow starts on Menu; hidden support chat loads only if explicitly opened.
+      syncDesignerIdentity();
+      switchTab('menu');
       // Defer non-critical UI work until the first screen is already visible
       setTimeout(()=>{try{buildMarquee();}catch(e){}},0);
-      setTimeout(()=>{try{loadChatHistory();}catch(e){}},50);
       setTimeout(()=>{try{loadLastPost();}catch(e){}},0);
     }
 
