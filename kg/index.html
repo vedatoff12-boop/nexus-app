@@ -227,6 +227,18 @@
     .confetti-p{position:absolute;top:-10px;animation:cFall 3s ease-in forwards;}
     @keyframes cFall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
+    /* GOLD CODE ACTIVATION */
+    .gold-activate-btn{width:100%;margin-top:12px;padding:12px 16px;border:1px solid rgba(250,204,21,.35);border-radius:12px;background:linear-gradient(135deg,rgba(250,204,21,.18),rgba(234,179,8,.08));color:var(--gold);font-family:inherit;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 8px 24px rgba(250,204,21,.08)}
+    .gold-activate-btn:active{transform:scale(.98)}
+    .gold-modal-overlay{position:fixed;inset:0;z-index:9500;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+    .gold-modal{width:100%;max-width:360px;padding:22px;border-radius:20px;background:var(--bg3);border:1px solid rgba(250,204,21,.3);box-shadow:0 24px 80px rgba(0,0,0,.75)}
+    .gold-modal-title{font-size:20px;font-weight:900;color:var(--gold);text-align:center}
+    .gold-modal-sub{font-size:12px;line-height:1.5;color:var(--muted);text-align:center;margin:8px 0 16px}
+    .gold-code-input{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--stroke2);background:rgba(255,255,255,.06);color:#fff;font-family:inherit;font-size:16px;outline:none;text-align:center;letter-spacing:.6px}
+    .gold-code-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(250,204,21,.1)}
+    .gold-modal-actions{display:flex;gap:8px;margin-top:12px}.gold-modal-actions .btn{min-width:0;padding:12px}
+    .gold-code-status{min-height:18px;margin-top:10px;text-align:center;font-size:12px;color:var(--muted)}
+
     /* MARQUEE */
     .marquee-wrap{position:absolute;left:0;right:0;bottom:0;width:100%;background:var(--bg);border-top:1px solid rgba(250,204,21,0.15);padding:7px 0;z-index:200;overflow:hidden;white-space:nowrap;}
     .marquee-inner{display:inline-block;animation:mqScroll 120s linear infinite;font-size:11px;font-weight:600;color:var(--muted);will-change:transform;}
@@ -409,10 +421,10 @@
       <div class="vip-card" id="vipCard" onclick="showHelp('vip')" style="margin-top:8px;">
         <div class="vip-top">
           <div class="vip-badge">
-            <div class="vip-badge-icon" id="vipIcon2">🥉</div>
+            <div class="vip-badge-icon" id="vipIcon2">⚡</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% ANIQLIK</div>
+              <div class="vip-badge-tier" id="vipTier2">Күнүнө 5 сигнал</div>
+              <div class="vip-badge-acc" id="vipAcc2">90% ТАКТЫК</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
@@ -421,8 +433,9 @@
           </div>
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
-        <div class="vip-progress-text"><span id="vipProgressLeft">0 / 1 500 KGS</span><span id="vipProgressHint">Upgrade үчүн кошумча депозит кылыңыз ⬆</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ Бүгүн 3/3 сигнал калды</div>
+        <div class="vip-progress-text"><span id="vipProgressLeft">Күнүнө 5 сигнал</span><span id="vipProgressHint">🥇 Gold — чексиз сигнал + AI Analyst</span></div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ Бүгүн 5/5 сигнал калды</div>
+        <button class="gold-activate-btn" id="goldActivateBtn" onclick="openGoldModal()">🥇 Gold алуу</button>
       </div>
 
       <div class="meta-bar">
@@ -492,8 +505,9 @@
     let currentGeo='kg'; S.set('user_geo','kg');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.kg;}
     const ACCESS_URL=wh('check-access-kg');
-    // KG legacy access mapping: backend check-access-kg reads users_kg and returns access_tier none|bronze|gold.
-    // Frontend maps none -> Yopiq, bronze -> Bronze access, gold -> Gold access. No direct database access here.
+    const GOLD_ACTIVATE_URL=wh('activate-gold-kg');
+    // Backend check-access-kg is authoritative: valid Telegram users receive baseline access; stored Gold is preserved.
+    // Internal access_tier values remain bronze|gold for backward compatibility; user-facing upgrade is Gold only.
 
     const ICONS={aviator:"✈️",jetx:"🚀",chicken:"🐔",penalty:"⚽",mines:"💣",balloon:"🎈"};
     const WIN_RATES={aviator:92,jetx:89,mines:87,penalty:91,balloon:88,chicken:85};
@@ -581,10 +595,11 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Деңгээлсиз',icon:'❔',dep:0,sigs:0,acc:0,desc:'Depozit qilib faollashtiring'},
-      {name:'Bronze',icon:'🥉',dep:700,sigs:5,acc:90,desc:'Kuniga 5 сигнал, 90% тактык'},
-      {name:'Gold',icon:'🥇',dep:1500,sigs:0,acc:95,desc:'Cheksiz сигнал, 95% тактык + Personal AI Analyst'}
+      {name:'Күнүмдүк',icon:'⚡',dep:0,sigs:5,acc:90,desc:'Күнүнө 5 сигнал, 90% тактык'},
+      {name:'Gold',icon:'🥇',dep:1500,sigs:0,acc:95,desc:'Чексиз сигнал, 95% тактык + Personal AI Analyst'}
     ];
+    // Clear the obsolete paid-baseline cache; backend access remains authoritative.
+    if(parseInt(S.get('totalDep')||'0')<1500)S.set('totalDep','0');
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
     function addDailySignal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
@@ -597,7 +612,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Bronze ачуу үчүн 700 KGS депозит кылыңыз':(tier.acc+'% ANIQLIK');
+      document.getElementById('vipAcc2').textContent=tier.acc+'% ТАКТЫК';
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -608,38 +623,54 @@
       const used=getDailySignals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Bronze ачуу үчүн 700 KGS депозит кылыңыз';}
-        else if(limit===0){sigEl.textContent='♾️ Бүгүн чексиз сигнал';}
-        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ Бүгүн ${rem}/${limit} сигнал калды`:'🔒 Сигналlar ertaga tiklanadi';}
+        if(limit===0){sigEl.textContent='♾️ Бүгүн чексиз сигнал';}
+        else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ Бүгүн ${rem}/${limit} сигнал калды`:'🔒 Сигналдар эртең жаңыланат';}
       }
-      if(dep===0){
-        nw.style.display='';
-        nt.textContent='🥉 Bronze';
-        fill.style.width='0%';
-        left.textContent='Bronze ачуу үчүн 700 KGS керек';
-        hint.textContent='Bronze ачуу үчүн 700 KGS депозит кылыңыз';
-      }
-      else if(idx<VIP_TIERS.length-1){
+      if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
         nw.style.display='';
         nt.textContent=next.icon+' '+next.name;
-        const prev=tier.dep;const target=next.dep;
-        const pct=Math.min(100,Math.max(0,((dep-prev)/(target-prev))*100));
-        fill.style.width=pct+'%';
-        const remain=target-dep;
-        left.textContent=''+dep.toLocaleString()+' / '+target.toLocaleString();
-        hint.textContent=''+remain.toLocaleString()+' to '+next.name+' — Unlimited + AI Analyst ⬆';
+        fill.style.width='0%';
+        left.textContent='Күнүнө 5 сигнал';
+        hint.textContent='Gold — чексиз сигнал + AI Analyst';
       } else {
         nw.style.display='none';
         fill.style.width='100%';
-        left.textContent='GOLD · MAX ДЕҢГЭЭЛ';
-        hint.textContent='Чексиз сигналдар + Personal AI Analyst 🥇';
+        left.textContent='Gold активдүү';
+        hint.textContent='Бардык мүмкүнчүлүктөр ачылды';
       }
       // Card border color by tier
       const colors={0:'rgba(205,127,50,0.3)',1:'rgba(192,192,192,0.3)',2:'rgba(255,215,0,0.3)',3:'rgba(0,191,255,0.3)',4:'rgba(255,215,0,0.5)'};
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
+      syncGoldButton();
     }
     updVIP();
+
+    function syncGoldButton(){const b=document.getElementById('goldActivateBtn');if(b)b.style.display=getVipTierIdx()>=1?'none':'block';}
+    function closeGoldModal(){document.getElementById('goldModalOverlay')?.remove();}
+    function openGoldModal(){
+      if(getVipTierIdx()>=1)return;
+      closeGoldModal();
+      const ov=document.createElement('div');ov.className='gold-modal-overlay';ov.id='goldModalOverlay';
+      ov.innerHTML=`<div class="gold-modal" onclick="event.stopPropagation()"><div class="gold-modal-title">🥇 Gold алуу</div><div class="gold-modal-sub">Активация кодун киргизиңиз. Код серверде текшерилет.</div><input class="gold-code-input" id="goldCodeInput" type="password" maxlength="64" autocomplete="one-time-code" placeholder="Активация коду"><div class="gold-modal-actions"><button class="btn" onclick="closeGoldModal()">Жабуу</button><button class="btn primary" id="goldCodeSubmit" onclick="submitGoldCode()">Gold ачуу</button></div><div class="gold-code-status" id="goldCodeStatus"></div></div>`;
+      ov.onclick=closeGoldModal;document.body.appendChild(ov);setTimeout(()=>document.getElementById('goldCodeInput')?.focus(),50);
+    }
+    async function submitGoldCode(){
+      const uid=String(tgUserId||S.get('tg_user_id')||'');const input=document.getElementById('goldCodeInput');const status=document.getElementById('goldCodeStatus');const submit=document.getElementById('goldCodeSubmit');const code=(input?.value||'').trim();
+      if(!uid){if(status){status.style.color='var(--red)';status.textContent='Mini Appты бот аркылуу кайра ачыңыз.';}return;}
+      if(!code){if(status){status.style.color='var(--red)';status.textContent='Кодду киргизиңиз.';}return;}
+      if(submit)submit.disabled=true;if(status){status.style.color='var(--muted)';status.textContent='Код текшерилүүдө...';}
+      if(input)input.value='';
+      try{
+        const r=await fetch(GOLD_ACTIVATE_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,code})});
+        const d=await r.json().catch(()=>({ok:false}));
+        if(!r.ok||!d.ok)throw new Error(d.error||'invalid_code');
+        S.set('totalDep','1500');S.set('accessGranted','1');userTotalDeposit=1500;accessMode='full';chatTier=2;updVIP();syncGoldButton();updateChatHeader();fireConfetti();
+        if(status){status.style.color='var(--green)';status.textContent='Gold ийгиликтүү ачылды!';}
+        await refreshAccessState();setTimeout(closeGoldModal,900);
+      }catch(e){if(status){status.style.color='var(--red)';status.textContent=e&&e.message==='invalid_identity'?'Mini Appты бот аркылуу кайра ачыңыз.':'Код туура эмес.';}}
+      finally{if(submit)submit.disabled=false;}
+    }
 
     // SOUND
     let actx=null;
@@ -687,7 +718,7 @@
     document.addEventListener('click',e=>{if(!e.target.closest('.lang-drop'))document.getElementById('langMenu').classList.remove('open');});
 
     const STR={
-      kg:{cg:"Тандаңыз:",back:"Меню",lt:"ЖАБЫК",lm:"⛔️ Access алуу үчүн ботко ID же скриншот жөнөтүңүз.",skip:"ӨТКӨРҮП ЖИБЕРҮҮ",wait:"Күтүңүз",
+      kg:{cg:"Тандаңыз:",back:"Меню",lt:"ЖАБЫК",lm:"⛔️ Mini Appты @nexusaikg_bot аркылуу кайра ачыңыз.",skip:"ӨТКӨРҮП ЖИБЕРҮҮ",wait:"Күтүңүз",
         tut:{s1:"ID синхрондолду.",s2:"Оюн тандаңыз.",s4:"Божомол даяр.",s5:"Сигнал алуу баскычын басыңыз."},
         g:{aviator:{n:"Aviator",d:"Crash оюну"},jetx:{n:"JetX",d:"SmartSoft Crash"},chicken:{n:"Chicken Road",d:"Тобокел деңгээлдери"},penalty:{n:"Penalty",d:"Гол киргизиңиз"},mines:{n:"Mines",d:"Бомбалардан качыңыз"},balloon:{n:"Balloon",d:"Үйлөп, утуп алыңыз"}},
         ch:{t:"Chicken Road",s:"Кыйынчылыкты тандаңыз.",nx:"КИЙИНКИ",w:(sec)=>`Күтүңүз ${sec}s`,tb:{easy:"Оңой",medium:"Орточо",hard:"Кыйын",hardcore:"Хардкор"}},
@@ -711,10 +742,10 @@
     function normalizeUzAccess(d){
       d=d||{};
       const tier=String(d.access_tier||d.tier||'none').toLowerCase();
-      const bronze=(tier==='bronze'||tier==='gold'||d.bronze_unlocked===true||d.access_granted===true||d.allowed===true);
+      const baseline=(tier==='bronze'||tier==='gold'||d.bronze_unlocked===true||d.access_granted===true||d.allowed===true);
       const gold=(tier==='gold'||d.gold_unlocked===true);
-      const total=Number(d.total_deposit!==undefined?d.total_deposit:(gold?1500:(bronze?700:0)))||0;
-      return Object.assign({},d,{access_tier:tier,bronze_unlocked:bronze,gold_unlocked:gold,access_granted:bronze,deposit_verified:bronze,allowed:bronze,total_deposit:total});
+      const total=gold?1500:0;
+      return Object.assign({},d,{access_tier:tier,bronze_unlocked:baseline,gold_unlocked:gold,access_granted:baseline,deposit_verified:baseline,allowed:baseline,total_deposit:total});
     }
 
     // SIGNALS — donor MN layout preserved: cards are always visible; lock only blocks details.
@@ -1009,7 +1040,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Күндүк streak',text:'Appты күн сайын ачып, streakти көтөрүңүз. Gold мүчөлөр узун streak менен так сигнал алат.'},
-      vip:{title:'🏅 VIP деңгээл',text:'Депозит суммасы AI сервер сизге бөлгөн ресурсту аныктайт.\n\n🥉 Bronze (700 KGS) — күнүнө 5 сигнал, 90% тактык\n🥇 Gold (1 500 KGS) — чексиз сигнал, 95% тактык + 24/7 Personal AI Analyst\n\nАр бир Gold колдонуучуда реалдуу убакытта багыт берген жеке AI analyst болот.\n\nКөбүрөөк депозит → көбүрөөк ресурс → жакшыраак сигнал → жогорураак пайда 🤝'},
+      vip:{title:'🏅 Сигнал мүмкүнчүлүктөрү',text:'Сизге күнүнө 5 AI сигнал автоматтык түрдө жеткиликтүү.\n\n🥇 Gold — чексиз сигнал, 95% тактык + 24/7 Personal AI Analyst.\n\nGold алуу үчүн «Gold алуу» баскычын басып, активация кодун киргизиңиз.'},
       profit:{title:'💰 Бүгүнкү пайда',text:'Бүгүн колдонулган сигналдардын жалпы пайдасын көрсөтөт. Бул көрсөткүч ар түнү reset болот. Көбүрөөк сигнал колдонсоңуз, күндүк пайда өсөт.'},
       winrate:{title:'📊 Ийгилик пайызы',text:'Бул оюндагы AI божомолдорунун тарыхый тактыгы. Миңдеген раунддун анализине негизделген.'}
     };
