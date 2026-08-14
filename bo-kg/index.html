@@ -961,6 +961,12 @@
     function rndInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
     function openExternal(url){const safe=safeExternalUrl(url);if(!safe)return false;try{if(tg&&safe.startsWith('https://t.me/')&&tg.openTelegramLink)tg.openTelegramLink(safe);else if(tg&&tg.openLink)tg.openLink(safe);else window.open(safe,'_blank','noopener,noreferrer');return true;}catch(e){window.open(safe,'_blank','noopener,noreferrer');return true;}}
     async function refreshAccessState(){const uid=tgUserId||S.get('tg_user_id');if(!uid)return;try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({init_data:String(tg&&tg.initData||''),user_id:uid})});const d=await r.json();let tierChanged=false;if(d.total_deposit!==undefined){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));tierChanged=true;}const serverTier=String(d.tier||d.access_tier||'').toLowerCase();if(BO_KG_TIERS.some(t=>t.key===serverTier)){S.set('accessTier',serverTier);tierChanged=true;}if(tierChanged)updVIP();if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}chatTier=getVipTier().key==='gold'?2:1;updateChatHeader();renderSignalWindow();}catch(e){}}
+    // Server-authoritative access: cached paid tiers must never survive a reset or app resume without readback.
+    let accessRefreshInFlight=null;
+    function clearCachedAccessState(){accessMode='limited';chatTier=1;userTotalDeposit=0;S.set('totalDep','0');S.set('accessTier','unranked');S.set('accessGranted','0');}
+    function refreshAuthoritativeAccess({failClosed=false}={}){if(failClosed){clearCachedAccessState();updVIP();renderSignalWindow();}if(accessRefreshInFlight)return accessRefreshInFlight;accessRefreshInFlight=refreshAccessState().catch(()=>{}).finally(()=>{accessRefreshInFlight=null;});return accessRefreshInFlight;}
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshAuthoritativeAccess({failClosed:true});});
+    window.addEventListener('focus',()=>{if(document.visibilityState==='visible')refreshAuthoritativeAccess();});
     function updateChatHeader(){const sub=document.getElementById('chatHeaderSub'),title=document.getElementById('chatHeaderTitle'),hdr=document.querySelector('.chat-header');if(sub)sub.textContent='NexusAI · 24/7';if(title)title.textContent='NEXUSAI';if(hdr){hdr.style.borderBottom='1px solid rgba(61,214,177,.2)';hdr.style.background='linear-gradient(180deg,rgba(61,214,177,.045),var(--bg))';}}
     function applyTranslations(){
       document.documentElement.lang=lang;
@@ -1207,9 +1213,10 @@
     function initApp(){
       try{window.trackBoKgEvent&&window.trackBoKgEvent('MiniAppOpen',{geo:'KG',lang});}catch(e){}
       const storedLang=S.get('aslang');lang=LANGS.some(x=>x.id===storedLang)?storedLang:'ky';S.set('aslang',lang);
+      clearCachedAccessState();
       applyStatic();
       startDailyStats();
-      refreshAccessState().catch(()=>{});
+      refreshAuthoritativeAccess();
       updateMarketClosedBanner();
       if(!marketBadgeTimer)marketBadgeTimer=setInterval(updateMarketClosedBanner,1000);
       updProfit();
