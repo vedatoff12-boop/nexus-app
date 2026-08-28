@@ -157,9 +157,6 @@
 
     /* LOCKED */
     .locked-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(8,12,24,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(6px);text-align:center;padding:10px;border-radius:var(--r2);}
-    .lock-icon{font-size:28px;margin-bottom:6px;}
-    .lock-text{color:var(--red);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:1px;}
-    .lock-msg{color:var(--muted);font-size:10px;margin-top:4px;line-height:1.3;}
 
 
     /* GAME CAROUSEL */
@@ -250,10 +247,6 @@
     .geo-btn:hover{border-color:var(--gold);background:rgba(250,204,21,0.06);}
     .geo-flag{font-size:28px;}
     .geo-name{font-size:14px;font-weight:700;color:#fff;}
-
-    /* REGISTER BUTTON in lock overlay */
-    .reg-btn{margin-top:8px;padding:8px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0f1e;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;}
-    .promo-text{margin-top:4px;font-size:10px;color:var(--gold);font-weight:700;}
 
     /* APP SHELL + TAB BAR */
     .app-shell{position:fixed;inset:0;max-width:480px;width:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;height:100dvh;}
@@ -416,10 +409,10 @@
       <div class="vip-card" id="vipCard" onclick="showHelp('vip')" style="margin-top:8px;">
         <div class="vip-top">
           <div class="vip-badge">
-            <div class="vip-badge-icon" id="vipIcon2">🥉</div>
+            <div class="vip-badge-icon" id="vipIcon2">⚡</div>
             <div class="vip-badge-info">
-              <div class="vip-badge-tier" id="vipTier2">Bronze</div>
-              <div class="vip-badge-acc" id="vipAcc2">85% ТАКТЫК</div>
+              <div class="vip-badge-tier" id="vipTier2">Акысыз</div>
+              <div class="vip-badge-acc" id="vipAcc2">90% ТАКТЫК</div>
             </div>
           </div>
           <div class="vip-next" id="vipNextWrap">
@@ -429,7 +422,7 @@
         </div>
         <div class="vip-progress"><div class="vip-progress-fill" id="vipProgressFill" style="width:0%"></div></div>
         <div class="vip-progress-text"><span id="vipProgressLeft">0 KGS / 1000 KGS</span><span id="vipProgressHint">Деңгээл көтөрүү үчүн дагы депозит кылыңыз ⬆</span></div>
-        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ Бүгүн 3/3 сигнал калды</div>
+        <div id="vipSignalsLeft" style="text-align:center;font-size:11px;font-weight:700;color:var(--green);margin-top:6px">⚡ 5/5 сигнал бүгүн калды</div>
       </div>
 
       <div class="meta-bar">
@@ -482,7 +475,6 @@
   <script>
     const GEO_CONFIG = {
       kg: { name:"Kyrgyzstan", flag:"🇰🇬", lang:"kg", currency:"KGS", sym:"сом", profitRange:[3000,15000],
-        link:"https://sp1nwin.com/V3YW8z", promo:"Ngm2026",
         webhook:"https://n8nnexusai.uk/webhook/check-access-kg-aiza",
         names:["Айбек","Нурбек","Бакыт","Эрлан","Тимур","Руслан","Азат","Данияр","Эмил","Адилет","Самат","Канат","Азамат","Нурсултан","Марат","Айсулуу","Нуриза","Айдана","Жанара","Гүлнур","Салтанат","Мээрим","Алина","Асел","Назира"] }
     };
@@ -493,6 +485,8 @@
     let chatTier=1; // 1=жардам, 2=жеке аналитик (total_deposit>=1000)
     let userTotalDeposit=0;
     const APP_NS='nexuskg_aiza'; const S={get(k){try{return localStorage.getItem(`${APP_NS}:${k}`)}catch(e){return null}},set(k,v){try{localStorage.setItem(`${APP_NS}:${k}`,v)}catch(e){}}};
+    // Fail closed on every load: Gold is restored only by the live checker.
+    S.set('totalDep','0');
     const urlParams=new URLSearchParams(window.location.search);
     let currentGeo='kg'; S.set('user_geo','kg');
     function geo(){return GEO_CONFIG[currentGeo]||GEO_CONFIG.kg;}
@@ -584,15 +578,13 @@
 
     // VIP
     const VIP_TIERS=[
-      {name:'Unranked',icon:'❔',dep:0,sigs:0,acc:0,desc:'Активдештирүү үчүн депозит'},
-      {name:'Bronze',icon:'🥉',dep:450,sigs:5,acc:90,desc:'5 сигнал/күн, 90% тактык'},
-      {name:'Gold',icon:'🥇',dep:1000,sigs:0,acc:95,desc:'Чексиз сигналдар, 95% тактык + жеке AI аналитик'}
+      {name:'Акысыз',icon:'⚡',dep:0,sigs:5,unlimited:false,acc:90,desc:'Күнүнө 5 бекер сигнал, 90% тактык'},
+      {name:'Gold',icon:'🥇',dep:1000,sigs:0,unlimited:true,acc:95,desc:'Чексиз сигналдар, 95% тактык + жеке AI аналитик'}
     ];
     function getVipTierIdx(){const dep=parseInt(S.get('totalDep')||'0');for(let i=VIP_TIERS.length-1;i>=0;i--){if(dep>=VIP_TIERS[i].dep)return i;}return 0;}
     function getDailySignals(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}return parseInt(S.get('sigToday')||'0');}
     function addDailySignal(){const d=new Date().toDateString();if(S.get('sigDay')!==d){S.set('sigDay',d);S.set('sigToday','0');}const c=parseInt(S.get('sigToday')||'0')+1;S.set('sigToday',c.toString());return c;}
-    function getDailyLimit(){const tier=getVipTier();return tier.sigs||999;}
-    function isSignalLimitReached(){const tier=getVipTier();if(tier.sigs===0)return false;return getDailySignals()>=tier.sigs;}
+    function isSignalLimitReached(){const tier=getVipTier();if(tier.unlimited)return false;return getDailySignals()>=tier.sigs;}
     function getVipTier(){return VIP_TIERS[getVipTierIdx()];}
     function updVIP(){
       const dep=parseInt(S.get('totalDep')||'0');
@@ -600,7 +592,7 @@
       // Badge
       document.getElementById('vipIcon2').textContent=tier.icon;
       document.getElementById('vipTier2').textContent=tier.name;
-      document.getElementById('vipAcc2').textContent=dep===0?'Bronze ачуу үчүн 450 KGS депозит':(tier.acc+'% ТАКТЫК');
+      document.getElementById('vipAcc2').textContent=tier.acc+'% ТАКТЫК';
       // Progress to next
       const nw=document.getElementById('vipNextWrap');
       const fill=document.getElementById('vipProgressFill');
@@ -611,18 +603,10 @@
       const used=getDailySignals();const limit=tier.sigs;
       const sigEl=document.getElementById('vipSignalsLeft');
       if(sigEl){
-        if(dep===0){sigEl.textContent='❔ Bronze ачуу үчүн 450 KGS депозит';}
-        else if(limit===0){sigEl.textContent='♾️ Бүгүн чексиз сигнал';}
+        if(tier.unlimited){sigEl.textContent='♾️ Бүгүн чексиз сигнал';}
         else{const rem=Math.max(0,limit-used);sigEl.textContent=rem>0?`⚡ ${rem}/${limit} сигнал бүгүн калды`:'🔒 Сигналдар эртең жаңыланат';}
       }
-      if(dep===0){
-        nw.style.display='';
-        nt.textContent='🥉 Bronze';
-        fill.style.width='0%';
-        left.textContent='Bronze ачуу үчүн 450 KGS';
-        hint.textContent='Bronze ачуу үчүн 450 KGS депозит';
-      }
-      else if(idx<VIP_TIERS.length-1){
+      if(idx<VIP_TIERS.length-1){
         const next=VIP_TIERS[idx+1];
         nw.style.display='';
         nt.textContent=next.icon+' '+next.name;
@@ -639,7 +623,7 @@
         hint.textContent='Чексиз сигналдар + жеке AI аналитик 🥇';
       }
       // Card border color by tier
-      const colors={0:'rgba(205,127,50,0.3)',1:'rgba(205,127,50,0.45)',2:'rgba(255,215,0,0.5)'};
+      const colors={0:'rgba(59,130,246,0.35)',1:'rgba(255,215,0,0.5)'};
       document.getElementById('vipCard').style.borderColor=colors[idx]||colors[0];
     }
     updVIP();
@@ -743,7 +727,7 @@
       try{const r=await fetch(CHECKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
       const d=await r.json();
 
-      if(d.total_deposit&&d.total_deposit>0){userTotalDeposit=d.total_deposit;S.set('totalDep',String(d.total_deposit));updVIP();}
+      if(d.total_deposit!==undefined&&d.total_deposit!==null){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));updVIP();}
       if(d.allowed){accessMode='full';S.set('accessGranted','1');}else{accessMode='limited';S.set('accessGranted','0');}
       chatTier=(userTotalDeposit>=1000)?2:1;
       updateЧатHeader();}catch(e){}
@@ -767,26 +751,19 @@
 
     async function handleGameClick(k,el){
       const ld=document.createElement('div');ld.className='locked-overlay';ld.innerHTML='<div style="font-size:32px">⏳</div>';el.appendChild(ld);
-      try{const uid=tgUserId||S.get('tg_user_id');if(!uid){if(el.contains(ld))el.removeChild(ld);showLock(el);return;}
-      const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
-      const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});clearTimeout(timeout);const d=await r.json();
-      if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
-      if(d.total_deposit!==undefined&&d.total_deposit>0){S.set('totalDep',String(d.total_deposit));updVIP();}
-      if(d.allowed){if(el.contains(ld))el.removeChild(ld);if(k==="chicken")renderChicken();else renderGame(k);}
-      else{if(el.contains(ld))el.removeChild(ld);showLock(el);}}
-      catch(e){if(el.contains(ld))el.removeChild(ld);showLock(el);}
-    }
-    function showLock(el){
-      if(el.querySelector('.lock-text'))return;
-      const g=geo();
-      const regBtn=g.link?`<button class="reg-btn" onclick="event.stopPropagation();openRegLink()">Катталуу →</button>`:'';
-      const promoTxt=g.promo?`<div class="promo-text">Промокод: ${g.promo}</div>`:'';
-      el.innerHTML+=`<div class="locked-overlay"><div class="lock-icon">🔒</div><div class="lock-text">${T().lt}</div><div class="lock-msg">${T().lm}</div>${regBtn}${promoTxt}</div>`;
-    }
-    function openRegLink(){
-      const url=geo().link;if(!url)return;
-      try{window.trackKGEvent&&window.trackKGEvent('RegistrationIntent',{geo:'KG'});}catch(e){}
-      if(tg&&tg.openLink)tg.openLink(url);else window.open(url,'_blank');
+      const openGame=()=>{if(k==='chicken')renderChicken();else renderGame(k);};
+      const uid=tgUserId||S.get('tg_user_id');
+      if(!uid){if(el.contains(ld))el.removeChild(ld);openGame();return;}
+      let timeout=null;
+      try{
+        const controller=new AbortController();timeout=setTimeout(()=>controller.abort(),10000);
+        const r=await fetch(geo().webhook,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid}),signal:controller.signal});
+        const d=await r.json();
+        if(d.player_id){document.getElementById('userHeaderId').textContent=`ID: ${d.player_id}`;S.set(savedIdKey,d.player_id);}
+        if(d.total_deposit!==undefined&&d.total_deposit!==null){userTotalDeposit=Math.max(0,Number(d.total_deposit)||0);S.set('totalDep',String(userTotalDeposit));chatTier=userTotalDeposit>=1000?2:1;updVIP();updateЧатHeader();}
+      }catch(e){}
+      finally{if(timeout)clearTimeout(timeout);if(el.contains(ld))el.removeChild(ld);}
+      openGame();
     }
 
     function renderGame(k){
@@ -804,7 +781,7 @@
         if(isSignalLimitReached()){
           const tier=getVipTier();const idx=getVipTierIdx();
           let upgradeHint='';
-          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} сигнал/күн, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${need.toLocaleString()} KGS толуктап, access ачыңыз ⬆</div></div>`;}
+          if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');upgradeHint=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.unlimited?'∞':next.sigs} сигнал/күн, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${need.toLocaleString()} KGS толуктап, access ачыңыз ⬆</div></div>`;}
           box.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI сервер лимити бүттү</div><div style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5">AI серверлер сигналдарды иштетип жатат.<br>${tier.icon} ${tier.name} деңгээлинде күнүнө ${tier.sigs} сигнал берилет.</div><div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.5">Депозит жогору болсо, аккаунтуңузга көбүрөөк сервер ресурсу берилет<br>= көбүрөөк сигнал + жогорку тактык.</div>${upgradeHint}</div>`;
           btn.disabled=true;btn.textContent='Сервер лимити';btn.style.opacity='0.3';return true;
         }
@@ -832,7 +809,7 @@
       function getCdCh(){return Math.max(0,Math.ceil((parseInt(S.get('cd_chicken')||'0')-Date.now())/1000));}
       function setCdCh(){S.set('cd_chicken',(Date.now()+CH_CD*1000).toString());}
       function uBtn(){const l=getCdCh();if(l>0){nxB.disabled=true;nxB.textContent=`${T().wait} ${l}s`;cdW.style.display='';cdP.style.strokeDashoffset=circ*(1-l/CH_CD);cdN.textContent=l;}else{nxB.disabled=false;nxB.textContent=T().ch.nx;cdW.style.display='none';}}
-      function checkLimit(){if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.sigs||'∞'} сигнал/күн, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${need.toLocaleString()} KGS толуктап, access ачыңыз ⬆</div></div>`;}gBox.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI сервер лимити бүттү</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — күнүнө ${tier.sigs} сигнал колдонулду</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Депозит жогору болсо, аккаунтуңузга көбүрөөк сервер ресурсу берилет</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Сервер лимити';return true;}return false;}
+      function checkLimit(){if(isSignalLimitReached()){const tier=getVipTier();const idx=getVipTierIdx();let uh='';if(idx<VIP_TIERS.length-1){const next=VIP_TIERS[idx+1];const need=next.dep-parseInt(S.get('totalDep')||'0');uh=`<div style="margin-top:14px;padding:10px;background:rgba(255,215,0,0.08);border-radius:10px;border:1px solid rgba(255,215,0,0.2)"><div style="font-size:13px;font-weight:700;color:#fff">${next.icon} ${next.name} — ${next.unlimited?'∞':next.sigs} сигнал/күн, ${next.acc}%</div><div style="font-size:11px;color:var(--gold);margin-top:4px">${need.toLocaleString()} KGS толуктап, access ачыңыз ⬆</div></div>`;}gBox.innerHTML=`<div style="text-align:center;padding:16px"><div style="font-size:36px">⚡</div><div style="font-size:15px;font-weight:800;color:#fff;margin-top:8px">AI сервер лимити бүттү</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${tier.icon} ${tier.name} — күнүнө ${tier.sigs} сигнал колдонулду</div><div style="font-size:13px;color:var(--muted);margin-top:8px">Депозит жогору болсо, аккаунтуңузга көбүрөөк сервер ресурсу берилет</div>${uh}</div>`;nxB.disabled=true;nxB.textContent='Сервер лимити';return true;}return false;}
       function dT(){tabs.innerHTML='';const bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;justify-content:center;flex-wrap:wrap';CH_D.forEach(d=>{const b=document.createElement('button');const labels={easy:'🟢',medium:'🟡',hard:'🔴',hardcore:'💀'};b.innerHTML=`${labels[d]||''} ${T().ch.tb[d]}`;b.style.cssText=`padding:8px 14px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;border:1px solid ${d===chD?'var(--gold)':'var(--stroke)'};background:${d===chD?'rgba(250,204,21,0.12)':'rgba(255,255,255,0.03)'};color:${d===chD?'var(--gold)':'var(--muted)'};${d===chD?'box-shadow:0 0 12px rgba(250,204,21,0.15);':''}`;b.onclick=()=>{chD=d;dT();sN.textContent='-';};bar.appendChild(b);});tabs.appendChild(bar);}
       function showSig(){if(checkLimit())return;setCdCh();try{navigator.vibrate&&navigator.vibrate([50,30,50]);}catch(e){}playSfx();addDailySignal();addProfit(rndInt(3,15));const ts=parseInt(S.get('tsig')||'0')+1;S.set('tsig',ts.toString());addSigHist('chicken');sN.textContent=`Кадам ${rndInt(1,6)}`;const hEl=document.querySelector('.sig-history');if(hEl){const tmp=document.createElement('div');tmp.innerHTML=renderSigHist('chicken');if(tmp.firstChild)hEl.parentNode.replaceChild(tmp.firstChild,hEl);}updVIP();uBtn();}
       dT();if(!checkLimit()){uBtn();timer=setInterval(uBtn,1000);}nxB.onclick=()=>{if(checkLimit())return;showSig();};
@@ -850,7 +827,7 @@
       'сонун сигнал 🔥','Aviator 2.4x алдым','Mines таза өттү','Chicken Road кайра жакшы болду','JetX 3.1x тийди',
       'бүгүн profit жакшы','Gold room күчтүү экен','дагы бир W','сигнал так чыкты','сом менен жакшы плюс','кечигип кирсем да алдым',
       'Penalty таза болду','Balloon сонун көтөрүлдү','3 жолу катары менен плюс','депозитти жаап алдым','AI timing жакшырыптыр',
-      'азыр эле сигнал кармадым','Bronze ачкандан кийин жакшыраак','room жандуу болуп жатат','gg баарыңарга'
+      'азыр эле сигнал кармадым','5 бекер сигнал жакшы экен','room жандуу болуп жатат','gg баарыңарга'
     ];
 
     let liveRoomFeed=[];
@@ -1024,7 +1001,7 @@
     // HELP TOOLTIPS
     const HELP_DATA={
       streak:{title:'🔥 Күнүмдүк streak',text:'Mini Appты күн сайын ачсаңыз streak өсөт. Gold деңгээлинде сигнал тактыгы жана жеке AI жардам күчөйт.'},
-      vip:{title:'🏅 VIP деңгээл',text:'Депозит деңгээли аккаунтка бөлүнгөн AI сервер ресурстарын аныктайт.\n\n🥉 Bronze (450 KGS) — күнүнө 5 сигнал, 90% тактык\n🥇 Gold (1000 KGS) — чексиз сигналдар, 95% тактык + жеке AI аналитик 24/7\n\nДепозит жогору болсо → ресурс көбүрөөк → сигналдар көбүрөөк → тактык жогору.'},
+      vip:{title:'🏅 Сигнал мүмкүнчүлүгү',text:'⚡ Ар бир колдонуучуга күнүнө 5 бекер сигнал, 90% тактык берилет.\n\n🥇 Gold (1000 KGS) — чексиз сигналдар, 95% тактык + жеке AI аналитик 24/7.\n\nGold депозитинен кийин чексиз сигналдар автоматтык түрдө ачылат.'},
       profit:{title:'💰 Бүгүнкү profit',text:'Бүгүн сигналдар боюнча эсептелген болжолдуу profit. Күн сайын түн жарымында жаңыланат.'},
       winrate:{title:'📊 Тактык',text:'AI прогноздорунун тарыхый тактыгы. Көп раунддардагы паттерндерге негизделген.'}
     };
