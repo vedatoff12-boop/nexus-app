@@ -1,0 +1,266 @@
+[
+  {
+    "name": "background",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      0,
+      151,
+      402,
+      920
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "home",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      45.0269,
+      976.923,
+      29,
+      29
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "games",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      140.5,
+      975,
+      29,
+      29
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "chat",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      233.658,
+      974.985,
+      29,
+      29
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "trophy",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      328,
+      977,
+      29,
+      29
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "back",
+    "source": "levels.svg",
+    "sourceFrame": "0 0 402 1227",
+    "viewBox": [
+      13,
+      175,
+      29,
+      31
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "people",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      24,
+      187,
+      14,
+      14
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "shield0",
+    "source": "levels.svg",
+    "sourceFrame": "0 0 402 1227",
+    "viewBox": [
+      32,
+      534,
+      72,
+      75
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "shield1",
+    "source": "levels.svg",
+    "sourceFrame": "0 0 402 1227",
+    "viewBox": [
+      32,
+      673,
+      72,
+      75
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "shield2",
+    "source": "levels.svg",
+    "sourceFrame": "0 0 402 1227",
+    "viewBox": [
+      32,
+      814,
+      72,
+      75
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "shield3",
+    "source": "levels.svg",
+    "sourceFrame": "0 0 402 1227",
+    "viewBox": [
+      32,
+      950,
+      72,
+      75
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "thumb-all",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      12,
+      476,
+      65,
+      65
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "thumb-lucky",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      101,
+      476,
+      65,
+      65
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "thumb-ice",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      193,
+      476,
+      65,
+      65
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "thumb-thimbles",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      285,
+      476,
+      65,
+      65
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "thumb-balloon",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      374,
+      476,
+      65,
+      65
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "promo-lucky",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      12,
+      342,
+      248,
+      107
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "promo-chicken",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      267,
+      342,
+      107,
+      107
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "promo-chicken2",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      382,
+      342,
+      107,
+      107
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "chat-banner",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      12,
+      590,
+      378,
+      162
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "ranking-banner",
+    "source": "home.svg",
+    "sourceFrame": "0 0 402 1071",
+    "viewBox": [
+      12,
+      776,
+      378,
+      162
+    ],
+    "type": "original exported Figma paths and paints"
+  },
+  {
+    "name": "levels-banner",
+    "source": "levels.svg",
+    "sourceFrame": "0 0 402 1227",
+    "viewBox": [
+      12,
+      230,
+      378,
+      177
+    ],
+    "type": "original exported Figma paths and paints"
+  }
+]

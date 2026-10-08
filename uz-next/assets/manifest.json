@@ -1,0 +1,282 @@
+[
+  {
+    "name": "lucky-cover",
+    "path": "assets/lucky-cover.png",
+    "figmaImageHash": "8d339b671b8911b8840b6dd394cf5e2c92cecf13",
+    "originalSize": [
+      1920,
+      1036
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "lucky-result",
+    "path": "assets/lucky-result.png",
+    "figmaImageHash": "c5a4be2e6576ce090106342d3d1dfb08972e732f",
+    "originalSize": [
+      1920,
+      1036
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "lucky-icon",
+    "path": "assets/lucky-icon.png",
+    "figmaImageHash": "8f748c8a9593368fccb20bb2af652931b29b5670",
+    "originalSize": [
+      554,
+      554
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "lucky-promo",
+    "path": "assets/lucky-promo.png",
+    "figmaImageHash": "8eecab25235524a31cde8406b6f3702084a2c0f8",
+    "originalSize": [
+      1672,
+      941
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken-cover",
+    "path": "assets/chicken-cover.png",
+    "figmaImageHash": "73ba863be7dfa5ad469d3da3d72e7c4ff9e8d0a8",
+    "originalSize": [
+      1440,
+      810
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken-result",
+    "path": "assets/chicken-result.png",
+    "figmaImageHash": "ef7b4593738f1c309a2ea9da3833953852a369bf",
+    "originalSize": [
+      1080,
+      479
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken-value",
+    "path": "assets/chicken-value.png",
+    "figmaImageHash": "8d6199ca926356925b3571c562e0b8076b489140",
+    "originalSize": [
+      176,
+      178
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken-icon",
+    "path": "assets/chicken-icon.png",
+    "figmaImageHash": "313ff8799f97c5e8799b8f50d5c964e8d49999c9",
+    "originalSize": [
+      512,
+      512
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken2-cover",
+    "path": "assets/chicken2-cover.png",
+    "figmaImageHash": "07eb52febc2e223a3c14822c846465b5bd53be9f",
+    "originalSize": [
+      596,
+      335
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken2-result",
+    "path": "assets/chicken2-result.png",
+    "figmaImageHash": "d64ac6781a2e69dc907e41dbca9407c58bb2cfb6",
+    "originalSize": [
+      1080,
+      479
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chicken2-value",
+    "path": "assets/chicken2-value.png",
+    "figmaImageHash": "421ed2c2a937d63ddf99d55d2a41e13da677119a",
+    "originalSize": [
+      184,
+      186
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "aviator-cover",
+    "path": "assets/aviator-cover.png",
+    "figmaImageHash": "7df84d1c06e9fcfb65681e422c9819c5bab7e890",
+    "originalSize": [
+      1229,
+      600
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "aviator-result",
+    "path": "assets/aviator-result.png",
+    "figmaImageHash": "9d99bd75df3541c874bebdead84cc362440c81e0",
+    "originalSize": [
+      1600,
+      900
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "aviator-icon",
+    "path": "assets/aviator-icon.png",
+    "figmaImageHash": "f693bf409c65c33e2526ec4f8cbb490da45f15fc",
+    "originalSize": [
+      375,
+      375
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "tower-cover",
+    "path": "assets/tower-cover.png",
+    "figmaImageHash": "88139ddf3a044c17388332a25415d216532c243e",
+    "originalSize": [
+      1733,
+      907
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "tower-result",
+    "path": "assets/tower-result.png",
+    "figmaImageHash": "089dae5269660e11dea06f04d09e8ba84490c1cb",
+    "originalSize": [
+      1280,
+      720
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "tower-value",
+    "path": "assets/tower-value.png",
+    "figmaImageHash": "9ce844d4a9710a73a853d810840b241cdd26c643",
+    "originalSize": [
+      511,
+      512
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "ice-cover",
+    "path": "assets/ice-cover.png",
+    "figmaImageHash": "a6da7c49bfb5a2f1a1d6b0dd8e5f1345c619e7b6",
+    "originalSize": [
+      1252,
+      770
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "ice-result",
+    "path": "assets/ice-result.png",
+    "figmaImageHash": "e64a4030efb9c8715621cccdecfa7da6493addf1",
+    "originalSize": [
+      900,
+      440
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "balloon-cover",
+    "path": "assets/balloon-cover.png",
+    "figmaImageHash": "6b4551aa0bfbbc6159d98ed41fb876a2b8d6397a",
+    "originalSize": [
+      1200,
+      800
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "balloon-result",
+    "path": "assets/balloon-result.jpg",
+    "figmaImageHash": "36ce8b082df206e0af4982f584c2c6e5ec829c33",
+    "originalSize": [
+      578,
+      346
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "thimbles-cover",
+    "path": "assets/thimbles-cover.png",
+    "figmaImageHash": "0debbd872fadf78b1a41c45d829abdf4bdf613cf",
+    "originalSize": [
+      1280,
+      720
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "thimbles-left",
+    "path": "assets/thimbles-left.png",
+    "figmaImageHash": "a164fddaf555064b7d7a0f4a11083901f9628aa0",
+    "originalSize": [
+      514,
+      231
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "thimbles-center",
+    "path": "assets/thimbles-center.png",
+    "figmaImageHash": "a97e9773a1c26003ca2a7c3985d6df287d83bbd3",
+    "originalSize": [
+      503,
+      224
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "thimbles-right",
+    "path": "assets/thimbles-right.png",
+    "figmaImageHash": "f3148f0fbe35a47a98099306bcc9dfd7c3302453",
+    "originalSize": [
+      465,
+      218
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "chat-banner",
+    "path": "assets/chat-banner.png",
+    "figmaImageHash": "2b9c47431bc3dfb072a80f8b73d9dafd30b658d1",
+    "originalSize": [
+      1672,
+      941
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "ranking-banner",
+    "path": "assets/ranking-banner.png",
+    "figmaImageHash": "2c3d3dd7ba8b7fc02c47d89454723ede18b1cb89",
+    "originalSize": [
+      1920,
+      1080
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  },
+  {
+    "name": "levels-banner",
+    "path": "assets/levels-banner.png",
+    "figmaImageHash": "fa5393833f8c8cd4974f88c656aca607b11b1052",
+    "originalSize": [
+      1672,
+      941
+    ],
+    "source": "For Omir / Nexus AI / local copy, original bytes"
+  }
+]
