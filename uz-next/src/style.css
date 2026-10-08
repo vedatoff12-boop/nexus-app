@@ -13,3 +13,8 @@
 .embedded{--app-safe-top:calc(var(--tg-safe-top,0px) + var(--tg-content-safe-top,0px));--app-safe-bottom:calc(max(var(--safe-bottom),var(--tg-safe-bottom,0px)) + var(--tg-content-safe-bottom,0px));min-height:var(--app-viewport-height,100dvh)}
 .embedded main{padding-top:calc(24px + var(--app-safe-top));padding-bottom:calc(110px + var(--app-safe-bottom));min-height:var(--app-viewport-height,100dvh)}
 .embedded .bottom-nav{top:calc(var(--app-viewport-height,100dvh) - 72px - var(--app-safe-bottom));bottom:auto}
+
+.primary.unavailable{cursor:not-allowed;opacity:.72}.availability{font-size:13px;line-height:18px;color:#b9afd2;margin-top:12px}.page-levels .level-hero h2{font-size:25px}.page-levels .level-copy{height:auto}.page-ranking .state-box{margin-top:28px}
+
+/* Inline heading icons must not inherit full-size artwork dimensions. */
+.section-title>.figma-art{display:inline-block;width:29px;height:29px;vertical-align:-3px;margin-right:8px}h1[tabindex="-1"]:focus{outline:none}
