@@ -1,5 +1,5 @@
-import {createSimulation} from './example-session.js?v=uz-minimal-20261008-193706';
-import {exampleSection,mountExample} from './per-game-ui.js?v=uz-minimal-20261008-193706';
+import {createSimulation} from './example-session.js?v=20261008-220415-clean';
+import {exampleSection,mountExample} from './per-game-ui.js?v=20261008-220415-clean';
 import {connectTelegram} from './telegram.js';
 import {art} from './figma-art.js';
 import {GAMES} from './config.js';

@@ -15,9 +15,9 @@ export function exampleMarkup(game,state){
  const result=state.blocked?null:state.result;
  const value=result?formatPerGameExample(result,game):'';
  const illustration=game==='thimbles'?cupMarkup(result?.kind==='cup'?result.position:null):`<img class="example-backdrop" src="assets/${backgrounds[game]}" alt=""/><span class="example-value ${game==='chicken'?'example-token':game==='chicken2'?'example-manhole':game==='tower'?'example-sign':''}" aria-hidden="true">${state.pending?'…':value||'—'}</span>`;
- const spoken=state.blocked?'Misol hozircha mavjud emas.':state.pending?'Kutilmoqda…':result?.kind==='cup'?`Qizil shar: ${{left:'chapda',center:'o‘rtada',right:'o‘ngda'}[result.position]}. Demo.`:value?`${label}: ${value}`:'';
+ const spoken=state.blocked?'Misol hozircha mavjud emas.':state.pending?'Kutilmoqda…':result?.kind==='cup'?`Qizil shar: ${{left:'chapda',center:'o‘rtada',right:'o‘ngda'}[result.position]}.`:value?`${label}: ${value}`:'';
  const card=result&&!state.pending?`<div class="example-card example-${game}">${illustration}</div>`:'';
- return `<div class="demo-label">Demo</div>${card}${countdownMarkup(state)}<button type="button" class="primary" data-example ${state.blocked||state.pending||state.remaining>0?'disabled':''}>${state.pending?'Kutilmoqda…':'Signal olish'}</button><p class="example-status ${state.blocked?'':'countdown-announcement'}" role="status" aria-live="polite">${spoken}</p>`;
+ return `${card}${countdownMarkup(state)}<button type="button" class="primary" data-example ${state.blocked||state.pending||state.remaining>0?'disabled':''}>${state.pending?'Kutilmoqda…':'Signal olish'}</button><p class="example-status ${state.blocked?'':'countdown-announcement'}" role="status" aria-live="polite">${spoken}</p>`;
 }
 export const exampleSection=game=>exampleLabel(game)?'<section class="game-example" aria-label="Tasodifiy misol"></section>':'';
 export function mountExample(host,game,simulation,{repeat=setInterval,stop=clearInterval}={}){
